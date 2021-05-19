@@ -7,26 +7,26 @@ import axios from 'axios';
 
 const initialClasses = [
     {
-      className: "Yoga On The Beach",
-      classType: "Yoga",
-      classDate: "2021/10/30",
-      startTime: "10:00am",
-      duration: 1, // hours
-      intensity: "low",
-      location: "Public Beach",
-      numberOfStudents: 8, 
-      maxClassSize: 10
+        className: "Yoga On The Beach",
+        classType: "Yoga",
+        classDate: "2021/10/30",
+        startTime: "10:00am",
+        duration: 1, // hours
+        intensity: "low",
+        location: "Public Beach",
+        numberOfStudents: 8, 
+        maxClassSize: 10
     },
     {
-      className: "Strong Men",
-      classType: "Weights",
-      classDate: "2021/10/31",
-      startTime: "9:00am",
-      duration: 1, // hours
-      intensity: "high",
-      location: "Anywhere",
-      numberOfStudents: 10, 
-      maxClassSize: 10
+        className: "Strong Men",
+        classType: "Weights",
+        classDate: "2021/10/31",
+        startTime: "9:00am",
+        duration: 1, // hours
+        intensity: "high",
+        location: "Anywhere",
+        numberOfStudents: 10, 
+        maxClassSize: 10
     } 
   ]
 
@@ -156,19 +156,19 @@ return (
             </div>
         
             <div className="classes-container">
-                {/* {
+                {filteredClasses && 
                 filteredClasses.map(indivClass => {
                     const classKey = Math.random().toString(16).slice(2);
                     return <Class key={classKey} indivClass={indivClass} />
                 })
-                } */}
+                }
 
-                {filteredClasses &&
+                {/* {filteredClasses &&
                 filteredClasses.map(indivClass => {
                 
                     return <p>Class</p>
                 })
-                }
+                } */}
             </div>
 
         </div>
