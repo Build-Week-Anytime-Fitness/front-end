@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1d434a08-85ab-44c7-9237-43343d152cf3" name="Default Changelist" comment="initial commit">
-      <change afterPath="$PROJECT_DIR$/client/src/views/PrivateRoute.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/views/classes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/views/footer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/views/home.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/views/instructors.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/views/login.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/views/logout.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/views/nav.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
-    </list>
+    <list default="true" id="1d434a08-85ab-44c7-9237-43343d152cf3" name="Default Changelist" comment="hive created. honey making may now commence" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -65,7 +51,7 @@
       <updated>1621389355521</updated>
       <workItem from="1621389356788" duration="171000" />
       <workItem from="1621391675157" duration="872000" />
-      <workItem from="1621392571816" duration="6951000" />
+      <workItem from="1621392571816" duration="7403000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1621389395520</created>
@@ -102,7 +88,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621393497721</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="hive created. honey making may now commence">
+      <created>1621407261985</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1621407261985</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,6 +116,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+    <MESSAGE value="hive created. honey making may now commence" />
+    <option name="LAST_COMMIT_MESSAGE" value="hive created. honey making may now commence" />
   </component>
 </project>
