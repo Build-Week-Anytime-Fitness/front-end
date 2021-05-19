@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 // import './classes.css';
-// import Class from './Class.js';
+import Class from './Class.js';
 import SearchIcon from '@material-ui/icons/Search';
 import axios from 'axios';
 // import { gsap } from "gsap";
@@ -72,7 +72,7 @@ let filteredClasses = initialClasses;
 
     // filter function over classes array
     const filteredClasses = allClasses.filter( indivClass => {
-      // clean up search term, assign to searchText
+    // clean up search term, assign to searchText
     const searchText = searchTerm.toLowerCase().trim();
     const name = indivClass.className.toLowerCase();
     const type = indivClass.classType.toLowerCase();
@@ -127,7 +127,7 @@ let filteredClasses = initialClasses;
 //        // debugger
 //       })
 //   }, [setAllClasses, setFilteredClasses]); // populates allClasses on browser reload
-  
+
 //   useEffect(() => {
 //     gsap.to(".classes-content-container", {duration: 2, y: 30});
 //   }, []);
@@ -156,8 +156,12 @@ return (
             </div>
         
             <div className="classes-container">
+            
+
+
                 {filteredClasses && 
                 filteredClasses.map(indivClass => {
+                    console.log("indivClass: ", indivClass)
                     const classKey = Math.random().toString(16).slice(2);
                     return <Class key={classKey} indivClass={indivClass} />
                 })
