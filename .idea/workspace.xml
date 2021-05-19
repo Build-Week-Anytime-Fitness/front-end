@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1d434a08-85ab-44c7-9237-43343d152cf3" name="Default Changelist" comment="hive created. honey making may now commence" />
+    <list default="true" id="1d434a08-85ab-44c7-9237-43343d152cf3" name="Default Changelist" comment="Capitalized file name refactor">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,7 +53,7 @@
       <updated>1621389355521</updated>
       <workItem from="1621389356788" duration="171000" />
       <workItem from="1621391675157" duration="872000" />
-      <workItem from="1621392571816" duration="7871000" />
+      <workItem from="1621392571816" duration="8897000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1621389395520</created>
@@ -102,7 +104,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621407598423</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Capitalized file name refactor">
+      <created>1621452976320</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1621452976320</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,6 +133,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="initial commit" />
     <MESSAGE value="hive created. honey making may now commence" />
-    <option name="LAST_COMMIT_MESSAGE" value="hive created. honey making may now commence" />
+    <MESSAGE value="Capitalized file name refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Capitalized file name refactor" />
   </component>
 </project>
