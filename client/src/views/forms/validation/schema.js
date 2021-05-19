@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 export const loginFormSchema = yup.object().shape({
     email:yup.string().email().required(),
-    password:yup.string().required()
+    password:yup.string().required().min(6)
 });
 // ***
 // uncomment when working on the correct feature branches

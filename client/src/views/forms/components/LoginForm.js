@@ -29,6 +29,8 @@ function LoginForm(props){
                 <input type='text' name='password' value={formValues.password} onChange={handleChange}></input>
             </label>
             <button disabled={!isValid}>Log In</button>
+            {formErrors.email===''?'':<div>{formErrors.email}</div>}
+            {formErrors.password===''?'':<div>{formErrors.password}</div>}
         </div>
     );
 }
