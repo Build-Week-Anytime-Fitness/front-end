@@ -32,6 +32,7 @@
       <option name="presentableId" value="Default" />
       <updated>1621389355521</updated>
       <workItem from="1621389356788" duration="171000" />
+      <workItem from="1621391675157" duration="353000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1621389395520</created>
@@ -40,7 +41,21 @@
       <option name="project" value="LOCAL" />
       <updated>1621389395520</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="initial commit">
+      <created>1621391683847</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1621391683847</updated>
+    </task>
+    <task id="LOCAL-00003" summary="initial commit">
+      <created>1621391990705</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1621391990705</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -56,6 +71,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
