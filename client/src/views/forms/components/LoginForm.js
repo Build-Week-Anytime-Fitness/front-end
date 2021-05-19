@@ -5,28 +5,28 @@ function LoginForm(props){
     // state variables
     const [isValid,setIsValid] = useState(true);
     // props variables
-    const {formValues,setFormValue,formErrors,setFormErrors} = props;
+    const {formValues,setFormValues,formErrors,setFormErrors} = props;
     // useEffect
     useEffect(()=>{
         // validateForm whenever the component is mounted
-        validateForm({loginFormSchema,formValues,setIsValid}); //check if form is valid using schema.validate
+        validateForm(loginFormSchema,formValues,setIsValid); //check if form is valid using schema.validate
     },[]);
     // function declarations
     const handleChange=(event)=>{
         const {name,value} = event.target;
-        validateField({loginFormSchema,name,value,formErrors,setFormErrors}); //validate changed field using yup.reach
-        validateForm({loginFormSchema,formValues,setIsValid});
-        setFormValue(name,value);
+        validateField(loginFormSchema,name,value,formErrors,setFormErrors); //validate changed field using yup.reach
+        validateForm(loginFormSchema,formValues,setIsValid);
+        setFormValues({...formValues,[name]:value});
     };
     return(
         <div>
             <label>
-                name
-                <input type='text' value={formValues.name} onChange={handleChange}></input>
+                email
+                <input type='text' name='email' value={formValues.email} onChange={handleChange}></input>
             </label>
             <label>
-                email
-                <input type='text' value={formValues.email} onChange={handleChange}></input>
+                password
+                <input type='text' name='password' value={formValues.password} onChange={handleChange}></input>
             </label>
             <button disabled={!isValid}>Log In</button>
         </div>
