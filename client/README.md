@@ -1,70 +1,182 @@
-# Getting Started with Create React App
+## ANYWHERE FITNESS APP 📱
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Anywhere Fitness is a React web application that allows fitness classes to be held anywhere - a park, an unfinished basement or a garage - not just your traditional gym.
 
-## Available Scripts
+## Software Developers
 
-In the project directory, you can run:
+backend: Jayaram Nair
+frontend: Tony Miller, Chris Lau, Rhiannon Stanford
 
-### `npm start`
+## Link to Product Vision Statement 📝
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+https://docs.google.com/document/d/17laY8Irc5cRqvpqdT3f6nNUofOl09Lr0IAZZsVlr7JE/edit?usp=sharing
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## FRONT END
 
-### `npm test`
+## App Organization & Structure Notes
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    - Home / splash / video
+    - sign-up
+      (checkbox for instructor)
+    - log-in
+      (checkbox for instructor, conditional render)
+      password? / instructor code?
+      User Object
+      isInstructor: boolean;
+    - log-out
 
-### `npm run build`
+    Client (protectedRoute)
+      - classes page
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    Instructor (protectedRoute)
+      - classes page for instructors (that has edit form component on top)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Components
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[] LandingPage.js
+[] Header.js
+[] Footer.js
 
-### `npm run eject`
+[] SearchClasses.js
+[] ClientClasses.js
+[] InstructorClasses.js
+[] ClientClass.js
+[] InstructorClass.js
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+[] SignUpForm.js
+[] LogInForm.js
+[] ClassForm.js
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> Tony
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+[] Create React App
+[] Install Dependencies
+[] Set Up File Architecture (component pages, views, utils, etc.)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+[] Create Router System (5 routes so far)
 
-## Learn More
+    [] Create ProtectedRoute component (for client & instructor pages after successful login)
+    [] Other Routes are:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+        - landing page
+        - sign-up
+        - log-in
+        - client classes - protected
+        - instructor classes - protected
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[] Create Header.js
+[] Create Footer.js
+[] Create Server.js - faux server to test login, until backend is ready.  
+      username: lambda
+      password: school
 
-### Code Splitting
+STRETCH:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+[] Create Landing.js - video splash page for landing page
 
-### Analyzing the Bundle Size
+> Rhiannon
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+[] Create & Maintain README.md
 
-### Making a Progressive Web App
+[] Create SearchClasses.js
+[] Create ClientClasses.js (protectedRoute)
+[] Create ClientClass.js
+[] Create InstructorClasses.js (protectedRoute)
+[] Create InstructorClass.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+> Tony & Rhiannon
 
-### Advanced Configuration
+Redux - pair-program (GOAL: start by Thursday)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Mid next week - Testing (Cypress, RTL)
 
-### Deployment
+Media Queries - BONUS
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+> Chris
 
-### `npm run build` fails to minify
+[] Create Forms:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    [] SignUpForm.js - new users sign-up
+    [] LogInForm.js - checkbox for ------>   isTeacher: boolean
+    [] ClassForm.js (CRUD:  add, update, delete a class)
+
+[] Conditional Rendering of Errors - save as error object
+[] Form Validation - Yup
+
+STRETCH:
+
+[] Material UI
+
+## Dependencies Installed
+
+React Dom
+[x] npm install react react-dom
+
+Axios
+[x] npm install axios
+import axios from 'axios';
+
+Yup
+[x] npm install -S yup
+import \* as yup from 'yup';
+
+React Router
+[x] npm install --save react-router
+import { Router, Route, Switch } from "react-router";
+
+Material UI
+[x] npm install @material-ui/core
+[x] npm install @material-ui/icons
+
+Bootstrap
+[x] npm install react-bootstrap bootstrap@4.6.0
+
+{/_ The following line can be included in your src/index.js or App.js file_/}
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+GSAP
+[x] npm install gsap
+import { gsap } from "gsap";
+
+## Dev Dependencies Installed
+
+Cypress
+[x] npm install cypress --save-dev
+npx cypress open
+add to cypress.json folder
+
+ADD:
+
+{
+"viewportWidth": 600,
+"viewportHeight": 600,
+"baseUrl": "http://localhost:3000",
+"integrationFolder": "cypress/integration"
+}
+
+React Testing Library
+[x] npm install --save-dev @testing-library/react
+
+## Tools
+
+Tiny JPEG https://tinyjpg.com/
+- to compress images to optimize performance
+
+## Responsiveness Media Queries
+
+<!-- mobile -->
+@media only screen and (min-width: 480px) {
+}
+
+<!-- tablet -->
+@media only screen and (min-width: 768px) {
+}
+
+<!-- desktop -->
+@media only screen and (min-width: 992px) {
+}
+
+<!-- wide-screen -->
+@media only screen and (min-width: 1280px) {
+}
