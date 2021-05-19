@@ -12,12 +12,24 @@ body {
 }
 
 .wrapper{
-    min-height: 100vh;
     width: 100vw;
+    min-height: 100vh;
     background: radial-gradient(farthest-corner at 30vw 20vh, #7397A1 1%, #3F2C41 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 h1 {
     color: white;
     margin: auto auto
+}
+
+.btn {
+    color: white;
+}
+
+.classes-content-container {
+    margin: 15vh auto
 }
