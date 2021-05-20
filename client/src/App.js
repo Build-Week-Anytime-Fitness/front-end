@@ -2,10 +2,10 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import "./App.css";
 import Nav from "./views/Nav";
 import Home from "./views/Home";
-import Login from "./views/Login";
+import Login from "./views/forms/components/LogInForm";
 import Logout from "./views/Logout";
 import PrivateRoute from "./views/PrivateRoute";
-import Classes from "./views/Classes";
+import Classes from "./views/classes/Classes";
 import Instructors from "./views/Instructors";
 import Footer from "./views/Footer";
 
@@ -33,7 +33,8 @@ function App() {
           {/* <PrivateRoute exact path={"/classes"} component={Classes}/> */}
           <Route exact path={"/classes"} component={Classes} />
 
-          <PrivateRoute exact path={"/instructors"} component={Instructors} />
+          {/* <PrivateRoute exact path={"/instructors"} component={Instructors} /> */}
+          <Route exact path={"/instructors"} component={Instructors} />
         </Switch>
         <Footer />
       </div>
