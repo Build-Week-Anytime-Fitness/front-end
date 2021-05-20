@@ -16,7 +16,7 @@ export const classFormSchema = yup.object().shape({
     classDate:yup.string().required().oneOf(['Monday','Tuesday','Wednesday','Thursday','Friday']),
     startTime:yup.string().required(),
     duration:yup.number().moreThan(0.5).required(),
-    intensity:yup.string().required(),
+    intensity:yup.string().required().oneOf('Low','Medium','High'),
     location:yup.string().required(),
     maxClassSize:yup.number().moreThan(5).integer().required()
 });
