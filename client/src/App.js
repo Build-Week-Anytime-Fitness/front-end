@@ -10,12 +10,15 @@ import Instructors from "./views/Instructors";
 import Footer from './views/Footer'
 
 function App() {
+    <button>
+
+    </button>
     return (
         <Router>
             <div className={'d-flex flex-column justify-content-center wrapper'}>
                 <Nav/>
                 <Switch>
-                    <Route path={"/home"} component={Home}/>
+                    <Route path={"/"} component={Home}/>
                     <Route path={"/login"} component={Login} />
                     <Route path={"/logout"} component={Logout}/>
                     {/* <PrivateRoute exact path={"/classes"} component={Classes}/> */}
