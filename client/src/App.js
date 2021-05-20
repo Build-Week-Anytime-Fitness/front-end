@@ -13,18 +13,18 @@ function App() {
   <button></button>;
   return (
     <Router>
-      <div className={"d-flex flex-column justify-content-center wrapper"}>
+      <div className={"d-flex flex-column justify-content-start align-items-center wrapper"}>
         <Nav />
         <div
-          className="d-flex justify-content-center align-items-"
+          className="d-flex justify-content-center align-items-start"
         >
-          <button
+          <Link
             to="home"
             className="btn"
-            style={{ color: "#666", marginTop: '-40vh' }}
+            style={{ color: "#666", outline: 'none', marginTop: '3vh'}}
           >
-            <h4 style={{ color: "black", padding: "3vh 5vw", border: '1px solid black' }}>Step Inside</h4>
-          </button>
+            <h4 style={{ color: "black", padding: "3vh 5vw" }}>Step Inside</h4>
+          </Link>
         </div>
         <Switch>
           <Route path={"/home"} component={Home} />

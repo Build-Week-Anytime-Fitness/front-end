@@ -1,10 +1,15 @@
 import FitnessThree from "../assets/fitnessThree.jpg";
 import FitnessFive from "../assets/fitnessFive.jpg";
 import FitnessSix from "../assets/fitnessSix.jpg";
+import FitnessEight from "../assets/fitnessEight.jpg";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
-    <div className={"d-flex flex-column justify-content-center"}>
+    <div
+      className={"d-flex flex-column justify-content-center"}
+      style={{ marginTop: "-10vh" }}
+    >
       <div
         className={
           "d-flex flex-row flex-wrap justify-content-center fitness-wrapper"
@@ -89,7 +94,19 @@ export default function Home() {
             }}
           >
             <h3 style={{ color: "white" }}>
-              Clients 
+              In the days of COVID-19, finding a comfortable place to workout
+              with a group can be nerve wracking. Smelly, sweaty gyms may not be
+              your cup of green tea. With Anywhere Fitness Club, you can find
+              popup fitness groups or schedule one-on-one time with a fitness
+              instructor/ personal trainer and pick your location. <br />
+              <br />
+              Whether at the park, by the beach, or in a less confined space as
+              fitness classes would normally take place in, Anywhere Fitness
+              Club allows you to take control of your life again. <br />
+              <br /> First, choose your desired workout. Next, decide on the
+              duration of your class. Pick a start time that works for your
+              schedule as well as a desired intensity level and get working with
+              Anywhere Fitness Club.
             </h3>
           </div>
         </div>
@@ -97,13 +114,48 @@ export default function Home() {
       <div className={"content-wrapperThree"}>
         <div className={"content"}>
           <h2>
-            Instructors can take attendance, request and process payments,
-            create virtual “punch passes” for each type of class offered, alert
-            clients of cancellations or location changes and so much more.
-            Clients can easily find out information on classes - location, class
-            size, start time and duration, as well as reschedule or cancel an
-            upcoming appointment or reservation right from the mobile app.
+            For for fitness instructors and personal trainers Anywhere Fitness
+            Club lets you reach your clientele easily and effectively. By
+            allowing instructors to post their classes, take attendance, and
+            request and process payments getting your business going is as easy
+            as making a social media post. Need to reschedule, cancel or change
+            a location because of inclement weather? Anywhere Fitness Club has
+            you covered. Easily make and post changes to the board letting your
+            clients know immediately with in the moment updating.
           </h2>
+        </div>
+      </div>
+      <div
+        className={
+          "d-flex flex-row flex-wrap justify-content-center fitness-wrapper"
+        }
+      >
+        <div className={"d-flex flex-column justify-content-center"}>
+          <img
+            className={"marketing-resizer"}
+            src={FitnessEight}
+            alt={"fitness eight"}
+            style={{ width: "50vw" }}
+          />
+          <div
+            style={{
+              maxWidth: "50vw",
+              marginTop: "10vh",
+              padding: "5vh 8vw",
+              textAlign: "justify",
+              color: "black",
+            }}
+          >
+            <h2
+              style={{ color: "#222", textAlign: "center", fontSize: "2.5rem" }}
+            >
+              Find your comfort zone with Anywhere Fitness Club. Signup or login
+              and start attaining your fitness goals today
+            </h2>
+          </div>{" "}
+          <Link to="login" className="btn" style={{ marginBottom: "15vh" }}>
+            Signup/ Login
+          </Link>
         </div>
       </div>
     </div>
