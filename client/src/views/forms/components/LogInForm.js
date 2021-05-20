@@ -5,7 +5,7 @@ function LogInForm(props){
     // state variables
     const [isValid,setIsValid] = useState(true);
     // props variables
-    const {formValues,setFormValues,formErrors,setFormErrors} = props;
+    const {formValues,setFormValues,formErrors,setFormErrors,handleSubmit} = props;
     // useEffect
     useEffect(()=>{
         // validateForm whenever the component is mounted
@@ -13,14 +13,20 @@ function LogInForm(props){
     },[]);
     // function declarations
     const handleChange=(event)=>{
-        const {name,value} = event.target;
-        validateField(loginFormSchema,name,value,formErrors,setFormErrors); //validate changed field using yup.reach
-        validateForm(loginFormSchema,formValues,setIsValid);
-        setFormValues({...formValues,[name]:value});
+        const {name,value,checked,type} = event.target;
+        const inputValue = type==='checkbox'?checked:value;
+        const newFormValues = {...formValues,[name]:inputValue};
+        validateField(loginFormSchema,name,inputValue,formErrors,setFormErrors); //validate changed field using yup.reach
+        validateForm(loginFormSchema,newFormValues,setIsValid);
+        setFormValues(newFormValues);
+    };
+    const handleSubmitEvent=(event)=>{
+        event.preventDefault();
+        handleSubmit();
     };
     return(
-        <div>
-            {/* <label>
+        <form onSubmit={handleSubmitEvent}>
+            <label>
                 email
                 <input type='text' name='email' value={formValues.email} onChange={handleChange}></input>
             </label>
@@ -28,10 +34,11 @@ function LogInForm(props){
                 password
                 <input type='text' name='password' value={formValues.password} onChange={handleChange}></input>
             </label>
-            <button disabled={!isValid}>Log In</button>
-            {formErrors.email===''?'':<div>{formErrors.email}</div>}
-            {formErrors.password===''?'':<div>{formErrors.password}</div>} */}
-        </div>
+            <button type='submit' disabled={!isValid}>Log In</button>
+            {
+                Object.keys(formErrors).map((key,i)=>formErrors[key]===''?'':<div key={i}>{formErrors[key]}</div>)
+            }
+        </form>
     );
 }
 export default LogInForm;
