@@ -237,7 +237,7 @@ return (
                 <div className="animation d-flex flex-row flex-wrap justify-content-center ">
                 {filteredClasses && 
                 filteredClasses.map(indivClass => {
-                    console.log("indivClass: ", indivClass)
+                    // console.log("indivClass: ", indivClass)
                     const classKey = Math.random().toString(16).slice(2);
                     return <Class key={classKey} indivClass={indivClass} />
                 })

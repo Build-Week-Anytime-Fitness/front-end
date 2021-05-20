@@ -1,5 +1,4 @@
 import React from 'react';
-// import './classes.css';
 import { useParams} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -7,7 +6,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
+import EditIcon from '@material-ui/icons/Edit';
 
 
 const useStyles = makeStyles({
@@ -41,8 +40,13 @@ export default function Class (props) {
   let { indivClass, allClasses } = props;
   // console.log("Props from class:", props);
 
-  let { classId } = useParams();
+  // let { classId } = useParams();
   // console.log("classId from Class: ", classId); // gets the classId, A STRING
+
+
+  let { isInstructor } = useParams();
+  console.log("isInstructor from Class: ", isInstructor); // gets the isInstructor, A STRING
+
 
   // material UI code
   const classes = useStyles();
@@ -75,8 +79,11 @@ export default function Class (props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" style={{ color: 'white'}}>Learn More</Button>
+
+        { isInstructor ? <EditIcon style={{ margin: '10', color: '555555'}}/> :  <Button size="small" style={{ color: '555555'}}>Sign Up</Button> }
+
       </CardActions>
+      
     </Card>
 
     </>
