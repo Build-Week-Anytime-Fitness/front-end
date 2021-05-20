@@ -1,11 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {loginFormSchema} from '../validation/schema';
 import {validateForm,validateField} from '../validation/validationHelpers';
-function LogInForm(props){
+const initialValues = {
+    email:'',
+    password:''
+};
+function LogInForm(){
     // state variables
     const [isValid,setIsValid] = useState(true);
-    // props variables
-    const {formValues,setFormValues,formErrors,setFormErrors,handleSubmit} = props;
+    const [formValues,setFormValues] = useState(initialValues);
+    const [formErrors,setFormErrors] = useState(Object.keys(initialValues).reduce((acc,key)=>{acc[key]='';return acc;},{}));
     // useEffect
     useEffect(()=>{
         // validateForm whenever the component is mounted
@@ -20,12 +24,12 @@ function LogInForm(props){
         validateForm(loginFormSchema,newFormValues,setIsValid);
         setFormValues(newFormValues);
     };
-    const handleSubmitEvent=(event)=>{
+    const handleSubmit=(event)=>{
         event.preventDefault();
-        handleSubmit();
+        // redux refactoring
     };
     return(
-        <form onSubmit={handleSubmitEvent}>
+        <form onSubmit={handleSubmit}>
             <label>
                 email
                 <input type='text' name='email' value={formValues.email} onChange={handleChange}></input>
