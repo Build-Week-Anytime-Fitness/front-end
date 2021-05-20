@@ -10,7 +10,7 @@ export default function Nav() {
             <h1>Anywhere Fitness Club</h1>
         </div>
         <div className={"d-flex flex-row flex-wrap justify-content-center"}>
-            <Link to="/" className="btn">
+            <Link to="/home" className="btn">
                 Home
             </Link>
             <Link

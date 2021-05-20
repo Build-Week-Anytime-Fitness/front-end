@@ -89,11 +89,7 @@ export default function Home() {
             }}
           >
             <h3 style={{ color: "white" }}>
-              While you could use several mobile apps to accomplish this,
-              AnywhereFitness is the all-in-one solution to meet your
-              “on-location” fitness class needs. AnywhereFitness makes it
-              painless for Instructors and Clients alike to hold and attend
-              Fitness classes wherever they might be held.
+              Clients 
             </h3>
           </div>
         </div>
