@@ -139,23 +139,25 @@ return (
     <div className='classes-background'>
         <div className='classes-content-container'>    
 
-            <div className='classes-title'>          
-                <h1>Classes</h1>
-            </div>
+            <div className='d-flex flex-row flex-wrap'>          
+                <h1>Classes</h1>        
 
-            <div className='search-container'><br/>
-
-                <SearchIcon className='search-icon' style={{ color: 'white'}} fontSize="large"/>
+                <SearchIcon className='search-icon' style={{ color: 'black', marginTop: '2vh'}} fontSize="large"/>
 
                 <input
                 placeholder="Search for classes"
                 type="text"
                 onChange={searchChangeHandler}
+                style={{
+                  width: '12vw',
+                  height: '2rem',
+                  marginTop: '2vh'
+                }}
                 />
 
             </div>
         
-            <div className="classes-container">
+            <div className="classes-container d-flex flex-row flex wrap justify-content-center class-box">
             
 
 
