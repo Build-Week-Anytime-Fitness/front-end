@@ -11,12 +11,12 @@ export const signUpFormSchema = yup.object().shape({
     isInstructor:yup.boolean()
 });
 export const classFormSchema = yup.object().shape({
-    className:yup.string().min(2).required(),
-    classType:yup.string().required(),
-    classDate:yup.string().required().oneOf(['Monday','Tuesday','Wednesday','Thursday','Friday']),
-    startTime:yup.string().required(),
-    duration:yup.number().moreThan(0.5).required(),
-    intensity:yup.string().required().oneOf('Low','Medium','High'),
-    location:yup.string().required(),
-    maxClassSize:yup.number().moreThan(5).integer().required()
+    // className:yup.string().min(2).required(),
+    // classType:yup.string().required(),
+    // classDate:yup.string().required().oneOf(['Monday','Tuesday','Wednesday','Thursday','Friday']),
+    // startTime:yup.string().required(),
+    // duration:yup.number().moreThan(0.5).required(),
+    // intensity:yup.string().required().oneOf('Low','Medium','High'),
+    // location:yup.string().required(),
+    // maxClassSize:yup.number().moreThan(5).integer().required()
 });
