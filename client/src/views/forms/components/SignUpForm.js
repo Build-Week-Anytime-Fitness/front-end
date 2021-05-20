@@ -14,11 +14,11 @@ function LogInForm(props){
     // function declarations
     const handleChange=(event)=>{
         const {name,value,checked,type} = event.target;
-        console.log(checked);
         const inputValue = type==='checkbox'?checked:value;
+        const newFormValues = {...formValues,[name]:inputValue};
         validateField(signUpFormSchema,name,inputValue,formErrors,setFormErrors); //validate changed field using yup.reach
-        validateForm(signUpFormSchema,formValues,setIsValid);
-        setFormValues({...formValues,[name]:inputValue});
+        validateForm(signUpFormSchema,newFormValues,setIsValid);
+        setFormValues(newFormValues);
     };
     const handleSubmitEvent=(event)=>{
         event.preventDefault();
