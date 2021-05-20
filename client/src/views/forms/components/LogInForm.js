@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {loginFormSchema} from '../validation/schema';
 import {validateForm,validateField} from '../validation/validationHelpers';
-function LoginForm(props){
+function LogInForm(props){
     // state variables
     const [isValid,setIsValid] = useState(true);
     // props variables
@@ -34,4 +34,4 @@ function LoginForm(props){
         </div>
     );
 }
-export default LoginForm;
+export default LogInForm;
