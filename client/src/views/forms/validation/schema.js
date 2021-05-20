@@ -6,14 +6,13 @@ export const loginFormSchema = yup.object().shape({
 // ***
 // uncomment when working on the correct feature branches
 // ***
-// const signUpFormSchema = yup.object().shape({
-//     userName:yup.string().required(),
-//     email:yup.email().required(),
-//     password:yup.min(8,'password must have at least 8 characters').required(),
-//     firstName:yup.string().required(),
-//     lastName:yup.string().required(),
-//     birthday:yup.date().required()
-// });
+export const signUpFormSchema = yup.object().shape({
+    personName:yup.string().required(),
+    email:yup.string().email('Invalid email').required(),
+    isOverEighteen:yup.boolean().oneOf([true],'You have to be older than 18'),
+    password:yup.string().min(8,'Password must have at least 8 characters').required(),
+    isInstructor:yup.boolean()
+});
 // const classFormSchema = yup.object().shape({
 //     name:yup.string().required(),
 //     type:yup.string().required(),
