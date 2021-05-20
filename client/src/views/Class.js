@@ -53,7 +53,7 @@ export default function Class (props) {
     <>
 
 
-      <Card classname="indivCard" className={classes.root} variant="outlined" >
+      <Card className={classes.root} variant="outlined" >
       <CardContent style={{textAlign: "center"}}>
       {/* // {isClassCard ? <button>Logout</button> : <button>Login</button>} */}
         <Typography className={classes.title} color="textSecondary" gutterBottom>

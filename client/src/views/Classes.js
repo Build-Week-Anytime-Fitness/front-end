@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Class from './Class.js';
 import SearchIcon from '@material-ui/icons/Search';
 import axios from 'axios';
 import { gsap } from "gsap";
 
-const initialClasses = [
+const initialClassesValues = [
     {
         className: "Yoga On The Beach",
         classType: "Yoga",
@@ -95,15 +95,26 @@ const initialClasses = [
     },
     ]
 
+// REDUX NOTE:
+// STATE NEEDED:  allClasses, filteredClasses, searchTerm
+// STATE CHANGERS NEEDED:  setAllClasses, setFilteredClasses, setSearchTerm
+// INITIAL STATE:  initialClassesValues (which gets assigned to setAllClasses and setFilteredClasses)
+
+// NOTE:  Each changeHandler in this component will need to communicate with Redux because they all have state setters in them
 
 
 export default function Classes (props) {
+    // THIS IS THE STATE THAT NORMALLY WOULD GET PASSED AS PROPS (below)
     // const { allClasses, setAllClasses, filteredClasses, setFilteredClasses, setSearchTerm } = props;
 
-    // hard code to test
-const { setAllClasses, setFilteredClasses, setSearchTerm } = props;
-let allClasses = initialClasses;
-let filteredClasses = initialClasses;
+    // ...WE WILL MAKE IT LOCAL FOR REDUX PURPOSES (below)
+
+    // -------- States for Classes.js & Search Functionality ----------
+    const [ allClasses, setAllClasses ] = useState(initialClassesValues);
+    const [ filteredClasses, setFilteredClasses ] = useState(initialClassesValues);
+    const [ searchTerm, setSearchTerm ] = useState('');
+
+
 
   // ------------ populate class data with backend data------------------
 //  function getAllClasses() {
@@ -164,14 +175,15 @@ let filteredClasses = initialClasses;
     };
 
   // ----------- Helper Function ---------------------}
-  const searchChangeHandler = (e) => {
-    // not the same variable as searchTerm in App.js
+    const searchChangeHandler = (e) => {
+    // NOT the same variable as searchTerm in App.js
     const searchTerm = e.target.value;
-    setSearchTerm(searchTerm);
+    setSearchTerm(searchTerm); // readable option
     // setSearchTerm({searchTerm: e.target.value}); // cleaner option
     // console.log("The changeHandler is running.")
     getFilteredClasses(searchTerm);
-  };
+    };
+
   // -------------------- Side Effects -----------------
 //   useEffect(() => {
 //     axios.get('https://pt-fitness.herokuapp.com/classes')
