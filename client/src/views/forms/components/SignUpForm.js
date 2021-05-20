@@ -48,7 +48,7 @@ function LogInForm(props){
             </label>
             <button type='submit' disabled={!isValid}>Log In</button>
             {
-                Object.keys(formErrors).map((key)=>formErrors[key]===''?'':<div>{formErrors[key]}</div>)
+                Object.keys(formErrors).map((key,i)=>formErrors[key]===''?'':<div key={i}>{formErrors[key]}</div>)
             }
         </form>
     );
