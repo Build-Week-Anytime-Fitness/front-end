@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-// import './classes.css';
 import Class from './Class.js';
 import SearchIcon from '@material-ui/icons/Search';
 import axios from 'axios';
-// import { gsap } from "gsap";
+import { gsap } from "gsap";
 
 const initialClasses = [
     {
@@ -71,8 +70,30 @@ const initialClasses = [
         location: "Anywhere",
         numberOfStudents: 10, 
         maxClassSize: 10
-    } 
-  ]
+    },
+    {
+        className: "Yoga On The Beach",
+        classType: "Yoga",
+        classDate: "2021/10/30",
+        startTime: "10:00am",
+        duration: 1, // hours
+        intensity: "low",
+        location: "Public Beach",
+        numberOfStudents: 8, 
+        maxClassSize: 10
+    },
+    {
+        className: "Strong Men",
+        classType: "Weights",
+        classDate: "2021/10/31",
+        startTime: "9:00am",
+        duration: 1, // hours
+        intensity: "high",
+        location: "Anywhere",
+        numberOfStudents: 10, 
+        maxClassSize: 10
+    },
+    ]
 
 
 
@@ -81,7 +102,6 @@ export default function Classes (props) {
 
     // hard code to test
 const { setAllClasses, setFilteredClasses, setSearchTerm } = props;
-
 let allClasses = initialClasses;
 let filteredClasses = initialClasses;
 
@@ -89,7 +109,7 @@ let filteredClasses = initialClasses;
 //  function getAllClasses() {
 //     axios.get('https://pt-fitness.herokuapp.com/classes')
 //       .then(res => {
- 
+
 //         // console.log("All Classes ", res.data);
 //         // console.log("Successful res back from Axios, res.data: ", res.data);
 
@@ -108,10 +128,10 @@ let filteredClasses = initialClasses;
 
 
   // ----------- Helper Function ---------------------
-  const getFilteredClasses = (searchTerm) => {
+    const getFilteredClasses = (searchTerm) => {
     // edge case if searchTerm is "", reset filteredClasses to allClasses
     if (searchTerm === "") {
-      setFilteredClasses(allClasses);
+        setFilteredClasses(allClasses);
     }
 
     // filter function over classes array
@@ -141,7 +161,7 @@ let filteredClasses = initialClasses;
 
     setFilteredClasses(filteredClasses);
 
-  };
+    };
 
   // ----------- Helper Function ---------------------}
   const searchChangeHandler = (e) => {
@@ -172,10 +192,9 @@ let filteredClasses = initialClasses;
 //       })
 //   }, [setAllClasses, setFilteredClasses]); // populates allClasses on browser reload
 
-//   useEffect(() => {
-//     gsap.to(".classes-content-container", {duration: 2, y: 30});
-//   }, []);
-
+    useEffect(() => {
+    gsap.to(".animation", {duration: 2, y: 30});
+    }, []); // gsap animation to slide cards down slightly upon load
 
 return (
     <>
@@ -186,25 +205,24 @@ return (
             <div className='d-flex flex-row flex-wrap'>          
                 <h1>Classes</h1>        
 
-                <SearchIcon className='search-icon' style={{ color: 'black', marginTop: '2vh'}} fontSize="large"/>
+                <SearchIcon className='search-icon' style={{ color: '444444', marginTop: '2vh'}} fontSize="large"/>
 
                 <input
                 placeholder="Search for classes"
                 type="text"
                 onChange={searchChangeHandler}
                 style={{
-                  width: '12vw',
-                  height: '2rem',
-                  marginTop: '2vh'
+                    width: '12vw',
+                    height: '2rem',
+                    marginTop: '2vh'
                 }}
                 />
 
             </div>
         
-            <div className="classes-container d-flex flex-row flex wrap justify-content-center class-box">
-            
+            <div className="classes-container d-flex flex-row flex-wrap justify-content-center class-box">
 
-
+                <div className="animation d-flex flex-row flex-wrap justify-content-center ">
                 {filteredClasses && 
                 filteredClasses.map(indivClass => {
                     console.log("indivClass: ", indivClass)
@@ -212,13 +230,8 @@ return (
                     return <Class key={classKey} indivClass={indivClass} />
                 })
                 }
+                </div>
 
-                {/* {filteredClasses &&
-                filteredClasses.map(indivClass => {
-                
-                    return <p>Class</p>
-                })
-                } */}
             </div>
 
         </div>
