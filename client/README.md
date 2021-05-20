@@ -163,6 +163,17 @@ React Testing Library
 Tiny JPEG https://tinyjpg.com/
 - to compress images to optimize performance
 
+## Data Structures
+
+> User Data Structure:
+
+  { "id": "1", "personName": "Pete", "email": "petel@email.com", "isOverEighteen": true, "password": abc123, "isInstructor": false }
+
+> Class Data Structure:
+
+  { "id": "1", "className": "oldie but goodie", "classType": "jazzersize", "classDate": "Monday", "startTime": 9:00am, "duration": 1, "intensity": "high", "location": "anywhere", "numberOfStudents": 10, "maxClassSize": 10 }
+
+
 ## Responsiveness Media Queries
 
 <!-- mobile -->
