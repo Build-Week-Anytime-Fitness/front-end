@@ -1,14 +1,11 @@
-
-
-
 body {
-    margin: 0;
-    color: white;
-    height: 100vh;
-    overflow-x: hidden;
-    font-family: "Tungsten Narrow A", "Tungsten Narrow B";
-    font-style: normal;
-    font-weight: 400;
+  margin: 0;
+  color: white;
+  height: 100vh;
+  overflow-x: hidden;
+  font-family: "Tungsten Narrow A", "Tungsten Narrow B";
+  font-style: normal;
+  font-weight: 400;
 }
 
 #videoBackground {
@@ -16,60 +13,109 @@ body {
   right: 0;
   bottom: 0;
   width: 100%;
-
 }
 
-.wrapper{
-    width: 100vw;
-    min-height: 100vh;
-    background-color: white;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 65vh;
-    
+.wrapper {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: white;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 65vh;
 }
 
-h1 {
-    color: #444;
-    margin: 1vh 3vw;
+h1,
+h3 {
+  color: #444;
+  margin: 1vh 3vw;
 }
 
 .btn {
-    color: #444;
-    margin: 1vh 2vw;
-    font-size: 1.5rem;
+  color: #444;
+  margin: 1vh 2vw;
+  font-size: 1.5rem;
 }
 
 .classes-content-container {
-    margin: 15vh auto
+  margin: 15vh auto;
 }
 
 .image-resizer {
-    height: 10vh;
-    margin-left: 2vw;
+  height: 10vh;
+  margin-left: 2vw;
 }
 
 .marketing-resizer {
-    width: 350px;
+  width: 350px;
+  box-shadow: .5rem .5rem 3vh black
 }
 
 .footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 5rem;           
-  }
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 5rem;
+}
 
 .class-box {
-    background-image: url("/src/assets/fitnessOne.jpg");
+  background-image: url("/src/assets/fitnessOne.jpg");
+  background-position: center center;
+  background-repeat: none;
+  background-size: 100vw;
+  background-attachment: fixed;
+  width: 100vw;
+  padding: 8vh 5vw;
+  margin-top: 5vh;
+}
+
+.content-wrapperOne {
+    background-image: url("/src/assets/fitnessFour.jpg");
     background-position: center center;
     background-repeat: none;
     background-size: 100vw;
     background-attachment: fixed;
     width: 100vw;
     padding: 8vh 5vw;
-    margin-top: 5vh;
+    margin-top: 25vh;
+    margin-bottom: 15vh ;
+}
 
+.content-wrapperTwo {
+    background-image: url("/src/assets/fitnessTwo.jpeg");
+    background-position: center center;
+    background-repeat: none;
+    background-size: 100vw;
+    background-attachment: fixed;
+    width: 100vw;
+    padding: 8vh 5vw;
+    margin-top: 25vh;
+    margin-bottom: 15vh ;
+}
+
+.content-wrapperThree {
+    background-image: url("/src/assets/fitnessSeven.jpg");
+    background-position: center center;
+    background-repeat: none;
+    background-size: 100vw;
+    background-attachment: fixed;
+    width: 100vw;
+    padding: 8vh 5vw;
+    margin-top: 25vh;
+    margin-bottom: 15vh ;
+}
+
+.content {
+    padding: 8vh 5vw;
+    background-color: #444;
+    opacity: 0.8;
+    border: 1px solid white;
+    box-shadow: 0 0 2vh #444;
+    text-align: center;
+    margin: 30vh auto;
+}
+
+.fitness-wrapper {
+    margin-top: 15vh;
 }
