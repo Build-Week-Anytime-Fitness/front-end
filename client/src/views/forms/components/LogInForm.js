@@ -5,11 +5,12 @@ const initialValues = {
     email:'',
     password:''
 };
+const initialErrorValues = Object.keys(initialValues).reduce((acc,key)=>{acc[key]='';return acc;},{});
 function LogInForm(){
     // state variables
     const [isValid,setIsValid] = useState(true);
     const [formValues,setFormValues] = useState(initialValues);
-    const [formErrors,setFormErrors] = useState(Object.keys(initialValues).reduce((acc,key)=>{acc[key]='';return acc;},{}));
+    const [formErrors,setFormErrors] = useState(initialErrorValues);
     // useEffect
     useEffect(()=>{
         // validateForm whenever the component is mounted
