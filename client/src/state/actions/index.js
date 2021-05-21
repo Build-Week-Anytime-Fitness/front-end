@@ -9,7 +9,6 @@ export const ALL_CLASSES = 'ALL_CLASSES';
 export const ADD_CLASS = 'ADD_CLASS'
 export const ADD_USER = 'ADD_USER'
 
-
 //NOTE: add userState
 
 
