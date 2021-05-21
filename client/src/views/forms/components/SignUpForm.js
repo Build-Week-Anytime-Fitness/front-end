@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {signUpFormSchema} from '../validation/schema';
-import {validateForm,validateField} from '../validation/validationHelpers';
+import {validateForm} from '../validation/validationHelpers';
+import {displayErrors,handleChangeHelper,handleSubmitHelper} from '../formHelpers';
 const initialValues = {
     personName:'',
     email:'',
@@ -21,16 +22,18 @@ function LogInForm(){
     },[]);
     // function declarations
     const handleChange=(event)=>{
-        const {name,value,checked,type} = event.target;
-        const inputValue = type==='checkbox'?checked:value;
-        const newFormValues = {...formValues,[name]:inputValue};
-        validateField(signUpFormSchema,name,inputValue,formErrors,setFormErrors); //validate changed field using yup.reach
-        validateForm(signUpFormSchema,newFormValues,setIsValid);
-        setFormValues(newFormValues);
+        handleChangeHelper({
+            event,
+            schema:signUpFormSchema,
+            formValues,
+            setFormValues,
+            formErrors,
+            setFormErrors,
+            setIsValid
+        });
     };
     const handleSubmit=(event)=>{
-        event.preventDefault();
-        // redux refactoring
+        handleSubmitHelper(event);
     };
     return(
         <form onSubmit={handleSubmit}>
@@ -55,9 +58,7 @@ function LogInForm(){
                 <input type='checkbox' name='isInstructor' checked={formValues.isInstructor} onChange={handleChange}></input>
             </label>
             <button type='submit' disabled={!isValid}>Sign Up</button>
-            {
-                Object.keys(formErrors).map((key,i)=>formErrors[key]===''?'':<div key={i}>{formErrors[key]}</div>)
-            }
+            {displayErrors(formErrors)}
         </form>
     );
 }
