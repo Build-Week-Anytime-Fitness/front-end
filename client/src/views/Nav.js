@@ -7,15 +7,19 @@ export default function Nav() {
     <AppBar className={'d-flex flex-row flex-wrap justify-content-between'} color={'inherit'}>
         <div className={'d-flex flex-row flex-wrap'}>
             <img className={'image-resizer'} src={Logo} alt='Anywhere Fitness'></img>
-            <h1>Anywhere Fitness Club</h1>
+            <Link to="/home" className="btn">
+                <h1>Anywhere Fitness Club</h1>
+            </Link>
         </div>
         <div className={"d-flex flex-row flex-wrap justify-content-center"}>
-            <Link to="/home" className="btn">
-                Home
+
+            <Link
+                to="signup" className="btn">
+                Signup
             </Link>
             <Link
                 to="login" className="btn">
-                Signup/ Login
+                Login
             </Link>
             <Link
                 to="logout" className="btn">
