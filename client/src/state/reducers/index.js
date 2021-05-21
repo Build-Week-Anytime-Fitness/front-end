@@ -3,8 +3,10 @@ import {
   FETCHING_API_SUCCESS,
   FETCHING_API_FAILURE,
   SEARCH_TERM,
-  FILTERED_VALUE,
+  FILTERED_CLASSES,
   ALL_CLASSES,
+  ADD_CLASS,
+  ADD_USER,
 } from "../actions";
 
 const log = console.log;
@@ -22,33 +24,48 @@ const initialState = {
     password: "",
     isInstructor: false,
   },
-  class: [
+  classes: [
     {
-        className: "Yoga On The Beach",
-        classType: "Yoga",
-        classDate: "2021/10/30",
-        startTime: "10:00am",
-        duration: 1, // hours
-        intensity: "low",
-        location: "Public Beach",
-        numberOfStudents: 8, 
-        maxClassSize: 10
+      className: "Yoga On The Beach",
+      classType: "Yoga",
+      classDate: "2021/10/30",
+      startTime: "10:00am",
+      duration: 1, // hours
+      intensity: "low",
+      location: "Public Beach",
+      numberOfStudents: 8,
+      maxClassSize: 10,
     },
     {
-        className: "Strong Men",
-        classType: "Weights",
-        classDate: "2021/10/31",
-        startTime: "9:00am",
-        duration: 1, // hours
-        intensity: "high",
-        location: "Anywhere",
-        numberOfStudents: 10, 
-        maxClassSize: 10
-    }
-  ]
-
-
+      className: "Strong Men",
+      classType: "Weights",
+      classDate: "2021/10/31",
+      startTime: "9:00am",
+      duration: 1, // hours
+      intensity: "high",
+      location: "Anywhere",
+      numberOfStudents: 10,
+      maxClassSize: 10,
+    },
+  ],
+  filteredClasses: [
+    {
+      className: "",
+      classType: "",
+      classDate: "",
+      startTime: "",
+      duration: 0, // hours
+      intensity: "",
+      location: "",
+      numberOfStudents: 0,
+      maxClassSize: 10,
+    },
+  ],
 };
+
+// STATE NEEDED:  allClasses, filteredClasses, searchTerm
+// STATE CHANGERS NEEDED:  setAllClasses, setFilteredClasses, setSearchTerm
+// INITIAL STATE:  initialClassesValues (which gets assigned to setAllClasses and setFilteredClasses)
 
 //2. create a features reducer that takes in initialState, sets it equal to state, and takes in an action
 export const appReducer = (state = initialState, action) => {
@@ -66,20 +83,35 @@ export const appReducer = (state = initialState, action) => {
       //log("FETCH FAIL FROM REDUCER");
       return { ...state, loading: false, error: action.payload };
     }
-    case SEARCH_TERM: {
-      //log("3. SEARCH TERM FROM REDUCER", action.payload);
-      return { ...state, searchTerm: action.payload };
-    }
-    case FILTERED_VALUE: {
-      log(" FILTERED VALUE from reducer", action.payload);
-      return { ...state, filteredValue: action.payload };
-    }
-    case ALL_CLASSES: {
-      log("ALL CLASSES from reducer", action.payload);
-      return { ...state, allClasses: action.payload };
-    }
+    // case SEARCH_TERM: {
+    //   //log("3. SEARCH TERM FROM REDUCER", action.payload);
+    //   return { ...state, searchTerm: action.payload };
+    // }
+    // case FILTERED_CLASSES: {
+    //   log(" FILTERED CLASSES from reducer", action.payload);
+    //   return { ...state, filteredClasses: action.payload };
+    // }
+    // case ALL_CLASSES: {
+    //   log("ALL CLASSES from reducer", action.payload);
+    //   return { ...state, allClasses: action.payload };
+    // }
+    // case ADD_CLASS: {
+    //   console.log("reducer fires: add class ");
+    //   return { ...state, classes: [...state.classes, action.payload] };
+    // }
+    // case ADD_USER: {
+    //   console.log("reducer fires: add users ");
+    //   return { ...state, users: [...state.users, action.payload] };
+    // }
 
+    // return {
+    //     ...state,
+    //     loading: false,
+    //     smurf: action.payload,
+    //     error: "",
     default:
       return state;
   }
 };
+
+// need to code out current user state

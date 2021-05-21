@@ -4,96 +4,96 @@ import SearchIcon from '@material-ui/icons/Search';
 import axios from 'axios';
 import { gsap } from "gsap";
 
-const initialClassesValues = [
-    {
-        className: "Yoga On The Beach",
-        classType: "Yoga",
-        classDate: "2021/10/30",
-        startTime: "10:00am",
-        duration: 1, // hours
-        intensity: "low",
-        location: "Public Beach",
-        numberOfStudents: 8, 
-        maxClassSize: 10
-    },
-    {
-        className: "Strong Men",
-        classType: "Weights",
-        classDate: "2021/10/31",
-        startTime: "9:00am",
-        duration: 1, // hours
-        intensity: "high",
-        location: "Anywhere",
-        numberOfStudents: 10, 
-        maxClassSize: 10
-    },
-    {
-        className: "Yoga On The Beach",
-        classType: "Yoga",
-        classDate: "2021/10/30",
-        startTime: "10:00am",
-        duration: 1, // hours
-        intensity: "low",
-        location: "Public Beach",
-        numberOfStudents: 8, 
-        maxClassSize: 10
-    },
-    {
-        className: "Strong Men",
-        classType: "Weights",
-        classDate: "2021/10/31",
-        startTime: "9:00am",
-        duration: 1, // hours
-        intensity: "high",
-        location: "Anywhere",
-        numberOfStudents: 10, 
-        maxClassSize: 10
-    },
-    {
-        className: "Yoga On The Beach",
-        classType: "Yoga",
-        classDate: "2021/10/30",
-        startTime: "10:00am",
-        duration: 1, // hours
-        intensity: "low",
-        location: "Public Beach",
-        numberOfStudents: 8, 
-        maxClassSize: 10
-    },
-    {
-        className: "Strong Men",
-        classType: "Weights",
-        classDate: "2021/10/31",
-        startTime: "9:00am",
-        duration: 1, // hours
-        intensity: "high",
-        location: "Anywhere",
-        numberOfStudents: 10, 
-        maxClassSize: 10
-    },
-    {
-        className: "Yoga On The Beach",
-        classType: "Yoga",
-        classDate: "2021/10/30",
-        startTime: "10:00am",
-        duration: 1, // hours
-        intensity: "low",
-        location: "Public Beach",
-        numberOfStudents: 8, 
-        maxClassSize: 10
-    },
-    {
-        className: "Strong Men",
-        classType: "Weights",
-        classDate: "2021/10/31",
-        startTime: "9:00am",
-        duration: 1, // hours
-        intensity: "high",
-        location: "Anywhere",
-        numberOfStudents: 10, 
-        maxClassSize: 10
-    },
-    ]
+// const initialClassesValues = [
+//     {
+//         className: "Yoga On The Beach",
+//         classType: "Yoga",
+//         classDate: "2021/10/30",
+//         startTime: "10:00am",
+//         duration: 1, // hours
+//         intensity: "low",
+//         location: "Public Beach",
+//         numberOfStudents: 8, 
+//         maxClassSize: 10
+//     },
+//     {
+//         className: "Strong Men",
+//         classType: "Weights",
+//         classDate: "2021/10/31",
+//         startTime: "9:00am",
+//         duration: 1, // hours
+//         intensity: "high",
+//         location: "Anywhere",
+//         numberOfStudents: 10, 
+//         maxClassSize: 10
+//     },
+//     {
+//         className: "Yoga On The Beach",
+//         classType: "Yoga",
+//         classDate: "2021/10/30",
+//         startTime: "10:00am",
+//         duration: 1, // hours
+//         intensity: "low",
+//         location: "Public Beach",
+//         numberOfStudents: 8, 
+//         maxClassSize: 10
+//     },
+//     {
+//         className: "Strong Men",
+//         classType: "Weights",
+//         classDate: "2021/10/31",
+//         startTime: "9:00am",
+//         duration: 1, // hours
+//         intensity: "high",
+//         location: "Anywhere",
+//         numberOfStudents: 10, 
+//         maxClassSize: 10
+//     },
+//     {
+//         className: "Yoga On The Beach",
+//         classType: "Yoga",
+//         classDate: "2021/10/30",
+//         startTime: "10:00am",
+//         duration: 1, // hours
+//         intensity: "low",
+//         location: "Public Beach",
+//         numberOfStudents: 8, 
+//         maxClassSize: 10
+//     },
+//     {
+//         className: "Strong Men",
+//         classType: "Weights",
+//         classDate: "2021/10/31",
+//         startTime: "9:00am",
+//         duration: 1, // hours
+//         intensity: "high",
+//         location: "Anywhere",
+//         numberOfStudents: 10, 
+//         maxClassSize: 10
+//     },
+//     {
+//         className: "Yoga On The Beach",
+//         classType: "Yoga",
+//         classDate: "2021/10/30",
+//         startTime: "10:00am",
+//         duration: 1, // hours
+//         intensity: "low",
+//         location: "Public Beach",
+//         numberOfStudents: 8, 
+//         maxClassSize: 10
+//     },
+//     {
+//         className: "Strong Men",
+//         classType: "Weights",
+//         classDate: "2021/10/31",
+//         startTime: "9:00am",
+//         duration: 1, // hours
+//         intensity: "high",
+//         location: "Anywhere",
+//         numberOfStudents: 10, 
+//         maxClassSize: 10
+//     },
+//     ]
 
 // REDUX NOTE:
 // STATE NEEDED:  allClasses, filteredClasses, searchTerm
