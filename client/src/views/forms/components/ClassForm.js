@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {classFormSchema} from '../validation/schema';
-import {validateForm,validateField} from '../validation/validationHelpers';
+import {validateForm} from '../validation/validationHelpers';
+import {displayErrors,handleChangeHelper,handleSubmitHelper} from '../formHelpers';
 const initialValues = {
     className:'',
     classType:'',
@@ -24,16 +25,18 @@ function ClassForm(){
     },[]);
     // function declarations
     const handleChange=(event)=>{
-        const {name,value,checked,type} = event.target;
-        const inputValue = type==='checkbox'?checked:value;
-        const newFormValues = {...formValues,[name]:inputValue};
-        validateField(classFormSchema,name,inputValue,formErrors,setFormErrors); //validate changed field using yup.reach
-        validateForm(classFormSchema,newFormValues,setIsValid);
-        setFormValues(newFormValues);
+        handleChangeHelper({
+            event,
+            schema:classFormSchema,
+            formValues,
+            setFormValues,
+            formErrors,
+            setFormErrors,
+            setIsValid
+        });
     };
     const handleSubmit=(event)=>{
-        event.preventDefault();
-        // redux refactoring
+        handleSubmitHelper(event);
     };
     return(
         <form onSubmit={handleSubmit}>
@@ -51,7 +54,7 @@ function ClassForm(){
             </label>
             <label>
                 Start Time
-                <input type='time' name='startTime' checked={formValues.startTime} onChange={handleChange}></input>
+                <input type='time' name='startTime' value={formValues.startTime} onChange={handleChange}></input>
             </label>
             <label>
                 Intensity
@@ -64,20 +67,18 @@ function ClassForm(){
             </label>
             <label>
                 Duration 
-                <input type='number' name='duration' checked={formValues.duration} onChange={handleChange}></input>
+                <input type='number' name='duration' value={formValues.duration} onChange={handleChange}></input>
             </label>
             <label>
                 Location 
-                <input type='text' name='location' checked={formValues.location} onChange={handleChange}></input>
+                <input type='text' name='location' value={formValues.location} onChange={handleChange}></input>
             </label>
             <label>
                 Maximum Class Size
-                <input type='number' name='maxClassSize' checked={formValues.maxClassSize} onChange={handleChange}></input>
+                <input type='number' name='maxClassSize' value={formValues.maxClassSize} onChange={handleChange}></input>
             </label>
             <button type='submit' disabled={!isValid}>Add/Edit Class</button>
-            {
-                Object.keys(formErrors).map((key,i)=>formErrors[key]===''?'':<div key={i}>{formErrors[key]}</div>)
-            }
+            {displayErrors(formErrors)}
         </form>
     );
 }
