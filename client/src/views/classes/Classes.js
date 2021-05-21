@@ -6,9 +6,8 @@ import { gsap } from "gsap";
 import { connect } from "react-redux";
 import { getData, searchTerm, getFilteredClasses, allClasses }  from "../../state/actions/index.js";
 
-
-
 /*
+
 const initialClassesValues = [
     {
         className: "Yoga On The Beach",
@@ -21,6 +20,7 @@ const initialClassesValues = [
         numberOfStudents: 8, 
         maxClassSize: 10
     },
+
     ]
 */
 

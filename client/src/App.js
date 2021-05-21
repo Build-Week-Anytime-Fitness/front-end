@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import "./App.css";
 import Nav from "./views/Nav";
 import Home from "./views/Home";
+import Signup from "./views/forms/components/SignUpForm"
 import Login from "./views/forms/components/LogInForm";
 import Logout from "./views/Logout";
 import PrivateRoute from "./views/PrivateRoute";
@@ -28,6 +29,7 @@ function App() {
         </div>
         <Switch>
           <Route path={"/home"} component={Home} />
+          <Route path={"/signup"} component={Signup} />
           <Route path={"/login"} component={Login} />
           <Route path={"/logout"} component={Logout} />
           {/* <PrivateRoute exact path={"/classes"} component={Classes}/> */}
