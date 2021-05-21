@@ -31,11 +31,11 @@ function LogInForm(){
     return(
         <form onSubmit={handleSubmit}>
             <label>
-                email
+                Email
                 <input type='text' name='email' value={formValues.email} onChange={handleChange}></input>
             </label>
             <label>
-                password
+                Password
                 <input type='text' name='password' value={formValues.password} onChange={handleChange}></input>
             </label>
             <button type='submit' disabled={!isValid}>Log In</button>
