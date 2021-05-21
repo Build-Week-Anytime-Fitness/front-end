@@ -42,7 +42,7 @@ export default function Class (props) {
 
   // Determines location from useLocation(), if "/instructors" is found, set isInstructor to true, trigger positive conditional render in card
   let { pathname } = useLocation();
-  console.log("pathname from Class: ", pathname); // gets the location, looking for "/instructors", A STRING
+  // console.log("pathname from Class: ", pathname); // gets the location, looking for "/instructors", A STRING
   let isInstructor = false;
   if (pathname === "/instructors") {
     isInstructor = true;

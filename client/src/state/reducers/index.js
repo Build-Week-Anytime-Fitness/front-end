@@ -3,7 +3,7 @@ import {
   FETCHING_API_SUCCESS,
   FETCHING_API_FAILURE,
   SEARCH_TERM,
-  FILTERED_CLASSES,
+  GET_FILTERED_CLASSES,
   ALL_CLASSES,
   ADD_CLASS,
   ADD_USER,
@@ -50,7 +50,7 @@ const initialState = {
   ],
   filteredClasses: [
     {
-      className: "",
+      className: "No Classes",
       classType: "",
       classDate: "",
       startTime: "",
@@ -87,14 +87,14 @@ export const appReducer = (state = initialState, action) => {
     //   //log("3. SEARCH TERM FROM REDUCER", action.payload);
     //   return { ...state, searchTerm: action.payload };
     // }
-    // case FILTERED_CLASSES: {
-    //   log(" FILTERED CLASSES from reducer", action.payload);
-    //   return { ...state, filteredClasses: action.payload };
-    // }
-    // case ALL_CLASSES: {
-    //   log("ALL CLASSES from reducer", action.payload);
-    //   return { ...state, allClasses: action.payload };
-    // }
+    case GET_FILTERED_CLASSES: {
+      log(" GET_FILTERED CLASSES from reducer", action.payload);
+      return { ...state, filteredClasses: action.payload };
+    }
+    case ALL_CLASSES: {
+      log("ALL CLASSES from reducer", action.payload);
+      return { ...state, allClasses: action.payload };
+    }
     // case ADD_CLASS: {
     //   console.log("reducer fires: add class ");
     //   return { ...state, classes: [...state.classes, action.payload] };
