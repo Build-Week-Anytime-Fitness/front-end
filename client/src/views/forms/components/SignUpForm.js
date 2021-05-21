@@ -12,6 +12,7 @@ const initialValues = {
 const initialErrorValues = Object.keys(initialValues).reduce((acc,key)=>{acc[key]='';return acc;},{});
 function LogInForm(){
     // state variables
+    //need to rename formValues to signUpFormValues
     const [isValid,setIsValid] = useState(true);
     const [formValues,setFormValues] = useState(initialValues);
     const [formErrors,setFormErrors] = useState(initialErrorValues);

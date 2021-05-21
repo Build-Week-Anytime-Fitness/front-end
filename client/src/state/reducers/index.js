@@ -8,6 +8,7 @@ import {
   ADD_CLASS,
   ADD_USER,
   CHECK_USER,
+  FORM_VALUES,
 } from "../actions";
 
 const log = console.log;
@@ -111,11 +112,12 @@ export const appReducer = (state = initialState, action) => {
       return { ...state, currentUser: action.payload };
     }
 
-    // return {
-    //     ...state,
-    //     loading: false,
-    //     smurf: action.payload,
-    //     error: "",
+    case FORM_VALUES: {
+      log("3. FORM_VALUES FROM REDUCER", action.payload);
+      return { ...state, formValues: action.payload };
+    }
+
+
     default:
       console.log("Error: unknown action type in App Reducer", action.type);
       return state;

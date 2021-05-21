@@ -10,6 +10,7 @@ export const ALL_CLASSES = 'ALL_CLASSES';
 export const ADD_CLASS = 'ADD_CLASS';
 export const ADD_USER = 'ADD_USER';
 export const CHECK_USER = 'CHECK_USER';
+export const FORM_VALUES = 'FORM_VALUES';
 
 //NOTE: add userState
 
@@ -83,6 +84,11 @@ export const checkUser = (props) => (dispatch) => { //this action takes dispatch
       //   console.log('ERR_1: This error is from Login', error)
       // })
     };
+
+    export const formValues = (formValues) => {
+      console.log('10. new formValues from classes.js', formValues)
+      return { type: FORM_VALUES, payload: formValues}
+    }
 
 
 //add current user state

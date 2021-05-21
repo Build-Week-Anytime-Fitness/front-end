@@ -6,8 +6,8 @@ import { connect } from "react-redux";
 import { checkUser } from "../../../state/actions/index";
 
 const initialValues = {
-  email: "",
-  password: "",
+  email: "test@email.com",
+  password: "testing",
 };
 
 const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
@@ -21,12 +21,13 @@ const LogInForm = (props) => {
   const [formErrors, setFormErrors] = useState(initialErrorValues);
 
   //redux state
-  const [formValues, setFormValues] = useState(initialValues);
+  //const [formValues, setFormValues] = useState(initialValues);
+  console.log('form values from login form', props.formValues)
 
   // useEffect
-  useEffect(() => {
+  useEffect((props) => {
     // validateForm whenever the component is mounted
-    validateForm(loginFormSchema, formValues, setIsValid); //check if form is valid using schema.validate
+    validateForm(loginFormSchema, props.formValues, setIsValid); //check if form is valid using schema.validate
   }, []);
 
   //refactored handleChangeHelper
@@ -45,15 +46,16 @@ const LogInForm = (props) => {
     validateField(schema, name, inputValue, formErrors, setFormErrors); //validate changed field using yup.reach
     validateForm(schema, newFormValues, setIsValid);
     setFormValues(newFormValues);
+    console.log("formValues", formValues, "newFormValues", newFormValues)
   };
 
   // function declarations
   const handleChange = (event) => {
     handleChangeHelper({
       event,
-      schema: loginFormSchema,
-      formValues,
-      setFormValues,
+     // schema: loginFormSchema,
+      //formValues,
+    //   setFormValues,
       formErrors,
       setFormErrors,
       setIsValid,
@@ -63,7 +65,8 @@ const LogInForm = (props) => {
   const handleSubmit = (event) => {
     handleSubmitHelper(event); //preventDefault only
     //dispatch CHECK_USER
-    checkUser(formValues)
+    checkUser(props.formValues)
+    console.log(props.formValues)
     //post submit which will be handled by redux dispatch which needs a new case in action and reducer of checkUser to verify credentials and receive JWT
   };
 
@@ -74,7 +77,7 @@ const LogInForm = (props) => {
         <input
           type="text"
           name="email"
-          value={formValues.email}
+          value={props.formValues.email}
           onChange={handleChange}
         ></input>
       </label>
@@ -83,7 +86,7 @@ const LogInForm = (props) => {
         <input
           type="password"
           name="password"
-          value={formValues.password}
+          value={props.formValues.password}
           onChange={handleChange}
         ></input>
       </label>
@@ -100,7 +103,7 @@ const LogInForm = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    formValues: state.formValues,
+    formValues: state.formValues, //credentials
     currentUser: state.currentUser
   };
 };
