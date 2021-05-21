@@ -51,7 +51,7 @@ function ClassForm(){
             </label>
             <label>
                 Start Time
-                <input type='time' name='startTime' checked={formValues.startTime} onChange={handleChange}></input>
+                <input type='time' name='startTime' value={formValues.startTime} onChange={handleChange}></input>
             </label>
             <label>
                 Intensity
@@ -64,15 +64,15 @@ function ClassForm(){
             </label>
             <label>
                 Duration 
-                <input type='number' name='duration' checked={formValues.duration} onChange={handleChange}></input>
+                <input type='number' name='duration' value={formValues.duration} onChange={handleChange}></input>
             </label>
             <label>
                 Location 
-                <input type='text' name='location' checked={formValues.location} onChange={handleChange}></input>
+                <input type='text' name='location' value={formValues.location} onChange={handleChange}></input>
             </label>
             <label>
                 Maximum Class Size
-                <input type='number' name='maxClassSize' checked={formValues.maxClassSize} onChange={handleChange}></input>
+                <input type='number' name='maxClassSize' value={formValues.maxClassSize} onChange={handleChange}></input>
             </label>
             <button type='submit' disabled={!isValid}>Add/Edit Class</button>
             {
