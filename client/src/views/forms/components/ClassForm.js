@@ -1,11 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import {classFormSchema} from '../validation/schema';
 import {validateForm,validateField} from '../validation/validationHelpers';
-function ClassForm(props){
+const initialValues = {
+    className:'',
+    classType:'',
+    classDate:'',
+    startTime:'',
+    duration:0.5,
+    intensity:'',
+    location:'',
+    maxClassSize:5
+};
+const initialErrorValues = Object.keys(initialValues).reduce((acc,key)=>{acc[key]='';return acc;},{});
+function ClassForm(){
     // state variables
     const [isValid,setIsValid] = useState(true);
-    // props variables
-    const {formValues,setFormValues,formErrors,setFormErrors,handleSubmit} = props;
+    const [formValues,setFormValues] = useState(initialValues);
+    const [formErrors,setFormErrors] = useState(initialErrorValues);
     // useEffect
     useEffect(()=>{
         // validateForm whenever the component is mounted
@@ -20,12 +31,12 @@ function ClassForm(props){
         validateForm(classFormSchema,newFormValues,setIsValid);
         setFormValues(newFormValues);
     };
-    const handleSubmitEvent=(event)=>{
+    const handleSubmit=(event)=>{
         event.preventDefault();
-        handleSubmit();
+        // redux refactoring
     };
     return(
-        <form onSubmit={handleSubmitEvent}>
+        <form onSubmit={handleSubmit}>
             <label>
                 Class Name
                 <input type='text' name='className' value={formValues.className} onChange={handleChange}></input>
@@ -36,12 +47,7 @@ function ClassForm(props){
             </label>
             <label>
                 Class Date
-                <select name='classDate' value={formValues.classDate} onChange={handleChange}>
-                    <option value=''>--select--</option>
-                    {
-                        ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'].map((day,i)=><option value={day} key={i}>{day}</option>)
-                    }
-                </select>
+                <input type='date' name='classDate' value={formValues.classDate} onChange={handleChange}></input>
             </label>
             <label>
                 Start Time
@@ -52,7 +58,7 @@ function ClassForm(props){
                 <select name='intensity' value={formValues.intensity} onChange={handleChange}>
                     <option value=''>--select--</option>
                     {
-                        ['Low','Medium','High'].map((val,i)=><option value={val} key={i}>{val}</option>)
+                        ['low','medium','high'].map((val,i)=><option value={val} key={i}>{val}</option>)
                     }
                 </select>
             </label>
