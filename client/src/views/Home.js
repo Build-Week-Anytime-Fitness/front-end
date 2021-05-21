@@ -62,12 +62,7 @@ export default function Home() {
       <div className={"content-wrapperTwo"}>
         <div className={"content"}>
           <h2>
-            Instructors can take attendance, request and process payments,
-            create virtual “punch passes” for each type of class offered, alert
-            clients of cancellations or location changes and so much more.
-            Clients can easily find out information on classes - location, class
-            size, start time and duration, as well as reschedule or cancel an
-            upcoming appointment or reservation right from the mobile app.
+            With the ability to set locations at leisure your workouts can either be in set locations or randomly located places around town. Anywhere Fitness Club allows to you have a range of locale options for either attending or hosting fitness classes. 
           </h2>
         </div>
       </div>
@@ -114,7 +109,7 @@ export default function Home() {
       <div className={"content-wrapperThree"}>
         <div className={"content"}>
           <h2>
-            For for fitness instructors and personal trainers Anywhere Fitness
+            For for fitness instructors and personal trainers, Anywhere Fitness
             Club lets you reach your clientele easily and effectively. By
             allowing instructors to post their classes, take attendance, and
             request and process payments getting your business going is as easy

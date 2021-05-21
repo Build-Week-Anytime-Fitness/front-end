@@ -20,7 +20,7 @@ function LogInForm(props){
     };
     return(
         <div>
-            <label>
+            {/* <label>
                 email
                 <input type='text' name='email' value={formValues.email} onChange={handleChange}></input>
             </label>
@@ -30,7 +30,7 @@ function LogInForm(props){
             </label>
             <button disabled={!isValid}>Log In</button>
             {formErrors.email===''?'':<div>{formErrors.email}</div>}
-            {formErrors.password===''?'':<div>{formErrors.password}</div>}
+            {formErrors.password===''?'':<div>{formErrors.password}</div>} */}
         </div>
     );
 }

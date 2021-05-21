@@ -17,13 +17,14 @@ body {
 
 .wrapper {
   width: 100vw;
-  min-height: 100vh;
+  height: auto;
   background-color: white;
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 65vh;
+  padding-bottom: 40vh;
 }
 
 h1,
@@ -62,7 +63,7 @@ h3 {
 .class-box {
   background-image: url("/src/assets/fitnessOne.jpg");
   background-position: center center;
-  background-repeat: none;
+  background-repeat: no-repeat;
   background-size: 100vw;
   background-attachment: fixed;
   width: 100vw;
@@ -73,7 +74,7 @@ h3 {
 .content-wrapperOne {
     background-image: url("/src/assets/fitnessFour.jpg");
     background-position: center center;
-    background-repeat: none;
+    background-repeat: no-repeat;
     background-size: 100vw;
     background-attachment: fixed;
     width: 100vw;
@@ -85,7 +86,7 @@ h3 {
 .content-wrapperTwo {
     background-image: url("/src/assets/fitnessTwo.jpeg");
     background-position: center center;
-    background-repeat: none;
+    background-repeat: no-repeat;
     background-size: 100vw;
     background-attachment: fixed;
     width: 100vw;
@@ -97,7 +98,7 @@ h3 {
 .content-wrapperThree {
     background-image: url("/src/assets/fitnessSeven.jpg");
     background-position: center center;
-    background-repeat: none;
+    background-repeat: no-repeat;
     background-size: 100vw;
     background-attachment: fixed;
     width: 100vw;

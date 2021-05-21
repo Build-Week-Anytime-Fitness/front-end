@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1d434a08-85ab-44c7-9237-43343d152cf3" name="Default Changelist" comment="Capitalized file name refactor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/Logout.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Logout.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +55,8 @@
       <workItem from="1621389356788" duration="171000" />
       <workItem from="1621391675157" duration="872000" />
       <workItem from="1621392571816" duration="9465000" />
+      <workItem from="1621553985321" duration="60000" />
+      <workItem from="1621554278657" duration="313000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1621389395520</created>
