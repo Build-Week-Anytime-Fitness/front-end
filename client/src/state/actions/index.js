@@ -7,6 +7,8 @@ export const SEARCH_TERM = 'SEARCH_TERM';
 export const FILTERED_VALUE = 'FILTERED_VALUE';
 export const ALL_CLASSES = 'ALL_CLASSES';
 
+//NOTE: add userState
+
 //state related to classes
 
 export const searchTerm = (searchTerm) => {
@@ -43,5 +45,8 @@ export const getData = (props) => (dispatch) => {
 }
 
 //state related to forms
+
+
+//add current user state
 
 

@@ -6,7 +6,7 @@ export default function Logout() {
     const logout = () => {
         alert("You have been logged out. Thank you for visiting");
         localStorage.clear();
-        history.push("/")
+        history.push("/home")
     }
     return (
         <div 
