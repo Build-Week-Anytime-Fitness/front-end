@@ -37,7 +37,7 @@ function LogInForm(){
             </label>
             <label>
                 Password
-                <input type='text' name='password' value={formValues.password} onChange={handleChange}></input>
+                <input type='password' name='password' value={formValues.password} onChange={handleChange}></input>
             </label>
             <button type='submit' disabled={!isValid}>Log In</button>
             {
