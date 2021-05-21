@@ -7,6 +7,7 @@ import {
   ALL_CLASSES,
   ADD_CLASS,
   ADD_USER,
+  CHECK_USER,
 } from "../actions";
 
 const log = console.log;
@@ -16,6 +17,7 @@ const initialState = {
   loading: false,
   error: "",
   searchTerm: "",
+  currentUser: {},
   user: {
     id: "",
     personName: "",
@@ -77,7 +79,7 @@ export const appReducer = (state = initialState, action) => {
     }
     case FETCHING_API_SUCCESS: {
       //log("FETCH SUCCESS THROUGH REDUCER");
-      return { ...state, loading: false, friends: action.payload };
+      return { ...state, loading: false };
     }
     case FETCHING_API_FAILURE: {
       //log("FETCH FAIL FROM REDUCER");
@@ -103,6 +105,11 @@ export const appReducer = (state = initialState, action) => {
     //   console.log("reducer fires: add users ");
     //   return { ...state, users: [...state.users, action.payload] };
     // }
+  
+    case CHECK_USER: {
+      console.log("reducer fires: check users");
+      return { ...state, currentUser: action.payload };
+    }
 
     // return {
     //     ...state,
@@ -110,6 +117,7 @@ export const appReducer = (state = initialState, action) => {
     //     smurf: action.payload,
     //     error: "",
     default:
+      console.log("Error: unknown action type in App Reducer", action.type);
       return state;
   }
 };

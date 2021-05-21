@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const axiosWithAuth = () => {
+ const axiosWithAuth = () => {
   //console.log('axiosWithAuth Started')
   const token = localStorage.getItem("authToken");
   //console.log(token)
@@ -12,3 +12,5 @@ export const axiosWithAuth = () => {
    
   });
 }
+
+export default axiosWithAuth

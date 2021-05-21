@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {signUpFormSchema} from '../validation/schema';
 import {validateForm} from '../validation/validationHelpers';
-import {displayErrors,handleChangeHelper,handleSubmitHelper} from '../formHelpers';
+import {displayErrors, handleChangeHelper, handleSubmitHelper} from '../formHelpers'; //bread crumbs if we get lost 
 const initialValues = {
     personName:'',
     email:'',
