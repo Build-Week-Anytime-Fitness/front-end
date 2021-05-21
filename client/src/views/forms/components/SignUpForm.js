@@ -1,11 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import {signUpFormSchema} from '../validation/schema';
 import {validateForm,validateField} from '../validation/validationHelpers';
-function LogInForm(props){
+const initialValues = {
+    personName:'',
+    email:'',
+    isOverEighteen:false,
+    password:'',
+    isInstructor:false
+};
+const initialErrorValues = Object.keys(initialValues).reduce((acc,key)=>{acc[key]='';return acc;},{});
+function LogInForm(){
     // state variables
     const [isValid,setIsValid] = useState(true);
-    // props variables
-    const {formValues,setFormValues,formErrors,setFormErrors,handleSubmit} = props;
+    const [formValues,setFormValues] = useState(initialValues);
+    const [formErrors,setFormErrors] = useState(initialErrorValues);
     // useEffect
     useEffect(()=>{
         // validateForm whenever the component is mounted
@@ -20,12 +28,12 @@ function LogInForm(props){
         validateForm(signUpFormSchema,newFormValues,setIsValid);
         setFormValues(newFormValues);
     };
-    const handleSubmitEvent=(event)=>{
+    const handleSubmit=(event)=>{
         event.preventDefault();
-        handleSubmit();
+        // redux refactoring
     };
     return(
-        <form onSubmit={handleSubmitEvent}>
+        <form onSubmit={handleSubmit}>
             <label>
                 Name
                 <input type='text' name='personName' value={formValues.personName} onChange={handleChange}></input>
@@ -35,7 +43,7 @@ function LogInForm(props){
                 <input type='text' name='email' value={formValues.email} onChange={handleChange}></input>
             </label>
             <label>
-                password
+                Password
                 <input type='password' name='password' value={formValues.password} onChange={handleChange}></input>
             </label>
             <label>
@@ -46,7 +54,7 @@ function LogInForm(props){
                 Are you an instructor?
                 <input type='checkbox' name='isInstructor' checked={formValues.isInstructor} onChange={handleChange}></input>
             </label>
-            <button type='submit' disabled={!isValid}>Log In</button>
+            <button type='submit' disabled={!isValid}>Sign Up</button>
             {
                 Object.keys(formErrors).map((key,i)=>formErrors[key]===''?'':<div key={i}>{formErrors[key]}</div>)
             }
