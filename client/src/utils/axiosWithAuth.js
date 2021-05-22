@@ -8,7 +8,7 @@ import axios from "axios";
   
     {
     baseURL: "http://localhost:5000/api",
-    headers: { Authorization: token }
+    headers: { Authorization: 'esfeyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItOGZhYi1jZWYzOTA0NUIhkufemQifQ' }
    
   });
 }

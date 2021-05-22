@@ -7,8 +7,8 @@ import { connect } from "react-redux";
 import { checkUser } from "../../../state/actions/index";
 
 const initialValues = {
-  email: "test@email.com",
-  password: "testing",
+  email: "lambda@lambda.com",
+  password: "school",
 };
 
 const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
@@ -46,10 +46,12 @@ const LogInForm = (props) => {
 };
 
   const handleSubmit = (event) => {
-    handleSubmitHelper(event); //preventDefault only
-    
+    //handleSubmitHelper(event); //preventDefault only
+    event.preventDefault()
     //dispatch CHECK_USER
-    checkUser(props.formValues); // api post in action
+    console.log(checkUser(formValues)); // api post in action
+    checkUser(formValues)
+    console.log(formValues)
 
     // check state for instructor... user.isInstructor which gets pulled below from Redux state
     if (props.user.isInstructor === true) {
@@ -82,7 +84,7 @@ const LogInForm = (props) => {
           onChange={handleChange}
         ></input>
       </label>
-      <button type="submit" disabled={!isValid}>
+      <button type="submit" onClick={() => console.log('button pressed')} disabled={!isValid}>
         Log In
       </button>
       {displayErrors(formErrors)}

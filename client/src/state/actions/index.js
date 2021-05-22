@@ -1,4 +1,4 @@
-import axios from 'axios';
+//import axios from 'axios';
 import axiosWithAuth from '../../utils/axiosWithAuth';
 
 export const FETCHING_API_START = "FETCHING_API_LOADING";
@@ -10,7 +10,6 @@ export const ALL_CLASSES = 'ALL_CLASSES';
 export const ADD_CLASS = 'ADD_CLASS';
 export const ADD_USER = 'ADD_USER';
 export const CHECK_USER = 'CHECK_USER';
-export const FORM_VALUES = 'FORM_VALUES';
 
 //NOTE: add userState
 
@@ -22,8 +21,8 @@ export const getData = (props) => (dispatch) => {
 
     console.log('API call is going')
     dispatch({ type: FETCHING_API_START });
-        axios
-        .get("/friends")
+        axiosWithAuth()
+        .get("http://localhost:5000/api/friends")
         .then((res) => {
           dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.results })
         })
@@ -63,36 +62,32 @@ export const allClasses = (allClasses) => {
 
 
 //state related to forms
-export const checkUser = (props) => (dispatch) => { //this action takes dispatch so that it can branch to two different reducers
-  console.log("props from checkUser /actions", props)
+export function checkUser(formValues)  { //this action takes dispatch so that it can branch to two different reducers
+  console.log("props from checkUser /actions", formValues)
     let currentUser = {}
     console.log('API call is going')
-    dispatch({ type: FETCHING_API_START });
-      // attempt code 3 times
-      axiosWithAuth()
-    // location might be here
-      .post("/login", props.formValues)
-      // or here
-      .then(res => {
-        console.log("res.data: ", res.data) // get back token, email, isInstructor value, success message
-        localStorage.setItem('authToken', res.data.payload )
-        dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.results }) // might not be .results.  
+    // dispatch({ type: FETCHING_API_START });
+    //   // attempt code 3 times
+    //   axiosWithAuth()
+    // // location might be here
+    //   .post("/login", formValues)
+    //   // or here
+    //   .then(res => {
+    //     console.log("res.data: ", res.data) // get back token, email, isInstructor value, success message
+    //     localStorage.setItem('authToken', res.data.payload )
+    //     dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.results }) // might not be .results.  
 
-        //also need to get user back from backend set userState to current user.  We might not get current user.  Why do we have a currentUser?
-        currentUser = res.data.user
-        dispatch({ type: CHECK_USER, payload: currentUser})
+    //     //also need to get user back from backend set userState to current user.  We might not get current user.  Why do we have a currentUser?
+    //     currentUser = res.data.user
+    //     dispatch({ type: CHECK_USER, payload: currentUser})
 
-      })
-      .catch(error => {
-        dispatch({ type: FETCHING_API_FAILURE, payload: error})
-        console.log('ERR_1: This error is from Login', error)
-      })
+    //   })
+    //   .catch(error => {
+    //     dispatch({ type: FETCHING_API_FAILURE, payload: error})
+    //     console.log('ERR_1: This error is from Login', error)
+    //   })
     };
 
-    export const formValues = (formValues) => {
-      console.log('10. new formValues from classes.js', formValues)
-      return { type: FORM_VALUES, payload: formValues}
-    }
 
 
 //add current user state

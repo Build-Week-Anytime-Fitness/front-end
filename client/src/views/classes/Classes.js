@@ -6,23 +6,23 @@ import { gsap } from "gsap";
 import { connect } from "react-redux";
 import { getData, searchTerm, getFilteredClasses, allClasses }  from "../../state/actions/index.js";
 
-/*
 
-const initialClassesValues = [
-    {
-        className: "Yoga On The Beach",
-        classType: "Yoga",
-        classDate: "2021/10/30",
-        startTime: "10:00am",
-        duration: 1, // hours
-        intensity: "low",
-        location: "Public Beach",
-        numberOfStudents: 8, 
-        maxClassSize: 10
-    },
 
-    ]
-*/
+// const initialClassesValues = [
+//     {
+//         className: "Yoga On The Beach",
+//         classType: "Yoga",
+//         classDate: "2021/10/30",
+//         startTime: "10:00am",
+//         duration: 1, // hours
+//         intensity: "low",
+//         location: "Public Beach",
+//         numberOfStudents: 8, 
+//         maxClassSize: 10
+//     },
+
+//     ]
+
 
 /* REDUX NOTE:
 STATE NEEDED:  allClasses, filteredClasses, searchTerm
@@ -166,8 +166,8 @@ return (
             <div className="classes-container d-flex flex-row flex-wrap justify-content-center class-box">
 
                 <div className="animation d-flex flex-row flex-wrap justify-content-center ">
-                {props.filteredClasses && 
-                props.filteredClasses.map(indivClass => {
+                {props.classes && 
+                props.classes.map(indivClass => {
                     // console.log("indivClass: ", indivClass)
                     const classKey = Math.random().toString(16).slice(2);
                     return <Class key={classKey} indivClass={indivClass} />
