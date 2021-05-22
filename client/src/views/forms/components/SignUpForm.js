@@ -39,25 +39,25 @@ function LogInForm(){
         <form onSubmit={handleSubmit}>
             <label>
                 Name
-                <input type='text' name='personName' value={formValues.personName} onChange={handleChange}></input>
+                <input id='sign-up-form-name' type='text' name='personName' value={formValues.personName} onChange={handleChange}></input>
             </label>
             <label>
                 Email
-                <input type='text' name='email' value={formValues.email} onChange={handleChange}></input>
+                <input id='sign-up-form-email' type='text' name='email' value={formValues.email} onChange={handleChange}></input>
             </label>
             <label>
                 Password
-                <input type='password' name='password' value={formValues.password} onChange={handleChange}></input>
+                <input id='sign-up-form-password' type='password' name='password' value={formValues.password} onChange={handleChange}></input>
             </label>
             <label>
                 Are you older than 18?
-                <input type='checkbox' name='isOverEighteen' checked={formValues.isOverEighteen} onChange={handleChange}></input>
+                <input id='sign-up-form-18-plus' type='checkbox' name='isOverEighteen' checked={formValues.isOverEighteen} onChange={handleChange}></input>
             </label>
             <label>
                 Are you an instructor?
-                <input type='checkbox' name='isInstructor' checked={formValues.isInstructor} onChange={handleChange}></input>
+                <input id='sign-up-form-instructor' type='checkbox' name='isInstructor' checked={formValues.isInstructor} onChange={handleChange}></input>
             </label>
-            <button type='submit' disabled={!isValid}>Sign Up</button>
+            <button id='sign-up-form-submit' type='submit' disabled={!isValid}>Sign Up</button>
             {displayErrors(formErrors)}
         </form>
     );

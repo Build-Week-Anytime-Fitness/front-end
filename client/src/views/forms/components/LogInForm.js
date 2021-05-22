@@ -36,13 +36,13 @@ function LogInForm(){
         <form onSubmit={handleSubmit}>
             <label>
                 Email
-                <input type='text' name='email' value={formValues.email} onChange={handleChange}></input>
+                <input id='login-form-email-input' type='text' name='email' value={formValues.email} onChange={handleChange}></input>
             </label>
             <label>
                 Password
-                <input type='password' name='password' value={formValues.password} onChange={handleChange}></input>
+                <input id='login-form-passwoard-input' type='password' name='password' value={formValues.password} onChange={handleChange}></input>
             </label>
-            <button type='submit' disabled={!isValid}>Log In</button>
+            <button id='login-form-submit' type='submit' disabled={!isValid}>Log In</button>
             {displayErrors(formErrors)}
         </form>
     );
