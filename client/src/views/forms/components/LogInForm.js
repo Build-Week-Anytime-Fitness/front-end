@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import {useHistory} from 'react-router-dom'
 import { loginFormSchema } from "../validation/schema";
-import { validateForm, validateField } from "../validation/validationHelpers";
-import { displayErrors, handleSubmitHelper } from "../formHelpers";
+import { validateForm } from "../validation/validationHelpers";
+import { displayErrors, handleChangeHelper, handleSubmitHelper } from "../formHelpers";
 import { connect } from "react-redux";
 import { checkUser } from "../../../state/actions/index";
 
@@ -16,51 +17,33 @@ const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
 }, {});
 
 const LogInForm = (props) => {
+    const history = useHistory()
   // local state variables
   const [isValid, setIsValid] = useState(true); //local state not needed by redux. product checker
   const [formErrors, setFormErrors] = useState(initialErrorValues);
 
   //redux state
-  //const [formValues, setFormValues] = useState(initialValues);
-  console.log('form values from login form', props.formValues)
+  const [formValues, setFormValues] = useState(initialValues);
+  console.log('form values from login form', formValues)
 
   // useEffect
-  useEffect((props) => {
+  useEffect(() => {
     // validateForm whenever the component is mounted
-    validateForm(loginFormSchema, props.formValues, setIsValid); //check if form is valid using schema.validate
+    validateForm(loginFormSchema, formValues, setIsValid); //check if form is valid using schema.validate
   }, []);
 
-  //refactored handleChangeHelper
-  const handleChangeHelper = ({
-    event,
-    schema,
-    formValues,
-    setFormValues,
-    formErrors,
-    setFormErrors,
-    setIsValid,
-  }) => {
-    const { name, value, checked, type } = event.target;
-    const inputValue = type === "checkbox" ? checked : value;
-    const newFormValues = { ...formValues, [name]: inputValue };
-    validateField(schema, name, inputValue, formErrors, setFormErrors); //validate changed field using yup.reach
-    validateForm(schema, newFormValues, setIsValid);
-    setFormValues(newFormValues);
-    console.log("formValues", formValues, "newFormValues", newFormValues)
-  };
-
   // function declarations
-  const handleChange = (event) => {
+  const handleChange=(event)=>{
     handleChangeHelper({
-      event,
-     // schema: loginFormSchema,
-      //formValues,
-    //   setFormValues,
-      formErrors,
-      setFormErrors,
-      setIsValid,
+        event,
+        schema:loginFormSchema,
+        formValues,
+        setFormValues,
+        formErrors,
+        setFormErrors,
+        setIsValid
     });
-  };
+};
 
   const handleSubmit = (event) => {
     handleSubmitHelper(event); //preventDefault only
@@ -86,7 +69,7 @@ const LogInForm = (props) => {
         <input
           type="text"
           name="email"
-          value={props.formValues.email}
+          value={formValues.email}
           onChange={handleChange}
         ></input>
       </label>
@@ -95,7 +78,7 @@ const LogInForm = (props) => {
         <input
           type="password"
           name="password"
-          value={props.formValues.password}
+          value={formValues.password}
           onChange={handleChange}
         ></input>
       </label>
@@ -112,7 +95,7 @@ const LogInForm = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    formValues: state.formValues, //credentials
+    //formValues: state.formValues, //credentials
     currentUser: state.currentUser,
     user: state.user,
   };
