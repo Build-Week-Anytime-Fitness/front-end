@@ -108,11 +108,11 @@ export const appReducer = (state = initialState, action) => {
     //   return { ...state, users: [...state.users, action.payload] };
     // }
   
-    // case CHECK_USER: {
-    //   console.log("reducer fires: check users");
-    //   // return { ...state, currentUser: action.payload };
-    //   return {...state, user: [...user, isInstructor: action.payload]}
-    // }
+    case CHECK_USER: {
+      console.log("reducer fires: check users");
+      // return { ...state, currentUser: action.payload };
+      return {...state, user: {...state.user, isInstructor: action.payload}}
+    }
 
     case FORM_VALUES: {
       log("3. FORM_VALUES FROM REDUCER", action.payload);
