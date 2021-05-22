@@ -42,23 +42,23 @@ function ClassForm(){
         <form onSubmit={handleSubmit}>
             <label>
                 Class Name
-                <input type='text' name='className' value={formValues.className} onChange={handleChange}></input>
+                <input id='class-form-class-name' type='text' name='className' value={formValues.className} onChange={handleChange}></input>
             </label>
             <label>
                 Class Type
-                <input type='text' name='classType' value={formValues.classType} onChange={handleChange}></input>
+                <input id='class-form-class-type' type='text' name='classType' value={formValues.classType} onChange={handleChange}></input>
             </label>
             <label>
                 Class Date
-                <input type='date' name='classDate' value={formValues.classDate} onChange={handleChange}></input>
+                <input id='class-form-class-date' type='date' name='classDate' value={formValues.classDate} onChange={handleChange}></input>
             </label>
             <label>
                 Start Time
-                <input type='time' name='startTime' value={formValues.startTime} onChange={handleChange}></input>
+                <input id='class-form-start-time' type='time' name='startTime' value={formValues.startTime} onChange={handleChange}></input>
             </label>
             <label>
                 Intensity
-                <select name='intensity' value={formValues.intensity} onChange={handleChange}>
+                <select id='class-form-intensity' name='intensity' value={formValues.intensity} onChange={handleChange}>
                     <option value=''>--select--</option>
                     {
                         ['low','medium','high'].map((val,i)=><option value={val} key={i}>{val}</option>)
@@ -67,17 +67,17 @@ function ClassForm(){
             </label>
             <label>
                 Duration 
-                <input type='number' name='duration' value={formValues.duration} onChange={handleChange}></input>
+                <input id='class-form-duration' type='number' name='duration' value={formValues.duration} onChange={handleChange}></input>
             </label>
             <label>
                 Location 
-                <input type='text' name='location' value={formValues.location} onChange={handleChange}></input>
+                <input id='class-form-location' type='text' name='location' value={formValues.location} onChange={handleChange}></input>
             </label>
             <label>
                 Maximum Class Size
-                <input type='number' name='maxClassSize' value={formValues.maxClassSize} onChange={handleChange}></input>
+                <input id='class-form-max-class-size' type='number' name='maxClassSize' value={formValues.maxClassSize} onChange={handleChange}></input>
             </label>
-            <button type='submit' disabled={!isValid}>Add/Edit Class</button>
+            <button id='class-form-submit' type='submit' disabled={!isValid}>Add/Edit Class</button>
             {displayErrors(formErrors)}
         </form>
     );
