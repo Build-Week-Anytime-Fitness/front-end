@@ -19,6 +19,7 @@ const initialState = {
   error: "",
   searchTerm: "",
   currentUser: {},
+
   user: {
     id: "",
     personName: "",
@@ -109,7 +110,9 @@ export const appReducer = (state = initialState, action) => {
   
     case CHECK_USER: {
       console.log("reducer fires: check users");
-      return { ...state, currentUser: action.payload };
+
+      // return { ...state, currentUser: action.payload };
+      return {...state, user: [...user, isInstructor: action.payload]}
     }
 
     case FORM_VALUES: {

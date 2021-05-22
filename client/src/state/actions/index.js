@@ -67,22 +67,26 @@ export const checkUser = (props) => (dispatch) => { //this action takes dispatch
   console.log("props from checkUser /actions", props)
     let currentUser = {}
     console.log('API call is going')
-    //dispatch({ type: FETCHING_API_START });
-      // axiosWithAuth()
-      // .post("/login", props.formValues)
-      // .then(res => {
-      //   localStorage.setItem('authToken', res.data.payload )
-      //   dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.results })
-      //   //also need to get user back from backend set userState to current user 
-      //   currentUser = res.data.user
-      //   dispatch({ type: CHECK_USER, payload: currentUser})
-      //   //history.push('/classes') //this is where client and instructor logic goes
-      //   // if isInstructor or true then history.push('/instructors') if !isInstructor then history.push('/classes')
-      // })
-      // .catch(error => {
-      //   dispatch({ type: FETCHING_API_FAILURE, payload: error})
-      //   console.log('ERR_1: This error is from Login', error)
-      // })
+    dispatch({ type: FETCHING_API_START });
+      // attempt code 3 times
+      axiosWithAuth()
+    // location might be here
+      .post("/login", props.formValues)
+      // or here
+      .then(res => {
+        console.log("res.data: ", res.data) // get back token, email, isInstructor value, success message
+        localStorage.setItem('authToken', res.data.payload )
+        dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.results }) // might not be .results.  
+
+        //also need to get user back from backend set userState to current user.  We might not get current user.  Why do we have a currentUser?
+        currentUser = res.data.user
+        dispatch({ type: CHECK_USER, payload: currentUser})
+
+      })
+      .catch(error => {
+        dispatch({ type: FETCHING_API_FAILURE, payload: error})
+        console.log('ERR_1: This error is from Login', error)
+      })
     };
 
     export const formValues = (formValues) => {

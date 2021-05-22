@@ -64,10 +64,19 @@ const LogInForm = (props) => {
 
   const handleSubmit = (event) => {
     handleSubmitHelper(event); //preventDefault only
+    
     //dispatch CHECK_USER
-    checkUser(props.formValues)
-    console.log(props.formValues)
-    //post submit which will be handled by redux dispatch which needs a new case in action and reducer of checkUser to verify credentials and receive JWT
+    checkUser(props.formValues); // api post in action
+
+    // check state for instructor... user.isInstructor which gets pulled below from Redux state
+    if (props.user.isInstructor === true) {
+      history.push('/instructors')
+    } else if (props.user.isInstructor === false) {
+      history.push('./classes')
+    }
+
+    // console.log(props.formValues)
+
   };
 
   return (
@@ -104,7 +113,8 @@ const LogInForm = (props) => {
 const mapStateToProps = (state) => {
   return {
     formValues: state.formValues, //credentials
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    user: state.user,
   };
 };
 
