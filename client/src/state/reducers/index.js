@@ -79,6 +79,7 @@ export const appReducer = (state = initialState, action) => {
       return { ...state, loading: true };
     }
     case FETCHING_API_SUCCESS: {
+        console.log("200 success")
       //log("FETCH SUCCESS THROUGH REDUCER");
       return { ...state, loading: false };
     }
@@ -86,10 +87,10 @@ export const appReducer = (state = initialState, action) => {
       //log("FETCH FAIL FROM REDUCER");
       return { ...state, loading: false, error: action.payload };
     }
-    // case SEARCH_TERM: {
-    //   //log("3. SEARCH TERM FROM REDUCER", action.payload);
-    //   return { ...state, searchTerm: action.payload };
-    // }
+    case SEARCH_TERM: {
+      //log("3. SEARCH TERM FROM REDUCER", action.payload);
+      return { ...state, searchTerm: action.payload };
+    }
     case GET_FILTERED_CLASSES: {
       log(" GET_FILTERED CLASSES from reducer", action.payload);
       return { ...state, filteredClasses: action.payload };

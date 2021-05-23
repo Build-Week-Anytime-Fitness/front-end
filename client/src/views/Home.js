@@ -62,7 +62,10 @@ export default function Home() {
       <div className={"content-wrapperTwo"}>
         <div className={"content"}>
           <h2>
-            With the ability to set locations at leisure your workouts can either be in set locations or randomly located places around town. Anywhere Fitness Club allows to you have a range of locale options for either attending or hosting fitness classes. 
+            With the ability to set locations at leisure your workouts can
+            either be in set locations or randomly located places around town.
+            Anywhere Fitness Club allows to you have a range of locale options
+            for either attending or hosting fitness classes.
           </h2>
         </div>
       </div>
@@ -139,18 +142,23 @@ export default function Home() {
               padding: "5vh 8vw",
               textAlign: "justify",
               color: "black",
+              
             }}
           >
             <h2
               style={{ color: "#222", textAlign: "center", fontSize: "2.5rem" }}
             >
-              Find your comfort zone with Anywhere Fitness Club. Signup or login
+              Find your comfort zone with Anywhere Fitness Club.{" "}
+              <Link to="signup" style={{ marginBottom: "15vh", color: '#2522CA', textDecoration: 'none' }}>
+                Signup {" "}
+              </Link>
+              or{" "}
+              <Link to="login" style={{ marginBottom: "15vh", color: '#2522CA', textDecoration: 'none' }}>
+                Login {" "}
+              </Link>
               and start attaining your fitness goals today
             </h2>
           </div>{" "}
-          <Link to="login" className="btn" style={{ marginBottom: "15vh" }}>
-            Signup/ Login
-          </Link>
         </div>
       </div>
     </div>

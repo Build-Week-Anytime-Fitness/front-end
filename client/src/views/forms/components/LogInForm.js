@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Link} from 'react-router-dom'
 import {useHistory} from 'react-router-dom'
 import { loginFormSchema } from "../validation/schema";
 import { validateForm } from "../validation/validationHelpers";
@@ -88,6 +89,10 @@ const LogInForm = (props) => {
         Log In
       </button>
       {displayErrors(formErrors)}
+      <h6><em>Need to start an account? <br/>
+            <Link to="signup" style={{ marginBottom: "15vh", color: '#2522CA', textDecoration: 'none' }}>
+                Signup Today {" "}
+              </Link></em></h6>
     </form>
   );
 };
