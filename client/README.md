@@ -151,7 +151,7 @@ ADD:
 {
 "viewportWidth": 600,
 "viewportHeight": 600,
-"baseUrl": "http://localhost:3000",
+"baseUrl": "http://localhost:5000",
 "integrationFolder": "cypress/integration"
 }
 

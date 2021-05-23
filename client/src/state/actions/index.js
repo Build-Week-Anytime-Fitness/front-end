@@ -1,4 +1,5 @@
-import axios from 'axios';
+//import axios from 'axios';
+import axiosWithAuth from '../../utils/axiosWithAuth';
 
 export const FETCHING_API_START = "FETCHING_API_LOADING";
 export const FETCHING_API_SUCCESS = "FETCHING_API_SUCCESS";
@@ -6,8 +7,9 @@ export const FETCHING_API_FAILURE = "FETCHING_API_FAIL";
 export const SEARCH_TERM = 'SEARCH_TERM';
 export const GET_FILTERED_CLASSES = 'GET_FILTERED_CLASSES';
 export const ALL_CLASSES = 'ALL_CLASSES';
-export const ADD_CLASS = 'ADD_CLASS'
-export const ADD_USER = 'ADD_USER'
+export const ADD_CLASS = 'ADD_CLASS';
+export const ADD_USER = 'ADD_USER';
+export const CHECK_USER = 'CHECK_USER';
 
 //NOTE: add userState
 
@@ -15,12 +17,12 @@ export const ADD_USER = 'ADD_USER'
 //state related to api call
 
 export const getData = (props) => (dispatch) => {
-  console.log("6. props from actions", props)
+  console.log("7. props from  getData /actions", props)
 
     console.log('API call is going')
     dispatch({ type: FETCHING_API_START });
-        axios
-        .get("/friends")
+        axiosWithAuth()
+        .get("http://localhost:5000/api/friends")
         .then((res) => {
           dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.results })
         })
@@ -53,13 +55,39 @@ export const allClasses = (allClasses) => {
 // }
 
 // export const addUser = (addUser) => {
-//   console.log('8. new allUser from classes.js', addUser)
+//   console.log('9. new allUser from classes.js', addUser)
 //     return { type: ADD_USER, payload: addUser}
 // }
 
 
 
 //state related to forms
+export function checkUser(formValues)  { //this action takes dispatch so that it can branch to two different reducers
+  console.log("props from checkUser /actions", formValues)
+    let currentUser = {}
+    console.log('API call is going')
+    // dispatch({ type: FETCHING_API_START });
+    //   // attempt code 3 times
+    //   axiosWithAuth()
+    // // location might be here
+    //   .post("/login", formValues)
+    //   // or here
+    //   .then(res => {
+    //     console.log("res.data: ", res.data) // get back token, email, isInstructor value, success message
+    //     localStorage.setItem('authToken', res.data.payload )
+    //     dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.results }) // might not be .results.  
+
+    //     //also need to get user back from backend set userState to current user.  We might not get current user.  Why do we have a currentUser?
+    //     currentUser = res.data.user
+    //     dispatch({ type: CHECK_USER, payload: currentUser})
+
+    //   })
+    //   .catch(error => {
+    //     dispatch({ type: FETCHING_API_FAILURE, payload: error})
+    //     console.log('ERR_1: This error is from Login', error)
+    //   })
+    };
+
 
 
 //add current user state

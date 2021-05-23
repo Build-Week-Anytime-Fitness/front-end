@@ -22,9 +22,9 @@ function App() {
           <Link
             to="home"
             className="btn"
-            style={{ color: "#666", outline: 'none', marginTop: '3vh'}}
+            style={{ color: "#666", outline: 'none', marginTop: '3vh', marginBottom: '15vh', padding: "3vh 5vw" }}
           >
-            <h4 style={{ color: "black", padding: "3vh 5vw" }}>Step Inside</h4>
+            <h4 style={{ color: "black"}}>Step Inside</h4>
           </Link>
         </div>
         <Switch>

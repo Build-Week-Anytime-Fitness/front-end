@@ -7,6 +7,7 @@ import {
   ALL_CLASSES,
   ADD_CLASS,
   ADD_USER,
+  CHECK_USER,
 } from "../actions";
 
 const log = console.log;
@@ -16,6 +17,8 @@ const initialState = {
   loading: false,
   error: "",
   searchTerm: "",
+  currentUser: {},
+
   user: {
     id: "",
     personName: "",
@@ -76,17 +79,18 @@ export const appReducer = (state = initialState, action) => {
       return { ...state, loading: true };
     }
     case FETCHING_API_SUCCESS: {
+        console.log("200 success")
       //log("FETCH SUCCESS THROUGH REDUCER");
-      return { ...state, loading: false, friends: action.payload };
+      return { ...state, loading: false };
     }
     case FETCHING_API_FAILURE: {
       //log("FETCH FAIL FROM REDUCER");
       return { ...state, loading: false, error: action.payload };
     }
-    // case SEARCH_TERM: {
-    //   //log("3. SEARCH TERM FROM REDUCER", action.payload);
-    //   return { ...state, searchTerm: action.payload };
-    // }
+    case SEARCH_TERM: {
+      //log("3. SEARCH TERM FROM REDUCER", action.payload);
+      return { ...state, searchTerm: action.payload };
+    }
     case GET_FILTERED_CLASSES: {
       log(" GET_FILTERED CLASSES from reducer", action.payload);
       return { ...state, filteredClasses: action.payload };
@@ -103,13 +107,15 @@ export const appReducer = (state = initialState, action) => {
     //   console.log("reducer fires: add users ");
     //   return { ...state, users: [...state.users, action.payload] };
     // }
+  
+    case CHECK_USER: {
+      console.log("reducer fires: check users");
+      // return { ...state, currentUser: action.payload };
+      return {...state, user: {...state.user, isInstructor: action.payload}}
+    }
 
-    // return {
-    //     ...state,
-    //     loading: false,
-    //     smurf: action.payload,
-    //     error: "",
     default:
+      console.log("Error: unknown action type in App Reducer", action.type);
       return state;
   }
 };

@@ -1,6 +1,5 @@
 body {
   margin: 0;
-  color: white;
   height: 100vh;
   overflow-x: hidden;
   font-family: "Tungsten Narrow A", "Tungsten Narrow B";
@@ -24,7 +23,7 @@ body {
   align-items: center;
   justify-content: center;
   margin-top: 65vh;
-  padding-bottom: 40vh;
+
 }
 
 h1,
@@ -110,6 +109,7 @@ h3 {
 .content {
     padding: 8vh 5vw;
     background-color: #444;
+    color: white;
     opacity: 0.8;
     border: 1px solid white;
     box-shadow: 0 0 2vh #444;
@@ -119,4 +119,34 @@ h3 {
 
 .fitness-wrapper {
     margin-top: 15vh;
+}
+
+.form-style {
+  padding: 3vh 5vw;
+  text-align: center;
+  font-size: large;
+  background: url('/src/assets/fitnessNine.jpg');
+  background-size: 90%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  height: 100vh
+}
+
+.input-style {
+  padding: 3vh 5vh;
+  background-color: #444;
+  opacity: 0.8;
+  color: white;
+}
+
+div input {
+  margin: 1.5vh 1vw;
+  width: 275px 
+}
+
+div button {
+  width: 275px;
+  margin: 3vh auto;
+  font-size: 1.5rem;
 }
