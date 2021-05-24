@@ -84,7 +84,7 @@ const LogInForm = (props) => {
           <label>
             Password
             <input
-              id="login-form-passwoard-input"
+              id="login-form-password-input"
               type="password"
               name="password"
               value={formValues.password}
