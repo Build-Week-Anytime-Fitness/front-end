@@ -55,6 +55,7 @@ function LogInForm() {
         <label>
           Name:{" "}
           <input
+          id='sign-up-form-name'
             type="text"
             name="personName"
             value={formValues.personName}
@@ -64,6 +65,7 @@ function LogInForm() {
         <label>
           Email:{" "}
           <input
+          id='sign-up-form-email'
             type="text"
             name="email"
             value={formValues.email}
@@ -73,6 +75,7 @@ function LogInForm() {
         <label style={{ fontSize: "0.9rem" }}>
           Password:
           <input
+          id='sign-up-form-password'
             type="password"
             name="password"
             value={formValues.password}
@@ -82,6 +85,7 @@ function LogInForm() {
         <label>
           Are you older than 18?
           <input
+          id='sign-up-form-18-plus'
             type="checkbox"
             name="isOverEighteen"
             checked={formValues.isOverEighteen}
@@ -91,13 +95,14 @@ function LogInForm() {
         <label>
           Are you an instructor?
           <input
+          id='sign-up-form-instructor'
             type="checkbox"
             name="isInstructor"
             checked={formValues.isInstructor}
             onChange={handleChange}
           ></input>
         </label>
-        <button type="submit" disabled={!isValid}>
+        <button id='sign-up-form-submit' type="submit" disabled={!isValid}>
           Sign Up
         </button>
         {displayErrors(formErrors)}{" "}

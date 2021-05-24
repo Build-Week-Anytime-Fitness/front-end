@@ -67,6 +67,7 @@ const LogInForm = (props) => {
       <label>
         Email
         <input
+        id='login-form-email-input'
           type="text"
           name="email"
           value={formValues.email}
@@ -76,13 +77,14 @@ const LogInForm = (props) => {
       <label>
         Password
         <input
+        id='login-form-passwoard-input'
           type="password"
           name="password"
           value={formValues.password}
           onChange={handleChange}
         ></input>
       </label>
-      <button type="submit" onClick={handleSubmit} disabled={!isValid}>
+      <button id='login-form-submit' type="submit" onClick={handleSubmit} disabled={!isValid}>
         Log In
       </button>
       {displayErrors(formErrors)}

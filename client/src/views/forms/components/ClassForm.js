@@ -57,6 +57,7 @@ function ClassForm() {
       <label>
         Class Name
         <input
+            id='class-form-class-name'
           type="text"
           name="className"
           value={formValues.className}
@@ -66,24 +67,27 @@ function ClassForm() {
       <label>
         Class Type
         <input
-          type="text"
-          name="classType"
-          value={formValues.classType}
-          onChange={handleChange}
+        id='class-form-class-type'
+        type="text"
+        name="classType"
+        value={formValues.classType}
+        onChange={handleChange}
         ></input>
       </label>
       <label>
         Class Date
         <input
+        id='class-form-class-date'
           type="date"
           name="classDate"
           value={formValues.classDate}
           onChange={handleChange}
-        ></input>
+          ></input>
       </label>
       <label>
         Start Time
         <input
+        id='class-form-start-time'
           type="time"
           name="startTime"
           value={formValues.startTime}
@@ -93,6 +97,7 @@ function ClassForm() {
       <label>
         Intensity
         <select
+        id='class-form-intensity'
           name="intensity"
           value={formValues.intensity}
           onChange={handleChange}
@@ -108,6 +113,7 @@ function ClassForm() {
       <label>
         Duration
         <input
+        id='class-form-duration'
           type="number"
           name="duration"
           value={formValues.duration}
@@ -117,6 +123,7 @@ function ClassForm() {
       <label>
         Location
         <input
+        id='class-form-location'
           type="text"
           name="location"
           value={formValues.location}
@@ -126,13 +133,14 @@ function ClassForm() {
       <label>
         Maximum Class Size
         <input
+        id='class-form-max-class-size'
           type="number"
           name="maxClassSize"
           value={formValues.maxClassSize}
           onChange={handleChange}
         ></input>
       </label>
-      <button type="submit" disabled={!isValid}>
+      <button id='class-form-submit' type="submit" disabled={!isValid}>
         Add/Edit Class
       </button>
       {displayErrors(formErrors)}

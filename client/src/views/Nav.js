@@ -14,10 +14,12 @@ export default function Nav() {
         <div className={"d-flex flex-row flex-wrap justify-content-center"}>
 
             <Link
+                id="nav-sign-up"
                 to="signup" className="btn">
                 Signup
             </Link>
             <Link
+                id="nav-log-in"
                 to="login" className="btn">
                 Login
             </Link>
@@ -27,10 +29,11 @@ export default function Nav() {
             </Link>
 
             <Link
+                id="nav-classes"
                 to="classes" className="btn">
                 Classes
             </Link>
-            <Link to="instructors" className="btn">
+            <Link id="nav-instructor" to="instructors" className="btn">
                 Instructor Portal
             </Link>
         </div>
