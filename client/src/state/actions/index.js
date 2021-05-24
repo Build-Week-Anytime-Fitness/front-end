@@ -90,27 +90,30 @@ export const checkUser = (formValues) => (dispatch) => {
   // attempt code 3 times
   axiosWithAuth()
     // location might be here
-    .post("/login", formValues)
-    // or here
-    .then((res) => {
-      // console.log("response: ", res) // see sample POST login res below
-      // localStorage.setItem('authToken', res.data.token ) // 200
-      console.log("message: ", res.data.message);
-      dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
 
-      // res gives is_instructor, assign to user obj in reducer. Payload = isInstructor
-      let isInstructor = res.data.is_instructor;
-      dispatch({ type: CHECK_USER, payload: isInstructor });
+      .post("/login", formValues)
+      // or here
+      .then(res => {
+        // console.log("response: ", res) // see sample POST login res below
+        localStorage.setItem('authToken', res.data.token ) // 200
+        console.log("message: ", res.data.message)
+        dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message }) 
+    
+         // res gives is_instructor, assign to user obj in reducer. Payload = isInstructor
+        let isInstructor = res.data.is_instructor
+        dispatch({ type: CHECK_USER, payload: isInstructor })
 
-      // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
-      let currentUserId = res.data.id;
-      dispatch({ type: CURRENT_USER, payload: currentUserId });
-    })
-    .catch((error) => {
-      dispatch({ type: FETCHING_API_FAILURE, payload: error });
-      console.log("ERR_1: This error is from Login", error);
-    });
-};
+         // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
+        let currentUserId = res.data.id  
+        dispatch({ type: CURRENT_USER, payload: currentUserId })
+
+      })
+      .catch(error => {
+        dispatch({ type: FETCHING_API_FAILURE, payload: error})
+        console.log('ERR_1: This error is from Login', error)
+      })
+    };
+
 
 /* Sample data response for POST login
 

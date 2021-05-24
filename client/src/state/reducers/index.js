@@ -119,7 +119,7 @@ export const appReducer = (state = initialState, action) => {
 
     case CURRENT_USER: {
       console.log("reducer fires: current user");
-      console.log("action.payload in current_user: ", action.payload)
+      // console.log("action.payload in current_user: ", action.payload)
       return { ...state, currentUser: {id: action.payload}};
 
       // return {...state, user: {...state.user, isInstructor: action.payload}}

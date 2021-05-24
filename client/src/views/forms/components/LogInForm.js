@@ -65,6 +65,7 @@ const LogInForm = (props) => {
     }
   };
 
+
   return (
     <form className={"d-flex flex-column login-style"} onSubmit={handleSubmit}>
       <div className={"d-flex flex-column justify-content-center input-style"}>
