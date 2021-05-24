@@ -47,6 +47,8 @@ const Classes = (props) => {
     console.log("props", props);
     console.log("props.filteredClasses", props.filteredClasses)
 
+    console.log("user from redux state", props.user)
+
   // ------------ populate class data with backend data------------------
 //  function getAllClasses() {
 //     axios.get('https://pt-fitness.herokuapp.com/classes')
@@ -189,6 +191,7 @@ const mapStateToProps = (state) => {
         classes: state.classes,
         filteredClasses: state.filteredClasses,
         isLoading: state.isLoading,
+        user: state.user,
     }
 };
 
