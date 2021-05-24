@@ -32,11 +32,13 @@ function App() {
           <Route path={"/signup"} component={Signup} />
           <Route path={"/login"} component={Login} />
           <Route path={"/logout"} component={Logout} />
-          {/* <PrivateRoute exact path={"/classes"} component={Classes}/> */}
-          <Route exact path={"/classes"} component={Classes} />
+          
+          <PrivateRoute exact path={"/classes"} component={Classes}/>
+          <PrivateRoute exact path={"/instructors"} component={Instructors} />
 
-          {/* <PrivateRoute exact path={"/instructors"} component={Instructors} /> */}
-          <Route exact path={"/instructors"} component={Instructors} />
+          {/* <Route exact path={"/classes"} component={Classes} /> */}
+          {/* <Route exact path={"/instructors"} component={Instructors} /> */}
+          
         </Switch>
         <Footer />
       </div>
