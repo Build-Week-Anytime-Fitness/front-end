@@ -21,7 +21,7 @@ export default function Logout() {
     >
         <h4>Thank You For Visiting</h4>
         <Link 
-         onClick={() => logout()}
+         onClick={logout()}
          style={{
             margin: "5vh 0",
             fontSize: "3vh",
