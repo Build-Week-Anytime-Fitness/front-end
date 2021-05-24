@@ -5,10 +5,10 @@ describe('test forms',()=>{
     });
 
     // getting elements
-    const loginLink=()=>cy.get('[href="/login"]');
-    const signupLink=()=>cy.get('[href="/signup"]');
-    const classesLink=()=>cy.get('[href="/classes"]');
-    const instructorLink=()=>cy.get('.justify-content-center > [href="/instructors"]');//this one may break
+    const loginLink=()=>cy.get('#nav-log-in');
+    const signupLink=()=>cy.get('#nav-sign-up');
+    const classesLink=()=>cy.get('#nav-classes');
+    const instructorLink=()=>cy.get('#nav-instructor');
 
     it('form links render',()=>{
         loginLink().should('exist');
@@ -27,15 +27,19 @@ describe('test forms',()=>{
     describe('test login form',()=>{
 
         before(()=>{
-            loginLink().click();
+            loginLink().click({ multiple: true });
         });
         // getting elements
         const email=()=>cy.get('#login-form-email-input');
         const password=()=>cy.get('#login-form-passwoard-input');
         const submit=()=>cy.get('#login-form-submit');
     
-    
+        const clearForm=()=>{
+            email().clear();
+            password().clear();
+        };
         const fillForm=()=>{
+            clearForm();
             email().type(emailValue);
             password().type(pwValue);
         };
@@ -47,6 +51,7 @@ describe('test forms',()=>{
         });
 
         it('submit disabled when empty',()=>{
+            clearForm();
             submit().should('be.disabled');
         });
     
@@ -82,8 +87,13 @@ describe('test forms',()=>{
         const eighteenPlus=()=>cy.get('#sign-up-form-18-plus');
         const instructor=()=>cy.get('#sign-up-form-instructor');
         const submit=()=>cy.get('#sign-up-form-submit');
-    
+        const clearForm=()=>{
+            name().clear();
+            email().clear();
+            password().clear();
+        };
         const fillForm=()=>{
+            clearForm();
             name().type(nameValue);
             email().type(emailValue);
             password().type(pwValue);
@@ -91,7 +101,7 @@ describe('test forms',()=>{
             instructor().check();
         };
     
-        it('renders login form',()=>{
+        it('renders signup form',()=>{
             name().should('exist');
             email().should('exist');
             password().should('exist');
@@ -101,11 +111,11 @@ describe('test forms',()=>{
         });
 
         it('submit disabled when empty',()=>{
+            clearForm();
             submit().should('be.disabled');
         });
     
         describe('singup form inputs',()=>{
-    
             before(()=>{
                 fillForm();
             });
@@ -137,10 +147,10 @@ describe('test forms',()=>{
 
 
     // class form
-    describe('test signup form',()=>{
+    describe('test class form',()=>{
 
         before(()=>{
-            instructorLink().click();
+            instructorLink().click({ multiple: true });
         });
 
         // getting elements
@@ -153,21 +163,28 @@ describe('test forms',()=>{
         const location=()=>cy.get('#class-form-location');
         const maxClassSize=()=>cy.get('#class-form-max-class-size');
         const submit=()=>cy.get('#class-form-submit');    
-    
+        const clearForm=()=>{
+            className().clear({force: true});
+            classType().clear({force: true});
+            classDate().clear({force: true});
+            startTime().clear({force: true});
+            duration().clear({force:true});
+            location().clear({force: true});
+            maxClassSize().clear({force:true});
+        };
         const fillForm=()=>{
+            clearForm();
             className().type(classNameValue,{force: true});
             classType().type(classTypeValue,{force: true});
             classDate().type(classDateValue,{force: true});
             startTime().type(startTimeValue,{force: true});
             intensity().select(intensityValue,{force: true});
-            duration().clear({force:true});
             duration().type(durationValue,{force: true});
             location().type(locationValue,{force: true});
-            maxClassSize().clear({force:true});
             maxClassSize().type(maxClassSizeValue,{force: true});
         };
     
-        it('renders login form',()=>{
+        it('renders class form',()=>{
             className().should('exist');
             classType().should('exist');
             classDate().should('exist');
@@ -182,7 +199,7 @@ describe('test forms',()=>{
             submit().should('be.disabled');
         });
     
-        describe('singup form inputs',()=>{
+        describe('class form inputs',()=>{
     
             before(()=>{
                 fillForm();
