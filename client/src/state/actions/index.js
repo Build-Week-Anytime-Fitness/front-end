@@ -12,26 +12,23 @@ export const ADD_USER = 'ADD_USER';
 export const CHECK_USER = 'CHECK_USER';
 export const CURRENT_USER = 'CURRENT_USER';
 
-
-//state related to getClasses API call
+//state related to api call
 export const getData = (props) => (dispatch) => {
-  // console.log("7. props from  getData /actions", props)
+  console.log("7. props from  getData /actions", props)
 
     console.log('getData API call fires')
     dispatch({ type: FETCHING_API_START });
         axiosWithAuth()
         .get("https://amazing-fitness-app.herokuapp.com/api/classes")
         .then((res) => {
-          console.log("getData API success, log response: ", res)
-          dispatch({ type: ALL_CLASSES, payload: res.data})
+          console.log("response after API get /classes: ", res)
           dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.results })
         })
         .catch((error) => {
           dispatch({ type: FETCHING_API_FAILURE, payload: error})
-          console.log("getData API request failed", error);
+          console.log("This API request failed", error);
         });
 }
-
 
 //state related to classes
 export const searchTerm = (searchTerm) => {
@@ -61,11 +58,10 @@ export const allClasses = (allClasses) => {
 
 
 
-
 //state related to forms
 export const checkUser = (formValues) => (dispatch) =>   { //this action takes dispatch so that it can branch to 1+ reducers
   console.log('checkUser API call fires')
-  console.log("checkUser Action: props", formValues)
+  console.log("props from checkUser /actions", formValues)
 
     dispatch({ type: FETCHING_API_START });
       // attempt code 3 times
@@ -74,18 +70,14 @@ export const checkUser = (formValues) => (dispatch) =>   { //this action takes d
       .post("/login", formValues)
       // or here
       .then(res => {
-        // console.log("response: ", res) // see sample POST login res below
-        // localStorage.setItem('authToken', res.data.token ) // 200
-        console.log("message: ", res.data.message)
-        dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message }) 
+        console.log("response: ", res) // see sample POST login res below
+        localStorage.setItem('authToken', res.data.token )
+        console.log("token", res.data.token)
+        dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.results }) // might not be .results.  
     
-         // res gives is_instructor, assign to user obj in reducer. Payload = isInstructor
-        let isInstructor = res.data.is_instructor
-        dispatch({ type: CHECK_USER, payload: isInstructor })
-
-         // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
+        // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
         let currentUserId = res.data.id  
-        dispatch({ type: CURRENT_USER, payload: currentUserId })
+        dispatch({ type: CHECK_USER, payload: currentUserId})
 
       })
       .catch(error => {
@@ -94,6 +86,10 @@ export const checkUser = (formValues) => (dispatch) =>   { //this action takes d
       })
     };
 
+    export const addUser = (formValues) => (dispatch) => {
+      console.log('Form Values from props in newUser Action', formValues)
+      dispatch({ type: FETCHING_API_START})
+    }
 
 
 /* Sample data response for POST login

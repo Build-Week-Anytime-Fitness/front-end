@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { signUpFormSchema } from "../validation/schema";
 import { validateForm } from "../validation/validationHelpers";
+import { connect } from "react-redux";
+import { addUser } from "../../../state/actions/index";
 import {
   displayErrors,
   handleChangeHelper,
   handleSubmitHelper,
 } from "../formHelpers"; //bread crumbs if we get lost
+
 const initialValues = {
   personName: "",
   email: "",
@@ -14,11 +17,14 @@ const initialValues = {
   password: "",
   isInstructor: false,
 };
+
 const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
   acc[key] = "";
   return acc;
 }, {});
-function LogInForm() {
+
+function SignUpForm(props) {
+    const history = useHistory()
   // state variables
   //need to rename formValues to signUpFormValues
   const [isValid, setIsValid] = useState(true);
@@ -43,6 +49,10 @@ function LogInForm() {
   };
   const handleSubmit = (event) => {
     handleSubmitHelper(event);
+    console.log('received form values in handle submit signup form', formValues)
+    props.addNewUser(formValues)
+    history.push('/login')
+
   };
   return (
     <form
@@ -124,5 +134,20 @@ function LogInForm() {
       </div>
     </form>
   );
+
 }
-export default LogInForm;
+
+const mapStateToProps = (state) => {
+    return {
+      currentUser: state.currentUser,
+      user: state.user,
+    };
+  };
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+      addNewUser: (formValues) => dispatch(addUser(formValues)),
+    };
+  };
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);
