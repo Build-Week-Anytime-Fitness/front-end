@@ -16,7 +16,23 @@
 
 [] Sign-up Form, Add sign up link / usehistory push to /login on 
 
+##  A command line program that you use from your terminal
 
+curl -X POST -d 'name=linuxize' -d 'email=linuxize@example.com' https://example.com/contact.php
+
+curl -X POST -d 'email=th@marvel.org' -d 'password=password'  https://amazing-fitness-app.herokuapp.com/api/login
+
+curl -X POST -d 'email=th@marvel.org&password=password'  https://amazing-fitness-app.herokuapp.com/api/login
+
+curl -X POST -H "Content-Type: application/json" \
+    -d '{"password": "password", "email": "th@marvel.org"}' \
+    https://amazing-fitness-app.herokuapp.com/api/login
+
+https://amazing-fitness-app.herokuapp.com
+
+Client # 1
+email: th@marvel.org
+password: password
 
 
 

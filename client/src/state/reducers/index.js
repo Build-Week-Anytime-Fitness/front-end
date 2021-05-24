@@ -8,6 +8,7 @@ import {
   ADD_CLASS,
   ADD_USER,
   CHECK_USER,
+  CURRENT_USER,
 } from "../actions";
 
 const log = console.log;
@@ -17,8 +18,9 @@ const initialState = {
   loading: false,
   error: "",
   searchTerm: "",
-  currentUser: {},
-
+  currentUser: {
+    id: "",
+  },
   user: {
     id: "",
     personName: "",
@@ -109,9 +111,16 @@ export const appReducer = (state = initialState, action) => {
     // }
   
     case CHECK_USER: {
-      console.log("reducer fires: check users");
+      console.log("reducer fires: check user");
       // return { ...state, currentUser: action.payload };
       return {...state, user: {...state.user, isInstructor: action.payload}}
+    }
+
+    case CURRENT_USER: {
+      console.log("reducer fires: current user");
+      return { ...state, currentUser: {id: action.payload}};
+
+      // return {...state, user: {...state.user, isInstructor: action.payload}}
     }
 
     default:

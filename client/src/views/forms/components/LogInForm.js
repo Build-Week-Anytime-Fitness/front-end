@@ -8,8 +8,8 @@ import { connect } from "react-redux";
 import { checkUser } from "../../../state/actions/index";
 
 const initialValues = {
-  email: "lambda@lambda.com",
-  password: "school",
+  email: "",
+  password: "",
 };
 
 const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
@@ -25,7 +25,7 @@ const LogInForm = (props) => {
 
   //redux state
   const [formValues, setFormValues] = useState(initialValues);
-  console.log('form values from login form', formValues)
+  // console.log('form values from login form', formValues)
 
   // useEffect
   useEffect(() => {
@@ -48,11 +48,10 @@ const LogInForm = (props) => {
 
   const handleSubmit = (event) => {
     //handleSubmitHelper(event); //preventDefault only
-    event.preventDefault()
-    //dispatch CHECK_USER
-    console.log(checkUser(formValues)); // api post in action
-    checkUser(formValues)
-    console.log(formValues)
+    event.preventDefault();
+    // console.log("Check User dispatch should fire in LoginForm"); // api post in action
+    // console.log("FormValues is captured: ", formValues);
+    props.myCheckUser(formValues);
 
     // check state for instructor... user.isInstructor which gets pulled below from Redux state
     if (props.user.isInstructor === true) {
@@ -60,8 +59,6 @@ const LogInForm = (props) => {
     } else if (props.user.isInstructor === false) {
       history.push('./classes')
     }
-
-    // console.log(props.formValues)
 
   };
 
@@ -87,7 +84,7 @@ const LogInForm = (props) => {
           onChange={handleChange}
         ></input>
       </label>
-      <button id='login-form-submit' type="submit" onClick={() => console.log('button pressed')} disabled={!isValid}>
+      <button id='login-form-submit' type="submit" onClick={handleSubmit} disabled={!isValid}>
         Log In
       </button>
       {displayErrors(formErrors)}
@@ -99,21 +96,21 @@ const LogInForm = (props) => {
   );
 };
 
-// state needed formValues,
-// reducer/ action function checkUser
+
 
 const mapStateToProps = (state) => {
   return {
-    //formValues: state.formValues, //credentials
     currentUser: state.currentUser,
     user: state.user,
   };
 };
 
-const mapDispatchToProps= (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    checkUser: dispatch(checkUser()),
+    myCheckUser: (formValues) => dispatch(checkUser(formValues)),
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);
+
+

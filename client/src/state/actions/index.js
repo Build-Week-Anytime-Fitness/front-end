@@ -10,20 +10,19 @@ export const ALL_CLASSES = 'ALL_CLASSES';
 export const ADD_CLASS = 'ADD_CLASS';
 export const ADD_USER = 'ADD_USER';
 export const CHECK_USER = 'CHECK_USER';
-
-//NOTE: add userState
+export const CURRENT_USER = 'CURRENT_USER';
 
 
 //state related to api call
-
 export const getData = (props) => (dispatch) => {
   console.log("7. props from  getData /actions", props)
 
-    console.log('API call is going')
+    console.log('getData API call fires')
     dispatch({ type: FETCHING_API_START });
         axiosWithAuth()
-        .get("http://localhost:5000/api/friends")
+        .get("https://amazing-fitness-app.herokuapp.com/api/classes")
         .then((res) => {
+          console.log("response after API get /classes: ", res)
           dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.results })
         })
         .catch((error) => {
@@ -61,35 +60,39 @@ export const allClasses = (allClasses) => {
 
 
 
+
 //state related to forms
-export function checkUser(formValues)  { //this action takes dispatch so that it can branch to two different reducers
+export const checkUser = (formValues) => (dispatch) =>   { //this action takes dispatch so that it can branch to 1+ reducers
+  console.log('checkUser API call fires')
   console.log("props from checkUser /actions", formValues)
-    let currentUser = {}
-    console.log('API call is going')
-    // dispatch({ type: FETCHING_API_START });
-    //   // attempt code 3 times
-    //   axiosWithAuth()
-    // // location might be here
-    //   .post("/login", formValues)
-    //   // or here
-    //   .then(res => {
-    //     console.log("res.data: ", res.data) // get back token, email, isInstructor value, success message
-    //     localStorage.setItem('authToken', res.data.payload )
-    //     dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.results }) // might not be .results.  
 
-    //     //also need to get user back from backend set userState to current user.  We might not get current user.  Why do we have a currentUser?
-    //     currentUser = res.data.user
-    //     dispatch({ type: CHECK_USER, payload: currentUser})
+    dispatch({ type: FETCHING_API_START });
+      // attempt code 3 times
+      axiosWithAuth()
+    // location might be here
+      .post("/login", formValues)
+      // or here
+      .then(res => {
+        console.log("response: ", res) // see sample POST login res below
+        localStorage.setItem('authToken', res.data.token )
+        console.log("token", res.data.token)
+        dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.results }) // might not be .results.  
+    
+        // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
+        let currentUserId = res.data.id  
+        dispatch({ type: CHECK_USER, payload: currentUserId})
 
-    //   })
-    //   .catch(error => {
-    //     dispatch({ type: FETCHING_API_FAILURE, payload: error})
-    //     console.log('ERR_1: This error is from Login', error)
-    //   })
+      })
+      .catch(error => {
+        dispatch({ type: FETCHING_API_FAILURE, payload: error})
+        console.log('ERR_1: This error is from Login', error)
+      })
     };
 
 
 
-//add current user state
+/* Sample data response for POST login
 
+{"message":"welcome, The Hulk","id":3,"email":"th@marvel.org","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjozLCJlbWFpbCI6InRoQG1hcnZlbC5vcmciLCJpc19pbnN0cnVjdG9yIjpmYWxzZSwiaWF0IjoxNjIxODE3Mjg5LCJleHAiOjE2MjE5MDM2ODl9.8Pwy9pcCv5XX0G6NgZYEZ_msd66ghaxBwn_G7nGKweg","is_instructor":false}
 
+*/
