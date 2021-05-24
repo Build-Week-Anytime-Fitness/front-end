@@ -4,7 +4,7 @@
 
 [] hook up forms to back end API 
 
-[] assign current user based on user id
+[x] assign current user based on user id
 
 [] enable full CRUD capability for editing classes 
 
@@ -18,7 +18,9 @@
 
 ##  A command line program that you use from your terminal
 
-curl -X POST -d 'name=linuxize' -d 'email=linuxize@example.com' https://example.com/contact.php
+> https://linuxize.com/post/curl-post-request/
+
+curl -X POST -F 'name=linuxize' -F 'email=linuxize@example.com' https://example.com/contact.php
 
 curl -X POST -d 'email=th@marvel.org' -d 'password=password'  https://amazing-fitness-app.herokuapp.com/api/login
 
@@ -28,11 +30,32 @@ curl -X POST -H "Content-Type: application/json" \
     -d '{"password": "password", "email": "th@marvel.org"}' \
     https://amazing-fitness-app.herokuapp.com/api/login
 
-https://amazing-fitness-app.herokuapp.com
 
 Client # 1
 email: th@marvel.org
 password: password
+
+Instructor# 2
+email: bp@marvel.org
+password: password
+
+
+## My idea to solve the async problem in Login:
+
+  useEffect(() => {
+     // check state for instructor... user.isInstructor which gets pulled below from Redux state
+     if (props.currentUser && !props.currentUser.id) {
+       return;
+     }
+
+     if (props.user.isInstructor === true) {
+      history.push('/instructors')
+    } else if (props.user.isInstructor === false) {
+      history.push('./classes')
+    }
+  }, [props.user] )
+
+  However, the sign-out breaks... but it solves the login client and login instructor views
 
 
 
