@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {Link} from 'react-router-dom'
-import {useHistory} from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { loginFormSchema } from "../validation/schema";
 import { validateForm } from "../validation/validationHelpers";
-import { displayErrors, handleChangeHelper, handleSubmitHelper } from "../formHelpers";
+import {
+  displayErrors,
+  handleChangeHelper,
+  handleSubmitHelper,
+} from "../formHelpers";
 import { connect } from "react-redux";
 import { checkUser } from "../../../state/actions/index";
 
@@ -18,7 +22,7 @@ const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
 }, {});
 
 const LogInForm = (props) => {
-    const history = useHistory()
+  const history = useHistory();
   // local state variables
   const [isValid, setIsValid] = useState(true); //local state not needed by redux. product checker
   const [formErrors, setFormErrors] = useState(initialErrorValues);
@@ -34,17 +38,17 @@ const LogInForm = (props) => {
   }, []);
 
   // function declarations
-  const handleChange=(event)=>{
+  const handleChange = (event) => {
     handleChangeHelper({
-        event,
-        schema:loginFormSchema,
-        formValues,
-        setFormValues,
-        formErrors,
-        setFormErrors,
-        setIsValid
+      event,
+      schema: loginFormSchema,
+      formValues,
+      setFormValues,
+      formErrors,
+      setFormErrors,
+      setIsValid,
     });
-};
+  };
 
   const handleSubmit = (event) => {
     //handleSubmitHelper(event); //preventDefault only
@@ -55,48 +59,68 @@ const LogInForm = (props) => {
 
     // check state for instructor... user.isInstructor which gets pulled below from Redux state
     if (props.user.isInstructor === true) {
-      history.push('/instructors')
+      history.push("/instructors");
     } else if (props.user.isInstructor === false) {
-      history.push('./classes')
+      history.push("./classes");
     }
-
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Email
-        <input
-        id='login-form-email-input'
-          type="text"
-          name="email"
-          value={formValues.email}
-          onChange={handleChange}
-        ></input>
-      </label>
-      <label>
-        Password
-        <input
-        id='login-form-passwoard-input'
-          type="password"
-          name="password"
-          value={formValues.password}
-          onChange={handleChange}
-        ></input>
-      </label>
-      <button id='login-form-submit' type="submit" onClick={handleSubmit} disabled={!isValid}>
-        Log In
-      </button>
-      {displayErrors(formErrors)}
-      <h6><em>Need to start an account? <br/>
-            <Link to="signup" style={{ marginBottom: "15vh", color: '#2522CA', textDecoration: 'none' }}>
-                Signup Today {" "}
-              </Link></em></h6>
+    <form className={"d-flex flex-column login-style"} onSubmit={handleSubmit}>
+      <div className={"d-flex flex-column justify-content-center input-style"}>
+        <h2 style={{ color: "white" }}>Login</h2>
+        <div className={"d-flex flex-row flex-wrap justify-content-center"}>
+          <label>
+            Email
+            <input
+              id="login-form-email-input"
+              type="text"
+              name="email"
+              value={formValues.email}
+              onChange={handleChange}
+            ></input>
+          </label>
+          <label>
+            Password
+            <input
+              id="login-form-passwoard-input"
+              type="password"
+              name="password"
+              value={formValues.password}
+              onChange={handleChange}
+            ></input>
+          </label>
+        </div>
+      </div>
+      <div className={"d-flex flex-column justify-content-center input-style"}>
+        <button
+          id="login-form-submit"
+          type="submit"
+          onClick={handleSubmit}
+          disabled={!isValid}
+        >
+          Enter
+        </button>
+        {displayErrors(formErrors)}
+        <h5>
+          <em>
+            Need to start an account? <br />
+            <Link
+              to="signup"
+              style={{
+                marginBottom: "15vh",
+                color: "#AAA",
+                textDecoration: "none",
+              }}
+            >
+              Signup Today{" "}
+            </Link>
+          </em>
+        </h5>
+      </div>
     </form>
   );
 };
-
-
 
 const mapStateToProps = (state) => {
   return {
@@ -112,5 +136,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);
-
-

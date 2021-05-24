@@ -106,10 +106,10 @@ export const appReducer = (state = initialState, action) => {
     //   console.log("reducer fires: add class ");
     //   return { ...state, classes: [...state.classes, action.payload] };
     // }
-    // case ADD_USER: {
-    //   console.log("reducer fires: add users ");
-    //   return { ...state, users: [...state.users, action.payload] };
-    // }
+    case ADD_USER: {
+      console.log("reducer fires: add users ");
+      return { ...state, user: [...state.users, action.payload] };
+    }
   
     case CHECK_USER: {
       console.log("reducer fires: check user");

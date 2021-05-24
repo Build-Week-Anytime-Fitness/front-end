@@ -32,10 +32,12 @@ h3 {
   margin: 1vh 3vw;
 }
 
-.btn {
+.button {
   color: #444;
   margin: 1vh 2vw;
   font-size: 1.5rem;
+  align-self: center;
+  text-decoration: none;
 }
 
 .classes-content-container {
@@ -149,4 +151,14 @@ div button {
   width: 275px;
   margin: 3vh auto;
   font-size: 1.5rem;
+}
+
+.login-style {
+  padding: 30vh 10vw;
+  background: url('/src/assets/fitnessTen.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  text-align: center;
 }
