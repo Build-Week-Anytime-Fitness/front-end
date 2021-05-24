@@ -91,8 +91,7 @@ const LogInForm = (props) => {
             ></input>
           </label>
         </div>
-      </div>
-      <div className={"d-flex flex-column justify-content-center input-style"}>
+        <div className={"d-flex flex-column justify-content-center"} style={{marginTop: '5vh'}}>
         <button
           id="login-form-submit"
           type="submit"
@@ -118,6 +117,8 @@ const LogInForm = (props) => {
           </em>
         </h5>
       </div>
+      </div>
+     
     </form>
   );
 };

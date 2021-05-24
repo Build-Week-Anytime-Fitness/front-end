@@ -61,6 +61,7 @@ function SignUpForm(props) {
       className={
         "d-flex flex-column flex-wrap justify-content-center form-style"
       }
+      style={{padding: '0 10vw'}}
       onSubmit={handleSubmit}
     >
       <div className={"d-flex flex-column justify-content-center input-style"}>

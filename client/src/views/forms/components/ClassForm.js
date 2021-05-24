@@ -53,7 +53,8 @@ function ClassForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={'d-flex flex-column justify-content-center form-style-two'} style={{textAlign:'center'}} onSubmit={handleSubmit}>
+      <h2>Create A Class</h2>
       <label>
         Class Name
         <input
@@ -101,6 +102,7 @@ function ClassForm() {
           name="intensity"
           value={formValues.intensity}
           onChange={handleChange}
+          style={{margin: '2vh 3vw', fontSize:'1.25rem'}}
         >
           <option value="">--select--</option>
           {["low", "medium", "high"].map((val, i) => (
@@ -131,7 +133,7 @@ function ClassForm() {
         ></input>
       </label>
       <label>
-        Maximum Class Size
+        Max Class:
         <input
         id='class-form-max-class-size'
           type="number"
