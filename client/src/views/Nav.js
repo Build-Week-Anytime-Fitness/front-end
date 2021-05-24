@@ -27,15 +27,15 @@ export default function Nav() {
                 to="logout" className="button">
                 Logout
             </Link>
-
-            <Link
+            {/* <Link
                 id="nav-classes"
                 to="classes" className="button">
                 Classes
             </Link>
             <Link id="nav-instructor" to="instructors" className="button">
                 Instructor Portal
-            </Link>
+            </Link> */}
+            
         </div>
 
     </AppBar>
