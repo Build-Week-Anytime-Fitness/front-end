@@ -8,22 +8,6 @@ import { getData, searchTerm, getFilteredClasses, allClasses }  from "../../stat
 
 
 
-// const initialClassesValues = [
-//     {
-//         className: "Yoga On The Beach",
-//         classType: "Yoga",
-//         classDate: "2021/10/30",
-//         startTime: "10:00am",
-//         duration: 1, // hours
-//         intensity: "low",
-//         location: "Public Beach",
-//         numberOfStudents: 8, 
-//         maxClassSize: 10
-//     },
-
-//     ]
-
-
 /* REDUX NOTE:
 STATE NEEDED:  allClasses, filteredClasses, searchTerm
 STATE CHANGERS NEEDED:  setAllClasses, setFilteredClasses, setSearchTerm
@@ -48,28 +32,6 @@ const Classes = (props) => {
     // console.log("props.filteredClasses", props.filteredClasses)
 
     console.log("Classes: user from redux state", props.user)
-
-  // ------------ populate class data with backend data------------------
-//  function getAllClasses() {
-//     axios.get('https://pt-fitness.herokuapp.com/classes')
-//       .then(res => {
-
-//         // console.log("All Classes ", res.data);
-//         // console.log("Successful res back from Axios, res.data: ", res.data);
-
-//         setAllClasses(res.data)
-//         setFilteredClasses(res.data)
-
-//       })
-//       .catch(err => {
-//         console.log("Error: ", err)
-//         // history.push(`/error`)
-//        alert("There was an error in loading classes.")
-//        // debugger
-//       })
-//   } // populates classes state
-
-
 
   // ----------- Helper Function ---------------------
     // const getFilteredClasses = (searchTerm) => {

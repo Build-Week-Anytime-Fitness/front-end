@@ -75,7 +75,7 @@ export const checkUser = (formValues) => (dispatch) =>   { //this action takes d
       // or here
       .then(res => {
         // console.log("response: ", res) // see sample POST login res below
-        // localStorage.setItem('authToken', res.data.token ) // 200
+        localStorage.setItem('authToken', res.data.token ) // 200
         console.log("message: ", res.data.message)
         dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message }) 
     
