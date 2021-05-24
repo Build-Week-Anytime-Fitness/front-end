@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
     fontSize: 22,
-    color: 'white'
+    color: 'dodgerblue'
   },
 }); // material UI styles
 
@@ -62,21 +62,20 @@ export default function Class (props) {
       <CardContent style={{textAlign: "center"}}>
       {/* // {isClassCard ? <button>Logout</button> : <button>Login</button>} */}
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          {indivClass.classType}
+          {indivClass.class_type}
         </Typography>
         <Typography variant="h5" component="h2">
-          {bull} {indivClass.className} {bull}
+          {bull} {indivClass.class_name} {bull}
         </Typography>
         <Typography className={classes.pos} color="textSecondary"><br/>
-      
-        {indivClass.classDate}
+        {indivClass.class_date}
         </Typography>
         <Typography variant="body2" component="p">
           {indivClass.intensity} intensity<br/>
           Location: {indivClass.location}<br/>
           {indivClass.duration} hour<br/>
-          starts at {indivClass.startTime}<br/>
-          {indivClass.numberOfStudents}/{indivClass.maxClassSize} students signed up<br/>
+          starts at {indivClass.start_time}<br/>
+          {indivClass.number_of_students}/{indivClass.max_class_size} students signed up<br/>
         </Typography>
       </CardContent>
       <CardActions>
@@ -90,3 +89,17 @@ export default function Class (props) {
     </>
   )
 };
+
+/*  SAMPLE INDIV CLASS DATA
+class_date: "Monday"
+class_name: "oldie but goldie"
+class_type: "jazzersize"
+duration: 1
+id: 1
+instructor_id: 1
+intensity: "high"
+location: "anywhere"
+max_class_size: 10
+number_of_students: 1
+start_time: "9:00 am"
+*/

@@ -81,7 +81,8 @@ export const appReducer = (state = initialState, action) => {
       return { ...state, loading: true };
     }
     case FETCHING_API_SUCCESS: {
-        console.log("200 success")
+        console.log("Fetching API success reducer fires")
+        console.log("payload: ", action.payload);
       //log("FETCH SUCCESS THROUGH REDUCER");
       return { ...state, loading: false };
     }
@@ -98,8 +99,8 @@ export const appReducer = (state = initialState, action) => {
       return { ...state, filteredClasses: action.payload };
     }
     case ALL_CLASSES: {
-      log("ALL CLASSES from reducer", action.payload);
-      return { ...state, allClasses: action.payload };
+      log("ALL CLASSES reducer, log classes", action.payload);
+      return { ...state, classes: action.payload };
     }
     // case ADD_CLASS: {
     //   console.log("reducer fires: add class ");
@@ -118,6 +119,7 @@ export const appReducer = (state = initialState, action) => {
 
     case CURRENT_USER: {
       console.log("reducer fires: current user");
+      console.log("action.payload in current_user: ", action.payload)
       return { ...state, currentUser: {id: action.payload}};
 
       // return {...state, user: {...state.user, isInstructor: action.payload}}

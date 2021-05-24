@@ -44,10 +44,10 @@ allClasses, setAllClasses, filteredClasses, setFilteredClasses, setSearchTerm
 */
 
 const Classes = (props) => {
-    console.log("props", props);
-    console.log("props.filteredClasses", props.filteredClasses)
+    // console.log("props", props);
+    // console.log("props.filteredClasses", props.filteredClasses)
 
-    console.log("user from redux state", props.user)
+    console.log("Classes: user from redux state", props.user)
 
   // ------------ populate class data with backend data------------------
 //  function getAllClasses() {
