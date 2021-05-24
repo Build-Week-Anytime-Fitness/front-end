@@ -5,7 +5,7 @@ export default function Instructors() {
 
     return (
         <>
-        <h1>Instructors Page</h1>
+        <h1>Instructors' Page</h1>
         <ClassForm/>
         <Classes/>
         </>

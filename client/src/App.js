@@ -21,8 +21,8 @@ function App() {
         >
           <Link
             to="home"
-            className="btn"
-            style={{ color: "#666", outline: 'none', marginTop: '3vh', marginBottom: '15vh', padding: "3vh 5vw" }}
+            className="button"
+            style={{ color: "#666", marginTop: '3vh', marginBottom: '15vh', padding: "3vh 5vw" }}
           >
             <h4 style={{ color: "black"}}>Step Inside</h4>
           </Link>

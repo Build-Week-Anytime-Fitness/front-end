@@ -32,10 +32,12 @@ h3 {
   margin: 1vh 3vw;
 }
 
-.btn {
+.button {
   color: #444;
   margin: 1vh 2vw;
   font-size: 1.5rem;
+  align-self: center;
+  text-decoration: none;
 }
 
 .classes-content-container {
@@ -124,7 +126,7 @@ h3 {
 .form-style {
   padding: 3vh 5vw;
   text-align: center;
-  font-size: large;
+  font-size: 1.25rem;
   background: url('/src/assets/fitnessNine.jpg');
   background-size: 90%;
   background-repeat: no-repeat;
@@ -133,20 +135,52 @@ h3 {
   height: 100vh
 }
 
+.form-style-two {
+  padding: 8vh 10vw;
+  text-align: center;
+  font-size: 1.25rem;
+  border: 1px solid black;
+  border-radius: 50px;
+  box-shadow: 0 0 2vh black;
+  height: auto;
+  margin-top: 3vh;
+  color: black;
+  opacity: 0.8;
+}
+
+.form-style-two input {
+  margin: 3vh 3vw;
+  font-size: 1.5rem
+}
+
 .input-style {
   padding: 3vh 5vh;
   background-color: #444;
+  box-shadow: 0 0 2vh black;
   opacity: 0.8;
   color: white;
+  border-radius: 50px;
 }
 
 div input {
   margin: 1.5vh 1vw;
-  width: 275px 
+  width: 275px;
+  font-size: 1.5rem;
 }
 
 div button {
   width: 275px;
   margin: 3vh auto;
   font-size: 1.5rem;
+}
+
+.login-style {
+  padding: 30vh 10vw;
+  font-size: 1.25rem;
+  background: url('/src/assets/fitnessTen.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  text-align: center;
 }
