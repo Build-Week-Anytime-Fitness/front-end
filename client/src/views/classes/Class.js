@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -37,6 +37,7 @@ const useStyles = makeStyles({
 
 const Class = (props) => {
   let { indivClass, allClasses } = props;
+  const [isEditMode, setIsEditMode] = useState(false)
 
   // Determines location from useLocation(), if "/instructors" is found, set isInstructor to true, trigger positive conditional render in card
   let { pathname } = useLocation();
@@ -52,8 +53,10 @@ const Class = (props) => {
 
   // --------------  Helper Functions ----------------
   const handleEditButtonClick = () => {
-    console.log("handleEditButtonClick has been fired")
+    setIsEditMode(true)
+    console.log("handleEditButtonClick has been fired", props, isEditMode)
     props.myClassToEdit(props.indivClass);
+    
   };
 
 
