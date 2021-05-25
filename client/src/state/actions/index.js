@@ -17,13 +17,16 @@ export const getData = (props) => (dispatch) => {
    console.log("7. props from  getData /actions", props)
   //props.isLoading = true
 
+
   console.log("getData API call fires is loading True", props);
   dispatch({ type: FETCHING_API_START, isLoading: "true" });
   setTimeout(
   axiosWithAuth()
-    .get("https://amazing-fitness-app.herokuapp.com/api/classes")
+    .get("/classes")
     .then((res) => {
+
       dispatch({ type: ALL_CLASSES, payload: res.data });
+      dispatch({ type: GET_FILTERED_CLASSES, payload: res.data });
       dispatch({
         type: FETCHING_API_SUCCESS,
         isLoading: "false",
@@ -41,12 +44,12 @@ export const getData = (props) => (dispatch) => {
 
 //state related to classes
 export const searchTerm = (searchTerm) => {
-  console.log("5. new searchTerm from classes.js", searchTerm);
   return { type: SEARCH_TERM, payload: searchTerm };
 };
 
 export const getFilteredClasses = (filteredClasses) => {
-  console.log("6. new filteredClasses from classes.js", filteredClasses);
+  // console.log("6. new filteredClasses from classes.js", filteredClasses);
+  console.log("GET_FILTERED_CLASSES action fires: log props: ", filteredClasses)
   return { type: GET_FILTERED_CLASSES, payload: filteredClasses };
 };
 

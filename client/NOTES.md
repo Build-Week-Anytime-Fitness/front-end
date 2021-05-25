@@ -2,11 +2,13 @@
 
 ## Front End Things to Do
 
-[] hook up forms to back end API 
+> Class CRUD
 
-[x] assign current user based on user id
+  [] update / edit class works
+  [] add class works
+  [] delete class works
 
-[] enable full CRUD capability for editing classes 
+> 
 
 [] implement a filter so when an instructor logs in, they will see only their classes (a conditional filter on classes component) … may require small refactor 
 

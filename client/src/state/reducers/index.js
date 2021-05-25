@@ -19,7 +19,7 @@ const initialState = {
   error: "",
   searchTerm: "",
   currentUser: {
-    id: "",
+  id: "",
   },
   user: {
     id: "",
@@ -81,7 +81,10 @@ export const appReducer = (state = initialState, action) => {
       return { ...state, isLoading: true };
     }
     case FETCHING_API_SUCCESS: {
+
         console.log("Fetching API success reducer fires isLoading is false")
+        console.log("Fetching API payload: ", action.payload);
+
       //log("FETCH SUCCESS THROUGH REDUCER");
       return { ...state, isLoading: false };
     }
@@ -94,7 +97,7 @@ export const appReducer = (state = initialState, action) => {
       return { ...state, searchTerm: action.payload };
     }
     case GET_FILTERED_CLASSES: {
-      log(" GET_FILTERED CLASSES from reducer", action.payload);
+      log(" GET_FILTERED_CLASSES in reducer: log payload: ", action.payload); 
       return { ...state, filteredClasses: action.payload };
     }
     case ALL_CLASSES: {
@@ -105,8 +108,9 @@ export const appReducer = (state = initialState, action) => {
     //   console.log("reducer fires: add class ");
     //   return { ...state, classes: [...state.classes, action.payload] };
     // }
+
     case ADD_USER: {
-      console.log("reducer fires: add users ");
+      console.log("reducer fires: add user");
       return { ...state, user: [...state.users, action.payload] };
     }
   
@@ -117,11 +121,8 @@ export const appReducer = (state = initialState, action) => {
     }
 
     case CURRENT_USER: {
-      console.log("reducer fires: current user");
-      // console.log("action.payload in current_user: ", action.payload)
+      console.log("reducer fires: current user, log payload: ", action.payload);
       return { ...state, currentUser: {id: action.payload}};
-
-      // return {...state, user: {...state.user, isInstructor: action.payload}}
     }
 
     default:
@@ -129,5 +130,3 @@ export const appReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-// need to code out current user state
