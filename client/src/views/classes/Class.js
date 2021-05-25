@@ -8,6 +8,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
 
+import { connect } from "react-redux";
+import { classToEdit }  from "../../state/actions/index.js";
+
 
 const useStyles = makeStyles({
   root: {
@@ -32,13 +35,8 @@ const useStyles = makeStyles({
 }); // material UI styles
 
 
-export default function Class (props) {
+const Class = (props) => {
   let { indivClass, allClasses } = props;
-  // console.log("Props from class:", props);
-
-  // let { classId } = useParams();
-  // console.log("classId from Class: ", classId); // gets the classId, A STRING
-
 
   // Determines location from useLocation(), if "/instructors" is found, set isInstructor to true, trigger positive conditional render in card
   let { pathname } = useLocation();
@@ -48,15 +46,19 @@ export default function Class (props) {
     isInstructor = true;
   }
 
-
   // material UI code
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
+  // --------------  Helper Functions ----------------
+  const handleEditButtonClick = () => {
+    console.log("handleEditButtonClick has been fired")
+    props.myClassToEdit(props.indivClass);
+  };
+
 
   return (
     <>
-
 
       <Card className={classes.root} variant="outlined" >
       <CardContent style={{textAlign: "center"}}>
@@ -78,7 +80,7 @@ export default function Class (props) {
       </CardContent>
       <CardActions>
 
-        { isInstructor ? <EditIcon style={{ margin: '10', color: '555555'}}/> :  <Button size="small" style={{ color: '555555'}}>Sign Up</Button> }
+        { isInstructor ? <Button onClick={handleEditButtonClick}><EditIcon style={{ margin: '10', color: '555555'}}/></Button>:  <Button size="small" style={{ color: '555555'}}>Sign Up</Button> }
 
       </CardActions>
       
@@ -101,16 +103,17 @@ const displayTime=(duration)=>{
     }
   }
 };
-/*  SAMPLE INDIV CLASS DATA
-class_date: "Monday"
-class_name: "oldie but goldie"
-class_type: "jazzersize"
-duration: 1
-id: 1
-instructor_id: 1
-intensity: "high"
-location: "anywhere"
-max_class_size: 10
-number_of_students: 1
-start_time: "9:00 am"
-*/
+
+const mapStateToProps = (state) => {
+  return {
+      classToEdit: state.classToEdit,
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      myClassToEdit: (indivClass) => dispatch(classToEdit(indivClass)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Class);

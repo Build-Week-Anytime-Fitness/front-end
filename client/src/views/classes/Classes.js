@@ -7,8 +7,7 @@ import { connect } from "react-redux";
 import { getData, searchTerm, getFilteredClasses, allClasses }  from "../../state/actions/index.js";
 
 
-
-/* REDUX NOTE:
+/* REDUX REFACTOR NOTES:
 STATE NEEDED:  allClasses, filteredClasses, searchTerm
 STATE CHANGERS NEEDED:  setAllClasses, setFilteredClasses, setSearchTerm
 INITIAL STATE:  initialClassesValues (which gets assigned to setAllClasses and setFilteredClasses) 
@@ -19,10 +18,7 @@ const [ filteredClasses, setFilteredClasses ] = useState(initialClassesValues);
 const [ searchTerm, setSearchTerm ] = useState('');
 */
 
-/*
-PROPS (below)
-allClasses, setAllClasses, filteredClasses, setFilteredClasses, setSearchTerm
-*/
+
 
 const Classes = (props) => {
 
@@ -62,14 +58,11 @@ const Classes = (props) => {
             return matchesName || matchesType || matchesDate || matchesTime || matchesDuration || matchesIntensity || matchesLocation;
             
         }); // end of filter
-
-        console.log("filteredClasses: ", filteredClasses);
-
+        // console.log("filteredClasses: ", filteredClasses);
         props.myGetFilteredClasses(filteredClasses);
-
     };
 
-  // ----------- Helper Function ---------------------}
+    // ------------- Helper Function ---------------------
     const searchChangeHandler = (e) => {
         const enteredSearchTerm = e.target.value;
         props.mySearchTerm(enteredSearchTerm); // readable option
@@ -77,35 +70,17 @@ const Classes = (props) => {
         getFilteredClassesHelper(enteredSearchTerm); // trigger filter Helper function
     };
 
-  // -------------------- Side Effects -----------------
-//   useEffect(() => {
-//     axios.get('https://pt-fitness.herokuapp.com/classes')
-//       .then(res => {
- 
-        // console.log("All Classes ", res.data);
-        // console.log("Successful res back from Axios, res.data: ", res.data);
-
-//         setAllClasses(res.data)
-//         setFilteredClasses(res.data)
-
-//       })
-//       .catch(err => {
-//         console.log("Error: ", err)
-//         // history.push(`/error`)
-//        alert("There was an error in loading classes.")
-//        // debugger
-//       })
-//   }, [setAllClasses, setFilteredClasses]); // populates allClasses on browser reload
+    // -------------------- Side Effects -----------------
 
     useEffect(() => {
     gsap.to(".animation", {duration: 2, y: 30});
     }, []); // gsap animation to slide cards down slightly upon load
 
-  if (props.isLoading) {
-      return (
-          <div style={{ textAlign: 'center', color: 'black'}}>Loading...</div>
-      )
-  }
+    if (props.isLoading) {
+        return (
+            <div style={{ textAlign: 'center', color: 'black'}}>Loading...</div>
+        )
+    };
 return (
     <>
 
@@ -127,31 +102,19 @@ return (
                     marginTop: '2vh'
                 }}
                 />
-
             </div>
         
             <div className="classes-container d-flex flex-row flex-wrap justify-content-center class-box">
 
-
                 <div className="animation d-flex flex-row flex-wrap justify-content-center ">
-                {props.filteredClasses && 
-                props.filteredClasses.map(indivClass => {
-
-               
-
-                    // console.log("indivClass: ", indivClass)
-                    const classKey = Math.random().toString(16).slice(2);
-                    return <Class key={classKey} indivClass={indivClass} />
-                })
-                }
-
-                {/* {props.classes && 
-                props.classes.map(indivClass => {
-                    // console.log("indivClass: ", indivClass)
-                    const classKey = Math.random().toString(16).slice(2);
-                    return <Class key={classKey} indivClass={indivClass} />
-                })
-                } */}
+                    {
+                    props.filteredClasses && 
+                    props.filteredClasses.map(indivClass => {
+                        // console.log("indivClass: ", indivClass)
+                        const classKey = Math.random().toString(16).slice(2);
+                        return <Class key={classKey} indivClass={indivClass} />
+                    })
+                    }
                 </div>
 
             </div>

@@ -11,6 +11,8 @@ export const ADD_CLASS = "ADD_CLASS";
 export const ADD_USER = "ADD_USER";
 export const CHECK_USER = "CHECK_USER";
 export const CURRENT_USER = "CURRENT_USER";
+export const CLASS_TO_EDIT = "CLASS_TO_EDIT";
+
 
 //state related to getClasses API call
 export const getData = (props) => (dispatch) => {
@@ -57,6 +59,13 @@ export const allClasses = (allClasses) => {
   console.log("7. new allClasses from classes.js", allClasses);
   return { type: ALL_CLASSES, payload: allClasses };
 };
+
+export const classToEdit = (indivClass) => {
+  console.log("CLASS_TO_EDIT action fires: log props: ", indivClass);
+  return { type: CLASS_TO_EDIT, payload: indivClass };
+};
+
+
 
 // export const addClass = (addClass) => {
 //   console.log('8. new allClasses from classes.js', addClass)
