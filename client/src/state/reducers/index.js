@@ -19,7 +19,7 @@ const initialState = {
   error: "",
   searchTerm: "",
   currentUser: {
-    id: "",
+  id: "",
   },
   user: {
     id: "",
@@ -108,7 +108,7 @@ export const appReducer = (state = initialState, action) => {
     // }
 
     case ADD_USER: {
-      console.log("reducer fires: add users ");
+      console.log("reducer fires: add user");
       return { ...state, user: [...state.users, action.payload] };
     }
   
@@ -119,11 +119,8 @@ export const appReducer = (state = initialState, action) => {
     }
 
     case CURRENT_USER: {
-      console.log("reducer fires: current user");
-      // console.log("action.payload in current_user: ", action.payload)
+      console.log("reducer fires: current user, log payload: ", action.payload);
       return { ...state, currentUser: {id: action.payload}};
-
-      // return {...state, user: {...state.user, isInstructor: action.payload}}
     }
 
     default:

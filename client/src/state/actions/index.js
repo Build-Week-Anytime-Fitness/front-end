@@ -18,8 +18,9 @@ export const getData = (props) => (dispatch) => {
 
   // console.log("getData API call fires");
   dispatch({ type: FETCHING_API_START });
+
   axiosWithAuth()
-    .get("https://amazing-fitness-app.herokuapp.com/api/classes")
+    .get("/classes")
     .then((res) => {
       // console.log("getData API success, log response: ", res);
       dispatch({ type: ALL_CLASSES, payload: res.data });
