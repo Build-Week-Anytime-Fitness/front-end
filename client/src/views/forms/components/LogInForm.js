@@ -6,10 +6,13 @@ import { validateForm } from "../validation/validationHelpers";
 import {
   displayErrors,
   handleChangeHelper,
-  handleSubmitHelper,
 } from "../formHelpers";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { checkUser } from "../../../state/actions/index";
+import axiosWithAuth from "../../../utils/axiosWithAuth"
+import {FETCHING_API_START,
+  FETCHING_API_SUCCESS,
+  FETCHING_API_FAILURE,} from '../../../state/actions/index'
 
 const initialValues = {
   email: "",
@@ -30,7 +33,7 @@ const LogInForm = (props) => {
   //redux state
   const [formValues, setFormValues] = useState(initialValues);
   // console.log('form values from login form', formValues)
-
+  const dispatch = useDispatch();
   // useEffect
   useEffect(() => {
     // validateForm whenever the component is mounted
@@ -51,20 +54,47 @@ const LogInForm = (props) => {
   };
 
   const handleSubmit = (event) => {
-    //handleSubmitHelper(event); //preventDefault only
     event.preventDefault();
-    // console.log("Check User dispatch should fire in LoginForm"); // api post in action
-    // console.log("FormValues is captured: ", formValues);
-    props.myCheckUser(formValues);
 
-    // check state for instructor... user.isInstructor which gets pulled below from Redux state
+     console.log("FormValues is captured: ", formValues);
+     dispatch({ type: FETCHING_API_START, isLoading: true });
+    axiosWithAuth()
+    .post("/login", formValues)
+    // or here
+    .then((res) => {
+      console.log("response: ", res) // see sample POST login res below
+      localStorage.setItem("authToken", res.data.token); // 200
+      console.log("message: ", res.data.message);
+      dispatch({ type: FETCHING_API_SUCCESS, isLoading: false, payload: res.data.message });
+    //check state for instructor... user.isInstructor which gets pulled below from Redux state
     if (props.user.isInstructor === true) {
       history.push("/instructors");
     } else if (props.user.isInstructor === false) {
-      history.push("./classes");
+      history.push("./classes")
     }
-  };
+  })
+    .catch((error) => {
+      dispatch({ type: FETCHING_API_FAILURE, payload: error });
+      console.log("ERR_1: This error is from Login", error);
+    });
+  }
+    // useEffect(() => {
 
+      // check state for instructor... user.isInstructor which gets pulled below from Redux state
+  //     console.group('useEffect started', props)
+  //     if (props.isLoading) {
+  //       console.log("first condition")
+  //       return;
+  //     }
+
+  //     if (props.user.isInstructor === true) {
+  //       console.log("move to instructor")
+  //      history.push('/instructors')
+  //    } else if (props.user.isInstructor === false) {
+  //      console.log('move to classes')
+  //      history.push('./classes')
+  //    }
+  //  }, [props.user] )
 
   return (
     <form className={"d-flex flex-column login-style"} onSubmit={handleSubmit}>
@@ -92,34 +122,36 @@ const LogInForm = (props) => {
             ></input>
           </label>
         </div>
-        <div className={"d-flex flex-column justify-content-center"} style={{marginTop: '5vh'}}>
-        <button
-          id="login-form-submit"
-          type="submit"
-          onClick={handleSubmit}
-          disabled={!isValid}
+        <div
+          className={"d-flex flex-column justify-content-center"}
+          style={{ marginTop: "5vh" }}
         >
-          Enter
-        </button>
-        {displayErrors(formErrors)}
-        <h5>
-          <em>
-            Need to start an account? <br />
-            <Link
-              to="signup"
-              style={{
-                marginBottom: "15vh",
-                color: "#AAA",
-                textDecoration: "none",
-              }}
-            >
-              Signup Today{" "}
-            </Link>
-          </em>
-        </h5>
+          <button
+            id="login-form-submit"
+            type="submit"
+            onClick={handleSubmit}
+            disabled={!isValid}
+          >
+            Enter
+          </button>
+          {displayErrors(formErrors)}
+          <h5>
+            <em>
+              Need to start an account? <br />
+              <Link
+                to="signup"
+                style={{
+                  marginBottom: "15vh",
+                  color: "#AAA",
+                  textDecoration: "none",
+                }}
+              >
+                Signup Today{" "}
+              </Link>
+            </em>
+          </h5>
+        </div>
       </div>
-      </div>
-     
     </form>
   );
 };
@@ -133,7 +165,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    myCheckUser: (formValues) => dispatch(checkUser(formValues)),
+    myCheckUser: (formValues) =>
+      dispatch(checkUser(formValues)),
   };
 };
 
