@@ -7,6 +7,10 @@ import {
   handleSubmitHelper,
 } from "../formHelpers";//bread crumbs in case we get lost 
 
+import { connect } from "react-redux";
+import { classToEdit }  from "../../../state/actions/index.js";
+
+
 const initialValues = {
   className: "",
   classType: "",
@@ -23,7 +27,7 @@ const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
   return acc;
 }, {});
 
-function ClassForm() {
+const ClassForm = (props) => {
   // state variables
   const [isValid, setIsValid] = useState(true);
   const [formValues, setFormValues] = useState(initialValues);
@@ -54,7 +58,7 @@ function ClassForm() {
 
   return (
     <form className={'d-flex flex-column justify-content-center form-style-two'} style={{textAlign:'center'}} onSubmit={handleSubmit}>
-      <h2>Create A Class</h2>
+      <h2>Add/Update/Delete A Class</h2>
       <label>
         Class Name
         <input
@@ -150,4 +154,18 @@ function ClassForm() {
   );
 }
 
-export default ClassForm;
+const mapStateToProps = (state) => {
+  return {
+    classToEdit: state.classToEdit, // when user clicks edit button on class, Redux state saves indivClass object
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // myCheckUser: (formValues) => dispatch(checkUser(formValues)), // SAMPLE CODE
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClassForm);
+
+
