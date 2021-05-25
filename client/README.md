@@ -11,11 +11,15 @@ frontend: Tony Miller, Chris Lau, Rhiannon Stanford
 
 https://docs.google.com/document/d/17laY8Irc5cRqvpqdT3f6nNUofOl09Lr0IAZZsVlr7JE/edit?usp=sharing
 
+## Link to Code on GitHub
+
+https://github.com/Build-Week-Anytime-Fitness
+
 ## FRONT END
 
 ## App Organization & Structure Notes
 
-    - Home / splash / video
+    - Home / video element
     - sign-up
       (checkbox for instructor)
     - log-in
@@ -25,87 +29,102 @@ https://docs.google.com/document/d/17laY8Irc5cRqvpqdT3f6nNUofOl09Lr0IAZZsVlr7JE/
       isInstructor: boolean;
     - log-out
 
-    Client (protectedRoute)
+    Client (protectedRoute) /classes
       - classes page
 
-    Instructor (protectedRoute)
-      - classes page for instructors (that has edit form component on top)
+    Instructor (protectedRoute) /instructors
+      - classes page for instructors (that has edit form component on top enabling full CRUD operations)
 
 ## Components
 
-[] LandingPage.js
+[] Home.js
 [] Header.js
 [] Footer.js
+[] Nav.js
 
-[] SearchClasses.js
-[] ClientClasses.js
-[] InstructorClasses.js
-[] ClientClass.js
-[] InstructorClass.js
+[] Classes.js
+[] Class.js
+[] Instructors.js
 
 [] SignUpForm.js
 [] LogInForm.js
+[] Logout.js
 [] ClassForm.js
+
+## NOTE: Front-end work shared by all front-end devs.  Regular pair programming.  Shared contribution.
 
 > Tony
 
-[] Create React App
-[] Install Dependencies
-[] Set Up File Architecture (component pages, views, utils, etc.)
+[x] Create React App
+[x] Install Dependencies
+[x] Set Up File Architecture (component pages, views, utils, etc.)
 
-[] Create Router System (5 routes so far)
+[x] Create Router System (5 routes so far)
 
-    [] Create ProtectedRoute component (for client & instructor pages after successful login)
-    [] Other Routes are:
+  [x] Create ProtectedRoute component (for client & instructor pages after successful login)
+  [x] Other Routes are:
 
-        - landing page
+        - home
         - sign-up
         - log-in
-        - client classes - protected
-        - instructor classes - protected
+        - client classes - protected /classes
+        - instructor classes - protected /instructors
 
-[] Create Header.js
-[] Create Footer.js
-[] Create Server.js - faux server to test login, until backend is ready.  
+[x] Create Header.js
+[x] Create Footer.js
+[x] Create Server.js - faux server to test login, until backend is ready.  
       username: lambda
       password: school
 
-STRETCH:
+[x] Create video element for home
+[x] Bootstrap styling
 
-[] Create Landing.js - video splash page for landing page
+[x] Refactor to redux, create actions and reducers
+[x] Add Media Queries to App.css
 
 > Rhiannon
 
-[] Create & Maintain README.md
+[x] Create & Maintain README.md
+[x] Set Up File Architecture for state (actions / reducers)
+[x] Enable ProtectedRoutes / congruent with Nav links
 
-[] Create SearchClasses.js
-[] Create ClientClasses.js (protectedRoute)
-[] Create ClientClass.js
-[] Create InstructorClasses.js (protectedRoute)
-[] Create InstructorClass.js
+[x] Add search feature to classes, integrated into Redux
+[x] Create Classes.js component(protectedRoute)
+[x] Create Class.js component(protected) - use Mat UI styling
+[x] Create Instructors.js component(protectedRoute) 
+[x] Conditional Rendering of views /classes (client) & /instructors (instructor)
+[x] Create InstructorClasses.js (protectedRoute)
 
-> Tony & Rhiannon
-
-Redux - pair-program (GOAL: start by Thursday)
-
-Mid next week - Testing (Cypress, RTL)
-
-Media Queries - BONUS
+[x] Refactor to redux, create actions and reducers
+[x] Add Media Queries App.css
 
 > Chris
 
-[] Create Forms:
+[x] Create Forms:
 
-    [] SignUpForm.js - new users sign-up
-    [] LogInForm.js - checkbox for ------>   isTeacher: boolean
-    [] ClassForm.js (CRUD:  add, update, delete a class)
+  [x] SignUpForm.js - new users sign-up
+  [x] LogInForm.js - checkbox for ------>   isTeacher: boolean
+  [x] ClassForm.js (CRUD:  add, update, delete a class)
+  [x] Form styling
 
-[] Conditional Rendering of Errors - save as error object
-[] Form Validation - Yup
+[x] Conditional Rendering of Errors - save as error object
+[x] Form Validation - Yup
+[x] Cypress Tests
 
-STRETCH:
+[x] Debugging work on Redux async issues / useEffect
+[x] Testing of components and feedback to group
 
-[] Material UI
+## SAMPLE LOGINS
+
+> Link to backend Github  https://github.com/Build-Week-Anytime-Fitness/back-end/blob/main/README.md
+
+  Client # 1
+  email: th@marvel.org
+  password: password
+
+  Instructor# 2
+  email: bp@marvel.org
+  password: password
 
 ## Dependencies Installed
 
