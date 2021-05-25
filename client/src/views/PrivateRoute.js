@@ -8,6 +8,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             } else {
                 alert("We know you're excited but let's sign up a new account or login first!")
                 return <Redirect to="/login" />;
+                
             }
         }}
         />

@@ -19,6 +19,7 @@ export const getData = (props) => (dispatch) => {
 
   console.log("getData API call fires is loading True", props);
   dispatch({ type: FETCHING_API_START, isLoading: "true" });
+  setTimeout(
   axiosWithAuth()
     .get("https://amazing-fitness-app.herokuapp.com/api/classes")
     .then((res) => {
@@ -34,8 +35,9 @@ export const getData = (props) => (dispatch) => {
     .catch((error) => {
       dispatch({ type: FETCHING_API_FAILURE, payload: error });
       console.log("getData API request failed", error);
-    });
+    }), 4000)
 };
+
 
 //state related to classes
 export const searchTerm = (searchTerm) => {
@@ -89,21 +91,20 @@ export const addUser = (addUser) => (dispatch) => {
 //state related to forms
 export const checkUser = (formValues) => (dispatch) => {
   //this action takes dispatch so that it can branch to 1+ reducers
-  console.log("checkUser API call fires");
-  console.log("checkUser Action: props", formValues);
+  // console.log("checkUser API call fires");
+     console.log("checkUser Action: props", formValues);
 
-  dispatch({ type: FETCHING_API_START });
+  dispatch({ type: FETCHING_API_START, isLoading: true });
   // attempt code 3 times
   axiosWithAuth()
     // location might be here
-
     .post("/login", formValues)
     // or here
     .then((res) => {
       // console.log("response: ", res) // see sample POST login res below
-      localStorage.setItem("authToken", res.data.token); // 200
+      //localStorage.setItem("authToken", res.data.token); // 200
       console.log("message: ", res.data.message);
-      dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
+      dispatch({ type: FETCHING_API_SUCCESS, isLoading: false, payload: res.data.message });
 
       // res gives is_instructor, assign to user obj in reducer. Payload = isInstructor
       let isInstructor = res.data.is_instructor;
