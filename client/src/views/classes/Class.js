@@ -71,9 +71,7 @@ export default function Class (props) {
         {indivClass.class_date}
         </Typography>
         <Typography variant="body2" component="p">
-          {indivClass.intensity} intensity<br/>
-          Location: {indivClass.location}<br/>
-          {indivClass.duration} hour<br/>
+          {displayTime(indivClass.duration)}<br/>
           starts at {indivClass.start_time}<br/>
           {indivClass.number_of_students}/{indivClass.max_class_size} students signed up<br/>
         </Typography>
@@ -89,7 +87,20 @@ export default function Class (props) {
     </>
   )
 };
+const displayTime=(duration)=>{
 
+  if(duration<1){
+    return `${Math.round(duration*60)} mins`;
+  }
+  else{
+    if(duration%1===0){
+      return `${duration} hour`;
+    }
+    else{
+      return `${duration} hour ${Math.round(duration*60)} mins`;
+    }
+  }
+};
 /*  SAMPLE INDIV CLASS DATA
 class_date: "Monday"
 class_name: "oldie but goldie"
