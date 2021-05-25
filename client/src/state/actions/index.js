@@ -16,29 +16,30 @@ export const CURRENT_USER = "CURRENT_USER";
 export const getData = (props) => (dispatch) => {
   // console.log("7. props from  getData /actions", props)
 
-  console.log("getData API call fires");
+  // console.log("getData API call fires");
   dispatch({ type: FETCHING_API_START });
   axiosWithAuth()
     .get("https://amazing-fitness-app.herokuapp.com/api/classes")
     .then((res) => {
-      console.log("getData API success, log response: ", res);
+      // console.log("getData API success, log response: ", res);
       dispatch({ type: ALL_CLASSES, payload: res.data });
+      dispatch({ type: GET_FILTERED_CLASSES, payload: res.data });
       dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.results });
     })
     .catch((error) => {
       dispatch({ type: FETCHING_API_FAILURE, payload: error });
-      console.log("getData API request failed", error);
+      // console.log("getData API request failed", error);
     });
 };
 
 //state related to classes
 export const searchTerm = (searchTerm) => {
-  console.log("5. new searchTerm from classes.js", searchTerm);
   return { type: SEARCH_TERM, payload: searchTerm };
 };
 
 export const getFilteredClasses = (filteredClasses) => {
-  console.log("6. new filteredClasses from classes.js", filteredClasses);
+  // console.log("6. new filteredClasses from classes.js", filteredClasses);
+  console.log("GET_FILTERED_CLASSES action fires: log props: ", filteredClasses)
   return { type: GET_FILTERED_CLASSES, payload: filteredClasses };
 };
 

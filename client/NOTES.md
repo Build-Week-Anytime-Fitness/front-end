@@ -2,7 +2,7 @@
 
 ## Front End Things to Do
 
-[] hook up forms to back end API 
+[x] hook up forms to back end API 
 
 [x] assign current user based on user id
 

@@ -82,7 +82,7 @@ export const appReducer = (state = initialState, action) => {
     }
     case FETCHING_API_SUCCESS: {
         console.log("Fetching API success reducer fires")
-        console.log("payload: ", action.payload);
+        console.log("Fetching API payload: ", action.payload);
       //log("FETCH SUCCESS THROUGH REDUCER");
       return { ...state, loading: false };
     }
@@ -95,7 +95,7 @@ export const appReducer = (state = initialState, action) => {
       return { ...state, searchTerm: action.payload };
     }
     case GET_FILTERED_CLASSES: {
-      log(" GET_FILTERED CLASSES from reducer", action.payload);
+      log(" GET_FILTERED_CLASSES in reducer: log payload: ", action.payload); 
       return { ...state, filteredClasses: action.payload };
     }
     case ALL_CLASSES: {
@@ -106,6 +106,7 @@ export const appReducer = (state = initialState, action) => {
     //   console.log("reducer fires: add class ");
     //   return { ...state, classes: [...state.classes, action.payload] };
     // }
+
     case ADD_USER: {
       console.log("reducer fires: add users ");
       return { ...state, user: [...state.users, action.payload] };
@@ -130,5 +131,3 @@ export const appReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-// need to code out current user state
