@@ -57,7 +57,7 @@ const LogInForm = (props) => {
     // console.log("FormValues is captured: ", formValues);
     props.myCheckUser(formValues);
 
-    // check state for instructor... user.isInstructor which gets pulled below from Redux state
+   //check state for instructor... user.isInstructor which gets pulled below from Redux state
     if (props.user.isInstructor === true) {
       history.push("/instructors");
     } else if (props.user.isInstructor === false) {
@@ -65,6 +65,23 @@ const LogInForm = (props) => {
     }
   };
 
+//   useEffect(() => {
+    
+//     // check state for instructor... user.isInstructor which gets pulled below from Redux state
+//     console.group('useEffect started', props)
+//     if (props.isLoading) {
+//       console.log("first condition")
+//       return;
+//     }
+
+//     if (props.user.isInstructor === true) {
+//       console.log("move to instructor")
+//      history.push('/instructors')
+//    } else if (props.user.isInstructor === false) {
+//      console.log('move to classes')
+//      history.push('./classes')
+//    }
+//  }, [props.user] )
 
   return (
     <form className={"d-flex flex-column login-style"} onSubmit={handleSubmit}>
@@ -133,7 +150,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    myCheckUser: (formValues) => dispatch(checkUser(formValues)),
+    myCheckUser: (formValues, localState) => dispatch(checkUser(formValues, localState)),
   };
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import Class from './Class.js';
 import SearchIcon from '@material-ui/icons/Search';
 import axios from 'axios';
@@ -28,7 +28,7 @@ allClasses, setAllClasses, filteredClasses, setFilteredClasses, setSearchTerm
 */
 
 const Classes = (props) => {
-    // console.log("props", props);
+    console.log("props", props);
     // console.log("props.filteredClasses", props.filteredClasses)
 
     console.log("Classes: user from redux state", props.user)
@@ -103,12 +103,17 @@ const Classes = (props) => {
     gsap.to(".animation", {duration: 2, y: 30});
     }, []); // gsap animation to slide cards down slightly upon load
 
+  if (props.isLoading) {
+      return (
+          <div style={{ textAlign: 'center', color: 'black'}}>Loading...</div>
+      )
+  }
 return (
     <>
 
     <div className='classes-background'>
         <div className='classes-content-container'>    
-
+            
             <div className='d-flex flex-row flex-wrap'>          
                 <h1>Classes</h1>        
 
@@ -128,8 +133,7 @@ return (
             </div>
         
             <div className="classes-container d-flex flex-row flex-wrap justify-content-center class-box">
-
-                <div className="animation d-flex flex-row flex-wrap justify-content-center ">
+                <div className="animation d-flex flex-row flex-wrap justify-content-center "> 
                 {props.classes && 
                 props.classes.map(indivClass => {
                     // console.log("indivClass: ", indivClass)
