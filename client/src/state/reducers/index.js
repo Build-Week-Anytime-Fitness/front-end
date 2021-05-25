@@ -9,6 +9,7 @@ import {
   ADD_USER,
   CHECK_USER,
   CURRENT_USER,
+  CLASS_TO_EDIT,
 } from "../actions";
 
 const log = console.log;
@@ -21,6 +22,7 @@ const initialState = {
   currentUser: {
   id: "",
   },
+  classToEdit: {},
   user: {
     id: "",
     personName: "",
@@ -103,6 +105,10 @@ export const appReducer = (state = initialState, action) => {
     case ALL_CLASSES: {
       log("ALL CLASSES reducer, log classes", action.payload);
       return { ...state, classes: action.payload };
+    }
+    case CLASS_TO_EDIT: {
+      log("CLASS_TO_EDIT in reducer: log payload: ", action.payload);
+      return { ...state, classToEdit: action.payload };
     }
     // case ADD_CLASS: {
     //   console.log("reducer fires: add class ");
