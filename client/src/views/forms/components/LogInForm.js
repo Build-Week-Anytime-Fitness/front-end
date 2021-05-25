@@ -55,7 +55,6 @@ const LogInForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
      console.log("FormValues is captured: ", formValues);
      dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
@@ -78,23 +77,6 @@ const LogInForm = (props) => {
       console.log("ERR_1: This error is from Login", error);
     });
   }
-    // useEffect(() => {
-
-      // check state for instructor... user.isInstructor which gets pulled below from Redux state
-  //     console.group('useEffect started', props)
-  //     if (props.isLoading) {
-  //       console.log("first condition")
-  //       return;
-  //     }
-
-  //     if (props.user.isInstructor === true) {
-  //       console.log("move to instructor")
-  //      history.push('/instructors')
-  //    } else if (props.user.isInstructor === false) {
-  //      console.log('move to classes')
-  //      history.push('./classes')
-  //    }
-  //  }, [props.user] )
 
   return (
     <form className={"d-flex flex-column login-style"} onSubmit={handleSubmit}>
