@@ -14,22 +14,30 @@ export const CURRENT_USER = "CURRENT_USER";
 
 //state related to getClasses API call
 export const getData = (props) => (dispatch) => {
-  // console.log("7. props from  getData /actions", props)
+   console.log("7. props from  getData /actions", props)
+  //props.isLoading = true
 
-  console.log("getData API call fires");
-  dispatch({ type: FETCHING_API_START });
+  console.log("getData API call fires is loading True", props);
+  dispatch({ type: FETCHING_API_START, isLoading: "true" });
+  setTimeout(
   axiosWithAuth()
     .get("https://amazing-fitness-app.herokuapp.com/api/classes")
     .then((res) => {
-      console.log("getData API success, log response: ", res);
       dispatch({ type: ALL_CLASSES, payload: res.data });
-      dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.results });
+      dispatch({
+        type: FETCHING_API_SUCCESS,
+        isLoading: "false",
+        payload: res.data.results,
+      });
+      console.log("getData API success is loading false ", props);
+      //props.isLoading = false
     })
     .catch((error) => {
       dispatch({ type: FETCHING_API_FAILURE, payload: error });
       console.log("getData API request failed", error);
-    });
+    }), 4000)
 };
+
 
 //state related to classes
 export const searchTerm = (searchTerm) => {
@@ -83,37 +91,34 @@ export const addUser = (addUser) => (dispatch) => {
 //state related to forms
 export const checkUser = (formValues) => (dispatch) => {
   //this action takes dispatch so that it can branch to 1+ reducers
-  console.log("checkUser API call fires");
-  console.log("checkUser Action: props", formValues);
+  // console.log("checkUser API call fires");
+     console.log("checkUser Action: props", formValues);
 
-  dispatch({ type: FETCHING_API_START });
+  dispatch({ type: FETCHING_API_START, isLoading: true });
   // attempt code 3 times
   axiosWithAuth()
     // location might be here
+    .post("/login", formValues)
+    // or here
+    .then((res) => {
+      // console.log("response: ", res) // see sample POST login res below
+      //localStorage.setItem("authToken", res.data.token); // 200
+      console.log("message: ", res.data.message);
+      dispatch({ type: FETCHING_API_SUCCESS, isLoading: false, payload: res.data.message });
 
-      .post("/login", formValues)
-      // or here
-      .then(res => {
-        // console.log("response: ", res) // see sample POST login res below
-        localStorage.setItem('authToken', res.data.token ) // 200
-        console.log("message: ", res.data.message)
-        dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message }) 
-    
-         // res gives is_instructor, assign to user obj in reducer. Payload = isInstructor
-        let isInstructor = res.data.is_instructor
-        dispatch({ type: CHECK_USER, payload: isInstructor })
+      // res gives is_instructor, assign to user obj in reducer. Payload = isInstructor
+      let isInstructor = res.data.is_instructor;
+      dispatch({ type: CHECK_USER, payload: isInstructor });
 
-         // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
-        let currentUserId = res.data.id  
-        dispatch({ type: CURRENT_USER, payload: currentUserId })
-
-      })
-      .catch(error => {
-        dispatch({ type: FETCHING_API_FAILURE, payload: error})
-        console.log('ERR_1: This error is from Login', error)
-      })
-    };
-
+      // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
+      let currentUserId = res.data.id;
+      dispatch({ type: CURRENT_USER, payload: currentUserId });
+    })
+    .catch((error) => {
+      dispatch({ type: FETCHING_API_FAILURE, payload: error });
+      console.log("ERR_1: This error is from Login", error);
+    });
+};
 
 /* Sample data response for POST login
 

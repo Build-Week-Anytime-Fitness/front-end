@@ -15,7 +15,7 @@ const log = console.log;
 
 //1. set initialState
 const initialState = {
-  loading: false,
+  isLoading: false,
   error: "",
   searchTerm: "",
   currentUser: {
@@ -77,18 +77,17 @@ export const appReducer = (state = initialState, action) => {
   //3. initialize switch statement
   switch (action.type) {
     case FETCHING_API_START: {
-      //log("FETCH RUNNING THROUGH REDUCER");
-      return { ...state, loading: true };
+      log("FETCH RUNNING THROUGH REDUCER isLoading: TRUE");
+      return { ...state, isLoading: true };
     }
     case FETCHING_API_SUCCESS: {
-        console.log("Fetching API success reducer fires")
-        console.log("payload: ", action.payload);
+        console.log("Fetching API success reducer fires isLoading is false")
       //log("FETCH SUCCESS THROUGH REDUCER");
-      return { ...state, loading: false };
+      return { ...state, isLoading: false };
     }
     case FETCHING_API_FAILURE: {
       //log("FETCH FAIL FROM REDUCER");
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, isLoading: false, error: action.payload };
     }
     case SEARCH_TERM: {
       //log("3. SEARCH TERM FROM REDUCER", action.payload);
