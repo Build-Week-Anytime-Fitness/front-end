@@ -37,7 +37,6 @@ const useStyles = makeStyles({
 
 const Class = (props) => {
   let { indivClass, allClasses } = props;
-
   // Determines location from useLocation(), if "/instructors" is found, set isInstructor to true, trigger positive conditional render in card
   let { pathname } = useLocation();
   // console.log("pathname from Class: ", pathname); // gets the location, looking for "/instructors", A STRING
@@ -55,7 +54,7 @@ const Class = (props) => {
     console.log("handleEditButtonClick has been fired")
     props.myClassToEdit(props.indivClass);
   };
-
+  const {max_class_size,number_of_students} = indivClass;
 
   return (
     <>
@@ -80,7 +79,9 @@ const Class = (props) => {
       </CardContent>
       <CardActions>
 
-        { isInstructor ? <Button onClick={handleEditButtonClick}><EditIcon style={{ margin: '10', color: '555555'}}/></Button>:  <Button size="small" style={{ color: '555555'}}>Sign Up</Button> }
+        { isInstructor ? <Button onClick={handleEditButtonClick}><EditIcon style={{ margin: '10', color: '555555'}}/></Button>:  
+        
+        <Button disabled={!(number_of_students < max_class_size)} size="small" style={{ color: '555555'}}>{number_of_students < max_class_size? "sign up":"full"}</Button>}
 
       </CardActions>
       
@@ -99,7 +100,7 @@ const displayTime=(duration)=>{
       return `${duration} hour`;
     }
     else{
-      return `${duration} hour ${Math.round(duration*60)} mins`;
+      return `${Math.floor(duration)} hour ${Math.round(duration%1*60)} mins`;
     }
   }
 };
