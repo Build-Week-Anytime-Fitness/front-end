@@ -10,6 +10,8 @@ import {
   CHECK_USER,
   CURRENT_USER,
   CLASS_TO_EDIT,
+  EDIT_MODE,
+  CLASS_TO_DELETE,
   CLASSES_TO_SIGN_UP,
 } from "../actions";
 
@@ -20,8 +22,9 @@ const initialState = {
   isLoading: false,
   error: "",
   searchTerm: "",
+  isEditMode: false,
   currentUser: {
-  id: "",
+    id: "",
   },
   classToEdit: {},
   classesToSignUp: {}, // dictionary of class ids that user had signed up for
@@ -85,10 +88,8 @@ export const appReducer = (state = initialState, action) => {
       return { ...state, isLoading: true };
     }
     case FETCHING_API_SUCCESS: {
-
-        // console.log("Fetching API success reducer fires isLoading is false")
-        // console.log("Fetching API payload: ", action.payload);
-
+      console.log("Fetching API success reducer fires isLoading is false");
+      console.log("Fetching API payload: ", action.payload);
       //log("FETCH SUCCESS THROUGH REDUCER");
       return { ...state, isLoading: false };
     }
@@ -101,7 +102,7 @@ export const appReducer = (state = initialState, action) => {
       return { ...state, searchTerm: action.payload };
     }
     case GET_FILTERED_CLASSES: {
-      // log(" GET_FILTERED_CLASSES in reducer: log payload: ", action.payload); 
+      log(" GET_FILTERED_CLASSES in reducer: log payload: ", action.payload);
       return { ...state, filteredClasses: action.payload };
     }
     case ALL_CLASSES: {
@@ -112,34 +113,46 @@ export const appReducer = (state = initialState, action) => {
       // log("CLASS_TO_EDIT in reducer: log payload: ", action.payload);
       return { ...state, classToEdit: action.payload };
     }
+
+    case EDIT_MODE: {
+      log("EDIT MODE FIRED FROM REDUCER", action.payload)
+      return { ...state, isEditMode: action.payload }
+    }
+
+    case ADD_CLASS: {
+      console.log("reducer fires: add class ");
+      return { ...state, classes: [...state.classes, action.payload] };
+    }
+
+    case CLASS_TO_DELETE: {
+      log("reducer fires: class to delete");
+      return { ...state, classToDelete: action.payload };
+    }
+
     case CLASSES_TO_SIGN_UP: {
       log("CLASSES_TO_SIGN_UP in reducer: log payload: ", action.payload);
       const newClassId = action.payload.id;
       log("newClassId: ", newClassId)
       return { ...state, classesToSignUp: {...state.classesToSignUp, [newClassId]: true} };
     }
-  
-
-   
-    // case ADD_CLASS: {
-    //   console.log("reducer fires: add class ");
-    //   return { ...state, classes: [...state.classes, action.payload] };
-    // }
 
     case ADD_USER: {
       console.log("reducer fires: add user");
       return { ...state, user: [...state.users, action.payload] };
     }
-  
+
     case CHECK_USER: {
       console.log("reducer fires: check user");
       // return { ...state, currentUser: action.payload };
-      return {...state, user: {...state.user, isInstructor: action.payload}}
+      return {
+        ...state,
+        user: { ...state.user, isInstructor: action.payload },
+      };
     }
 
     case CURRENT_USER: {
       console.log("reducer fires: current user, log payload: ", action.payload);
-      return { ...state, currentUser: {id: action.payload}};
+      return { ...state, currentUser: { id: action.payload } };
     }
 
     default:

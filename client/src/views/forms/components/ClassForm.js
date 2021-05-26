@@ -5,21 +5,27 @@ import {
   displayErrors,
   handleChangeHelper,
   handleSubmitHelper,
-} from "../formHelpers";//bread crumbs in case we get lost 
-
-import { connect } from "react-redux";
-import { classToEdit }  from "../../../state/actions/index.js";
+} from "../formHelpers"; //bread crumbs in case we get lost
+import axiosWithAuth from '../../../utils/axiosWithAuth'
+import { connect, useDispatch } from "react-redux";
+import {
+  classToEdit,
+  FETCHING_API_START,
+  FETCHING_API_SUCCESS,
+  FETCHING_API_FAILURE,
+} from "../../../state/actions/index.js";
 
 
 const initialValues = {
-  className: "",
-  classType: "",
-  classDate: "",
-  startTime: "",
+  class_name: "",
+  class_type: "",
+  class_date: "",
+  start_time: "",
   duration: 0.5,
   intensity: "",
   location: "",
-  maxClassSize: 5,
+  max_class_size: 5,
+  instructor_id: 2
 };
 
 const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
@@ -32,6 +38,7 @@ const ClassForm = (props) => {
   const [isValid, setIsValid] = useState(true);
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState(initialErrorValues);
+  const dispatch = useDispatch();
 
   // useEffect
   useEffect(() => {
@@ -39,8 +46,20 @@ const ClassForm = (props) => {
     validateForm(classFormSchema, formValues, setIsValid); //check if form is valid using schema.validate
   }, []);
 
+  useEffect(() => {
+    console.log("props.classToEdit from useEffect", props.classToEdit);
+    if (props.isEditMode && props.classToEdit) {
+      setFormValues(props.classToEdit);
+    }
+  }, [props.isEditMode, props.classToEdit]);
+
   // function declarations
   const handleChange = (event) => {
+    console.log({ [event.target.name]: event.target.value });
+    setFormValues({
+      ...formValues,
+      [event.target.name]: event.target.value,
+    });
     handleChangeHelper({
       event,
       schema: classFormSchema,
@@ -54,59 +73,88 @@ const ClassForm = (props) => {
 
   const handleSubmit = (event) => {
     handleSubmitHelper(event);
+    console.log("Add class submit fired from ClassForm", formValues);
+    dispatch({ type: FETCHING_API_START, isLoading: true });
+    axiosWithAuth()
+    .post("/classes", formValues)
+    // or here
+    .then((res) => {
+      console.log("response: ", res) // see sample POST login res below
+      localStorage.setItem("authToken", res.data.token); // 200
+      console.log("message: ", res.data.message);
+      dispatch({ type: FETCHING_API_SUCCESS, isLoading: false, payload: res.data.message });
+  })
+    .catch((error) => {
+      dispatch({ type: FETCHING_API_FAILURE, payload: error });
+      console.log("ERR_1: This error is from Login", error);
+    });
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    console.log("Update a class fired from classForm DATA: ", e);
+  };
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    console.log("Delete a class fired from classForm DATA: ", e);
   };
 
   return (
-    <form className={'d-flex flex-column justify-content-center form-style-two'} style={{textAlign:'center'}} onSubmit={handleSubmit}>
-      <h2>Add/Update/Delete A Class</h2>
+    <form
+      className={"d-flex flex-column justify-content-center form-style-two"}
+      style={{ textAlign: "center" }}
+      onSubmit={handleSubmit}
+    >
+      <h2>{!props.isEditMode ? "Add a Class" : "Update or Delete"}</h2>
       <label>
         Class Name
         <input
-            id='class-form-class-name'
+          id="class-form-class-name"
           type="text"
-          name="className"
-          value={formValues.className}
+          name="class_name"
+          value={formValues.class_name}
           onChange={handleChange}
         ></input>
       </label>
       <label>
         Class Type
         <input
-        id='class-form-class-type'
-        type="text"
-        name="classType"
-        value={formValues.classType}
-        onChange={handleChange}
+          id="class-form-class-type"
+          type="text"
+          name="class_type"
+          value={formValues.class_type}
+          onChange={handleChange}
         ></input>
       </label>
       <label>
         Class Date
         <input
-        id='class-form-class-date'
-          type="date"
-          name="classDate"
-          value={formValues.classDate}
+          id="class-form-class-date"
+          type="text"
+          name="class_date"
+          value={formValues.class_date}
           onChange={handleChange}
-          ></input>
+        ></input>
       </label>
       <label>
         Start Time
         <input
-        id='class-form-start-time'
-          type="time"
-          name="startTime"
-          value={formValues.startTime}
+          id="class-form-start-time"
+          type="text"
+          name="start_time"
+          value={formValues.start_time}
           onChange={handleChange}
         ></input>
       </label>
       <label>
         Intensity
         <select
-        id='class-form-intensity'
+          id="class-form-intensity"
           name="intensity"
           value={formValues.intensity}
           onChange={handleChange}
-          style={{margin: '2vh 3vw', fontSize:'1.25rem'}}
+          style={{ margin: "2vh 3vw", fontSize: "1.25rem" }}
         >
           <option value="">--select--</option>
           {["low", "medium", "high"].map((val, i) => (
@@ -119,7 +167,7 @@ const ClassForm = (props) => {
       <label>
         Duration
         <input
-        id='class-form-duration'
+          id="class-form-duration"
           type="number"
           name="duration"
           value={formValues.duration}
@@ -129,7 +177,7 @@ const ClassForm = (props) => {
       <label>
         Location
         <input
-        id='class-form-location'
+          id="class-form-location"
           type="text"
           name="location"
           value={formValues.location}
@@ -139,24 +187,53 @@ const ClassForm = (props) => {
       <label>
         Max Class:
         <input
-        id='class-form-max-class-size'
+          id="class-form-max-class-size"
           type="number"
-          name="maxClassSize"
+          name="max_class_size"
           value={formValues.maxClassSize}
           onChange={handleChange}
         ></input>
       </label>
-      <button id='class-form-submit' type="submit" disabled={!isValid}>
-        Add/Edit Class
-      </button>
+      {!props.isEditMode ? (
+        <button
+          id="class-form-submit"
+          type="submit"
+          disabled={isValid}
+          onClick={handleSubmit}
+        >
+          Add Class
+        </button>
+      ) : (
+        <React.Fragment>
+          <button
+            id="class-form-update"
+            type="submit"
+            disabled={isValid}
+            onClick={handleUpdate}
+          >
+            Update Class
+          </button>
+          <button
+            id="class-form-delete"
+            type="submit"
+            disabled={isValid}
+            onClick={handleDelete}
+            style={{ backgroundColor: "red", color: "white" }}
+          >
+            Delete Class
+          </button>
+        </React.Fragment>
+      )}
       {displayErrors(formErrors)}
     </form>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {
     classToEdit: state.classToEdit, // when user clicks edit button on class, Redux state saves indivClass object
+    isEditMode: state.isEditMode,
+    //indivClass: state.indivClass,
   };
 };
 
@@ -167,5 +244,3 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClassForm);
-
-

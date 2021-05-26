@@ -1,11 +1,15 @@
-import React, { Suspense, useEffect, useState } from 'react';
-import Class from './Class.js';
-import SearchIcon from '@material-ui/icons/Search';
-import axios from 'axios';
+import React, { useEffect } from "react";
+import Class from "./Class.js";
+import SearchIcon from "@material-ui/icons/Search";
+// import axios from "axios";
 import { gsap } from "gsap";
-import { connect } from "react-redux";
-import { getData, searchTerm, getFilteredClasses, allClasses }  from "../../state/actions/index.js";
-
+import { connect} from "react-redux";
+import {
+  getData,
+  searchTerm,
+  getFilteredClasses,
+  allClasses,
+} from "../../state/actions/index.js";
 
 /* REDUX REFACTOR NOTES:
 STATE NEEDED:  allClasses, filteredClasses, searchTerm
@@ -18,135 +22,139 @@ const [ filteredClasses, setFilteredClasses ] = useState(initialClassesValues);
 const [ searchTerm, setSearchTerm ] = useState('');
 */
 
-
-
 const Classes = (props) => {
-
     // console.log("props", props); // log props
     // console.log("props.filteredClasses", props.filteredClasses) // log filteredClasses
     // console.log("Classes: user from redux state", props.user) // log user
     // console.log("Classes: currentUser from redux state", props.currentUser) // log current user
 
   // ----------- Helper Function ---------------------
-    const getFilteredClassesHelper = (searchTerm) => {
-        // edge case if searchTerm is "", reset filteredClasses to allClasses
-        if (searchTerm === "") {
-            props.myGetFilteredClasses(props.classes);
-            return; // bail our of getFilteredClassesHelper because no searchTerm
-        }
+  const getFilteredClassesHelper = (searchTerm) => {
+    // edge case if searchTerm is "", reset filteredClasses to allClasses
+    if (searchTerm === "") {
+      props.myGetFilteredClasses(props.classes);
+      return; // bail our of getFilteredClassesHelper because no searchTerm
+    }
 
-        console.log("getFilteredClassesHelper fires")
+    console.log("getFilteredClassesHelper fires");
 
-        // filter function over classes array
-        const filteredClasses = props.classes.filter( indivClass => {
-            // clean up search term, assign to searchText
-            const searchText = searchTerm.toLowerCase().trim();
-            const name = indivClass.class_name.toLowerCase();
-            const type = indivClass.class_type.toLowerCase();
-            const time = indivClass.start_time.toLowerCase();
-            const intensity = indivClass.intensity.toLowerCase();
-            const location = indivClass.location.toLowerCase();
-            
-            // check for match, create boolean
-            const matchesName = name.includes(searchText); 
-            const matchesType = type.includes(searchText);
-            const matchesDate = indivClass.class_date.includes(searchText);
-            const matchesTime = time.includes(searchText);
-            const matchesDuration = indivClass.intensity.includes(searchText);
-            const matchesIntensity = intensity.includes(searchText);
-            const matchesLocation = location.includes(searchText);
-            
-            return matchesName || matchesType || matchesDate || matchesTime || matchesDuration || matchesIntensity || matchesLocation;
-            
-        }); // end of filter
-        // console.log("filteredClasses: ", filteredClasses);
-        props.myGetFilteredClasses(filteredClasses);
-    };
+    // filter function over classes array
+    const filteredClasses = props.classes.filter((indivClass) => {
+      // clean up search term, assign to searchText
+      const searchText = searchTerm.toLowerCase().trim();
+      const name = indivClass.class_name.toLowerCase();
+      const type = indivClass.class_type.toLowerCase();
+      const time = indivClass.start_time.toLowerCase();
+      const intensity = indivClass.intensity.toLowerCase();
+      const location = indivClass.location.toLowerCase();
 
-    // ------------- Helper Function ---------------------
-    const searchChangeHandler = (e) => {
-        const enteredSearchTerm = e.target.value;
-        props.mySearchTerm(enteredSearchTerm); // readable option
-        // props.mySearchTerm({enteredSearchTerm: e.target.value}); // cleaner option
-        getFilteredClassesHelper(enteredSearchTerm); // trigger filter Helper function
-    };
+      // check for match, create boolean
+      const matchesName = name.includes(searchText);
+      const matchesType = type.includes(searchText);
+      const matchesDate = indivClass.class_date.includes(searchText);
+      const matchesTime = time.includes(searchText);
+      const matchesDuration = indivClass.intensity.includes(searchText);
+      const matchesIntensity = intensity.includes(searchText);
+      const matchesLocation = location.includes(searchText);
 
-    // -------------------- Side Effects -----------------
+      return (
+        matchesName ||
+        matchesType ||
+        matchesDate ||
+        matchesTime ||
+        matchesDuration ||
+        matchesIntensity ||
+        matchesLocation
+      );
+    }); // end of filter
+    // console.log("filteredClasses: ", filteredClasses);
+    props.myGetFilteredClasses(filteredClasses);
+  };
 
-    useEffect(() => {
-    gsap.to(".animation", {duration: 2, y: 30});
-    }, []); // gsap animation to slide cards down slightly upon load
+  // ------------- Helper Function ---------------------
+  const searchChangeHandler = (e) => {
+    const enteredSearchTerm = e.target.value;
+    props.mySearchTerm(enteredSearchTerm); // readable option
+    // props.mySearchTerm({enteredSearchTerm: e.target.value}); // cleaner option
+    getFilteredClassesHelper(enteredSearchTerm); // trigger filter Helper function
+  };
 
-    if (props.isLoading) {
-        return (
-            <div style={{ textAlign: 'center', color: 'black'}}>Loading...</div>
-        )
-    };
-return (
+  // -------------------- Side Effects -----------------
+
+  useEffect(() => {
+    gsap.to(".animation", { duration: 2, y: 30 });
+  }, []); // gsap animation to slide cards down slightly upon load
+
+  if (props.isLoading) {
+    return (
+      <div style={{ textAlign: "center", color: "black" }}>Loading...</div>
+    );
+  }
+  return (
     <>
+      <div className="classes-background">
+        <div className="classes-content-container">
+          <div className="d-flex flex-row flex-wrap">
+            <h1>Classes</h1>
 
-    <div className='classes-background'>
-        <div className='classes-content-container'>    
-            
-            <div className='d-flex flex-row flex-wrap'>          
-                <h1>Classes</h1>        
+            <SearchIcon
+              className="search-icon"
+              style={{ color: "444444", marginTop: "2vh" }}
+              fontSize="large"
+            />
 
-                <SearchIcon className='search-icon' style={{ color: '444444', marginTop: '2vh'}} fontSize="large"/>
+            <input
+              placeholder="Search for classes"
+              type="text"
+              onChange={searchChangeHandler}
+              style={{
+                width: "12vw",
+                height: "2rem",
+                marginTop: "2vh",
+              }}
+            />
+          </div>
 
-                <input
-                placeholder="Search for classes"
-                type="text"
-                onChange={searchChangeHandler}
-                style={{
-                    width: '12vw',
-                    height: '2rem',
-                    marginTop: '2vh'
-                }}
-                />
+          <div className="classes-container d-flex flex-row flex-wrap justify-content-center class-box">
+            <div className="animation d-flex flex-row flex-wrap justify-content-center ">
+              {props.filteredClasses &&
+                props.filteredClasses.map((indivClass) => {
+                  // console.log("indivClass: ", indivClass)
+                  const classKey = Math.random().toString(16).slice(2);
+                  return <Class key={classKey} indivClass={indivClass} />;
+                })}
             </div>
-        
-            <div className="classes-container d-flex flex-row flex-wrap justify-content-center class-box">
-
-                <div className="animation d-flex flex-row flex-wrap justify-content-center ">
-                    {
-                    props.filteredClasses && 
-                    props.filteredClasses.map(indivClass => {
-                        // console.log("indivClass: ", indivClass)
-                        const classKey = Math.random().toString(16).slice(2);
-                        return <Class key={classKey} indivClass={indivClass} />
-                    })
-                    }
-                </div>
-
-            </div>
-
+          </div>
         </div>
-    </div>
-
+      </div>
     </>
-    )
-}
+  );
+};
 
 const mapStateToProps = (state) => {
-    return {
-        classes: state.classes,
-        filteredClasses: state.filteredClasses,
-        isLoading: state.isLoading,
-        user: state.user,
-        searchTerm: state.searchTerm,
-        currentUser: state.currentUser,
-    }
+
+  return {
+    classes: state.classes,
+    filteredClasses: state.filteredClasses,
+    isLoading: state.isLoading,
+    user: state.user,
+    searchTerm: state.searchTerm,
+    isEditMode: state.isEditMode,
+    currentUser: state.currentUser,
+  };
+
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        getData: dispatch(getData()),
-        allClasses: dispatch(allClasses()),
+  return {
+    getData: dispatch(getData()),
+    allClasses: dispatch(allClasses()),
 
-        myGetFilteredClasses: (filteredClasses) => dispatch(getFilteredClasses(filteredClasses)),
-        mySearchTerm: (enteredSearchTerm) => dispatch(searchTerm(enteredSearchTerm))
-    };
-}
+    myGetFilteredClasses: (filteredClasses) =>
+      dispatch(getFilteredClasses(filteredClasses)),
+    mySearchTerm: (enteredSearchTerm) =>
+      dispatch(searchTerm(enteredSearchTerm)),
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Classes);
-
