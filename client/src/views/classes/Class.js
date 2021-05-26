@@ -7,11 +7,10 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import EditIcon from "@material-ui/icons/Edit";
-
 import { connect, useDispatch, useSelector } from "react-redux";
-import { classToEdit, setEditMode } from "../../state/actions/index.js";
-import {
-} from "../../state/actions/index";
+import axiosWithAuth from "../../utils/axiosWithAuth";
+import { classToEdit, setEditMode, classesToSignUp, FETCHING_API_START,FETCHING_API_SUCCESS, FETCHING_API_FAILURE }  from "../../state/actions/index.js";
+
 
 const useStyles = makeStyles({
   root: {
@@ -37,6 +36,7 @@ const useStyles = makeStyles({
 
 const Class = (props) => {
   const dispatch = useDispatch();
+
   const editing = useSelector((state) => state.editing);
   let { indivClass, allClasses } = props;
   const [editForm, setEditForm] = useState({
@@ -52,6 +52,8 @@ const Class = (props) => {
     max_class_size: props.indivClass.max_class_size,
   });
 
+
+  let { indivClass, allClasses } = props;
   // Determines location from useLocation(), if "/instructors" is found, set isInstructor to true, trigger positive conditional render in card
   let { pathname } = useLocation();
   // console.log("pathname from Class: ", pathname); // gets the location, looking for "/instructors", A STRING
@@ -59,6 +61,8 @@ const Class = (props) => {
   if (pathname === "/instructors") {
     isInstructor = true;
   }
+
+  const {max_class_size,number_of_students} = indivClass;
 
   // material UI code
   const classes = useStyles();
@@ -74,10 +78,46 @@ const Class = (props) => {
     dispatch(classToEdit(props.indivClass));
   };
 
+
   const handleSubmit = (e) => {
     dispatch(props.myClassToEdit(editForm));
   };
 
+  const handleSignUpButtonClick = () => {
+    console.log("handleSignUpButtonClick has been fired: indiv class", props.indivClass)
+
+    props.myClassesToSignUp(props.indivClass); // add class to dictionary of signed up classes
+
+    const classId = {class_id: indivClass.id};
+
+    dispatch({ type: FETCHING_API_START });
+
+    axiosWithAuth()
+      .post("/clientclasses", classId) 
+      .then((res) => {
+        console.log("SIGN_UP_FOR_CLASS response: ", res); 
+        alert(res.data.message);
+        dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
+      })
+      .catch((error) => {
+        dispatch({ type: FETCHING_API_FAILURE, payload: error });
+        console.log("ERR_1: This error is from SIGN_UP_FOR_CLASS", error);
+      });
+
+  };
+
+  const isSignedUpFor = (indivClass) => {
+    // if (!props.classesToSignUp) {
+    //   return false;
+    // }
+    // props.classToSignUp is the dictionary of classes signed up for
+    console.log("props.classesToSignUp: ", props.classesToSignUp)
+    return props.classesToSignUp[indivClass.id] ? true : false;  // returns true or undef
+  }
+
+        { isInstructor ? <Button onClick={handleEditButtonClick}><EditIcon style={{ margin: '10', color: '555555'}}/></Button>:  
+        
+        <Button onClick={handleSignUpButtonClick} disabled={!(number_of_students < max_class_size) || ( isSignedUpFor(props.indivClass))} size="small" style={{ color: '555555'}}>{number_of_students < max_class_size? "sign up":"full"}</Button>}
 
 
   return (
@@ -141,22 +181,26 @@ const displayTime = (duration) => {
   } else {
     if (duration % 1 === 0) {
       return `${duration} hour`;
-    } else {
-      return `${duration} hour ${Math.round(duration * 60)} mins`;
+    }
+    else{
+      return `${Math.floor(duration)} hour ${Math.round(duration%1*60)} mins`;
     }
   }
 };
 
 const mapStateToProps = (state) => {
   return {
-    classToEdit: state.classToEdit,
-    isEditMode: state.isEditMode
-  };
+      classToEdit: state.classToEdit,
+      currentUser: state.currentUser,
+      classesToSignUp: state.classesToSignUp,
+      isEditMode: state.isEditMode
+  }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    myClassToEdit: (indivClass) => dispatch(classToEdit(indivClass)),
+      myClassToEdit: (indivClass) => dispatch(classToEdit(indivClass)),
+      myClassesToSignUp: (indivClass) => dispatch(classesToSignUp(indivClass)),
   };
 };
 

@@ -18,13 +18,14 @@ export const UPDATE_CLASSES_START = "UPDATE_CLASSES_START"
 export const UPDATE_CLASSES_SUCCESS = "UPDATE_CLASSES_SUCCESS"
 export const DELETE_CLASSES_START = "DELETE_CLASSES_START"
 export const DELETE_CLASSES_SUCCESS = "DELETE_CLASSES_SUCCESS"
-
+export const CLASSES_TO_SIGN_UP = "CLASS_TO_SIGN_UP";
 
 //state related to getClasses API call
 export const getData = (props) => (dispatch) => {
-   console.log("7. props from  getData /actions", props)
+  //  console.log("7. props from  getData /actions", props)
   //props.isLoading = true
-  console.log("getData API call fires is loading True", props);
+
+  // console.log("getData API call fires is loading True", props);
   dispatch({ type: FETCHING_API_START, isLoading: "true" });
   setTimeout(
   axiosWithAuth()
@@ -37,7 +38,7 @@ export const getData = (props) => (dispatch) => {
         isLoading: "false",
         payload: res.data.results,
       });
-      console.log("getData API success is loading false ", props);
+      // console.log("getData API success is loading false ", props);
       //props.isLoading = false
     })
     .catch((error) => {
@@ -54,12 +55,12 @@ export const searchTerm = (searchTerm) => {
 
 export const getFilteredClasses = (filteredClasses) => {
   // console.log("6. new filteredClasses from classes.js", filteredClasses);
-  console.log("GET_FILTERED_CLASSES action fires: log props: ", filteredClasses)
+  // console.log("GET_FILTERED_CLASSES action fires: log props: ", filteredClasses)
   return { type: GET_FILTERED_CLASSES, payload: filteredClasses };
 };
 
 export const allClasses = (allClasses) => {
-  console.log("7. new allClasses from classes.js", allClasses);
+  // console.log("7. new allClasses from classes.js", allClasses);
   return { type: ALL_CLASSES, payload: allClasses };
 };
 
@@ -78,6 +79,13 @@ export const deleteClass = (indivClass) => {
   return { type: CLASS_TO_DELETE, payload: indivClass }
 }
 
+export const classesToSignUp = (indivClass) => {
+  console.log("CLASSES_TO_SIGN_UP action fires: log props: ", indivClass);
+  return { type: CLASSES_TO_SIGN_UP, payload: indivClass };
+};
+
+
+
 
 export const addClass = (addClass) => {
   console.log('8. new allClasses from classes.js', addClass)
@@ -86,12 +94,12 @@ export const addClass = (addClass) => {
 
 
 export const addUser = (addUser) => (dispatch) => {
-  console.log("9. new allUser from classes.js", addUser);
+  // console.log("9. new allUser from classes.js", addUser);
   dispatch({ type: FETCHING_API_START });
-  // attempt code 3 times
+
   axiosWithAuth()
-    // location might be here
-    .post("/register", addUser)
+
+    .post("/register", addUser) 
     // or here
     .then((res) => {
       console.log("ADD_USER response: ", res); // see sample POST login res below
@@ -113,6 +121,8 @@ export const addUser = (addUser) => (dispatch) => {
     });
 };
 
+// {class_id: 3}
+
 //state related to forms
 export const checkUser = (formValues) => (dispatch) => {
   //this action takes dispatch so that it can branch to 1+ reducers
@@ -120,14 +130,14 @@ export const checkUser = (formValues) => (dispatch) => {
      console.log("checkUser Action: props", formValues);
 
   dispatch({ type: FETCHING_API_START, isLoading: true });
-  // attempt code 3 times
+
   axiosWithAuth()
-    // location might be here
+
     .post("/login", formValues)
     // or here
     .then((res) => {
       // console.log("response: ", res) // see sample POST login res below
-      //localStorage.setItem("authToken", res.data.token); // 200
+      localStorage.setItem("authToken", res.data.token); // 200
       console.log("message: ", res.data.message);
       dispatch({ type: FETCHING_API_SUCCESS, isLoading: false, payload: res.data.message });
 
@@ -137,6 +147,7 @@ export const checkUser = (formValues) => (dispatch) => {
 
       // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
       let currentUserId = res.data.id;
+      console.log("user ID: ", res.data.id)
       dispatch({ type: CURRENT_USER, payload: currentUserId });
     })
     .catch((error) => {

@@ -184,3 +184,24 @@ div button {
   background-attachment: fixed;
   text-align: center;
 }
+
+/* ---------------------- Media Queries ------------------------- */
+/* <!-- mobile --> */
+@media only screen and (min-width: 480px) {
+
+}
+
+/* <!-- tablet --> */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* <!-- desktop --> */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* <!-- wide-screen --> */
+@media only screen and (min-width: 1280px) {
+  
+}
