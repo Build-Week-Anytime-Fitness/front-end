@@ -10,7 +10,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import { connect, useDispatch } from "react-redux";
 import axiosWithAuth from "../../utils/axiosWithAuth";
-import { classToEdit, classToSignUp, signUpForClass, FETCHING_API_START,FETCHING_API_SUCCESS, FETCHING_API_FAILURE }  from "../../state/actions/index.js";
+import { classToEdit, classesToSignUp, FETCHING_API_START,FETCHING_API_SUCCESS, FETCHING_API_FAILURE }  from "../../state/actions/index.js";
 
 
 const useStyles = makeStyles({
@@ -63,7 +63,7 @@ const Class = (props) => {
   const handleSignUpButtonClick = () => {
     console.log("handleSignUpButtonClick has been fired: indiv class", props.indivClass)
 
-    props.myClassToSignUp(props.indivClass); // add class to dictionary of signed up classes
+    props.myClassesToSignUp(props.indivClass); // add class to dictionary of signed up classes
 
     const classId = {class_id: indivClass.id};
 
@@ -84,8 +84,12 @@ const Class = (props) => {
   };
 
   const isSignedUpFor = (indivClass) => {
+    // if (!props.classesToSignUp) {
+    //   return false;
+    // }
     // props.classToSignUp is the dictionary of classes signed up for
-    return props.classToSignUp[indivClass.id] ? true : false;  // returns true or undef
+    console.log("props.classesToSignUp: ", props.classesToSignUp)
+    return props.classesToSignUp[indivClass.id] ? true : false;  // returns true or undef
   }
 
 
@@ -145,14 +149,14 @@ const mapStateToProps = (state) => {
   return {
       classToEdit: state.classToEdit,
       currentUser: state.currentUser,
-      classToSignUp: state.classToSignUp,
+      classesToSignUp: state.classesToSignUp,
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
       myClassToEdit: (indivClass) => dispatch(classToEdit(indivClass)),
-      myClassToSignUp: (indivClass) => dispatch(classToSignUp(indivClass)),
+      myClassesToSignUp: (indivClass) => dispatch(classesToSignUp(indivClass)),
 
   };
 }
