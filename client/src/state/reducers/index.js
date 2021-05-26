@@ -10,7 +10,7 @@ import {
   CHECK_USER,
   CURRENT_USER,
   CLASS_TO_EDIT,
-  CLASS_TO_SIGN_UP,
+  CLASSES_TO_SIGN_UP,
 } from "../actions";
 
 const log = console.log;
@@ -24,7 +24,7 @@ const initialState = {
   id: "",
   },
   classToEdit: {},
-  classToSignUp: {}, // dictionary of class ids that user had signed up for
+  classesToSignUp: {}, // dictionary of class ids that user had signed up for
   user: {
     id: "",
     personName: "",
@@ -112,10 +112,11 @@ export const appReducer = (state = initialState, action) => {
       // log("CLASS_TO_EDIT in reducer: log payload: ", action.payload);
       return { ...state, classToEdit: action.payload };
     }
-    case CLASS_TO_SIGN_UP: {
-      log("CLASS_TO_SIGN_UP in reducer: log payload: ", action.payload);
+    case CLASSES_TO_SIGN_UP: {
+      log("CLASSES_TO_SIGN_UP in reducer: log payload: ", action.payload);
       const newClassId = action.payload.id;
-      return { ...state, classToSignUp: {...state.classToSignUp, newClassId: true} };
+      log("newClassId: ", newClassId)
+      return { ...state, classesToSignUp: {...state.classesToSignUp, [newClassId]: true} };
     }
   
 

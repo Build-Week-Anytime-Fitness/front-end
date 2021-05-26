@@ -12,7 +12,7 @@ export const ADD_USER = "ADD_USER";
 export const CHECK_USER = "CHECK_USER";
 export const CURRENT_USER = "CURRENT_USER";
 export const CLASS_TO_EDIT = "CLASS_TO_EDIT";
-export const CLASS_TO_SIGN_UP = "CLASS_TO_SIGN_UP";
+export const CLASSES_TO_SIGN_UP = "CLASS_TO_SIGN_UP";
 
 
 //state related to getClasses API call
@@ -66,9 +66,9 @@ export const classToEdit = (indivClass) => {
   return { type: CLASS_TO_EDIT, payload: indivClass };
 };
 
-export const classToSignUp = (indivClass) => {
-  console.log("CLASS_TO_SIGN_UP action fires: log props: ", indivClass);
-  return { type: CLASS_TO_SIGN_UP, payload: indivClass };
+export const classesToSignUp = (indivClass) => {
+  console.log("CLASSES_TO_SIGN_UP action fires: log props: ", indivClass);
+  return { type: CLASSES_TO_SIGN_UP, payload: indivClass };
 };
 
 
