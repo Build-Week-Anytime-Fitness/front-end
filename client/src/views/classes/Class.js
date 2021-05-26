@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -8,8 +8,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
 
-import { connect } from "react-redux";
-import { classToEdit }  from "../../state/actions/index.js";
+import { connect, useDispatch } from "react-redux";
+import axiosWithAuth from "../../utils/axiosWithAuth";
+import { classToEdit, classToSignUp, signUpForClass, FETCHING_API_START,FETCHING_API_SUCCESS, FETCHING_API_FAILURE }  from "../../state/actions/index.js";
 
 
 const useStyles = makeStyles({
@@ -36,6 +37,8 @@ const useStyles = makeStyles({
 
 
 const Class = (props) => {
+  const dispatch = useDispatch();
+
   let { indivClass, allClasses } = props;
   // Determines location from useLocation(), if "/instructors" is found, set isInstructor to true, trigger positive conditional render in card
   let { pathname } = useLocation();
@@ -58,9 +61,35 @@ const Class = (props) => {
   };
 
   const handleSignUpButtonClick = () => {
-    console.log("handleSignUpButtonClick has been fired")
-    props.myClassToEdit(props.indivClass);
+    console.log("handleSignUpButtonClick has been fired: indiv class", props.indivClass)
+
+    props.myClassToSignUp(props.indivClass); // add class to dictionary of signed up classes
+
+    const classId = {class_id: indivClass.id};
+
+    dispatch({ type: FETCHING_API_START });
+
+    axiosWithAuth()
+      .post("/clientclasses", classId) 
+      .then((res) => {
+        console.log("SIGN_UP_FOR_CLASS response: ", res); 
+        alert(res.data.message);
+        dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
+      })
+      .catch((error) => {
+        dispatch({ type: FETCHING_API_FAILURE, payload: error });
+        console.log("ERR_1: This error is from SIGN_UP_FOR_CLASS", error);
+      });
+
   };
+
+  const isSignedUpFor = (indivClass) => {
+    // props.classToSignUp is the dictionary of classes signed up for
+    return props.classToSignUp[indivClass.id] ? true : false;  // returns true or undef
+  }
+
+
+
 
 
   return (
@@ -88,7 +117,7 @@ const Class = (props) => {
 
         { isInstructor ? <Button onClick={handleEditButtonClick}><EditIcon style={{ margin: '10', color: '555555'}}/></Button>:  
         
-        <Button onClick={handleSignUpButtonClick} disabled={!(number_of_students < max_class_size)} size="small" style={{ color: '555555'}}>{number_of_students < max_class_size? "sign up":"full"}</Button>}
+        <Button onClick={handleSignUpButtonClick} disabled={!(number_of_students < max_class_size) || ( isSignedUpFor(props.indivClass))} size="small" style={{ color: '555555'}}>{number_of_students < max_class_size? "sign up":"full"}</Button>}
 
       </CardActions>
       
@@ -115,12 +144,16 @@ const displayTime=(duration)=>{
 const mapStateToProps = (state) => {
   return {
       classToEdit: state.classToEdit,
+      currentUser: state.currentUser,
+      classToSignUp: state.classToSignUp,
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
       myClassToEdit: (indivClass) => dispatch(classToEdit(indivClass)),
+      myClassToSignUp: (indivClass) => dispatch(classToSignUp(indivClass)),
+
   };
 }
 

@@ -14,6 +14,7 @@ export const CURRENT_USER = "CURRENT_USER";
 export const CLASS_TO_EDIT = "CLASS_TO_EDIT";
 export const CLASS_TO_SIGN_UP = "CLASS_TO_SIGN_UP";
 
+
 //state related to getClasses API call
 export const getData = (props) => (dispatch) => {
   //  console.log("7. props from  getData /actions", props)
@@ -61,7 +62,7 @@ export const allClasses = (allClasses) => {
 };
 
 export const classToEdit = (indivClass) => {
-  // console.log("CLASS_TO_EDIT action fires: log props: ", indivClass);
+  console.log("CLASS_TO_EDIT action fires: log props: ", indivClass);
   return { type: CLASS_TO_EDIT, payload: indivClass };
 };
 
@@ -69,6 +70,7 @@ export const classToSignUp = (indivClass) => {
   console.log("CLASS_TO_SIGN_UP action fires: log props: ", indivClass);
   return { type: CLASS_TO_SIGN_UP, payload: indivClass };
 };
+
 
 
 
@@ -80,10 +82,10 @@ export const classToSignUp = (indivClass) => {
 export const addUser = (addUser) => (dispatch) => {
   // console.log("9. new allUser from classes.js", addUser);
   dispatch({ type: FETCHING_API_START });
-  // attempt code 3 times
+
   axiosWithAuth()
-    // location might be here
-    .post("/register", addUser)
+
+    .post("/register", addUser) 
     // or here
     .then((res) => {
       console.log("ADD_USER response: ", res); // see sample POST login res below
@@ -104,6 +106,8 @@ export const addUser = (addUser) => (dispatch) => {
       console.log("ERR_1: This error is from Login", error);
     });
 };
+
+// {class_id: 3}
 
 //state related to forms
 export const checkUser = (formValues) => (dispatch) => {

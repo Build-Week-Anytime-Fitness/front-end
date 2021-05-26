@@ -24,7 +24,7 @@ const initialState = {
   id: "",
   },
   classToEdit: {},
-  classToSignUp: {},
+  classToSignUp: {}, // dictionary of class ids that user had signed up for
   user: {
     id: "",
     personName: "",
@@ -114,8 +114,12 @@ export const appReducer = (state = initialState, action) => {
     }
     case CLASS_TO_SIGN_UP: {
       log("CLASS_TO_SIGN_UP in reducer: log payload: ", action.payload);
-      return { ...state, classToSignUp: action.payload };
+      const newClassId = action.payload.id;
+      return { ...state, classToSignUp: {...state.classToSignUp, newClassId: true} };
     }
+  
+
+   
     // case ADD_CLASS: {
     //   console.log("reducer fires: add class ");
     //   return { ...state, classes: [...state.classes, action.payload] };
