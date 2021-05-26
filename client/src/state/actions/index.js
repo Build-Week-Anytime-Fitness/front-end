@@ -13,6 +13,7 @@ export const CHECK_USER = "CHECK_USER";
 export const CURRENT_USER = "CURRENT_USER";
 export const CLASS_TO_EDIT = "CLASS_TO_EDIT";
 export const CLASSES_TO_SIGN_UP = "CLASS_TO_SIGN_UP";
+export const UNDO_SIGN_UP = "UNDO_SIGN_UP";
 
 
 //state related to getClasses API call
@@ -71,7 +72,10 @@ export const classesToSignUp = (indivClass) => {
   return { type: CLASSES_TO_SIGN_UP, payload: indivClass };
 };
 
-
+export const undoSignUp = (indivClass) => {
+  console.log("UNDO_SIGN_UP action fires: log props: ", indivClass);
+  return { type: UNDO_SIGN_UP, payload: indivClass };
+};
 
 
 // export const addClass = (addClass) => {
