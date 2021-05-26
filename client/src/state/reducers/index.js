@@ -10,6 +10,7 @@ import {
   CHECK_USER,
   CURRENT_USER,
   CLASS_TO_EDIT,
+  CLASS_TO_SIGN_UP,
 } from "../actions";
 
 const log = console.log;
@@ -23,6 +24,7 @@ const initialState = {
   id: "",
   },
   classToEdit: {},
+  classToSignUp: {},
   user: {
     id: "",
     personName: "",
@@ -79,13 +81,13 @@ export const appReducer = (state = initialState, action) => {
   //3. initialize switch statement
   switch (action.type) {
     case FETCHING_API_START: {
-      log("FETCH RUNNING THROUGH REDUCER isLoading: TRUE");
+      // log("FETCH RUNNING THROUGH REDUCER isLoading: TRUE");
       return { ...state, isLoading: true };
     }
     case FETCHING_API_SUCCESS: {
 
-        console.log("Fetching API success reducer fires isLoading is false")
-        console.log("Fetching API payload: ", action.payload);
+        // console.log("Fetching API success reducer fires isLoading is false")
+        // console.log("Fetching API payload: ", action.payload);
 
       //log("FETCH SUCCESS THROUGH REDUCER");
       return { ...state, isLoading: false };
@@ -99,16 +101,20 @@ export const appReducer = (state = initialState, action) => {
       return { ...state, searchTerm: action.payload };
     }
     case GET_FILTERED_CLASSES: {
-      log(" GET_FILTERED_CLASSES in reducer: log payload: ", action.payload); 
+      // log(" GET_FILTERED_CLASSES in reducer: log payload: ", action.payload); 
       return { ...state, filteredClasses: action.payload };
     }
     case ALL_CLASSES: {
-      log("ALL CLASSES reducer, log classes", action.payload);
+      // log("ALL CLASSES reducer, log classes", action.payload);
       return { ...state, classes: action.payload };
     }
     case CLASS_TO_EDIT: {
-      log("CLASS_TO_EDIT in reducer: log payload: ", action.payload);
+      // log("CLASS_TO_EDIT in reducer: log payload: ", action.payload);
       return { ...state, classToEdit: action.payload };
+    }
+    case CLASS_TO_SIGN_UP: {
+      log("CLASS_TO_SIGN_UP in reducer: log payload: ", action.payload);
+      return { ...state, classToSignUp: action.payload };
     }
     // case ADD_CLASS: {
     //   console.log("reducer fires: add class ");
