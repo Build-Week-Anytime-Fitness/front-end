@@ -45,6 +45,8 @@ const Class = (props) => {
     isInstructor = true;
   }
 
+  const {max_class_size,number_of_students} = indivClass;
+
   // material UI code
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
@@ -54,7 +56,12 @@ const Class = (props) => {
     console.log("handleEditButtonClick has been fired")
     props.myClassToEdit(props.indivClass);
   };
-  const {max_class_size,number_of_students} = indivClass;
+
+  const handleSignUpButtonClick = () => {
+    console.log("handleSignUpButtonClick has been fired")
+    props.myClassToEdit(props.indivClass);
+  };
+
 
   return (
     <>
@@ -81,7 +88,7 @@ const Class = (props) => {
 
         { isInstructor ? <Button onClick={handleEditButtonClick}><EditIcon style={{ margin: '10', color: '555555'}}/></Button>:  
         
-        <Button disabled={!(number_of_students < max_class_size)} size="small" style={{ color: '555555'}}>{number_of_students < max_class_size? "sign up":"full"}</Button>}
+        <Button onClick={handleSignUpButtonClick} disabled={!(number_of_students < max_class_size)} size="small" style={{ color: '555555'}}>{number_of_students < max_class_size? "sign up":"full"}</Button>}
 
       </CardActions>
       

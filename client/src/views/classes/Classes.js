@@ -25,6 +25,7 @@ const Classes = (props) => {
     // console.log("props", props); // log props
     // console.log("props.filteredClasses", props.filteredClasses) // log filteredClasses
     // console.log("Classes: user from redux state", props.user) // log user
+    console.log("Classes: currentUser from redux state", props.currentUser) // log current user
 
   // ----------- Helper Function ---------------------
     const getFilteredClassesHelper = (searchTerm) => {
@@ -133,6 +134,7 @@ const mapStateToProps = (state) => {
         isLoading: state.isLoading,
         user: state.user,
         searchTerm: state.searchTerm,
+        currentUser: state.currentUser,
     }
 };
 

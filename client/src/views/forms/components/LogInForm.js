@@ -12,7 +12,7 @@ import { checkUser } from "../../../state/actions/index";
 import axiosWithAuth from "../../../utils/axiosWithAuth"
 import {FETCHING_API_START,
   FETCHING_API_SUCCESS,
-  FETCHING_API_FAILURE,} from '../../../state/actions/index'
+  FETCHING_API_FAILURE, CURRENT_USER} from '../../../state/actions/index'
 
 const initialValues = {
   email: "",
@@ -65,6 +65,13 @@ const LogInForm = (props) => {
       localStorage.setItem("authToken", res.data.token); // 200
       console.log("message: ", res.data.message);
       dispatch({ type: FETCHING_API_SUCCESS, isLoading: false, payload: res.data.message });
+
+       // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
+       let currentUserId = res.data.id;
+       console.log("user ID: ", res.data.id)
+       dispatch({ type: CURRENT_USER, payload: currentUserId });
+
+
     //check state for instructor... user.isInstructor which gets pulled below from Redux state
     if (props.user.isInstructor === true) {
       history.push("/instructors");
