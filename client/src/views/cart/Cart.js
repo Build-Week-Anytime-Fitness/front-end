@@ -1,6 +1,8 @@
 import React,{useState} from 'react';
 import CartItem from './CartItem';
 import {useHistory} from 'react-router-dom';
+
+
 // this is for debugging purpose, please delete when redux is implemented
 const exampleList=[
     {
@@ -12,24 +14,30 @@ const exampleList=[
         class_date:'12/04/2021'
     },
 ]
+
 const Cart=()=>{
     // This state will be refactored into redux store
     // pull this from redux
     const [cartList,setCartList] = useState(exampleList);
+
     // history object
     const history = useHistory();
+
     const handleClickCheckout=()=>{
         // click event of the checkout button
         history.push('/cart/checkout');
     };
+
     const handleClickShopping=()=>{
         // click event of the continue shopping button
         history.push('/classes');
     };
+
     const deleteCartItem=(class_name)=>{
         // update to redux
         setCartList(cartList.filter((c)=>c.class_name!==class_name));
     };
+    
     const displayCartItems=(cartList)=>{
         if(cartList.length===0){
             return <div>Your cart is empty</div>;
