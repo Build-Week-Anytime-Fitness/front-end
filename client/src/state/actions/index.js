@@ -12,21 +12,24 @@ export const ADD_USER = "ADD_USER";
 export const CHECK_USER = "CHECK_USER";
 export const CURRENT_USER = "CURRENT_USER";
 export const CLASS_TO_EDIT = "CLASS_TO_EDIT";
+export const EDIT_MODE = "EDIT_MODE"
+export const CLASS_TO_DELETE = "CLASS_TO_DELETE";
+export const UPDATE_CLASSES_START = "UPDATE_CLASSES_START"
+export const UPDATE_CLASSES_SUCCESS = "UPDATE_CLASSES_SUCCESS"
+export const DELETE_CLASSES_START = "DELETE_CLASSES_START"
+export const DELETE_CLASSES_SUCCESS = "DELETE_CLASSES_SUCCESS"
 
 
 //state related to getClasses API call
 export const getData = (props) => (dispatch) => {
    console.log("7. props from  getData /actions", props)
   //props.isLoading = true
-
-
   console.log("getData API call fires is loading True", props);
   dispatch({ type: FETCHING_API_START, isLoading: "true" });
   setTimeout(
   axiosWithAuth()
     .get("/classes")
     .then((res) => {
-
       dispatch({ type: ALL_CLASSES, payload: res.data });
       dispatch({ type: GET_FILTERED_CLASSES, payload: res.data });
       dispatch({
@@ -61,16 +64,26 @@ export const allClasses = (allClasses) => {
 };
 
 export const classToEdit = (indivClass) => {
-  console.log("CLASS_TO_EDIT action fires: log props: ", indivClass);
+  console.log("CLASS_TO_EDIT action fires: log props: ", indivClass)
   return { type: CLASS_TO_EDIT, payload: indivClass };
 };
 
+export const setEditMode = (isEditMode) => {
+  console.log("EDIT_MODE ACTION FIRES IS EDIT MODE", isEditMode)
+  return { type: EDIT_MODE, payload: isEditMode}
+}
+
+export const deleteClass = (indivClass) => {
+  console.log("CLASS_TO_DELETE action fires: props: ", indivClass);
+  return { type: CLASS_TO_DELETE, payload: indivClass }
+}
 
 
-// export const addClass = (addClass) => {
-//   console.log('8. new allClasses from classes.js', addClass)
-//     return { type: ADD_CLASS, payload: addClass}
-// }
+export const addClass = (addClass) => {
+  console.log('8. new allClasses from classes.js', addClass)
+    return { type: ADD_CLASS, payload: addClass}
+}
+
 
 export const addUser = (addUser) => (dispatch) => {
   console.log("9. new allUser from classes.js", addUser);
