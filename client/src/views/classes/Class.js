@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import EditIcon from "@material-ui/icons/Edit";
 import { connect, useDispatch, useSelector } from "react-redux";
 import axiosWithAuth from "../../utils/axiosWithAuth";
-import { classToEdit, setEditMode, classesToSignUp, FETCHING_API_START,FETCHING_API_SUCCESS, FETCHING_API_FAILURE }  from "../../state/actions/index.js";
+import { classToEdit, classesToSignUp, setEditMode, undoSignUp, FETCHING_API_START,FETCHING_API_SUCCESS, FETCHING_API_FAILURE }  from "../../state/actions/index.js";
 
 
 const useStyles = makeStyles({
@@ -82,8 +82,17 @@ const Class = (props) => {
     dispatch(props.myClassToEdit(editForm));
   };
 
-  const handleSignUpButtonClick = () => {
-    console.log("handleSignUpButtonClick has been fired: indiv class", props.indivClass)
+  const toggleSignUp = () => {
+    console.log("toggleSignUp has been fired")
+    if (isSignedUpFor(props.indivClass)) {
+      handleUndoSignUp();
+    } else {
+      handleSignUp();
+    }
+  }
+
+  const handleSignUp = () => {
+    console.log("handleSignUp has been fired: indiv class", props.indivClass)
 
     props.myClassesToSignUp(props.indivClass); // add class to dictionary of signed up classes
 
@@ -105,18 +114,36 @@ const Class = (props) => {
 
   };
 
+  const handleUndoSignUp = () => {
+    console.log("handleUndoSignUp has been fired: indiv class", props.indivClass)
+
+    props.myUndoSignUp(props.indivClass); // assign class to false in dictionary of signed up classes
+
+    dispatch({ type: FETCHING_API_START });
+
+    axiosWithAuth()
+      .delete(`/clientclasses/${indivClass.id}`) 
+      .then((res) => {
+        console.log("UNDO_SIGN_UP_FOR_CLASS response: ", res); 
+        alert(res.data.message);
+        dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
+      })
+      .catch((error) => {
+        dispatch({ type: FETCHING_API_FAILURE, payload: error });
+        console.log("ERR_1: This error is from UNDO_SIGN_UP_FOR_CLASS", error);
+      });
+
+  };
+
   const isSignedUpFor = (indivClass) => {
-    // if (!props.classesToSignUp) {
-    //   return false;
-    // }
     // props.classToSignUp is the dictionary of classes signed up for
-    console.log("props.classesToSignUp: ", props.classesToSignUp)
+    // console.log("props.classesToSignUp: ", props.classesToSignUp)
     return props.classesToSignUp[indivClass.id] ? true : false;  // returns true or undef
   }
 
         { isInstructor ? <Button onClick={handleEditButtonClick}><EditIcon style={{ margin: '10', color: '555555'}}/></Button>:  
         
-        <Button onClick={handleSignUpButtonClick} disabled={!(number_of_students < max_class_size) || ( isSignedUpFor(props.indivClass))} size="small" style={{ color: '555555'}}>{number_of_students < max_class_size? "sign up":"full"}</Button>}
+        <Button onClick={toggleSignUp} disabled={!(number_of_students < max_class_size) || ( isSignedUpFor(props.indivClass))} size="small" style={{ color: '555555'}}>{number_of_students < max_class_size? "sign up":"full"}</Button>}
 
 
   return (
@@ -200,6 +227,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
       myClassToEdit: (indivClass) => dispatch(classToEdit(indivClass)),
       myClassesToSignUp: (indivClass) => dispatch(classesToSignUp(indivClass)),
+      myUndoSignUp: (indivClass) => dispatch(undoSignUp(indivClass)),
+
   };
 };
 

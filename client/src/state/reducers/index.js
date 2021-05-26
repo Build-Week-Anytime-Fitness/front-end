@@ -13,6 +13,7 @@ import {
   EDIT_MODE,
   CLASS_TO_DELETE,
   CLASSES_TO_SIGN_UP,
+  UNDO_SIGN_UP,
 } from "../actions";
 
 const log = console.log;
@@ -135,6 +136,21 @@ export const appReducer = (state = initialState, action) => {
       log("newClassId: ", newClassId)
       return { ...state, classesToSignUp: {...state.classesToSignUp, [newClassId]: true} };
     }
+
+    case UNDO_SIGN_UP: {
+      log("UNDO_SIGN_UP in reducer: log payload: ", action.payload);
+      const newClassId = action.payload.id;
+      log("newClassId: ", newClassId)
+      // tell the dict that the class is now false, user is NOT signed up for class
+      return { ...state, classesToSignUp: {...state.classesToSignUp, [newClassId]: false} };
+    }
+
+   
+    // case ADD_CLASS: {
+    //   console.log("reducer fires: add class ");
+    //   return { ...state, classes: [...state.classes, action.payload] };
+    // }
+
 
     case ADD_USER: {
       console.log("reducer fires: add user");
