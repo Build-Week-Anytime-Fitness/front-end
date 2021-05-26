@@ -38,7 +38,6 @@ const Class = (props) => {
   const dispatch = useDispatch();
 
   const editing = useSelector((state) => state.editing);
-  let { indivClass, allClasses } = props;
   const [editForm, setEditForm] = useState({
     id: props.indivClass.id,
     class_name: props.indivClass.class_name,
