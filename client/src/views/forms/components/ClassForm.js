@@ -174,7 +174,7 @@ const ClassForm = (props) => {
         Class Date
         <input
           id="class-form-class-date"
-          type="date"
+          type="text"
           name="class_date"
           value={formValues.class_date}
           onChange={handleChange}
