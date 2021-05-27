@@ -37,6 +37,7 @@ h3 {
   font-size: 1.5rem;
   align-self: center;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .classes-content-container {

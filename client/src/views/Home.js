@@ -138,7 +138,7 @@ export default function Home() {
           <div
             style={{
               maxWidth: "50vw",
-              marginTop: "10vh",
+              margin: "10vh 0",
               padding: "5vh 8vw",
               textAlign: "justify",
               color: "black",

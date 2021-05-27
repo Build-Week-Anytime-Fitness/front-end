@@ -9,7 +9,7 @@ import {
 import axiosWithAuth from "../../../utils/axiosWithAuth";
 import { connect, useDispatch } from "react-redux";
 import {
-  //classToEdit,
+  getData,
   FETCHING_API_START,
   FETCHING_API_SUCCESS,
   FETCHING_API_FAILURE,
@@ -24,7 +24,7 @@ const initialValues = {
   intensity: "",
   location: "",
   max_class_size: "",
-  instructor_id: 1,
+  instructor_id: '',
 };
 
 const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
@@ -39,17 +39,20 @@ const ClassForm = (props) => {
   const [formErrors, setFormErrors] = useState(initialErrorValues);
   const dispatch = useDispatch();
   console.log(
-    "sanity check to ensure props.currentUserId is coming into component",
-    props.currentUserId
+    "sanity check to ensure props.currentUser is coming into component",
+    props.currentUser
   );
+  //setFormValues(initialValues);
+
 
   // useEffect
   useEffect(() => {
     // validateForm whenever the component is mounted
     validateForm(classFormSchema, formValues, setIsValid); //check if form is valid using schema.validate
+    //setFormValues(initialValues)
   }, [formValues]);
 
-  useEffect(() => {
+  useEffect((instructor_id) => {
     console.log("props.classToEdit from useEffect", props.classToEdit);
     if (props.isEditMode && props.classToEdit) {
       setFormValues(props.classToEdit);
@@ -58,6 +61,7 @@ const ClassForm = (props) => {
 
   // function declarations
   const handleChange = (event) => {
+    
     console.log({ [event.target.name]: event.target.value });
     setFormValues({
       ...formValues,
@@ -78,7 +82,7 @@ const ClassForm = (props) => {
     handleSubmitHelper(event);
 
     console.log("Add class submit fired from ClassForm", formValues);
-    //formValues.instructor_id = props.currentUserId
+    formValues.instructor_id = props.currentUser.id
     dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
       .post("/classes", formValues)
@@ -92,6 +96,7 @@ const ClassForm = (props) => {
           isLoading: false,
           payload: res.data.message,
         });
+        dispatch(getData())
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
@@ -109,11 +114,13 @@ const ClassForm = (props) => {
       .then((res) => {
         console.log("response: ", res); // see sample POST login res below
         console.log("message: ", res.data.message);
+        setFormValues(initialValues);
         dispatch({
           type: FETCHING_API_SUCCESS,
           isLoading: false,
           payload: res.data.message,
         });
+        dispatch(getData())
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
@@ -131,11 +138,13 @@ const ClassForm = (props) => {
       .then((res) => {
         console.log("response: ", res); // see sample POST login res below
         console.log("message: ", res.data.message);
+        setFormValues(initialValues);
         dispatch({
           type: FETCHING_API_SUCCESS,
           isLoading: false,
           payload: res.data.message,
         });
+        dispatch(getData())
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
@@ -277,13 +286,13 @@ const mapStateToProps = (state) => {
     classToEdit: state.classToEdit, // when user clicks edit button on class, Redux state saves indivClass object
     isEditMode: state.isEditMode,
     indivClass: state.indivClass,
-    currentUserId: state.currentUserId,
+    currentUser: state.currentUser,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // myCheckUser: (formValues) => dispatch(checkUser(formValues)), // SAMPLE CODE
+    getData: dispatch(getData()),
   };
 };
 

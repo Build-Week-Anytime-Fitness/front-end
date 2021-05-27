@@ -25,7 +25,13 @@ const useStyles = makeStyles({
     opacity: 0.9,
     fontSize: 22,
     margin: "20px",
-    boxShadow: '0 0 1rem #444'
+    boxShadow: "0 0 1rem #444",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "25px",
+    padding: "3vh 3vw",
   },
   bullet: {
     display: "inline-block",
@@ -44,6 +50,11 @@ const useStyles = makeStyles({
 
 const Class = (props) => {
   const dispatch = useDispatch();
+  // console.log("sanity Check props.currentUser.id", props.currentUser);
+  // console.log(
+  //   "sanity check props.classesToSignUp",
+  //   props.indivClass.instructor_id
+  // );
 
   //const editing = useSelector((state) => state.editing);
   const editForm = {
@@ -219,7 +230,24 @@ const Class = (props) => {
               //   buttonTitle = "unregister";
               // }
               isInstructor ? (
-                <Button onClick={handleEditButtonClick}>
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  onClick={handleEditButtonClick}
+                  disabled={
+                    props.currentUser.id !== props.indivClass.instructor_id
+                  }
+                  style={{
+                    backgroundColor:
+                      props.currentUser.id !== props.indivClass.instructor_id
+                        ? "red"
+                        : "#aaa",
+                    borderRadius: "25px",
+                    opacity: props.currentUser.id !== props.indivClass.instructor_id
+                    ? "0.5"
+                    : "0.85",
+                  }}
+                >
                   <EditIcon style={{ margin: "10", color: "555555" }} />
                 </Button>
               ) : (
