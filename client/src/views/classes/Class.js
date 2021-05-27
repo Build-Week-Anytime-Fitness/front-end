@@ -180,19 +180,22 @@ const Class = (props) => {
                 {indivClass.class_type}
               </Typography>
               <Typography variant="h5" component="h2">
-                {bull} {indivClass.class_name} {bull}
+                {bull} {indivClass.class_name} {bull} <br/>
+                
+              </Typography>
+              <Typography component="h4">
+              Where: {indivClass.location}
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
                 <br />
-                {indivClass.class_date}
+                When: {indivClass.class_date}
               </Typography>
               <Typography variant="body2" component="p">
-                {displayTime(indivClass.duration)}
+                Duration: {displayTime(indivClass.duration)}
                 <br />
-                starts at {indivClass.start_time}
+                Kickoff Time:  {indivClass.start_time}
                 <br />
-                {indivClass.number_of_students}/{indivClass.max_class_size}{" "}
-                students signed up
+                Class Capacity: {indivClass.number_of_students}/{indivClass.max_class_size}{" "}
                 <br />
               </Typography>
             </CardContent>
