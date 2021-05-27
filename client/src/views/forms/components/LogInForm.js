@@ -38,7 +38,7 @@ const LogInForm = (props) => {
   useEffect(() => {
     // validateForm whenever the component is mounted
     validateForm(loginFormSchema, formValues, setIsValid); //check if form is valid using schema.validate
-  }, []);
+  }, [formValues]);
 
   // function declarations
   const handleChange = (event) => {

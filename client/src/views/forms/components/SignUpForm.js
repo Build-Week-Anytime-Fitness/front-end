@@ -34,7 +34,7 @@ function SignUpForm(props) {
   useEffect(() => {
     // validateForm whenever the component is mounted
     validateForm(signUpFormSchema, formValues, setIsValid); //check if form is valid using schema.validate
-  }, []);
+  }, [formValues]);
   // function declarations
   const handleChange = (event) => {
     handleChangeHelper({
