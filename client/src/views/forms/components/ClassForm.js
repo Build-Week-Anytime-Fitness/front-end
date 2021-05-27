@@ -21,11 +21,11 @@ const initialValues = {
   class_type: "",
   class_date: "",
   start_time: "",
-  duration: 0.5,
+  duration: "",
   intensity: "",
   location: "",
-  max_class_size: 5,
-  instructor_id: 2
+  max_class_size: "",
+  instructor_id: "" 
 };
 
 const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
@@ -39,6 +39,7 @@ const ClassForm = (props) => {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState(initialErrorValues);
   const dispatch = useDispatch();
+  console.log("sanity check to ensure props.currentUserId is coming into component", props.currentUserId)
 
   // useEffect
   useEffect(() => {
@@ -73,31 +74,60 @@ const ClassForm = (props) => {
 
   const handleSubmit = (event) => {
     handleSubmitHelper(event);
+    
     console.log("Add class submit fired from ClassForm", formValues);
+    //formValues.instructor_id = props.currentUserId
     dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
     .post("/classes", formValues)
     // or here
     .then((res) => {
       console.log("response: ", res) // see sample POST login res below
-      localStorage.setItem("authToken", res.data.token); // 200
       console.log("message: ", res.data.message);
+      setFormValues(initialValues)
       dispatch({ type: FETCHING_API_SUCCESS, isLoading: false, payload: res.data.message });
+      
   })
     .catch((error) => {
       dispatch({ type: FETCHING_API_FAILURE, payload: error });
-      console.log("ERR_1: This error is from Login", error);
+      console.log("ERR_1: This error is from Login", {error});
     });
   };
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    console.log("Update a class fired from classForm DATA: ", e);
+    console.log("Update a class fired from classForm DATA: ", formValues);
+    dispatch({ type: FETCHING_API_START, isLoading: true });
+    axiosWithAuth()
+    .put(`/classes/${props.classToEdit.id}`, formValues)
+    // or here
+    .then((res) => {
+      console.log("response: ", res) // see sample POST login res below
+      console.log("message: ", res.data.message);
+      dispatch({ type: FETCHING_API_SUCCESS, isLoading: false, payload: res.data.message });
+  })
+    .catch((error) => {
+      dispatch({ type: FETCHING_API_FAILURE, payload: error });
+      console.log("ERR_1: This error is from Login", {error});
+    });
   };
 
   const handleDelete = (e) => {
     e.preventDefault();
-    console.log("Delete a class fired from classForm DATA: ", e);
+    console.log("Delete a class fired from classForm DATA: ",);
+    dispatch({ type: FETCHING_API_START, isLoading: true });
+    axiosWithAuth()
+    .delete(`/classes/${props.classToEdit.id}`)
+    // or here
+    .then((res) => {
+      console.log("response: ", res) // see sample POST login res below
+      console.log("message: ", res.data.message);
+      dispatch({ type: FETCHING_API_SUCCESS, isLoading: false, payload: res.data.message });
+  })
+    .catch((error) => {
+      dispatch({ type: FETCHING_API_FAILURE, payload: error });
+      console.log("ERR_1: This error is from Login", {error});
+    });
   };
 
   return (
@@ -198,7 +228,7 @@ const ClassForm = (props) => {
         <button
           id="class-form-submit"
           type="submit"
-          disabled={isValid}
+          disabled={!isValid}
           onClick={handleSubmit}
         >
           Add Class
@@ -208,7 +238,7 @@ const ClassForm = (props) => {
           <button
             id="class-form-update"
             type="submit"
-            disabled={isValid}
+            disabled={!isValid}
             onClick={handleUpdate}
           >
             Update Class
@@ -216,7 +246,7 @@ const ClassForm = (props) => {
           <button
             id="class-form-delete"
             type="submit"
-            disabled={isValid}
+            disabled={!isValid}
             onClick={handleDelete}
             style={{ backgroundColor: "red", color: "white" }}
           >
@@ -233,7 +263,8 @@ const mapStateToProps = (state) => {
   return {
     classToEdit: state.classToEdit, // when user clicks edit button on class, Redux state saves indivClass object
     isEditMode: state.isEditMode,
-    //indivClass: state.indivClass,
+    indivClass: state.indivClass,
+    currentUserId: state.currentUserId
   };
 };
 

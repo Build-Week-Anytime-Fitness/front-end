@@ -7,7 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import EditIcon from "@material-ui/icons/Edit";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import { classToEdit, classesToSignUp, setEditMode, undoSignUp, FETCHING_API_START,FETCHING_API_SUCCESS, FETCHING_API_FAILURE }  from "../../state/actions/index.js";
 
@@ -37,7 +37,7 @@ const useStyles = makeStyles({
 const Class = (props) => {
   const dispatch = useDispatch();
 
-  const editing = useSelector((state) => state.editing);
+  //const editing = useSelector((state) => state.editing);
   const [editForm, setEditForm] = useState({
     id: props.indivClass.id,
     class_name: props.indivClass.class_name,
@@ -144,17 +144,18 @@ const Class = (props) => {
   }
 
         { 
-          // const classIsFull = number_of_students >= max_class_size;
-          // const buttonTitle = "sign it up";
-          // if (classIsFull) {
-          //   buttonTitle = "full";
-          // }
-          // else if (isSignedUpFor(props.indivClass)) {
-          //   buttonTitle = "unregister";
-          // }
-          // isInstructor ? <Button onClick={handleEditButtonClick}><EditIcon style={{ margin: '10', color: '555555'}}/></Button> :  
+          const classIsFull = number_of_students >= max_class_size;
+          let buttonTitle = "sign it up";
+          if (classIsFull) {
+            buttonTitle = "full";
+          }
+          else if (isSignedUpFor(props.indivClass)) {
+            buttonTitle = "unregister";
+          }
+          isInstructor ? <Button onClick={handleEditButtonClick}><EditIcon style={{ margin: '10', color: '555555'}}/></Button> :  
         
-          // <Button onClick={toggleSignUp} disabled={ classIsFull } size="small" style={{ color: '555555'}}>{ buttonTitle }</Button>
+          <Button onClick={toggleSignUp} disabled={ classIsFull } size="small" style={{ color: '555555'}}>{ buttonTitle }</Button>
+
         }
 
 
