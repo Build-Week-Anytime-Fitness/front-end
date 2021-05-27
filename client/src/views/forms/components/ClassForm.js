@@ -25,7 +25,7 @@ const initialValues = {
   intensity: "",
   location: "",
   max_class_size: "",
-  instructor_id: "" 
+  instructor_id: 1 
 };
 
 const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
@@ -95,7 +95,7 @@ const ClassForm = (props) => {
   };
 
   const handleUpdate = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     console.log("Update a class fired from classForm DATA: ", formValues);
     dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
@@ -220,7 +220,7 @@ const ClassForm = (props) => {
           id="class-form-max-class-size"
           type="number"
           name="max_class_size"
-          value={formValues.maxClassSize}
+          value={formValues.max_class_size}
           onChange={handleChange}
         ></input>
       </label>
