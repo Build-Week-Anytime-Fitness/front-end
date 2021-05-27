@@ -135,6 +135,8 @@ const Class = (props) => {
 
   };
 
+  // <Button onClick={toggleSignUp} disabled={!(number_of_students < max_class_size) || ( isSignedUpFor(props.indivClass))} size="small" style={{ color: '555555'}}>{number_of_students < max_class_size? "sign up":"full"}</Button>}
+
   const isSignedUpFor = (indivClass) => {
     // props.classToSignUp is the dictionary of classes signed up for
     // console.log("props.classesToSignUp: ", props.classesToSignUp)
@@ -153,6 +155,7 @@ const Class = (props) => {
           isInstructor ? <Button onClick={handleEditButtonClick}><EditIcon style={{ margin: '10', color: '555555'}}/></Button> :  
         
           <Button onClick={toggleSignUp} disabled={ classIsFull } size="small" style={{ color: '555555'}}>{ buttonTitle }</Button>
+
         }
 
 
@@ -195,14 +198,21 @@ const Class = (props) => {
               </Typography>
             </CardContent>
             <CardActions>
-              {isInstructor ? (
+              {
+                          // const classIsFull = number_of_students >= max_class_size;
+                          // const buttonTitle = "sign it up";
+                          // if (classIsFull) {
+                          //   buttonTitle = "full";
+                          // }
+                          // else if (isSignedUpFor(props.indivClass)) {
+                          //   buttonTitle = "unregister";
+                          // }
+              isInstructor ? (
                 <Button onClick={handleEditButtonClick}>
                   <EditIcon style={{ margin: "10", color: "555555" }} />
                 </Button>
               ) : (
-                <Button size="small" style={{ color: "555555" }}>
-                  Sign Up
-                </Button>
+                <Button onClick={toggleSignUp} disabled={ number_of_students >= max_class_size } size="small" style={{ color: '555555'}}>{ number_of_students >= max_class_size ? "full" : isSignedUpFor(props.indivClass) ? "unregister" : "sign up" }</Button>
               )}
             </CardActions>
           </Card>
