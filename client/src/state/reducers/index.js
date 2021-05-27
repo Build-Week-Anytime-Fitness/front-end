@@ -116,8 +116,8 @@ export const appReducer = (state = initialState, action) => {
     }
 
     case EDIT_MODE: {
-      log("EDIT MODE FIRED FROM REDUCER", action.payload)
-      return { ...state, isEditMode: action.payload }
+      log("EDIT MODE FIRED FROM REDUCER", action.payload);
+      return { ...state, isEditMode: action.payload };
     }
 
     case ADD_CLASS: {
@@ -133,24 +133,28 @@ export const appReducer = (state = initialState, action) => {
     case CLASSES_TO_SIGN_UP: {
       log("CLASSES_TO_SIGN_UP in reducer: log payload: ", action.payload);
       const newClassId = action.payload.id;
-      log("newClassId: ", newClassId)
-      return { ...state, classesToSignUp: {...state.classesToSignUp, [newClassId]: true} };
+      log("newClassId: ", newClassId);
+      return {
+        ...state,
+        classesToSignUp: { ...state.classesToSignUp, [newClassId]: true },
+      };
     }
 
     case UNDO_SIGN_UP: {
       log("UNDO_SIGN_UP in reducer: log payload: ", action.payload);
       const newClassId = action.payload.id;
-      log("newClassId: ", newClassId)
+      log("newClassId: ", newClassId);
       // tell the dict that the class is now false, user is NOT signed up for class
-      return { ...state, classesToSignUp: {...state.classesToSignUp, [newClassId]: false} };
+      return {
+        ...state,
+        classesToSignUp: { ...state.classesToSignUp, [newClassId]: false },
+      };
     }
 
-   
     // case ADD_CLASS: {
     //   console.log("reducer fires: add class ");
     //   return { ...state, classes: [...state.classes, action.payload] };
     // }
-
 
     case ADD_USER: {
       console.log("reducer fires: add user");

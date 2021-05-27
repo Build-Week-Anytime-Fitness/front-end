@@ -12,12 +12,12 @@ export const ADD_USER = "ADD_USER";
 export const CHECK_USER = "CHECK_USER";
 export const CURRENT_USER = "CURRENT_USER";
 export const CLASS_TO_EDIT = "CLASS_TO_EDIT";
-export const EDIT_MODE = "EDIT_MODE"
+export const EDIT_MODE = "EDIT_MODE";
 export const CLASS_TO_DELETE = "CLASS_TO_DELETE";
-export const UPDATE_CLASSES_START = "UPDATE_CLASSES_START"
-export const UPDATE_CLASSES_SUCCESS = "UPDATE_CLASSES_SUCCESS"
-export const DELETE_CLASSES_START = "DELETE_CLASSES_START"
-export const DELETE_CLASSES_SUCCESS = "DELETE_CLASSES_SUCCESS"
+export const UPDATE_CLASSES_START = "UPDATE_CLASSES_START";
+export const UPDATE_CLASSES_SUCCESS = "UPDATE_CLASSES_SUCCESS";
+export const DELETE_CLASSES_START = "DELETE_CLASSES_START";
+export const DELETE_CLASSES_SUCCESS = "DELETE_CLASSES_SUCCESS";
 export const CLASSES_TO_SIGN_UP = "CLASS_TO_SIGN_UP";
 export const UNDO_SIGN_UP = "UNDO_SIGN_UP";
 
@@ -29,25 +29,26 @@ export const getData = (props) => (dispatch) => {
   // console.log("getData API call fires is loading True", props);
   dispatch({ type: FETCHING_API_START, isLoading: "true" });
   setTimeout(
-  axiosWithAuth()
-    .get("/classes")
-    .then((res) => {
-      dispatch({ type: ALL_CLASSES, payload: res.data });
-      dispatch({ type: GET_FILTERED_CLASSES, payload: res.data });
-      dispatch({
-        type: FETCHING_API_SUCCESS,
-        isLoading: "false",
-        payload: res.data.results,
-      });
-      // console.log("getData API success is loading false ", props);
-      //props.isLoading = false
-    })
-    .catch((error) => {
-      dispatch({ type: FETCHING_API_FAILURE, payload: error });
-      console.log("getData API request failed", error);
-    }), 4000)
+    axiosWithAuth()
+      .get("/classes")
+      .then((res) => {
+        dispatch({ type: ALL_CLASSES, payload: res.data });
+        dispatch({ type: GET_FILTERED_CLASSES, payload: res.data });
+        dispatch({
+          type: FETCHING_API_SUCCESS,
+          isLoading: "false",
+          payload: res.data.results,
+        });
+        // console.log("getData API success is loading false ", props);
+        //props.isLoading = false
+      })
+      .catch((error) => {
+        dispatch({ type: FETCHING_API_FAILURE, payload: error });
+        console.log("getData API request failed", error);
+      }),
+    4000
+  );
 };
-
 
 //state related to classes
 export const searchTerm = (searchTerm) => {
@@ -66,19 +67,19 @@ export const allClasses = (allClasses) => {
 };
 
 export const classToEdit = (indivClass) => {
-  console.log("CLASS_TO_EDIT action fires: log props: ", indivClass)
+  console.log("CLASS_TO_EDIT action fires: log props: ", indivClass);
   return { type: CLASS_TO_EDIT, payload: indivClass };
 };
 
 export const setEditMode = (isEditMode) => {
-  console.log("EDIT_MODE ACTION FIRES IS EDIT MODE", isEditMode)
-  return { type: EDIT_MODE, payload: isEditMode}
-}
+  console.log("EDIT_MODE ACTION FIRES IS EDIT MODE", isEditMode);
+  return { type: EDIT_MODE, payload: isEditMode };
+};
 
 export const deleteClass = (indivClass) => {
   console.log("CLASS_TO_DELETE action fires: props: ", indivClass);
-  return { type: CLASS_TO_DELETE, payload: indivClass }
-}
+  return { type: CLASS_TO_DELETE, payload: indivClass };
+};
 
 export const classesToSignUp = (indivClass) => {
   console.log("CLASSES_TO_SIGN_UP action fires: log props: ", indivClass);
@@ -90,20 +91,17 @@ export const undoSignUp = (indivClass) => {
   return { type: UNDO_SIGN_UP, payload: indivClass };
 };
 
-
 export const addClass = (addClass) => {
-  console.log('8. new allClasses from classes.js', addClass)
-    return { type: ADD_CLASS, payload: addClass}
-}
-
+  console.log("8. new allClasses from classes.js", addClass);
+  return { type: ADD_CLASS, payload: addClass };
+};
 
 export const addUser = (addUser) => (dispatch) => {
   // console.log("9. new allUser from classes.js", addUser);
   dispatch({ type: FETCHING_API_START });
 
   axiosWithAuth()
-
-    .post("/register", addUser) 
+    .post("/register", addUser)
     // or here
     .then((res) => {
       console.log("ADD_USER response: ", res); // see sample POST login res below
@@ -131,19 +129,22 @@ export const addUser = (addUser) => (dispatch) => {
 export const checkUser = (formValues) => (dispatch) => {
   //this action takes dispatch so that it can branch to 1+ reducers
   // console.log("checkUser API call fires");
-     console.log("checkUser Action: props", formValues);
+  console.log("checkUser Action: props", formValues);
 
   dispatch({ type: FETCHING_API_START, isLoading: true });
 
   axiosWithAuth()
-
     .post("/login", formValues)
     // or here
     .then((res) => {
       // console.log("response: ", res) // see sample POST login res below
       localStorage.setItem("authToken", res.data.token); // 200
       console.log("message: ", res.data.message);
-      dispatch({ type: FETCHING_API_SUCCESS, isLoading: false, payload: res.data.message });
+      dispatch({
+        type: FETCHING_API_SUCCESS,
+        isLoading: false,
+        payload: res.data.message,
+      });
 
       // res gives is_instructor, assign to user obj in reducer. Payload = isInstructor
       let isInstructor = res.data.is_instructor;
@@ -151,7 +152,7 @@ export const checkUser = (formValues) => (dispatch) => {
 
       // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
       let currentUserId = res.data.id;
-      console.log("user ID: ", res.data.id)
+      console.log("user ID: ", res.data.id);
       dispatch({ type: CURRENT_USER, payload: currentUserId });
     })
     .catch((error) => {

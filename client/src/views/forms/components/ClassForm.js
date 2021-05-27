@@ -6,15 +6,14 @@ import {
   handleChangeHelper,
   handleSubmitHelper,
 } from "../formHelpers"; //bread crumbs in case we get lost
-import axiosWithAuth from '../../../utils/axiosWithAuth'
+import axiosWithAuth from "../../../utils/axiosWithAuth";
 import { connect, useDispatch } from "react-redux";
 import {
-  classToEdit,
+  //classToEdit,
   FETCHING_API_START,
   FETCHING_API_SUCCESS,
   FETCHING_API_FAILURE,
 } from "../../../state/actions/index.js";
-
 
 const initialValues = {
   class_name: "",
@@ -25,7 +24,7 @@ const initialValues = {
   intensity: "",
   location: "",
   max_class_size: "",
-  instructor_id: 1 
+  instructor_id: 1,
 };
 
 const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
@@ -39,13 +38,16 @@ const ClassForm = (props) => {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState(initialErrorValues);
   const dispatch = useDispatch();
-  console.log("sanity check to ensure props.currentUserId is coming into component", props.currentUserId)
+  console.log(
+    "sanity check to ensure props.currentUserId is coming into component",
+    props.currentUserId
+  );
 
   // useEffect
   useEffect(() => {
     // validateForm whenever the component is mounted
     validateForm(classFormSchema, formValues, setIsValid); //check if form is valid using schema.validate
-  }, []);
+  }, [formValues]);
 
   useEffect(() => {
     console.log("props.classToEdit from useEffect", props.classToEdit);
@@ -74,24 +76,27 @@ const ClassForm = (props) => {
 
   const handleSubmit = (event) => {
     handleSubmitHelper(event);
-    
+
     console.log("Add class submit fired from ClassForm", formValues);
     //formValues.instructor_id = props.currentUserId
     dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
-    .post("/classes", formValues)
-    // or here
-    .then((res) => {
-      console.log("response: ", res) // see sample POST login res below
-      console.log("message: ", res.data.message);
-      setFormValues(initialValues)
-      dispatch({ type: FETCHING_API_SUCCESS, isLoading: false, payload: res.data.message });
-      
-  })
-    .catch((error) => {
-      dispatch({ type: FETCHING_API_FAILURE, payload: error });
-      console.log("ERR_1: This error is from Login", {error});
-    });
+      .post("/classes", formValues)
+      // or here
+      .then((res) => {
+        console.log("response: ", res); // see sample POST login res below
+        console.log("message: ", res.data.message);
+        setFormValues(initialValues);
+        dispatch({
+          type: FETCHING_API_SUCCESS,
+          isLoading: false,
+          payload: res.data.message,
+        });
+      })
+      .catch((error) => {
+        dispatch({ type: FETCHING_API_FAILURE, payload: error });
+        console.log("ERR_1: This error is from Login", { error });
+      });
   };
 
   const handleUpdate = (e) => {
@@ -99,35 +104,43 @@ const ClassForm = (props) => {
     console.log("Update a class fired from classForm DATA: ", formValues);
     dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
-    .put(`/classes/${props.classToEdit.id}`, formValues)
-    // or here
-    .then((res) => {
-      console.log("response: ", res) // see sample POST login res below
-      console.log("message: ", res.data.message);
-      dispatch({ type: FETCHING_API_SUCCESS, isLoading: false, payload: res.data.message });
-  })
-    .catch((error) => {
-      dispatch({ type: FETCHING_API_FAILURE, payload: error });
-      console.log("ERR_1: This error is from Login", {error});
-    });
+      .put(`/classes/${props.classToEdit.id}`, formValues)
+      // or here
+      .then((res) => {
+        console.log("response: ", res); // see sample POST login res below
+        console.log("message: ", res.data.message);
+        dispatch({
+          type: FETCHING_API_SUCCESS,
+          isLoading: false,
+          payload: res.data.message,
+        });
+      })
+      .catch((error) => {
+        dispatch({ type: FETCHING_API_FAILURE, payload: error });
+        console.log("ERR_1: This error is from Login", { error });
+      });
   };
 
   const handleDelete = (e) => {
     e.preventDefault();
-    console.log("Delete a class fired from classForm DATA: ",);
+    console.log("Delete a class fired from classForm DATA: ");
     dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
-    .delete(`/classes/${props.classToEdit.id}`)
-    // or here
-    .then((res) => {
-      console.log("response: ", res) // see sample POST login res below
-      console.log("message: ", res.data.message);
-      dispatch({ type: FETCHING_API_SUCCESS, isLoading: false, payload: res.data.message });
-  })
-    .catch((error) => {
-      dispatch({ type: FETCHING_API_FAILURE, payload: error });
-      console.log("ERR_1: This error is from Login", {error});
-    });
+      .delete(`/classes/${props.classToEdit.id}`)
+      // or here
+      .then((res) => {
+        console.log("response: ", res); // see sample POST login res below
+        console.log("message: ", res.data.message);
+        dispatch({
+          type: FETCHING_API_SUCCESS,
+          isLoading: false,
+          payload: res.data.message,
+        });
+      })
+      .catch((error) => {
+        dispatch({ type: FETCHING_API_FAILURE, payload: error });
+        console.log("ERR_1: This error is from Login", { error });
+      });
   };
 
   return (
@@ -161,7 +174,7 @@ const ClassForm = (props) => {
         Class Date
         <input
           id="class-form-class-date"
-          type="text"
+          type="date"
           name="class_date"
           value={formValues.class_date}
           onChange={handleChange}
@@ -171,7 +184,7 @@ const ClassForm = (props) => {
         Start Time
         <input
           id="class-form-start-time"
-          type="text"
+          type="time"
           name="start_time"
           value={formValues.start_time}
           onChange={handleChange}
@@ -264,7 +277,7 @@ const mapStateToProps = (state) => {
     classToEdit: state.classToEdit, // when user clicks edit button on class, Redux state saves indivClass object
     isEditMode: state.isEditMode,
     indivClass: state.indivClass,
-    currentUserId: state.currentUserId
+    currentUserId: state.currentUserId,
   };
 };
 

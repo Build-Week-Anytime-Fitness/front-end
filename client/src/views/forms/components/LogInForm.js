@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { loginFormSchema } from "../validation/schema";
 import { validateForm } from "../validation/validationHelpers";
-import {
-  displayErrors,
-  handleChangeHelper,
-} from "../formHelpers";
+import { displayErrors, handleChangeHelper } from "../formHelpers";
 import { connect, useDispatch } from "react-redux";
 import { checkUser } from "../../../state/actions/index";
-import axiosWithAuth from "../../../utils/axiosWithAuth"
-import {FETCHING_API_START,
+import axiosWithAuth from "../../../utils/axiosWithAuth";
+import {
+  FETCHING_API_START,
   FETCHING_API_SUCCESS,
-  FETCHING_API_FAILURE, CURRENT_USER} from '../../../state/actions/index'
+  FETCHING_API_FAILURE,
+  CURRENT_USER,
+} from "../../../state/actions/index";
 
 const initialValues = {
   email: "",
@@ -55,35 +55,38 @@ const LogInForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-     console.log("FormValues is captured: ", formValues);
-     dispatch({ type: FETCHING_API_START, isLoading: true });
+    console.log("FormValues is captured: ", formValues);
+    dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
-    .post("/login", formValues)
-    // or here
-    .then((res) => {
-      console.log("response: ", res) // see sample POST login res below
-      localStorage.setItem("authToken", res.data.token); // 200
-      console.log("message: ", res.data.message);
-      dispatch({ type: FETCHING_API_SUCCESS, isLoading: false, payload: res.data.message });
+      .post("/login", formValues)
+      // or here
+      .then((res) => {
+        console.log("response: ", res); // see sample POST login res below
+        localStorage.setItem("authToken", res.data.token); // 200
+        console.log("message: ", res.data.message);
+        dispatch({
+          type: FETCHING_API_SUCCESS,
+          isLoading: false,
+          payload: res.data.message,
+        });
 
-       // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
-       let currentUserId = res.data.id;
-       console.log("user ID: ", res.data.id)
-       dispatch({ type: CURRENT_USER, payload: currentUserId });
+        // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
+        let currentUserId = res.data.id;
+        console.log("user ID: ", res.data.id);
+        dispatch({ type: CURRENT_USER, payload: currentUserId });
 
-
-    //check state for instructor... user.isInstructor which gets pulled below from Redux state
-    if (props.user.isInstructor === true) {
-      history.push("/instructors");
-    } else if (props.user.isInstructor === false) {
-      history.push("./classes")
-    }
-  })
-    .catch((error) => {
-      dispatch({ type: FETCHING_API_FAILURE, payload: error });
-      console.log("ERR_1: This error is from Login", error);
-    });
-  }
+        //check state for instructor... user.isInstructor which gets pulled below from Redux state
+        if (props.user.isInstructor === true) {
+          history.push("/instructors");
+        } else if (props.user.isInstructor === false) {
+          history.push("./classes");
+        }
+      })
+      .catch((error) => {
+        dispatch({ type: FETCHING_API_FAILURE, payload: error });
+        console.log("ERR_1: This error is from Login", error);
+      });
+  };
 
   return (
     <form className={"d-flex flex-column login-style"} onSubmit={handleSubmit}>
@@ -154,8 +157,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    myCheckUser: (formValues) =>
-      dispatch(checkUser(formValues)),
+    myCheckUser: (formValues) => dispatch(checkUser(formValues)),
   };
 };
 

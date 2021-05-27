@@ -4,8 +4,8 @@ import Logo from '../assets/transparent.png'
 
 export default function Nav() {
     return (
-    <AppBar className={'d-flex flex-row flex-wrap justify-content-between'} color={'inherit'}>
-        <div className={'d-flex flex-row flex-wrap'}>
+    <AppBar className={'d-flex flex-row flex-wrap justify-content-between '} color={'inherit'}>
+        <div className={'d-flex flex-row'} style={{width: '75vw'}}>
             <img className={'image-resizer'} src={Logo} alt='Anywhere Fitness'></img>
             <Link to="/home" className="button">
                 <h1>Anywhere Fitness Club</h1>
