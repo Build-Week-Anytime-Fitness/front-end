@@ -52,7 +52,7 @@ const ClassForm = (props) => {
     //setFormValues(initialValues)
   }, [formValues]);
 
-  useEffect(() => {
+  useEffect((instructor_id) => {
     console.log("props.classToEdit from useEffect", props.classToEdit);
     if (props.isEditMode && props.classToEdit) {
       setFormValues(props.classToEdit);
@@ -61,6 +61,7 @@ const ClassForm = (props) => {
 
   // function declarations
   const handleChange = (event) => {
+    
     console.log({ [event.target.name]: event.target.value });
     setFormValues({
       ...formValues,
@@ -95,6 +96,7 @@ const ClassForm = (props) => {
           isLoading: false,
           payload: res.data.message,
         });
+        dispatch(getData())
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
@@ -118,6 +120,7 @@ const ClassForm = (props) => {
           isLoading: false,
           payload: res.data.message,
         });
+        dispatch(getData())
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
@@ -141,6 +144,7 @@ const ClassForm = (props) => {
           isLoading: false,
           payload: res.data.message,
         });
+        dispatch(getData())
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
@@ -288,7 +292,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    //getData: dispatch(getData()),
+    getData: dispatch(getData()),
   };
 };
 
