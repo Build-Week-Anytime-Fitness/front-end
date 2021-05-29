@@ -98,7 +98,7 @@ const Class = (props) => {
   };
 
   const toggleSignUp = () => {
-    console.log("toggleSignUp has been fired");
+    //console.log("toggleSignUp has been fired");
     if (isSignedUpFor(props.indivClass)) {
       handleUndoSignUp();
     } else {
@@ -107,7 +107,7 @@ const Class = (props) => {
   };
 
   const handleSignUp = () => {
-    console.log("handleSignUp has been fired: indiv class", props.indivClass);
+    //console.log("handleSignUp has been fired: indiv class", props.indivClass);
 
     props.myClassesToSignUp(props.indivClass); // add class to dictionary of signed up classes
 
@@ -118,7 +118,7 @@ const Class = (props) => {
     axiosWithAuth()
       .post("/clientclasses", classId)
       .then((res) => {
-        console.log("SIGN_UP_FOR_CLASS response: ", res);
+        //console.log("SIGN_UP_FOR_CLASS response: ", res);
         alert(res.data.message);
         dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
       })
