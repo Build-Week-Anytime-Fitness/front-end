@@ -130,9 +130,9 @@ export const appReducer = (state = initialState, action) => {
     }
 
     case CLASSES_TO_SIGN_UP: {
-      log("CLASSES_TO_SIGN_UP in reducer: log payload: ", action.payload);
+      //log("CLASSES_TO_SIGN_UP in reducer: log payload: ", action.payload);
       const newClassId = action.payload.id;
-      log("newClassId: ", newClassId);
+      //log("newClassId: ", newClassId);
       return {
         ...state,
         classesToSignUp: { ...state.classesToSignUp, [newClassId]: true },
