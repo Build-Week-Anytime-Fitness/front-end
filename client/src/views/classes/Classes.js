@@ -23,7 +23,9 @@ const [ searchTerm, setSearchTerm ] = useState('');
 */
 
 const Classes = (props) => {
-  // console.log("props", props); // log props
+  let localId = localStorage.getItem("id");
+  //let { indivClass } = props;
+  //console.log("Props", props.filteredClasses, "localId", Number(localId)); // log props
   // console.log("props.filteredClasses", props.filteredClasses) // log filteredClasses
   // console.log("Classes: user from redux state", props.user) // log user
   // console.log("Classes: currentUser from redux state", props.currentUser) // log current user
@@ -90,6 +92,34 @@ const Classes = (props) => {
       <div style={{ textAlign: "center", color: "black" }}>Loading...</div>
     );
   }
+
+  const disabler = (item) => {
+    let toggle;
+    //localId !== item.instructor_id ?  toggle = true : toggle = false
+    if (Number(localId) !== item.instructor_id) {
+      toggle = true;
+      // console.log(
+      //   "toggle state",
+      //   toggle,
+      //   "localId",
+      //   Number(localId),
+      //   "item.id",
+      //   item.instructor_id
+      // );
+    } else if (Number(localId) === item.instructor_id) {
+      toggle = false;
+      // console.log(
+      //   "toggle state",
+      //   toggle,
+      //   "localId",
+      //   localId,
+      //   "item.id",
+      //   item.instructor_id
+      // );
+    }
+
+    return toggle;
+  };
   return (
     <>
       <div className="classes-background">
@@ -119,9 +149,19 @@ const Classes = (props) => {
             <div className="animation d-flex flex-row flex-wrap justify-content-center ">
               {props.filteredClasses &&
                 props.filteredClasses.map((indivClass) => {
+                  //add comparator
+                  //  localId !== props. ? toggle = true : toggle = false
+                  const isDisabled = disabler(indivClass);
+                  // console.log("classes.js line 134", isDisabled);
                   // console.log("indivClass: ", indivClass)
                   const classKey = Math.random().toString(16).slice(2);
-                  return <Class key={classKey} indivClass={indivClass} />;
+                  return (
+                    <Class
+                      key={classKey}
+                      indivClass={indivClass}
+                      disabled={isDisabled}
+                    />
+                  );
                 })}
             </div>
           </div>

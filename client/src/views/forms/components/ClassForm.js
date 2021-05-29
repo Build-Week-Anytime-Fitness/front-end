@@ -13,6 +13,7 @@ import {
   FETCHING_API_START,
   FETCHING_API_SUCCESS,
   FETCHING_API_FAILURE,
+  setEditMode,
 } from "../../../state/actions/index.js";
 
 const initialValues = {
@@ -24,7 +25,7 @@ const initialValues = {
   intensity: "",
   location: "",
   max_class_size: "",
-  instructor_id: '',
+  instructor_id: 0,
 };
 
 const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
@@ -38,26 +39,29 @@ const ClassForm = (props) => {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState(initialErrorValues);
   const dispatch = useDispatch();
-  console.log(
-    "sanity check to ensure props.currentUser is coming into component",
-    props.currentUser
-  );
-  //setFormValues(initialValues);
-
+  // console.log(
+  //   "sanity check to ensure props.currentUser is coming into component",
+  //   localStorage.getItem("id")
+  // );
+  let localId = localStorage.getItem("id");
+  formValues.instructor_id = Number(localId);
 
   // useEffect
   useEffect(() => {
     // validateForm whenever the component is mounted
     validateForm(classFormSchema, formValues, setIsValid); //check if form is valid using schema.validate
-    //setFormValues(initialValues)
   }, [formValues]);
 
   useEffect(() => {
     console.log("props.classToEdit from useEffect", props.classToEdit);
     if (props.isEditMode && props.classToEdit) {
       setFormValues(props.classToEdit);
+    } else if (!props.isEditMode && !props.classToEdit){
+      setFormValues(initialValues)
     }
   }, [props.isEditMode, props.classToEdit]);
+
+  useEffect(() => {});
 
   // function declarations
   const handleChange = (event) => {
@@ -79,9 +83,9 @@ const ClassForm = (props) => {
 
   const handleSubmit = (event) => {
     handleSubmitHelper(event);
-
+    const currUser = localStorage.getItem("id");
+    formValues.instructor_id = Number(currUser)
     console.log("Add class submit fired from ClassForm", formValues);
-    formValues.instructor_id = props.currentUser.id
     dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
       .post("/classes", formValues)
@@ -89,15 +93,21 @@ const ClassForm = (props) => {
       .then((res) => {
         console.log("response: ", res); // see sample POST login res below
         console.log("message: ", res.data.message);
+        alert(res.data.message);
         setFormValues(initialValues);
         dispatch({
           type: FETCHING_API_SUCCESS,
           isLoading: false,
           payload: res.data.message,
-        });
+        }); 
+        setFormValues(initialValues);
+        window.location.reload();
+       
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
+        const message = error.response.data.message
+        alert(message)
         console.log("ERR_1: This error is from Login", { error });
       });
   };
@@ -105,6 +115,8 @@ const ClassForm = (props) => {
   const handleUpdate = (e) => {
     //e.preventDefault();
     console.log("Update a class fired from classForm DATA: ", formValues);
+    const currUser = localStorage.getItem("id");
+    formValues.instructor_id = Number(currUser)
     dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
       .put(`/classes/${props.classToEdit.id}`, formValues)
@@ -112,21 +124,26 @@ const ClassForm = (props) => {
       .then((res) => {
         console.log("response: ", res); // see sample POST login res below
         console.log("message: ", res.data.message);
-        setFormValues(initialValues);
         dispatch({
           type: FETCHING_API_SUCCESS,
           isLoading: false,
           payload: res.data.message,
         });
+        alert(res.data.message);
+        setFormValues(initialValues);
+        props.mySetEditMode(false);
+        window.location.reload();
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
+        const message = error.response.data.message
+        alert(message)
         console.log("ERR_1: This error is from Login", { error });
       });
   };
 
   const handleDelete = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     console.log("Delete a class fired from classForm DATA: ");
     dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
@@ -135,15 +152,19 @@ const ClassForm = (props) => {
       .then((res) => {
         console.log("response: ", res); // see sample POST login res below
         console.log("message: ", res.data.message);
-        setFormValues(initialValues);
         dispatch({
           type: FETCHING_API_SUCCESS,
           isLoading: false,
           payload: res.data.message,
         });
+        alert(res.data.message);
+        setFormValues(initialValues);
+        props.mySetEditMode(false);
+        window.location.reload();
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
+        alert("Class Successfully Deleted")
         console.log("ERR_1: This error is from Login", { error });
       });
   };
@@ -283,12 +304,15 @@ const mapStateToProps = (state) => {
     isEditMode: state.isEditMode,
     indivClass: state.indivClass,
     currentUser: state.currentUser,
+    currentUserId: state.currentUserId,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    //getData: dispatch(getData()),
+    // myCheckUser: (formValues) => dispatch(checkUser(formValues)), // SAMPLE CODE
+    mySetEditMode: (isEditMode) => dispatch(setEditMode(isEditMode)),
+    myGetData: () => dispatch(getData()),
   };
 };
 

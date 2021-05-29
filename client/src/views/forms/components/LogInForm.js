@@ -55,15 +55,16 @@ const LogInForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("FormValues is captured: ", formValues);
+    //console.log("FormValues is captured: ", formValues);
     dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
       .post("/login", formValues)
       // or here
       .then((res) => {
-        console.log("response: ", res); // see sample POST login res below
+        //console.log("response: ", res); // see sample POST login res below
         localStorage.setItem("authToken", res.data.token); // 200
-        console.log("message: ", res.data.message);
+        //localStorage.setItem("currentUserId", res.data.id)
+        //console.log("message: ", res.data.message);
         dispatch({
           type: FETCHING_API_SUCCESS,
           isLoading: false,
@@ -72,15 +73,15 @@ const LogInForm = (props) => {
 
         // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
         let currentUserId = res.data.id;
-        console.log("user ID: ", res.data.id);
+        //console.log("user ID: ", res.data.id);
+        localStorage.setItem('id', res.data.id)
         dispatch({ type: CURRENT_USER, payload: currentUserId });
-
+      
+        //console.log("localInstructor State from LoginForm line 80: ", res.data.is_instructor)
         //check state for instructor... user.isInstructor which gets pulled below from Redux state
-        if (props.user.isInstructor === true) {
-          history.push("/instructors");
-        } else if (props.user.isInstructor === false) {
-          history.push("./classes");
-        }
+        res.data.is_instructor !== true ?
+        history.push("./classes") :
+        history.push("/instructors") 
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });

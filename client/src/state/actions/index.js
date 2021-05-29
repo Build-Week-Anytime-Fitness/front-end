@@ -33,13 +33,13 @@ export const getData = (props) => (dispatch) => {
       .get("/classes")
       .then((res) => {
         dispatch({ type: ALL_CLASSES, payload: res.data });
-        dispatch({ type: GET_FILTERED_CLASSES, payload: res.data });
+        dispatch({ type: GET_FILTERED_CLASSES, payload: res.data })   
         dispatch({
           type: FETCHING_API_SUCCESS,
           isLoading: "false",
-          payload: res.data.results,
+          payload: res.data,
         });
-        // console.log("getData API success is loading false ", props);
+         //console.log("getData API success is loading false DATA: ", res.data);
         //props.isLoading = false
       })
       .catch((error) => {
@@ -67,12 +67,12 @@ export const allClasses = (allClasses) => {
 };
 
 export const classToEdit = (indivClass) => {
-  console.log("CLASS_TO_EDIT action fires: log props: ", indivClass);
+  //console.log("CLASS_TO_EDIT action fires: log props: ", indivClass);
   return { type: CLASS_TO_EDIT, payload: indivClass };
 };
 
 export const setEditMode = (isEditMode) => {
-  console.log("EDIT_MODE ACTION FIRES IS EDIT MODE", isEditMode);
+  //console.log("EDIT_MODE ACTION FIRES IS EDIT MODE", isEditMode);
   return { type: EDIT_MODE, payload: isEditMode };
 };
 
@@ -139,11 +139,13 @@ export const checkUser = (formValues) => (dispatch) => {
     .then((res) => {
       // console.log("response: ", res) // see sample POST login res below
       localStorage.setItem("authToken", res.data.token); // 200
-      console.log("message: ", res.data.message);
-      dispatch({
-        type: FETCHING_API_SUCCESS,
-        isLoading: false,
-        payload: res.data.message,
+      localStorage.setItem("id", res.data.id);
+      alert(res.data.message);
+     console.log("message: ", res.data.message);
+     dispatch({
+       type: FETCHING_API_SUCCESS,
+       isLoading: false,
+       payload: res.data.message,
       });
 
       // res gives is_instructor, assign to user obj in reducer. Payload = isInstructor
@@ -153,6 +155,7 @@ export const checkUser = (formValues) => (dispatch) => {
       // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
       let currentUserId = res.data.id;
       console.log("user ID: ", res.data.id);
+      localStorage.setItem("id", res.data.id)
       dispatch({ type: CURRENT_USER, payload: currentUserId });
     })
     .catch((error) => {

@@ -50,9 +50,10 @@ const useStyles = makeStyles({
 
 const Class = (props) => {
   const dispatch = useDispatch();
-  // console.log("sanity Check props.currentUser.id", props.currentUser);
+  //const localId = localStorage.getItem("id")
+  // console.log("sanity localId", Number(localId));
   // console.log(
-  //   "sanity check props.classesToSignUp",
+  //   "sanity check props.indivClass.instructor_id",
   //   props.indivClass.instructor_id
   // );
 
@@ -234,18 +235,11 @@ const Class = (props) => {
                   variant="outlined"
                   color="inherit"
                   onClick={handleEditButtonClick}
-                  disabled={
-                    props.currentUser.id !== props.indivClass.instructor_id
-                  }
+                  disabled={props.disabled}
                   style={{
-                    backgroundColor:
-                      props.currentUser.id !== props.indivClass.instructor_id
-                        ? "red"
-                        : "#aaa",
+                    backgroundColor: props.disabled === true ? "red" : "#aaa",
                     borderRadius: "25px",
-                    opacity: props.currentUser.id !== props.indivClass.instructor_id
-                    ? "0.5"
-                    : "0.85",
+                    opacity: props.disabled === true ? "0.5" : "0.9",
                   }}
                 >
                   <EditIcon style={{ margin: "10", color: "555555" }} />
