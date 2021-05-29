@@ -115,17 +115,17 @@ export const appReducer = (state = initialState, action) => {
     }
 
     case EDIT_MODE: {
-      log("EDIT MODE FIRED FROM REDUCER", action.payload);
+     // log("EDIT MODE FIRED FROM REDUCER", action.payload);
       return { ...state, isEditMode: action.payload };
     }
 
     case ADD_CLASS: {
-      console.log("reducer fires: add class ");
+      //console.log("reducer fires: add class ");
       return { ...state, classes: [...state.classes, action.payload] };
     }
 
     case CLASS_TO_DELETE: {
-      log("reducer fires: class to delete");
+      //log("reducer fires: class to delete");
       return { ...state, classToDelete: action.payload };
     }
 
