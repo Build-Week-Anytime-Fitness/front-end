@@ -53,7 +53,7 @@ const ClassForm = (props) => {
   }, [formValues]);
 
   useEffect(() => {
-    console.log("props.classToEdit from useEffect", props.classToEdit);
+    //console.log("props.classToEdit from useEffect", props.classToEdit);
     if (props.isEditMode && props.classToEdit) {
       setFormValues(props.classToEdit);
     } else if (!props.isEditMode && !props.classToEdit){
