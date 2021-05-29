@@ -37,13 +37,13 @@ export default function Footer() {
                 >
                     Terms and Conditions
                 </Link>
-                <Link
+                {/* <Link
                     to="instructors"
                     className="button"
                     style={{ color: "#666", margin: '0 1rem' }}
                 >
                     Instructor Portal
-                </Link>
+                </Link> */}
             </div>
         </BottomNavigation>
     )
