@@ -25,7 +25,13 @@ const useStyles = makeStyles({
     opacity: 0.9,
     fontSize: 22,
     margin: "20px",
-    boxShadow: '0 0 1rem #444'
+    boxShadow: "0 0 1rem #444",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "25px",
+    padding: "3vh 3vw",
   },
   bullet: {
     display: "inline-block",
@@ -44,6 +50,12 @@ const useStyles = makeStyles({
 
 const Class = (props) => {
   const dispatch = useDispatch();
+  //const localId = localStorage.getItem("id")
+  // console.log("sanity localId", Number(localId));
+  // console.log(
+  //   "sanity check props.indivClass.instructor_id",
+  //   props.indivClass.instructor_id
+  // );
 
   //const editing = useSelector((state) => state.editing);
   const editForm = {
@@ -219,7 +231,17 @@ const Class = (props) => {
               //   buttonTitle = "unregister";
               // }
               isInstructor ? (
-                <Button onClick={handleEditButtonClick}>
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  onClick={handleEditButtonClick}
+                  disabled={props.disabled}
+                  style={{
+                    backgroundColor: props.disabled === true ? "red" : "#aaa",
+                    borderRadius: "25px",
+                    opacity: props.disabled === true ? "0.5" : "0.9",
+                  }}
+                >
                   <EditIcon style={{ margin: "10", color: "555555" }} />
                 </Button>
               ) : (
