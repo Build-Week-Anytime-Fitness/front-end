@@ -106,7 +106,7 @@ const ClassForm = (props) => {
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
-        const message = error.response.data.message
+        //const message = error.response.data.message
         //alert(message)
         console.log("ERR_1: This error is from Login", { error });
       });
@@ -136,7 +136,7 @@ const ClassForm = (props) => {
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
-        const message = error.response.data.message
+        //const message = error.response.data.message
        // alert(message)
         console.log("ERR_1: This error is from Login", { error });
       });
