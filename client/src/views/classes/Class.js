@@ -121,6 +121,7 @@ const Class = (props) => {
         //console.log("SIGN_UP_FOR_CLASS response: ", res);
         alert(res.data.message);
         dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
+        //window.location.reload();
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });

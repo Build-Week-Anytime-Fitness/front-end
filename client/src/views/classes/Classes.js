@@ -98,24 +98,8 @@ const Classes = (props) => {
     //localId !== item.instructor_id ?  toggle = true : toggle = false
     if (Number(localId) !== item.instructor_id) {
       toggle = true;
-      // console.log(
-      //   "toggle state",
-      //   toggle,
-      //   "localId",
-      //   Number(localId),
-      //   "item.id",
-      //   item.instructor_id
-      // );
     } else if (Number(localId) === item.instructor_id) {
       toggle = false;
-      // console.log(
-      //   "toggle state",
-      //   toggle,
-      //   "localId",
-      //   localId,
-      //   "item.id",
-      //   item.instructor_id
-      // );
     }
 
     return toggle;

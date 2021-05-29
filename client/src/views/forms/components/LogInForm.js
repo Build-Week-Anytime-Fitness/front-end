@@ -65,6 +65,7 @@ const LogInForm = (props) => {
         localStorage.setItem("authToken", res.data.token); // 200
         //localStorage.setItem("currentUserId", res.data.id)
         //console.log("message: ", res.data.message);
+        alert(res.data.message)
         dispatch({
           type: FETCHING_API_SUCCESS,
           isLoading: false,

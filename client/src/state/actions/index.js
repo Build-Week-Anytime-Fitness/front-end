@@ -106,7 +106,8 @@ export const addUser = (addUser) => (dispatch) => {
     .then((res) => {
       //console.log("ADD_USER response: ", res); // see sample POST login res below
       // localStorage.setItem('authToken', res.data.token ) // 200
-      //console.log("message: ", res.data.message);
+      console.log("message: ", res.data.message);
+      alert(res.data.message)
       dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
 
       // res gives is_instructor, assign to user obj in reducer. Payload = isInstructor
