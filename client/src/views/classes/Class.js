@@ -89,7 +89,7 @@ const Class = (props) => {
   // --------------  Helper Functions ----------------
   const handleEditButtonClick = () => {
     dispatch(setEditMode(true));
-    console.log("handleEditButtonClick has been fired", props);
+    //console.log("handleEditButtonClick has been fired", props);
     dispatch(classToEdit(props.indivClass));
   };
 
@@ -191,6 +191,10 @@ const Class = (props) => {
           variant="outlined"
           onSubmit={(e) => {
             e.preventDefault();
+            console.log(
+              "number of students in class",
+              indivClass.number_of_students
+            );
             handleSubmit(e);
           }}
         >

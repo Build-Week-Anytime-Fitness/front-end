@@ -65,7 +65,7 @@ const ClassForm = (props) => {
 
   // function declarations
   const handleChange = (event) => {
-    console.log({ [event.target.name]: event.target.value });
+    //console.log({ [event.target.name]: event.target.value });
     setFormValues({
       ...formValues,
       [event.target.name]: event.target.value,
@@ -93,7 +93,7 @@ const ClassForm = (props) => {
       .then((res) => {
         console.log("response: ", res); // see sample POST login res below
         console.log("message: ", res.data.message);
-        alert(res.data.message);
+        //alert(res.data.message);
         setFormValues(initialValues);
         dispatch({
           type: FETCHING_API_SUCCESS,
@@ -128,9 +128,9 @@ const ClassForm = (props) => {
           type: FETCHING_API_SUCCESS,
           isLoading: false,
           payload: res.data.message,
-        });
-        alert(res.data.message);
+        });  
         setFormValues(initialValues);
+        alert(res.data.message);
         props.mySetEditMode(false);
         window.location.reload();
       })
@@ -144,7 +144,7 @@ const ClassForm = (props) => {
 
   const handleDelete = (e) => {
     //e.preventDefault();
-    console.log("Delete a class fired from classForm DATA: ");
+    console.log("Delete a class fired from classForm DATA: ", props.classToEdit.id);
     dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
       .delete(`/classes/${props.classToEdit.id}`)
@@ -160,7 +160,7 @@ const ClassForm = (props) => {
         alert(res.data.message);
         setFormValues(initialValues);
         props.mySetEditMode(false);
-        window.location.reload();
+        //window.location.reload();
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
