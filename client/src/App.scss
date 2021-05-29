@@ -6,10 +6,8 @@ body {
   font-family: "Tungsten Narrow A", "Tungsten Narrow B";
   font-style: normal;
   font-weight: 400;
-  -webkit-perspective: 1px;
-          perspective: 1px;
-  -webkit-transform-style: preserve-3d;
-          transform-style: preserve-3d;
+  perspective: 1px;
+  transform-style: preserve-3d;
 }
 
 #videoBackground {
@@ -24,15 +22,9 @@ body {
   height: auto;
   background-color: white;
   position: absolute;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   margin-top: 65vh;
 }
 
@@ -46,9 +38,7 @@ h3 {
   color: #444;
   margin: 1vh 2vw;
   font-size: 1.5rem;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
+  align-self: center;
   text-decoration: none;
   cursor: pointer;
 }
@@ -64,15 +54,14 @@ h3 {
 
 .marketing-resizer {
   width: 350px;
-  -webkit-box-shadow: 0.5rem 0.5rem 3vh black;
-          box-shadow: 0.5rem 0.5rem 3vh black;
+  box-shadow: 0.5rem 0.5rem 3vh black;
 }
 
 .footer {
   left: 0;
   bottom: 0;
   width: 100%;
-  height: auto;
+  height: auto
 }
 
 .class-box {
@@ -128,8 +117,7 @@ h3 {
   color: white;
   opacity: 0.8;
   border: 1px solid white;
-  -webkit-box-shadow: 0 0 2vh #444;
-          box-shadow: 0 0 2vh #444;
+  box-shadow: 0 0 2vh #444;
   text-align: center;
   margin: 30vh auto;
 }
@@ -156,8 +144,7 @@ h3 {
   font-size: 1.25rem;
   border: 1px solid black;
   border-radius: 50px;
-  -webkit-box-shadow: 0 0 2vh black;
-          box-shadow: 0 0 2vh black;
+  box-shadow: 0 0 2vh black;
   height: auto;
   margin-top: 3vh;
   color: black;
@@ -172,8 +159,7 @@ h3 {
 .input-style {
   padding: 3vh 5vh;
   background-color: #444;
-  -webkit-box-shadow: 0 0 2vh black;
-          box-shadow: 0 0 2vh black;
+  box-shadow: 0 0 2vh black;
   opacity: 0.8;
   color: white;
   border-radius: 50px;
@@ -202,8 +188,20 @@ div button {
   text-align: center;
 }
 
+
 /* ---------------------- Media Queries ------------------------- */
 /* <!-- mobile --> */
+@media only screen and (min-width: 480px) {
+}
+
 /* <!-- tablet --> */
+@media only screen and (min-width: 768px) {
+}
+
 /* <!-- desktop --> */
+@media only screen and (min-width: 992px) {
+}
+
 /* <!-- wide-screen --> */
+@media only screen and (min-width: 1280px) {
+}

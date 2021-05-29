@@ -16,7 +16,7 @@ import {
   UNDO_SIGN_UP,
 } from "../actions";
 
-const log = console.log;
+//const log = console.log;
 
 //1. set initialState
 const initialState = {
@@ -89,7 +89,6 @@ export const appReducer = (state = initialState, action) => {
       return { ...state, isLoading: true };
     }
     case FETCHING_API_SUCCESS: {
-      //console.log("Fetching API success reducer fires isLoading is false");
       //log("FETCH SUCCESS THROUGH REDUCER");
       return { ...state, isLoading: false };
     }
@@ -140,9 +139,8 @@ export const appReducer = (state = initialState, action) => {
     }
 
     case UNDO_SIGN_UP: {
-      log("UNDO_SIGN_UP in reducer: log payload: ", action.payload);
+      //log("UNDO_SIGN_UP in reducer: log payload: ", action.payload);
       const newClassId = action.payload.id;
-      log("newClassId: ", newClassId);
       // tell the dict that the class is now false, user is NOT signed up for class
       return {
         ...state,
@@ -151,13 +149,12 @@ export const appReducer = (state = initialState, action) => {
     }
 
     case ADD_USER: {
-      console.log("reducer fires: add user");
+      //console.log("reducer fires: add user");
       return { ...state, user: [...state.users, action.payload] };
     }
 
     case CHECK_USER: {
-      console.log("reducer fires: check user");
-      // return { ...state, currentUser: action.payload };
+      //console.log("reducer fires: check user");
       return {
         ...state,
         user: { ...state.user, isInstructor: action.payload },

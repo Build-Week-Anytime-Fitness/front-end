@@ -121,6 +121,7 @@ const Class = (props) => {
         //console.log("SIGN_UP_FOR_CLASS response: ", res);
         alert(res.data.message);
         dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
+        //window.location.reload();
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
@@ -129,10 +130,10 @@ const Class = (props) => {
   };
 
   const handleUndoSignUp = () => {
-    console.log(
-      "handleUndoSignUp has been fired: indiv class",
-      props.indivClass
-    );
+    // console.log(
+    //   "handleUndoSignUp has been fired: indiv class",
+    //   props.indivClass
+    // );
 
     props.myUndoSignUp(props.indivClass); // assign class to false in dictionary of signed up classes
 
@@ -141,7 +142,7 @@ const Class = (props) => {
     axiosWithAuth()
       .delete(`/clientclasses/${indivClass.id}`)
       .then((res) => {
-        console.log("UNDO_SIGN_UP_FOR_CLASS response: ", res);
+        //console.log("UNDO_SIGN_UP_FOR_CLASS response: ", res);
         alert(res.data.message);
         dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
       })
@@ -150,8 +151,6 @@ const Class = (props) => {
         console.log("ERR_1: This error is from UNDO_SIGN_UP_FOR_CLASS", error);
       });
   };
-
-  // <Button onClick={toggleSignUp} disabled={!(number_of_students < max_class_size) || ( isSignedUpFor(props.indivClass))} size="small" style={{ color: '555555'}}>{number_of_students < max_class_size? "sign up":"full"}</Button>}
 
   const isSignedUpFor = (indivClass) => {
     // props.classToSignUp is the dictionary of classes signed up for
@@ -191,10 +190,6 @@ const Class = (props) => {
           variant="outlined"
           onSubmit={(e) => {
             e.preventDefault();
-            console.log(
-              "number of students in class",
-              indivClass.number_of_students
-            );
             handleSubmit(e);
           }}
         >
@@ -226,14 +221,6 @@ const Class = (props) => {
           </CardContent>
           <CardActions>
             {
-              // const classIsFull = number_of_students >= max_class_size;
-              // const buttonTitle = "sign it up";
-              // if (classIsFull) {
-              //   buttonTitle = "full";
-              // }
-              // else if (isSignedUpFor(props.indivClass)) {
-              //   buttonTitle = "unregister";
-              // }
               isInstructor ? (
                 <Button
                   variant="outlined"

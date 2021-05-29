@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import "./App.css";
+import "./App.scss";
 import Nav from "./views/Nav";
 import Home from "./views/Home";
 import Signup from "./views/forms/components/SignUpForm"

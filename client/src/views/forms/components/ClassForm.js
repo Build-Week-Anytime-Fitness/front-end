@@ -39,10 +39,7 @@ const ClassForm = (props) => {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState(initialErrorValues);
   const dispatch = useDispatch();
-  // console.log(
-  //   "sanity check to ensure props.currentUser is coming into component",
-  //   localStorage.getItem("id")
-  // );
+
   let localId = localStorage.getItem("id");
   formValues.instructor_id = Number(localId);
 
@@ -56,8 +53,8 @@ const ClassForm = (props) => {
     //console.log("props.classToEdit from useEffect", props.classToEdit);
     if (props.isEditMode && props.classToEdit) {
       setFormValues(props.classToEdit);
-    } else if (!props.isEditMode && !props.classToEdit){
-      setFormValues(initialValues)
+    } else if (!props.isEditMode && !props.classToEdit) {
+      setFormValues(initialValues);
     }
   }, [props.isEditMode, props.classToEdit]);
 
@@ -65,11 +62,11 @@ const ClassForm = (props) => {
 
   // function declarations
   const handleChange = (event) => {
-    //console.log({ [event.target.name]: event.target.value });
     setFormValues({
       ...formValues,
       [event.target.name]: event.target.value,
     });
+
     handleChangeHelper({
       event,
       schema: classFormSchema,
@@ -83,52 +80,48 @@ const ClassForm = (props) => {
 
   const handleSubmit = (event) => {
     handleSubmitHelper(event);
+
     const currUser = localStorage.getItem("id");
-    formValues.instructor_id = Number(currUser)
-    console.log("Add class submit fired from ClassForm", formValues);
+    formValues.instructor_id = Number(currUser);
+    //console.log("Add class submit fired from ClassForm", formValues);
     dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
       .post("/classes", formValues)
       // or here
       .then((res) => {
-        console.log("response: ", res); // see sample POST login res below
-        console.log("message: ", res.data.message);
-        //alert(res.data.message);
+        //console.log("response: ", res); // see sample POST login res below
+        //console.log("message: ", res.data.message);
         setFormValues(initialValues);
         dispatch({
           type: FETCHING_API_SUCCESS,
           isLoading: false,
           payload: res.data.message,
-        }); 
+        });
         setFormValues(initialValues);
         window.location.reload();
-       
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
-        //const message = error.response.data.message
-        //alert(message)
         console.log("ERR_1: This error is from Login", { error });
       });
   };
 
   const handleUpdate = (e) => {
-    //e.preventDefault();
-    console.log("Update a class fired from classForm DATA: ", formValues);
+    e.preventDefault();
     const currUser = localStorage.getItem("id");
-    formValues.instructor_id = Number(currUser)
+    formValues.instructor_id = Number(currUser);
     dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
       .put(`/classes/${props.classToEdit.id}`, formValues)
       // or here
       .then((res) => {
-        console.log("response: ", res); // see sample POST login res below
-        console.log("message: ", res.data.message);
+        //console.log("response: ", res); // see sample POST login res below
+        //console.log("message: ", res.data.message);
         dispatch({
           type: FETCHING_API_SUCCESS,
           isLoading: false,
           payload: res.data.message,
-        });  
+        });
         setFormValues(initialValues);
         alert(res.data.message);
         props.mySetEditMode(false);
@@ -137,21 +130,24 @@ const ClassForm = (props) => {
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
         //const message = error.response.data.message
-       // alert(message)
+        // alert(message)
         console.log("ERR_1: This error is from Login", { error });
       });
   };
 
   const handleDelete = (e) => {
     //e.preventDefault();
-    console.log("Delete a class fired from classForm DATA: ", props.classToEdit.id);
+    console.log(
+      "Delete a class fired from classForm DATA: ",
+      props.classToEdit.id
+    );
     dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
       .delete(`/classes/${props.classToEdit.id}`)
       // or here
       .then((res) => {
-        console.log("response: ", res); // see sample POST login res below
-        console.log("message: ", res.data.message);
+        //console.log("response: ", res); // see sample POST login res below
+        //console.log("message: ", res.data.message);
         dispatch({
           type: FETCHING_API_SUCCESS,
           isLoading: false,
@@ -160,7 +156,6 @@ const ClassForm = (props) => {
         alert(res.data.message);
         setFormValues(initialValues);
         props.mySetEditMode(false);
-        //window.location.reload();
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
