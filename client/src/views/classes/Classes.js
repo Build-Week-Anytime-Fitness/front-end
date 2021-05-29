@@ -24,21 +24,16 @@ const [ searchTerm, setSearchTerm ] = useState('');
 
 const Classes = (props) => {
   let localId = localStorage.getItem("id");
-  //let { indivClass } = props;
-  //console.log("Props", props.filteredClasses, "localId", Number(localId)); // log props
-  // console.log("props.filteredClasses", props.filteredClasses) // log filteredClasses
-  // console.log("Classes: user from redux state", props.user) // log user
-  // console.log("Classes: currentUser from redux state", props.currentUser) // log current user
 
   // ----------- Helper Function ---------------------
   const getFilteredClassesHelper = (searchTerm) => {
     // edge case if searchTerm is "", reset filteredClasses to allClasses
     if (searchTerm === "") {
       props.myGetFilteredClasses(props.classes);
-      return; // bail our of getFilteredClassesHelper because no searchTerm
+      return; // bail out of getFilteredClassesHelper because no searchTerm
     }
 
-    console.log("getFilteredClassesHelper fires");
+    //console.log("getFilteredClassesHelper fires");
 
     // filter function over classes array
     const filteredClasses = props.classes.filter((indivClass) => {
@@ -95,28 +90,21 @@ const Classes = (props) => {
 
   const disabler = (item) => {
     let toggle;
-    //localId !== item.instructor_id ?  toggle = true : toggle = false
-    if (Number(localId) !== item.instructor_id) {
-      toggle = true;
-    } else if (Number(localId) === item.instructor_id) {
-      toggle = false;
-    }
-
+    Number(localId) !== item.instructor_id ? (toggle = true) : (toggle = false);
     return toggle;
   };
+
   return (
     <>
       <div className="classes-background">
         <div className="classes-content-container">
           <div className="d-flex flex-row flex-wrap">
             <h1>Classes</h1>
-
             <SearchIcon
               className="search-icon"
               style={{ color: "444444", marginTop: "2vh" }}
               fontSize="large"
             />
-
             <input
               placeholder="Search for classes"
               type="text"
@@ -128,16 +116,11 @@ const Classes = (props) => {
               }}
             />
           </div>
-
           <div className="classes-container d-flex flex-row flex-wrap justify-content-center class-box">
             <div className="animation d-flex flex-row flex-wrap justify-content-center ">
               {props.filteredClasses &&
                 props.filteredClasses.map((indivClass) => {
-                  //add comparator
-                  //  localId !== props. ? toggle = true : toggle = false
                   const isDisabled = disabler(indivClass);
-                  // console.log("classes.js line 134", isDisabled);
-                  // console.log("indivClass: ", indivClass)
                   const classKey = Math.random().toString(16).slice(2);
                   return (
                     <Class

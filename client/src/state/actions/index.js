@@ -23,8 +23,6 @@ export const UNDO_SIGN_UP = "UNDO_SIGN_UP";
 
 //state related to getClasses API call
 export const getData = (props) => (dispatch) => {
-  //  console.log("7. props from  getData /actions", props)
-  //props.isLoading = true
 
   // console.log("getData API call fires is loading True", props);
   dispatch({ type: FETCHING_API_START, isLoading: "true" });
@@ -39,8 +37,6 @@ export const getData = (props) => (dispatch) => {
           isLoading: "false",
           payload: res.data,
         });
-         //console.log("getData API success is loading false DATA: ", res.data);
-        //props.isLoading = false
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
@@ -56,7 +52,6 @@ export const searchTerm = (searchTerm) => {
 };
 
 export const getFilteredClasses = (filteredClasses) => {
-  // console.log("6. new filteredClasses from classes.js", filteredClasses);
   // console.log("GET_FILTERED_CLASSES action fires: log props: ", filteredClasses)
   return { type: GET_FILTERED_CLASSES, payload: filteredClasses };
 };
@@ -105,7 +100,6 @@ export const addUser = (addUser) => (dispatch) => {
     // or here
     .then((res) => {
       //console.log("ADD_USER response: ", res); // see sample POST login res below
-      // localStorage.setItem('authToken', res.data.token ) // 200
       console.log("message: ", res.data.message);
       alert(res.data.message)
       dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
@@ -128,10 +122,7 @@ export const addUser = (addUser) => (dispatch) => {
 
 //state related to forms
 export const checkUser = (formValues) => (dispatch) => {
-  //this action takes dispatch so that it can branch to 1+ reducers
-  // console.log("checkUser API call fires");
-  //console.log("checkUser Action: props", formValues);
-
+  //this action takes dispatch so that it can branch to 1+ reducer
   dispatch({ type: FETCHING_API_START, isLoading: true });
 
   axiosWithAuth()
