@@ -164,7 +164,6 @@ const ClassForm = (props) => {
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
-        alert("Class Successfully Deleted")
         console.log("ERR_1: This error is from Login", { error });
       });
   };
