@@ -1,8 +1,11 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import CartItem from './CartItem';
 import {useHistory} from 'react-router-dom';
 import StripeCheckout from 'react-stripe-checkout';
-
+import {connectToStore} from './cartReduxInterface';
+// data needed
+// - client id
+// 
 
 // this is for debugging purpose, please delete when redux is implemented
 const exampleList=[
@@ -15,11 +18,34 @@ const exampleList=[
         class_date:'12/04/2021'
     },
 ]
+// fetch client fitness classes from backend by id
+// expected class format: 
+const exampleData={
+    class_date: "Monday",
+    class_id: 1,
+    class_name: "oldie but goldies",
+    class_type: "jazzersize",
+    client_id: 3,
+    duration: 1,
+    email: "th@marvel.org",
+    intensity: "high",
+    max_class_size: 23,
+    number_of_students: 1,
+    start_time: "9:00 am"
+};
 
-const Cart=()=>{
+const Cart=(props)=>{
+    // states: classes, user
+    const {classesPaid, classesToSignUp, user} = props;
+    // actions: payForClass(indivClass), undoSignUp(indivClass)
+    const {payForClass, undoSignUp} = props;
+    console.log(props);
+    const cartList = Object.keys(classesToSignUp)
+    .filter((k1)=>classesPaid.find((k2) => classesToSignUp[k1].id===classesPaid[k2].id))
+    .map((key)=>classesToSignUp[key]);
+
     // This state will be refactored into redux store
     // pull this from redux
-    const [cartList,setCartList] = useState(exampleList);
     // history object
     const history = useHistory();
 
@@ -29,8 +55,7 @@ const Cart=()=>{
     };
 
     const deleteCartItem=(class_name)=>{
-        // update to redux
-        setCartList(cartList.filter((c)=>c.class_name!==class_name));
+        undoSignUp(cartList.find((c)=>c.class_name===class_name));
     };
 
     const displayCartItems=(cartList)=>{
@@ -42,25 +67,7 @@ const Cart=()=>{
         }
     };
     const makePayment = () => {
-        // const body = {
-        //   token,
-        //   product,
-        // }
-        // const header = {
-        //   'Content-Type': 'application/json',
-        // }
-        // return fetch(`http://localhost:8282/payment`, {
-        //   method: "POST",
-        //   headers: header,
-        //   body: JSON.stringify(body)
-        // }).then(response => {
-        //   console.log("RESPONSE ", response)
-        //   const { status } = response;
-        //   console.log("STATUS", status)
-        // })
-        //   .catch((err) => {
-        //     console.log(err)
-        //   })
+
     }
     const exampleAmount= 10;
     return (
@@ -80,4 +87,4 @@ const Cart=()=>{
     </div>
     );
 };
-export default Cart;
+export default connectToStore(Cart);

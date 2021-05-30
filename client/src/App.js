@@ -8,6 +8,7 @@ import Logout from "./views/Logout";
 import PrivateRoute from "./views/PrivateRoute";
 import Classes from "./views/classes/Classes";
 import Instructors from "./views/Instructors";
+import Cart from "./views/cart/Cart";
 import Footer from "./views/Footer";
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
           <Route path={"/signup"} component={Signup} />
           <Route path={"/login"} component={Login} />
           <Route path={"/logout"} component={Logout} />
-
+          <Route path={"/cart"} component={Cart} />
           <PrivateRoute exact path={"/classes"} component={Classes}/>
           <PrivateRoute exact path={"/instructors"} component={Instructors} />
 

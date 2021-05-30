@@ -14,8 +14,9 @@ import {
   CLASS_TO_DELETE,
   CLASSES_TO_SIGN_UP,
   UNDO_SIGN_UP,
+  PAY_FOR_CLASS,
 } from "../actions";
-
+import {payForClassReducer} from "../../views/cart/cartReduxInterface";
 const log = console.log;
 
 //1. set initialState
@@ -29,6 +30,7 @@ const initialState = {
   },
   classToEdit: {},
   classesToSignUp: {}, // dictionary of class ids that user had signed up for
+  classesPaid:{},
   user: {
     id: "",
     personName: "",
@@ -145,6 +147,9 @@ export const appReducer = (state = initialState, action) => {
       return { ...state, classesToSignUp: {...state.classesToSignUp, [newClassId]: false} };
     }
 
+    case PAY_FOR_CLASS:{
+      return payForClassReducer(state,action);
+    }
    
     // case ADD_CLASS: {
     //   console.log("reducer fires: add class ");

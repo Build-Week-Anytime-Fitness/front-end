@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import EditIcon from "@material-ui/icons/Edit";
 import { connect, useDispatch } from "react-redux";
-import axiosWithAuth from "../../utils/axiosWithAuth";
+// import axiosWithAuth from "../../utils/axiosWithAuth";
 import { classToEdit, classesToSignUp, setEditMode, undoSignUp, FETCHING_API_START,FETCHING_API_SUCCESS, FETCHING_API_FAILURE }  from "../../state/actions/index.js";
 
 
@@ -36,7 +36,7 @@ const useStyles = makeStyles({
 
 const Class = (props) => {
   const dispatch = useDispatch();
-
+  console.log(props);
   //const editing = useSelector((state) => state.editing);
   const [editForm, setEditForm] = useState({
     id: props.indivClass.id,
@@ -96,22 +96,6 @@ const Class = (props) => {
 
     props.myClassesToSignUp(props.indivClass); // add class to dictionary of signed up classes
 
-    const classId = {class_id: indivClass.id};
-
-    dispatch({ type: FETCHING_API_START });
-
-    axiosWithAuth()
-      .post("/clientclasses", classId) 
-      .then((res) => {
-        console.log("SIGN_UP_FOR_CLASS response: ", res); 
-        alert(res.data.message);
-        dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
-      })
-      .catch((error) => {
-        dispatch({ type: FETCHING_API_FAILURE, payload: error });
-        console.log("ERR_1: This error is from SIGN_UP_FOR_CLASS", error);
-      });
-
   };
 
   const handleUndoSignUp = () => {
@@ -119,19 +103,19 @@ const Class = (props) => {
 
     props.myUndoSignUp(props.indivClass); // assign class to false in dictionary of signed up classes
 
-    dispatch({ type: FETCHING_API_START });
+    // dispatch({ type: FETCHING_API_START });
 
-    axiosWithAuth()
-      .delete(`/clientclasses/${indivClass.id}`) 
-      .then((res) => {
-        console.log("UNDO_SIGN_UP_FOR_CLASS response: ", res); 
-        alert(res.data.message);
-        dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
-      })
-      .catch((error) => {
-        dispatch({ type: FETCHING_API_FAILURE, payload: error });
-        console.log("ERR_1: This error is from UNDO_SIGN_UP_FOR_CLASS", error);
-      });
+    // axiosWithAuth()
+    //   .delete(`/clientclasses/${indivClass.id}`) 
+    //   .then((res) => {
+    //     console.log("UNDO_SIGN_UP_FOR_CLASS response: ", res); 
+    //     alert(res.data.message);
+    //     dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
+    //   })
+    //   .catch((error) => {
+    //     dispatch({ type: FETCHING_API_FAILURE, payload: error });
+    //     console.log("ERR_1: This error is from UNDO_SIGN_UP_FOR_CLASS", error);
+    //   });
 
   };
 

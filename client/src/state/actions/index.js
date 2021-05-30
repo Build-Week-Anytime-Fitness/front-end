@@ -1,6 +1,6 @@
 //import axios from 'axios';
 import axiosWithAuth from "../../utils/axiosWithAuth";
-
+import {payForClassAction} from "../../views/cart/cartReduxInterface";
 export const FETCHING_API_START = "FETCHING_API_LOADING";
 export const FETCHING_API_SUCCESS = "FETCHING_API_SUCCESS";
 export const FETCHING_API_FAILURE = "FETCHING_API_FAIL";
@@ -20,6 +20,7 @@ export const DELETE_CLASSES_START = "DELETE_CLASSES_START"
 export const DELETE_CLASSES_SUCCESS = "DELETE_CLASSES_SUCCESS"
 export const CLASSES_TO_SIGN_UP = "CLASS_TO_SIGN_UP";
 export const UNDO_SIGN_UP = "UNDO_SIGN_UP";
+export const PAY_FOR_CLASS = "PAY_FOR_CLASS";
 
 //state related to getClasses API call
 export const getData = (props) => (dispatch) => {
@@ -85,32 +86,33 @@ export const classesToSignUp = (indivClass) => {
   return { type: CLASSES_TO_SIGN_UP, payload: indivClass };
 };
 
+
 export const undoSignUp = (indivClass) => {
   console.log("UNDO_SIGN_UP action fires: log props: ", indivClass);
   return { type: UNDO_SIGN_UP, payload: indivClass };
 };
 
+export const payForClass = payForClassAction;
 
 export const addClass = (addClass) => {
   console.log('8. new allClasses from classes.js', addClass)
-    return { type: ADD_CLASS, payload: addClass}
+  return { type: ADD_CLASS, payload: addClass}
 }
-
 
 export const addUser = (addUser) => (dispatch) => {
   // console.log("9. new allUser from classes.js", addUser);
   dispatch({ type: FETCHING_API_START });
-
+  
   axiosWithAuth()
-
-    .post("/register", addUser) 
-    // or here
-    .then((res) => {
-      console.log("ADD_USER response: ", res); // see sample POST login res below
+  
+  .post("/register", addUser) 
+  // or here
+  .then((res) => {
+    console.log("ADD_USER response: ", res); // see sample POST login res below
       // localStorage.setItem('authToken', res.data.token ) // 200
       console.log("message: ", res.data.message);
       dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
-
+      
       // res gives is_instructor, assign to user obj in reducer. Payload = isInstructor
       let isInstructor = res.data.is_instructor;
       dispatch({ type: CHECK_USER, payload: isInstructor });
