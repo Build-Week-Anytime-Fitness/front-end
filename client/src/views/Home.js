@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
+
     <div
       className={"d-flex flex-column justify-content-center"}
       style={{ marginTop: "-10vh" }}
@@ -138,11 +139,11 @@ export default function Home() {
           <div
             style={{
               maxWidth: "50vw",
-              marginTop: "10vh",
+              margin: "10vh 0",
               padding: "5vh 8vw",
               textAlign: "justify",
               color: "black",
-              
+
             }}
           >
             <h2

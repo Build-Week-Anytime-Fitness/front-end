@@ -3,7 +3,7 @@ import Class from "./Class.js";
 import SearchIcon from "@material-ui/icons/Search";
 // import axios from "axios";
 import { gsap } from "gsap";
-import { connect} from "react-redux";
+import { connect } from "react-redux";
 import {
   getData,
   searchTerm,
@@ -23,20 +23,17 @@ const [ searchTerm, setSearchTerm ] = useState('');
 */
 
 const Classes = (props) => {
-    // console.log("props", props); // log props
-    // console.log("props.filteredClasses", props.filteredClasses) // log filteredClasses
-    // console.log("Classes: user from redux state", props.user) // log user
-    // console.log("Classes: currentUser from redux state", props.currentUser) // log current user
+  let localId = localStorage.getItem("id");
 
   // ----------- Helper Function ---------------------
   const getFilteredClassesHelper = (searchTerm) => {
     // edge case if searchTerm is "", reset filteredClasses to allClasses
     if (searchTerm === "") {
       props.myGetFilteredClasses(props.classes);
-      return; // bail our of getFilteredClassesHelper because no searchTerm
+      return; // bail out of getFilteredClassesHelper because no searchTerm
     }
 
-    console.log("getFilteredClassesHelper fires");
+    //console.log("getFilteredClassesHelper fires");
 
     // filter function over classes array
     const filteredClasses = props.classes.filter((indivClass) => {
@@ -90,19 +87,24 @@ const Classes = (props) => {
       <div style={{ textAlign: "center", color: "black" }}>Loading...</div>
     );
   }
+
+  const disabler = (item) => {
+    let toggle;
+    Number(localId) !== item.instructor_id ? (toggle = true) : (toggle = false);
+    return toggle;
+  };
+
   return (
     <>
       <div className="classes-background">
         <div className="classes-content-container">
           <div className="d-flex flex-row flex-wrap">
             <h1>Classes</h1>
-
             <SearchIcon
               className="search-icon"
               style={{ color: "444444", marginTop: "2vh" }}
               fontSize="large"
             />
-
             <input
               placeholder="Search for classes"
               type="text"
@@ -114,14 +116,19 @@ const Classes = (props) => {
               }}
             />
           </div>
-
           <div className="classes-container d-flex flex-row flex-wrap justify-content-center class-box">
             <div className="animation d-flex flex-row flex-wrap justify-content-center ">
               {props.filteredClasses &&
                 props.filteredClasses.map((indivClass) => {
-                  // console.log("indivClass: ", indivClass)
+                  const isDisabled = disabler(indivClass);
                   const classKey = Math.random().toString(16).slice(2);
-                  return <Class key={classKey} indivClass={indivClass} />;
+                  return (
+                    <Class
+                      key={classKey}
+                      indivClass={indivClass}
+                      disabled={isDisabled}
+                    />
+                  );
                 })}
             </div>
           </div>
@@ -132,7 +139,6 @@ const Classes = (props) => {
 };
 
 const mapStateToProps = (state) => {
-
   return {
     classes: state.classes,
     filteredClasses: state.filteredClasses,
@@ -142,7 +148,6 @@ const mapStateToProps = (state) => {
     isEditMode: state.isEditMode,
     currentUser: state.currentUser,
   };
-
 };
 
 const mapDispatchToProps = (dispatch) => {

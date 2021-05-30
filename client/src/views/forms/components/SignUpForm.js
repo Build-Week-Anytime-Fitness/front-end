@@ -26,7 +26,6 @@ const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
 function SignUpForm(props) {
   const history = useHistory();
   // state variables
-  //need to rename formValues to signUpFormValues
   const [isValid, setIsValid] = useState(true);
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState(initialErrorValues);
@@ -34,7 +33,7 @@ function SignUpForm(props) {
   useEffect(() => {
     // validateForm whenever the component is mounted
     validateForm(signUpFormSchema, formValues, setIsValid); //check if form is valid using schema.validate
-  }, []);
+  }, [formValues]);
   // function declarations
   const handleChange = (event) => {
     handleChangeHelper({
@@ -49,10 +48,10 @@ function SignUpForm(props) {
   };
   const handleSubmit = (event) => {
     handleSubmitHelper(event);
-    console.log(
-      "received form values in handle submit signup form",
-      formValues
-    );
+    // console.log(
+    //   "received form values in handle submit signup form",
+    //   formValues
+    // );
     props.addNewUser(formValues);
     history.push("/login");
   };
