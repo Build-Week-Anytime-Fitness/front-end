@@ -3,23 +3,26 @@ import axiosWithAuth from '../../utils/axiosWithAuth';
 import { 
     payForClass, 
     undoSignUp,
+    getData,
     FETCHING_API_START,
     FETCHING_API_SUCCESS,
     FETCHING_API_FAILURE,
     PAY_FOR_CLASS
-} from '../../state/actions/index';
+} from '../actions/index';
 
 // props attributes
 export const connectToStore = (component) => {
     const mapStateToProps = (state) =>{
         return{
-            classesPaid:state.classesPaid,
+            classes:state.classes,
+            myClasses:state.myClasses,
             classesToSignUp: state.classesToSignUp,
             user:state.user
         };
     };
     const mapDispatchToProps = (dispatch) =>{
         return{
+            getData: dispatch(getData()),
             payForClass: (indivClass)=>dispatch(payForClass(indivClass)),
             undoSignUp: (indivClass)=>dispatch(undoSignUp(indivClass)),
         };
@@ -48,7 +51,7 @@ export const payForClassAction = (indivClass) => (dispatch) =>{
 //  reducer
 export const payForClassReducer = (state,action) => {
     const indivClass = action.payload;
-    const updatedClasses = {...state.classesPaid,[indivClass.id]:indivClass};
+    const updatedClasses = {...state.myClasses,[indivClass.id]:{isPaid:true}};
     console.log("reducer fires: pay for class");
-    return { ...state, classesPaid: updatedClasses };
+    return { ...state, myClasses: updatedClasses };
 };
