@@ -1,6 +1,11 @@
 //import axios from 'axios';
 import axiosWithAuth from "../../utils/axiosWithAuth";
-import {payForClassAction} from "../../views/cart/cartReduxInterface";
+import {payForClassAction} from "../interfaces/cartInterface";
+import {
+  addMyClassAction,
+  removeMyClassAction
+} from "../interfaces/classInterface";
+import {getDataAction} from "../interfaces/getDataInterface";
 export const FETCHING_API_START = "FETCHING_API_LOADING";
 export const FETCHING_API_SUCCESS = "FETCHING_API_SUCCESS";
 export const FETCHING_API_FAILURE = "FETCHING_API_FAIL";
@@ -21,31 +26,10 @@ export const DELETE_CLASSES_SUCCESS = "DELETE_CLASSES_SUCCESS";
 export const CLASSES_TO_SIGN_UP = "CLASS_TO_SIGN_UP";
 export const UNDO_SIGN_UP = "UNDO_SIGN_UP";
 export const PAY_FOR_CLASS = "PAY_FOR_CLASS";
-
+export const ADD_MY_CLASS = "ADD_MY_CLASS";
+export const REMOVE_MY_CLASS = "REMOVE_MY_CLASS";
 //state related to getClasses API call
-export const getData = (props) => (dispatch) => {
-
-  // console.log("getData API call fires is loading True", props);
-  dispatch({ type: FETCHING_API_START, isLoading: "true" });
-  setTimeout(
-    axiosWithAuth()
-      .get("/classes")
-      .then((res) => {
-        dispatch({ type: ALL_CLASSES, payload: res.data });
-        dispatch({ type: GET_FILTERED_CLASSES, payload: res.data })   
-        dispatch({
-          type: FETCHING_API_SUCCESS,
-          isLoading: "false",
-          payload: res.data,
-        });
-      })
-      .catch((error) => {
-        dispatch({ type: FETCHING_API_FAILURE, payload: error });
-        console.log("getData API request failed", error);
-      }),
-    4000
-  );
-};
+export const getData = getDataAction;
 
 //state related to classes
 export const searchTerm = (searchTerm) => {
@@ -89,6 +73,10 @@ export const undoSignUp = (indivClass) => {
 };
 
 export const payForClass = payForClassAction;
+
+export const addMyClass = addMyClassAction;
+
+export const removeMyClass = removeMyClassAction;
 
 export const addClass = (addClass) => {
   //console.log("8. new allClasses from classes.js", addClass);

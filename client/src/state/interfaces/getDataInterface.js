@@ -42,10 +42,15 @@ export const fetchingAPIFailureReducer=(state,action)=>{
 };
 export const allClassesReducer=(state,action)=>{
     const classes = action.payload;
-    const IdAsKeysClasses = Object.keys(classes).reduce((acc,key)=>{
-        const id = classes[key].id;
-        acc[id] = classes[key];
-        return acc;
-    },{})
-    return { ...state, classes: IdAsKeysClasses };
+    if(classes){
+        const IdAsKeysClasses = Object.keys(classes).reduce((acc,key)=>{
+            const id = classes[key].id;
+            acc[id] = classes[key];
+            return acc;
+        },{});
+        return { ...state, classes: IdAsKeysClasses };
+    }
+    else{
+        return state;
+    }
 };

@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react';
 import CartItem from './CartItem';
 import {useHistory} from 'react-router-dom';
 import StripeCheckout from 'react-stripe-checkout';
-import {connectToStore} from './cartReduxInterface';
+import {connectToStore} from '../../state/interfaces/cartInterface';
 // data needed
 // - client id
 // 
@@ -36,13 +36,12 @@ const exampleData={
 
 const Cart=(props)=>{
     // states: classes, user
-    const {classesPaid, classesToSignUp, user} = props;
+    const {classes, myClasses, user} = props;
     // actions: payForClass(indivClass), undoSignUp(indivClass)
     const {payForClass, undoSignUp} = props;
-    console.log(props);
-    const cartList = Object.keys(classesToSignUp)
-    .filter((k1)=>classesPaid.find((k2) => classesToSignUp[k1].id===classesPaid[k2].id))
-    .map((key)=>classesToSignUp[key]);
+
+    const cartList = Object.keys(myClasses).filter((key)=>!myClasses[key].isPaid).map((key)=>classes[key]);
+    // const cartList = [];
 
     // This state will be refactored into redux store
     // pull this from redux
@@ -75,7 +74,7 @@ const Cart=(props)=>{
         <h1>Cart</h1>
 
         {displayCartItems(cartList)}
-
+        
         <button onClick={handleClickShopping}>Continue shopping</button>
 
         <StripeCheckout stripeKey="" token={makePayment} name="Anywhere Fitness" amount={exampleAmount*1000}>

@@ -7,16 +7,11 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import EditIcon from "@material-ui/icons/Edit";
-import { connect, useDispatch } from "react-redux";
-import axiosWithAuth from "../../utils/axiosWithAuth";
+import { useDispatch } from "react-redux";
+import { connectToStore } from "../../state/interfaces/classInterface";
 import {
   classToEdit,
-  classesToSignUp,
   setEditMode,
-  undoSignUp,
-  FETCHING_API_START,
-  FETCHING_API_SUCCESS,
-  FETCHING_API_FAILURE,
 } from "../../state/actions/index.js";
 
 const useStyles = makeStyles({
@@ -56,7 +51,6 @@ const Class = (props) => {
   //   "sanity check props.indivClass.instructor_id",
   //   props.indivClass.instructor_id
   // );
-
   //const editing = useSelector((state) => state.editing);
   const editForm = {
     id: props.indivClass.id,
@@ -110,7 +104,7 @@ const Class = (props) => {
     //console.log("handleSignUp has been fired: indiv class", props.indivClass);
 
     props.myClassesToSignUp(props.indivClass); // add class to dictionary of signed up classes
-
+    props.addMyClass(props.indivClass);
   };
 
   const handleUndoSignUp = () => {
@@ -120,7 +114,7 @@ const Class = (props) => {
     // );
 
     props.myUndoSignUp(props.indivClass); // assign class to false in dictionary of signed up classes
-
+    props.removeMyClass(props.indivClass);
     // dispatch({ type: FETCHING_API_START });
 
     // axiosWithAuth()
@@ -255,21 +249,4 @@ const displayTime = (duration) => {
   }
 };
 
-const mapStateToProps = (state) => {
-  return {
-    classToEdit: state.classToEdit,
-    currentUser: state.currentUser,
-    classesToSignUp: state.classesToSignUp,
-    isEditMode: state.isEditMode,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    myClassToEdit: (indivClass) => dispatch(classToEdit(indivClass)),
-    myClassesToSignUp: (indivClass) => dispatch(classesToSignUp(indivClass)),
-    myUndoSignUp: (indivClass) => dispatch(undoSignUp(indivClass)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Class);
+export default connectToStore(Class);
