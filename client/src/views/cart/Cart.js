@@ -1,42 +1,11 @@
-import React,{useEffect, useState} from 'react';
 import CartItem from './CartItem';
 import {useHistory} from 'react-router-dom';
 import StripeCheckout from 'react-stripe-checkout';
 import {connectToStore} from '../../state/interfaces/cartInterface';
-// data needed
-// - client id
-// 
-
-// this is for debugging purpose, please delete when redux is implemented
-const exampleList=[
-    {
-        class_name:'Awesome Class',
-        class_date:'01/04/2021'
-    },
-    {
-        class_name:'Fun Fun Class',
-        class_date:'12/04/2021'
-    },
-]
-// fetch client fitness classes from backend by id
-// expected class format: 
-const exampleData={
-    class_date: "Monday",
-    class_id: 1,
-    class_name: "oldie but goldies",
-    class_type: "jazzersize",
-    client_id: 3,
-    duration: 1,
-    email: "th@marvel.org",
-    intensity: "high",
-    max_class_size: 23,
-    number_of_students: 1,
-    start_time: "9:00 am"
-};
 
 const Cart=(props)=>{
     // states: classes, user
-    const {classes, myClasses, user} = props;
+    const {classes, myClasses} = props;
     // actions: payForClass(indivClass), undoSignUp(indivClass)
     const {payForClass, undoSignUp} = props;
 
