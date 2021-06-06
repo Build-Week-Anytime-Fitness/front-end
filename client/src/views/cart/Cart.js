@@ -82,7 +82,7 @@ const Cart=(props)=>{
             {/*react-stripe-checkout package */}
             {/*stripeKey prop will store the publishable key as process.env.REACT_APP_KEY*/}
             <StripeCheckout stripeKey={process.env.REACT_APP_KEY} token={makePayment} name={'Anywhere Fitness Checkout'} amount={10.99 * 100}>
-                <button disabled={cartList.length===0}>Checkout</button>
+                <button id='cart-checkout-button' disabled={cartList.length===0}>Checkout</button>
             </StripeCheckout>
     </div>
     );

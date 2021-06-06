@@ -28,6 +28,7 @@ describe('test shopping cart',()=>{
         email().type('th@marvel.org');
         password().type('password');
         submit().click();
+        cy.wait(10000);
     });
     it('renders class page',()=>{
         signUp1().should('exist');
@@ -41,6 +42,10 @@ describe('test shopping cart',()=>{
         signUp3().should('have.text','unregister');
     });
     describe('test cart page',()=>{
+        const checkout = () =>cy.get('#cart-checkout-button');
+        const cardNum = '4242424242424242';
+        const expDate = '12/99';
+        const cvc = '123';
         before(()=>{
             cartLink().click();
         });
@@ -48,7 +53,17 @@ describe('test shopping cart',()=>{
             cy.contains(class1).should('exist');
             cy.contains(class2).should('exist');
             cy.contains(class3).should('exist');
+            checkout.should('exist');
+            checkout.should('be.enabled');
         });
+        describe('test checkout',()=>{
+            before(()=>{
+                checkout.click();
+            });
+            it('can use stripe',()=>{
+                
+            });
+        })
         
     });
 });
