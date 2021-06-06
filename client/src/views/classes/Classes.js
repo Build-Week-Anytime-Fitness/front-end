@@ -24,7 +24,6 @@ const [ searchTerm, setSearchTerm ] = useState('');
 
 const Classes = (props) => {
   let localId = localStorage.getItem("id");
-
   // ----------- Helper Function ---------------------
   const getFilteredClassesHelper = (searchTerm) => {
     // edge case if searchTerm is "", reset filteredClasses to allClasses

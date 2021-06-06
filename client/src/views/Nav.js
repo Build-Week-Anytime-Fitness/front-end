@@ -27,6 +27,16 @@ export default function Nav() {
                 to="logout" className="button">
                 Logout
             </Link>
+            <Link
+                id="nav-classes"
+                to="classes" className="button">
+                Classes
+            </Link>
+            <Link
+                id="nav-cart"
+                to="cart" className="button">
+                Cart
+            </Link>
             {/* <Link
                 id="nav-classes"
                 to="classes" className="button">

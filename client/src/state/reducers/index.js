@@ -14,8 +14,21 @@ import {
   CLASS_TO_DELETE,
   CLASSES_TO_SIGN_UP,
   UNDO_SIGN_UP,
+  PAY_FOR_CLASS,
+  ADD_MY_CLASS,
+  REMOVE_MY_CLASS
 } from "../actions";
-
+import {payForClassReducer} from "../interfaces/cartInterface";
+import {
+  addMyClassReducer, 
+  removeMyClassReducer
+} from "../interfaces/classInterface";
+import {
+  fetchingAPIStartReducer,
+  fetchingAPISuccessReducer,
+  fetchingAPIFailureReducer,
+  allClassesReducer
+} from "../interfaces/getDataInterface";
 //const log = console.log;
 
 //1. set initialState
@@ -29,6 +42,7 @@ const initialState = {
   },
   classToEdit: {},
   classesToSignUp: {}, // dictionary of class ids that user had signed up for
+  myClasses:{},
   user: {
     id: "",
     personName: "",
@@ -85,16 +99,13 @@ export const appReducer = (state = initialState, action) => {
   //3. initialize switch statement
   switch (action.type) {
     case FETCHING_API_START: {
-      // log("FETCH RUNNING THROUGH REDUCER isLoading: TRUE");
-      return { ...state, isLoading: true };
+      return fetchingAPIStartReducer(state,action);
     }
     case FETCHING_API_SUCCESS: {
-      //log("FETCH SUCCESS THROUGH REDUCER");
-      return { ...state, isLoading: false };
+      return fetchingAPISuccessReducer(state,action);
     }
     case FETCHING_API_FAILURE: {
-      //log("FETCH FAIL FROM REDUCER");
-      return { ...state, isLoading: false, error: action.payload };
+      return fetchingAPIFailureReducer(state,action);
     }
     case SEARCH_TERM: {
       //log("3. SEARCH TERM FROM REDUCER", action.payload);
@@ -105,8 +116,7 @@ export const appReducer = (state = initialState, action) => {
       return { ...state, filteredClasses: action.payload };
     }
     case ALL_CLASSES: {
-      // log("ALL CLASSES reducer, log classes", action.payload);
-      return { ...state, classes: action.payload };
+      return allClassesReducer(state,action);
     }
     case CLASS_TO_EDIT: {
       // log("CLASS_TO_EDIT in reducer: log payload: ", action.payload);
@@ -147,6 +157,23 @@ export const appReducer = (state = initialState, action) => {
         classesToSignUp: { ...state.classesToSignUp, [newClassId]: false },
       };
     }
+
+    case PAY_FOR_CLASS:{
+      return payForClassReducer(state,action);
+    }
+   
+    case ADD_MY_CLASS:{
+      return addMyClassReducer(state,action);
+    }
+
+    case REMOVE_MY_CLASS:{
+      return removeMyClassReducer(state,action);
+    }
+    // case ADD_CLASS: {
+    //   console.log("reducer fires: add class ");
+    //   return { ...state, classes: [...state.classes, action.payload] };
+    // }
+
 
     case ADD_USER: {
       //console.log("reducer fires: add user");
