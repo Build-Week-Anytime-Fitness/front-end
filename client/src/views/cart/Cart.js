@@ -70,19 +70,19 @@ const Cart=(props)=>{
           })
     }
     return (
-    <div>
+    <div className={'d-flex flex-column justify-content-center'} style={{textAlign: 'center', border: '1px solid black', padding: '8vh 10vw', borderRadius: '50px', boxShadow: '0 0 3vh black', marginBottom: '10vh'}}>
         <h1>Cart</h1>
 
         {displayCartItems(cartList)}
         
-        <button onClick={handleClickShopping}>Continue shopping</button>
+        <button onClick={handleClickShopping} style={{borderRadius: '50px'}}>Continue shopping</button>
 
             {/*Stripe Secret Key needs to be stored in the .env file on the backend*/}
             {/*Stripe Publishable Key needs to be stored in the .env file on the frontend - REACT_APP_KEY  environment variable stored on FE */}
             {/*react-stripe-checkout package */}
             {/*stripeKey prop will store the publishable key as process.env.REACT_APP_KEY*/}
             <StripeCheckout stripeKey={process.env.REACT_APP_KEY} token={makePayment} name={'Anywhere Fitness Checkout'} amount={10.99 * 100}>
-                <button id='cart-checkout-button' disabled={cartList.length===0}>Checkout</button>
+                <button id='cart-checkout-button' disabled={cartList.length===0} style={{borderRadius: '50px'}}>Checkout</button>
             </StripeCheckout>
     </div>
     );

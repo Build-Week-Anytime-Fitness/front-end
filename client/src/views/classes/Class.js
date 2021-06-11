@@ -12,7 +12,7 @@ import { connectToStore } from "../../state/interfaces/classInterface";
 import {
   classToEdit,
   setEditMode,
-} from "../../state/actions/index.js";
+} from "../../state/actions";
 
 const useStyles = makeStyles({
   root: {
@@ -87,15 +87,17 @@ const Class = (props) => {
     dispatch(classToEdit(props.indivClass));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     dispatch(props.myClassToEdit(editForm));
   };
 
   const toggleSignUp = () => {
     //console.log("toggleSignUp has been fired");
     if (isSignedUpFor(props.indivClass)) {
+      
       handleUndoSignUp();
     } else {
+      alert(`Your class has been added to your cart`)
       handleSignUp();
     }
   };
@@ -112,7 +114,7 @@ const Class = (props) => {
     //   "handleUndoSignUp has been fired: indiv class",
     //   props.indivClass
     // );
-
+    alert("The selected class has been removed from your cart")
     props.myUndoSignUp(props.indivClass); // assign class to false in dictionary of signed up classes
     props.removeMyClass(props.indivClass);
     // dispatch({ type: FETCHING_API_START });

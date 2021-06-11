@@ -2,18 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d434a08-85ab-44c7-9237-43343d152cf3" name="Default Changelist" comment="Capitalized file name refactor">
-      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/App.ccss.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/App.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/state/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/state/actions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/Nav.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/Nav.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/views/forms/components/LogInForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/forms/components/LogInForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/cart/Cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/cart/Cart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/cart/CartItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/cart/CartItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/classes/Class.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/classes/Class.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/views/forms/components/ClassForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/views/forms/components/ClassForm.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +15,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -70,6 +69,7 @@
       <workItem from="1621553985321" duration="60000" />
       <workItem from="1621554278657" duration="313000" />
       <workItem from="1622273408947" duration="3803000" />
+      <workItem from="1623382802612" duration="406000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1621389395520</created>

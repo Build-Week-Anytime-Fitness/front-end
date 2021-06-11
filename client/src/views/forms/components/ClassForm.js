@@ -14,7 +14,7 @@ import {
   FETCHING_API_SUCCESS,
   FETCHING_API_FAILURE,
   setEditMode,
-} from "../../../state/actions/index.js";
+} from "../../../state/actions";
 
 const initialValues = {
   class_name: "",
@@ -121,10 +121,10 @@ const ClassForm = (props) => {
           type: FETCHING_API_SUCCESS,
           isLoading: false,
           payload: res.data.message,
-        });
-        setFormValues(initialValues);
+        });      
         alert(res.data.message);
         props.mySetEditMode(false);
+        setFormValues(initialValues);
         window.location.reload();
       })
       .catch((error) => {
@@ -135,7 +135,7 @@ const ClassForm = (props) => {
       });
   };
 
-  const handleDelete = (e) => {
+  const handleDelete = () => {
     //e.preventDefault();
     console.log(
       "Delete a class fired from classForm DATA: ",
