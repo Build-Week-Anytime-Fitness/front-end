@@ -26,14 +26,14 @@ function App() {
             marginTop: '20vh'
           }}
         >
-          {/* <ReactPlayer
+          <ReactPlayer
             url={Video}
             playing={true}
             loop={true}
             height={'40vh'}
             style={{margin: 'auto auto'}}
             id={'video-player'}
-        /> */}
+        />
           <Link
             to="home"
             className="button"

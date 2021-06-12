@@ -9,7 +9,7 @@ import {
     handleChangeHelper,
     handleSubmitHelper,
 } from "../formHelpers";
-import FitnessThree from "../../../assets/fitnessThree.jpg"; //bread crumbs if we get lost
+//import FitnessThree from "../../../assets/fitnessThree.jpg"; //bread crumbs if we get lost
 
 const initialValues = {
     name: "",
