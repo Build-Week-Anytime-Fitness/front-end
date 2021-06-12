@@ -5,13 +5,13 @@ import Logo from '../assets/anywhereWhite.png'
 export default function Nav() {
     return (
     <AppBar className={'d-flex flex-row flex-wrap justify-content-between'} position={'fixed'} style={{backgroundColor: 'black'}}>
-        <div className={'d-flex flex-row'} style={{width: '500px'}}>
+        <div className={'d-flex flex-row'} style={{width: '550px'}}>
             <img className={'image-resizer'} src={Logo} alt='Anywhere Fitness'></img>
             <Link to="/home" className="button">
                 <h1 style={{color: '#AAA'}}>Anywhere Fitness Club</h1>
             </Link>
         </div>
-        <div className={"d-flex flex-row flex-wrap justify-content-center"} style={{width: '500px'}}>
+        <div className={"d-flex flex-row flex-wrap justify-content-center"} style={{width: '550px'}}>
 
             <Link
                 id="nav-sign-up"

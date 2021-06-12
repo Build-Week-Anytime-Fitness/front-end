@@ -16,11 +16,11 @@ import {
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 310,
+    width: 350,
+    height: 450,
     backgroundColor: '#DDD',
     fontSize: 22,
     margin: "20px",
-    boxShadow: "0 0 1rem #444",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",

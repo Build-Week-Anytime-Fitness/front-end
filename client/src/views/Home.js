@@ -19,8 +19,9 @@ export default function Home() {
                 loop={true}
                 width={'100vw'}
                 height={'120vh'}
-                style={{marginTop: '10vh'}}
+                style={{marginTop: '5vh'}}
                 id={'video-player'}
+                playsinline={true}
             />
 
             <div className={"regular-wrapper"} >
@@ -91,7 +92,7 @@ export default function Home() {
                         for either attending or hosting fitness classes.
                     </h2>
                 </div>
-                
+
 
             </div>
             <div className={"parallax-wrapper2"} style={{height: '120vh'}}>
@@ -141,7 +142,7 @@ export default function Home() {
 
             </div>
             <div className={"regular-wrapper3"}>
-                <div className={"content"}>
+                <div className={"content"} style={{opacity: '0.95'}}>
                     <img
                     className={"marketing-resizer"}
                     src={FitnessEight}
