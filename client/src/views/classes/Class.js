@@ -17,7 +17,7 @@ import {
 const useStyles = makeStyles({
   root: {
     minWidth: 310,
-    opacity: 0.9,
+    backgroundColor: '#DDD',
     fontSize: 22,
     margin: "20px",
     boxShadow: "0 0 1rem #444",
@@ -212,6 +212,7 @@ const Class = (props) => {
                     backgroundColor: props.disabled === true ? "red" : "#aaa",
                     borderRadius: "25px",
                     opacity: props.disabled === true ? "0.5" : "0.9",
+                    width: '250px'
                   }}
                 >
                   <EditIcon style={{ margin: "10", color: "555555" }} />
@@ -221,7 +222,8 @@ const Class = (props) => {
                   onClick={toggleSignUp}
                   disabled={number_of_students >= max_class_size}
                   size="small"
-                  style={{ color: "555555" }}
+                  style={{ color: "#555555" }}
+
                 >
                   {number_of_students >= max_class_size
                     ? "full"

@@ -97,7 +97,7 @@ const Classes = (props) => {
     <>
       <div className="classes-background">
         <div className="classes-content-container">
-          <div className="d-flex flex-row flex-wrap">
+          <div className="d-flex flex-row flex-wrap" style={{ backgroundColor: 'black', justifyContent: 'center',  }}>
             <h1>Classes</h1>
             <SearchIcon
               className="search-icon"
@@ -109,13 +109,15 @@ const Classes = (props) => {
               type="text"
               onChange={searchChangeHandler}
               style={{
-                width: "12vw",
+                width: "200px",
                 height: "2rem",
                 marginTop: "2vh",
               }}
             />
           </div>
-          <div className="classes-container d-flex flex-row flex-wrap justify-content-center class-box">
+          <div className={"parallax-wrapper6"} style={{marginTop: '40vh'}}>
+     
+ <div className="classes-container d-flex flex-row flex-wrap justify-content-center class-box">
             <div className="animation d-flex flex-row flex-wrap justify-content-center ">
               {props.filteredClasses &&
                 props.filteredClasses.map((indivClass) => {
@@ -130,6 +132,9 @@ const Classes = (props) => {
                   );
                 })}
             </div>
+          
+        </div>
+         
           </div>
         </div>
       </div>

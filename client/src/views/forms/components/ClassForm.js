@@ -121,7 +121,7 @@ const ClassForm = (props) => {
           type: FETCHING_API_SUCCESS,
           isLoading: false,
           payload: res.data.message,
-        });      
+        });
         alert(res.data.message);
         props.mySetEditMode(false);
         setFormValues(initialValues);
@@ -166,7 +166,13 @@ const ClassForm = (props) => {
   return (
     <form
       className={"d-flex flex-column justify-content-center form-style-two"}
-      style={{ textAlign: "center" }}
+      style={{
+        textAlign: "center",
+        backgroundColor: "#444",
+        width: "100vw",
+        opacity: "0.8",
+        padding: '8vh 0'
+      }}
       onSubmit={handleSubmit}
     >
       <h2>{!props.isEditMode ? "Add a Class" : "Update or Delete"}</h2>
@@ -263,6 +269,14 @@ const ClassForm = (props) => {
           type="submit"
           disabled={!isValid}
           onClick={handleSubmit}
+          style={{
+            width: "250px",
+            alignSelf: "center",
+            margin: "5vh 0",
+            borderRadius: "50px",
+            fontSize: "1.5rem",
+            border: "1px solid #222",
+          }}
         >
           Add Class
         </button>
@@ -273,6 +287,14 @@ const ClassForm = (props) => {
             type="submit"
             disabled={!isValid}
             onClick={handleUpdate}
+            style={{
+              width: "250px",
+              alignSelf: "center",
+              margin: "5vh 0",
+              borderRadius: "50px",
+              fontSize: "1.5rem",
+              border: "1px solid #222",
+            }}
           >
             Update Class
           </button>
@@ -281,7 +303,16 @@ const ClassForm = (props) => {
             type="submit"
             disabled={!isValid}
             onClick={handleDelete}
-            style={{ backgroundColor: "red", color: "white" }}
+            style={{
+              width: "250px",
+              alignSelf: "center",
+              margin: "5vh 0",
+              borderRadius: "50px",
+              fontSize: "1.5rem",
+              border: "1px solid #222",
+              backgroundColor: "red",
+              color: "white",
+            }}
           >
             Delete Class
           </button>
