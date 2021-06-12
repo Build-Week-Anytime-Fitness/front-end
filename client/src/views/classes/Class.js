@@ -12,12 +12,12 @@ import { connectToStore } from "../../state/interfaces/classInterface";
 import {
   classToEdit,
   setEditMode,
-} from "../../state/actions/index.js";
+} from "../../state/actions";
 
 const useStyles = makeStyles({
   root: {
     minWidth: 310,
-    opacity: 0.9,
+    backgroundColor: '#DDD',
     fontSize: 22,
     margin: "20px",
     boxShadow: "0 0 1rem #444",
@@ -87,15 +87,17 @@ const Class = (props) => {
     dispatch(classToEdit(props.indivClass));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     dispatch(props.myClassToEdit(editForm));
   };
 
   const toggleSignUp = () => {
     //console.log("toggleSignUp has been fired");
     if (isSignedUpFor(props.indivClass)) {
+      
       handleUndoSignUp();
     } else {
+      alert(`Your class has been added to your cart`)
       handleSignUp();
     }
   };
@@ -112,7 +114,7 @@ const Class = (props) => {
     //   "handleUndoSignUp has been fired: indiv class",
     //   props.indivClass
     // );
-
+    alert("The selected class has been removed from your cart")
     props.myUndoSignUp(props.indivClass); // assign class to false in dictionary of signed up classes
     props.removeMyClass(props.indivClass);
     // dispatch({ type: FETCHING_API_START });
@@ -210,6 +212,7 @@ const Class = (props) => {
                     backgroundColor: props.disabled === true ? "red" : "#aaa",
                     borderRadius: "25px",
                     opacity: props.disabled === true ? "0.5" : "0.9",
+                    width: '250px'
                   }}
                 >
                   <EditIcon style={{ margin: "10", color: "555555" }} />
@@ -219,7 +222,8 @@ const Class = (props) => {
                   onClick={toggleSignUp}
                   disabled={number_of_students >= max_class_size}
                   size="small"
-                  style={{ color: "555555" }}
+                  style={{ color: "#555555" }}
+
                 >
                   {number_of_students >= max_class_size
                     ? "full"

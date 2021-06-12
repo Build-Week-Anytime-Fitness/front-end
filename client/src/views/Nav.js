@@ -1,17 +1,17 @@
 import {Link} from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
-import Logo from '../assets/transparent.png'
+import Logo from '../assets/anywhereWhite.png'
 
 export default function Nav() {
     return (
-    <AppBar className={'d-flex flex-row flex-wrap justify-content-between '} color={'inherit'} position={'fixed'}>
-        <div className={'d-flex flex-row'} style={{width: '75vw'}}>
+    <AppBar className={'d-flex flex-row flex-wrap justify-content-between'} position={'fixed'} style={{backgroundColor: 'black'}}>
+        <div className={'d-flex flex-row'} style={{width: '500px'}}>
             <img className={'image-resizer'} src={Logo} alt='Anywhere Fitness'></img>
             <Link to="/home" className="button">
-                <h1>Anywhere Fitness Club</h1>
+                <h1 style={{color: '#AAA'}}>Anywhere Fitness Club</h1>
             </Link>
         </div>
-        <div className={"d-flex flex-row flex-wrap justify-content-center"}>
+        <div className={"d-flex flex-row flex-wrap justify-content-center"} style={{width: '500px'}}>
 
             <Link
                 id="nav-sign-up"
