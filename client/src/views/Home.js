@@ -91,6 +91,7 @@ export default function Home() {
                         for either attending or hosting fitness classes.
                     </h2>
                 </div>
+                
 
             </div>
             <div className={"parallax-wrapper2"} style={{height: '120vh'}}>
