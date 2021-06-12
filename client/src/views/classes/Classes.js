@@ -97,7 +97,7 @@ const Classes = (props) => {
     <>
       <div className="classes-background">
         <div className="classes-content-container">
-          <div className="d-flex flex-row flex-wrap" style={{ backgroundColor: 'black', justifyContent: 'center',  }}>
+          <div className="d-flex flex-row flex-wrap" style={{ backgroundColor: 'black', justifyContent: 'center', opacity: '0.7' }}>
             <h1>Classes</h1>
             <SearchIcon
               className="search-icon"

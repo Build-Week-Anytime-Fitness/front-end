@@ -31,13 +31,14 @@ function App() {
             playing={true}
             loop={true}
             height={'40vh'}
-            style={{margin: 'auto auto'}}
+            style={{margin: 'auto auto', }}
             id={'video-player'}
+            playsinline={true}
         />
           <Link
             to="home"
             className="button"
-            style={{ color: "white", padding: "3vh 5vw", border: '1px solid white', borderRadius: '50px', backgroundColor: '#222' }}
+            style={{ color: "white", padding: "3vh 5vw", border: '1px solid white', borderRadius: '50px', margin: '10vh 0', backgroundColor: '#222', opacity: '0.8' }}
           >
             <h4 style={{ color: "white"}}>Step Inside</h4>
           </Link>
