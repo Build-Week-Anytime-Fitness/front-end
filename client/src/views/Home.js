@@ -10,7 +10,6 @@ import ReactPlayer from "react-player";
 
 export default function Home() {
 
-
     return (
         <React.Fragment>
             <ReactPlayer
