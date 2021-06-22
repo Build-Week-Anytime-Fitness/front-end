@@ -149,11 +149,11 @@ Bootstrap
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-GSAP
-[x] npm install gsap
-import { gsap } from "gsap";
+- GSAP
+    [ ] npm install gsap
+    [ ] import { gsap } from "gsap";
 
-## Dev Dependencies Installed
+## Dev Dependencies
 
 - Cypress
     - [ ] npm install cypress --save-dev
@@ -170,7 +170,7 @@ import { gsap } from "gsap";
         }
 
 - React Testing Library
-    - [x] npm install --save-dev @testing-library/react
+    - [ ] npm install --save-dev @testing-library/react
 
 ## Tools
 
