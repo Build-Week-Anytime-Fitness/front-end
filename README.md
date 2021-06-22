@@ -2,10 +2,13 @@
 
 Anywhere Fitness is a React web application that allows fitness classes to be held anywhere - a park, an unfinished basement or a garage - not just your traditional gym.
 
+
+https://anywhere-fitness-club.vercel.app/
+
 ## Software Developers
 
 backend: Jayaram Nair
-frontend: Tony Miller, Chris Lau, Rhiannon Stanford
+frontend: Chris Lau, Tony Miller, Rhiannon Stanford
 
 ## Link to Product Vision Statement 📝
 
@@ -51,9 +54,7 @@ https://github.com/Build-Week-Anytime-Fitness
 [] Logout.js
 [] ClassForm.js
 
-## NOTE: Front-end work shared by all front-end devs.  Regular pair programming.  Shared contribution.
-
-> Tony
+## NOTE: Front-end work shared by all front-end devs. Regular pair programming. Shared contribution.
 
 [x] Create React App
 [x] Install Dependencies
@@ -61,8 +62,8 @@ https://github.com/Build-Week-Anytime-Fitness
 
 [x] Create Router System (5 routes so far)
 
-  [x] Create ProtectedRoute component (for client & instructor pages after successful login)
-  [x] Other Routes are:
+[x] Create ProtectedRoute component (for client & instructor pages after successful login)
+[x] Other Routes are:
 
         - home
         - sign-up
@@ -72,17 +73,17 @@ https://github.com/Build-Week-Anytime-Fitness
 
 [x] Create Header.js
 [x] Create Footer.js
-[x] Create Server.js - faux server to test login, until backend is ready.  
-      username: lambda
-      password: school
+
+[x] Create Server.js - faux server to test login, until backend is ready.
+
+- username: lambda
+- password: school
 
 [x] Create video element for home
 [x] Bootstrap styling
 
 [x] Refactor to redux, create actions and reducers
 [x] Add Media Queries to App.css
-
-> Rhiannon
 
 [x] Create & Maintain README.md
 [x] Set Up File Architecture for state (actions / reducers)
@@ -91,21 +92,22 @@ https://github.com/Build-Week-Anytime-Fitness
 [x] Add search feature to classes, integrated into Redux
 [x] Create Classes.js component(protectedRoute)
 [x] Create Class.js component(protected) - use Mat UI styling
-[x] Create Instructors.js component(protectedRoute) 
+
+[x] Create Instructors.js component(protectedRoute)
+
 [x] Conditional Rendering of views /classes (client) & /instructors (instructor)
 [x] Create InstructorClasses.js (protectedRoute)
 
 [x] Refactor to redux, create actions and reducers
 [x] Add Media Queries App.css
 
-> Chris
-
 [x] Create Forms:
 
-  [x] SignUpForm.js - new users sign-up
-  [x] LogInForm.js - checkbox for ------>   isTeacher: boolean
-  [x] ClassForm.js (CRUD:  add, update, delete a class)
-  [x] Form styling
+[x] SignUpForm.js - new users sign-up
+[x] LogInForm.js - checkbox for ------> isTeacher: boolean
+[x] ClassForm.js (CRUD: add, update, delete a class)
+[x] Form styling
+
 
 [x] Conditional Rendering of Errors - save as error object
 [x] Form Validation - Yup
@@ -114,17 +116,19 @@ https://github.com/Build-Week-Anytime-Fitness
 [x] Debugging work on Redux async issues / useEffect
 [x] Testing of components and feedback to group
 
+[x] Implement Stripe - Stripe components, cart, payment, and redux
+
 ## SAMPLE LOGINS
 
-> Link to backend Github  https://github.com/Build-Week-Anytime-Fitness/back-end/blob/main/README.md
+> Link to backend Github https://github.com/Build-Week-Anytime-Fitness/back-end/blob/main/README.md
 
-  Client # 1
-  email: th@marvel.org
-  password: password
+Client # 1
+email: th@marvel.org
+password: password
 
-  Instructor# 2
-  email: bp@marvel.org
-  password: password
+Instructor# 2
+email: bp@marvel.org
+password: password
 
 ## Dependencies Installed
 
@@ -191,6 +195,7 @@ Tiny JPEG https://tinyjpg.com/
 > Class Data Structure:
 
   { "id": "1", "className": "oldie but goodie", "classType": "jazzersize", "classDate": "Monday", "startTime": 9:00am, "duration": 1, "intensity": "high", "location": "anywhere", "numberOfStudents": 10, "maxClassSize": 10 }
+
 
 
 ## Responsiveness Media Queries

@@ -84,7 +84,9 @@ const LogInForm = (props) => {
   };
 
   return (
-    <form className={"d-flex flex-column login-style"} onSubmit={handleSubmit}>
+    <div className={"parallax-wrapper5"} style={{marginTop: '60vh'}}>
+    <div className={"content1"}>
+  <form className={"d-flex flex-column login-style"} onSubmit={handleSubmit}>
       <div className={"d-flex flex-column justify-content-center input-style"}>
         <h2 style={{ color: "white" }}>Login</h2>
         <div className={"d-flex flex-row flex-wrap justify-content-center"}>
@@ -118,6 +120,7 @@ const LogInForm = (props) => {
             type="submit"
             onClick={handleSubmit}
             disabled={!isValid}
+            style={{width: '250px', alignSelf: 'center', padding: '1vh 3vw', borderRadius: '50px', marginBottom: '3vh'}}
           >
             Enter
           </button>
@@ -140,6 +143,9 @@ const LogInForm = (props) => {
         </div>
       </div>
     </form>
+    </div>
+</div>
+  
   );
 };
 

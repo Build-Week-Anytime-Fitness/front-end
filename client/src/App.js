@@ -10,22 +10,37 @@ import Classes from "./views/classes/Classes";
 import Instructors from "./views/Instructors";
 import Cart from "./views/cart/Cart";
 import Footer from "./views/Footer";
+import ReactPlayer from "react-player";
+import Video from "./assets/ANYWHERE.mp4";
+import React from "react";
 
 function App() {
-  <button></button>;
+
   return (
     <Router>
       <div className={"d-flex flex-column justify-content-start align-items-center wrapper"}>
         <Nav />
         <div
-          className="d-flex justify-content-center align-items-start"
+          className="d-flex justify-content-center flex-column"
+          style={{
+            marginTop: '20vh'
+          }}
         >
+          <ReactPlayer
+            url={Video}
+            playing={true}
+            loop={true}
+            height={'40vh'}
+            style={{margin: 'auto auto', }}
+            id={'video-player'}
+            playsinline={true}
+        />
           <Link
             to="home"
             className="button"
-            style={{ color: "#666", marginTop: '3vh', marginBottom: '17vh', padding: "3vh 5vw" }}
+            style={{ color: "white", padding: "3vh 5vw", border: '1px solid white', borderRadius: '50px', margin: '10vh 0', backgroundColor: '#222', opacity: '0.8' }}
           >
-            <h4 style={{ color: "black"}}>Step Inside</h4>
+            <h4 style={{ color: "white"}}>Step Inside</h4>
           </Link>
         </div>
         <Switch>
