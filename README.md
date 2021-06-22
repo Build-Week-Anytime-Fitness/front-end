@@ -6,8 +6,8 @@ https://anywhere-fitness-club.vercel.app/
 
 ## Software Developers
 
-backend: Jayaram Nair
-frontend: Chris Lau, Tony Miller, Rhiannon Stanford
+- backend: Jayaram Nair
+- frontend: Chris Lau, Tony Miller, Rhiannon Stanford
 
 ## Link to Product Vision Statement 📝
 
