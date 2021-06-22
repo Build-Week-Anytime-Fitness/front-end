@@ -121,37 +121,35 @@ Instructor# 2
 email: bp@marvel.org
 password: password
 
-## Dependencies Installed
+## Dependencies
 
-React Dom
-[x] npm install react react-dom
+- React Dom
+    - [ ] npm install react react-dom
 
-Axios
-[x] npm install axios
-import axios from 'axios';
+- Axios
+    - [ ] npm install axios
+    - [ ] import axios from 'axios';
 
-Yup
-[x] npm install -S yup
-import \* as yup from 'yup';
+- Yup
+    - [ ] npm install -S yup
+    - [ ] import \* as yup from 'yup';
 
-React Router
-[x] npm install --save react-router
-import { Router, Route, Switch } from "react-router";
+- React Router
+    - [ ] npm install --save react-router
+    - [ ] import { Router, Route, Switch } from "react-router";
 
-Material UI
-[x] npm install @material-ui/core
-[x] npm install @material-ui/icons
+- Material UI
+    - [ ] npm install @material-ui/core
+    - [ ] [ ] npm install @material-ui/icons
 
-Bootstrap
-[x] npm install react-bootstrap bootstrap@4.6.0
-
-{/_ The following line can be included in your src/index.js or App.js file_/}
-
-import 'bootstrap/dist/css/bootstrap.min.css';
+- Bootstrap
+    - [ ] npm install react-bootstrap bootstrap@4.6.0
+    - {/_ The following line can be included in your src/index.js or App.js file_/}
+    - [ ] import 'bootstrap/dist/css/bootstrap.min.css';
 
 - GSAP
-    [ ] npm install gsap
-    [ ] import { gsap } from "gsap";
+    - [ ] npm install gsap
+    - [ ] import { gsap } from "gsap";
 
 ## Dev Dependencies
 
