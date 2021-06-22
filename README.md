@@ -15,7 +15,7 @@ https://anywhere-fitness-club.vercel.app/
 
 ## FRONT END
 
-## App Organization & Structure Notes
+## App Organization & Structure
 
     - Home / video element
     - sign-up
@@ -35,19 +35,19 @@ https://anywhere-fitness-club.vercel.app/
 
 ## Components
 
-[] Home.js
-[] Header.js
-[] Footer.js
-[] Nav.js
+- Home.js
+- Header.js
+- Footer.js
+- Nav.js
 
-[] Classes.js
-[] Class.js
-[] Instructors.js
+- Classes.js
+- Class.js
+- Instructors.js
 
-[] SignUpForm.js
-[] LogInForm.js
-[] Logout.js
-[] ClassForm.js
+- SignUpForm.js
+- LogInForm.js
+- Logout.js
+- ClassForm.js
 
 ## NOTE: Front-end work shared by all front-end devs. Regular pair programming. Shared contribution.
 
