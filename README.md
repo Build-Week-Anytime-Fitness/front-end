@@ -55,7 +55,7 @@ https://anywhere-fitness-club.vercel.app/
     [ ] Install Dependencies
     [ ] Set Up File Architecture (component pages, views, utils, etc.)
 
-    [ ] Create Router System (5 routes so far)
+    [ ] Create Router System (5 routes)
 
     [ ] Create ProtectedRoute component (for client & instructor pages after successful login)
     [ ] Other Routes are:
