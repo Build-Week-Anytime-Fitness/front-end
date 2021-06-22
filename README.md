@@ -156,18 +156,18 @@ import { gsap } from "gsap";
 ## Dev Dependencies Installed
 
 - Cypress
-    - [x] npm install cypress --save-dev
+    - [ ] npm install cypress --save-dev
     - [ ] npx cypress open
-    add to cypress.json folder
+    - [ ] add to cypress.json folder
 
-ADD:
+> ADD:
 
-{
-"viewportWidth": 600,
-"viewportHeight": 600,
-"baseUrl": "http://localhost:5000",
-"integrationFolder": "cypress/integration"
-}
+        {
+        "viewportWidth": 600,
+        "viewportHeight": 600,
+        "baseUrl": "http://localhost:5000",
+        "integrationFolder": "cypress/integration"
+        }
 
 - React Testing Library
     - [x] npm install --save-dev @testing-library/react
