@@ -51,14 +51,14 @@ https://anywhere-fitness-club.vercel.app/
 
 ## NOTE: Front-end work shared by all front-end devs. Regular pair programming. Shared contribution.
 
-[x] Create React App
-[x] Install Dependencies
-[x] Set Up File Architecture (component pages, views, utils, etc.)
+[ ] Create React App
+[ ] Install Dependencies
+[ ] Set Up File Architecture (component pages, views, utils, etc.)
 
-[x] Create Router System (5 routes so far)
+[ ] Create Router System (5 routes so far)
 
-[x] Create ProtectedRoute component (for client & instructor pages after successful login)
-[x] Other Routes are:
+[ ] Create ProtectedRoute component (for client & instructor pages after successful login)
+[ ] Other Routes are:
 
         - home
         - sign-up
@@ -66,60 +66,60 @@ https://anywhere-fitness-club.vercel.app/
         - client classes - protected /classes
         - instructor classes - protected /instructors
 
-[x] Create Header.js
-[x] Create Footer.js
-[x] Create Server.js - faux server to test login, until backend is ready.
+[ ] Create Header.js
+[ ] Create Footer.js
+[ ] Create Server.js - faux server to test login, until backend is ready.
 
 - username: lambda
 - password: school
 
-[x] Create video element for home
-[x] Bootstrap styling
+[ ] Create video element for home
+[ ] Bootstrap styling
 
-[x] Refactor to redux, create actions and reducers
-[x] Add Media Queries to App.css
+[ ] Refactor to redux, create actions and reducers
+[ ] Add Media Queries to App.css
 
-[x] Create & Maintain README.md
-[x] Set Up File Architecture for state (actions / reducers)
-[x] Enable ProtectedRoutes / congruent with Nav links
+[ ] Create & Maintain README.md
+[ ] Set Up File Architecture for state (actions / reducers)
+[ ] Enable ProtectedRoutes / congruent with Nav links
 
-[x] Add search feature to classes, integrated into Redux
-[x] Create Classes.js component(protectedRoute)
-[x] Create Class.js component(protected) - use Mat UI styling
-[x] Create Instructors.js component(protectedRoute)
-[x] Conditional Rendering of views /classes (client) & /instructors (instructor)
-[x] Create InstructorClasses.js (protectedRoute)
+[ ] Add search feature to classes, integrated into Redux
+[ ] Create Classes.js component(protectedRoute)
+[ ] Create Class.js component(protected) - use Mat UI styling
+[ ] Create Instructors.js component(protectedRoute)
+[ ] Conditional Rendering of views /classes (client) & /instructors (instructor)
+[ ] Create InstructorClasses.js (protectedRoute)
 
-[x] Refactor to redux, create actions and reducers
-[x] Add Media Queries App.css
+[ ] Refactor to redux, create actions and reducers
+[ ] Add Media Queries App.css
 
-[x] Create Forms:
+[ ] Create Forms:
 
-[x] SignUpForm.js - new users sign-up
-[x] LogInForm.js - checkbox for ------> isTeacher: boolean
-[x] ClassForm.js (CRUD: add, update, delete a class)
-[x] Form styling
+[ ] SignUpForm.js - new users sign-up
+[ ] LogInForm.js - checkbox for ------> isTeacher: boolean
+[ ] ClassForm.js (CRUD: add, update, delete a class)
+[ ] Form styling
 
-[x] Conditional Rendering of Errors - save as error object
-[x] Form Validation - Yup
-[x] Cypress Tests
+[ ] Conditional Rendering of Errors - save as error object
+[ ] Form Validation - Yup
+[ ] Cypress Tests
 
-[x] Debugging work on Redux async issues / useEffect
-[x] Testing of components and feedback to group
+[ ] Debugging work on Redux async issues / useEffect
+[ ] Testing of components and feedback to group
 
-[x] Implement Stripe - Stripe components, cart, payment, and redux
+[ ] Implement Stripe - Stripe components, cart, payment, and redux
 
 ## SAMPLE LOGINS
 
 > Link to backend Github https://github.com/Build-Week-Anytime-Fitness/back-end/blob/main/README.md
 
-Client # 1
-email: th@marvel.org
-password: password
+        Client # 1
+        email: th@marvel.org
+        password: password
 
-Instructor# 2
-email: bp@marvel.org
-password: password
+        Instructor# 2
+        email: bp@marvel.org
+        password: password
 
 ## Dependencies
 
@@ -140,11 +140,11 @@ password: password
 
 - Material UI
     - [ ] npm install @material-ui/core
-    - [ ] [ ] npm install @material-ui/icons
+    - [ ] npm install @material-ui/icons
 
 - Bootstrap
     - [ ] npm install react-bootstrap bootstrap@4.6.0
-    - {/_ The following line can be included in your src/index.js or App.js file_/}
+    - The following line can be included in your src/index.js or App.js file
     - [ ] import 'bootstrap/dist/css/bootstrap.min.css';
 
 - GSAP
