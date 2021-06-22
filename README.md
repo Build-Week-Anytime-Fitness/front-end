@@ -9,7 +9,9 @@ https://anywhere-fitness-club.vercel.app/
 - backend: Jayaram Nair
 - frontend: Chris Lau, Tony Miller, Rhiannon Stanford
 
-### Link to Product Vision Statement 📝
+### *[Link to Product Vision Statement 📝](https://docs.google.com/document/d/17laY8Irc5cRqvpqdT3f6nNUofOl09Lr0IAZZsVlr7JE/edit?usp=sharing)
+
+  - *[LinkedIn](https://www.linkedin.com/in/rhiannon-stanford-35144973/)*
 
 https://docs.google.com/document/d/17laY8Irc5cRqvpqdT3f6nNUofOl09Lr0IAZZsVlr7JE/edit?usp=sharing
 
