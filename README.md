@@ -13,7 +13,7 @@ https://anywhere-fitness-club.vercel.app/
 
 ### [Link to Code on GitHub](https://github.com/Build-Week-Anytime-Fitness) 💻
 
-## FRONT END
+# FRONT END
 
 ## App Organization & Structure
 
