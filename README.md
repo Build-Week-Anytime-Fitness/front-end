@@ -170,7 +170,7 @@ ADD:
 }
 
 - React Testing Library
-- [x] npm install --save-dev @testing-library/react
+    - [x] npm install --save-dev @testing-library/react
 
 ## Tools
 
