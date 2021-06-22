@@ -169,12 +169,12 @@ ADD:
 "integrationFolder": "cypress/integration"
 }
 
-React Testing Library
-[x] npm install --save-dev @testing-library/react
+- React Testing Library
+- [x] npm install --save-dev @testing-library/react
 
 ## Tools
 
-Tiny JPEG https://tinyjpg.com/
+[Tiny JPEG](https://tinyjpg.com/)
 
 - to compress images to optimize performance
 
