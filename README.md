@@ -157,7 +157,7 @@ import { gsap } from "gsap";
 
 - Cypress
     - [x] npm install cypress --save-dev
-    - [] npx cypress open
+    - [ ] npx cypress open
     add to cypress.json folder
 
 ADD:
