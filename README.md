@@ -1,4 +1,4 @@
-## ANYWHERE FITNESS APP 📱
+# ANYWHERE FITNESS APP 📱
 
 Anywhere Fitness is a React web application that allows fitness classes to be held anywhere - a park, an unfinished basement or a garage - not just your traditional gym.
 
@@ -9,11 +9,11 @@ https://anywhere-fitness-club.vercel.app/
 - backend: Jayaram Nair
 - frontend: Chris Lau, Tony Miller, Rhiannon Stanford
 
-## Link to Product Vision Statement 📝
+### Link to Product Vision Statement 📝
 
 https://docs.google.com/document/d/17laY8Irc5cRqvpqdT3f6nNUofOl09Lr0IAZZsVlr7JE/edit?usp=sharing
 
-## Link to Code on GitHub
+### Link to Code on GitHub
 
 https://github.com/Build-Week-Anytime-Fitness
 
