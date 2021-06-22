@@ -49,16 +49,16 @@ https://anywhere-fitness-club.vercel.app/
 - Logout.js
 - ClassForm.js
 
-## NOTE: Front-end work shared by all front-end devs. Regular pair programming. Shared contribution.
+## Front-end work shared by all front-end devs. Regular pair programming. Shared contribution.
 
-[ ] Create React App
-[ ] Install Dependencies
-[ ] Set Up File Architecture (component pages, views, utils, etc.)
+    [ ] Create React App
+    [ ] Install Dependencies
+    [ ] Set Up File Architecture (component pages, views, utils, etc.)
 
-[ ] Create Router System (5 routes so far)
+    [ ] Create Router System (5 routes so far)
 
-[ ] Create ProtectedRoute component (for client & instructor pages after successful login)
-[ ] Other Routes are:
+    [ ] Create ProtectedRoute component (for client & instructor pages after successful login)
+    [ ] Other Routes are:
 
         - home
         - sign-up
