@@ -66,48 +66,48 @@ https://anywhere-fitness-club.vercel.app/
         - client classes - protected /classes
         - instructor classes - protected /instructors
 
-[ ] Create Header.js
-[ ] Create Footer.js
-[ ] Create Server.js - faux server to test login, until backend is ready.
+    [ ] Create Header.js
+    [ ] Create Footer.js
+    [ ] Create Server.js - faux server to test login, until backend is ready.
 
-- username: lambda
-- password: school
+    - username: lambda
+    - password: school
 
-[ ] Create video element for home
-[ ] Bootstrap styling
+    [ ] Create video element for home
+    [ ] Bootstrap styling
 
-[ ] Refactor to redux, create actions and reducers
-[ ] Add Media Queries to App.css
+    [ ] Refactor to redux, create actions and reducers
+    [ ] Add Media Queries to App.css
 
-[ ] Create & Maintain README.md
-[ ] Set Up File Architecture for state (actions / reducers)
-[ ] Enable ProtectedRoutes / congruent with Nav links
+    [ ] Create & Maintain README.md
+    [ ] Set Up File Architecture for state (actions / reducers)
+    [ ] Enable ProtectedRoutes / congruent with Nav links
 
-[ ] Add search feature to classes, integrated into Redux
-[ ] Create Classes.js component(protectedRoute)
-[ ] Create Class.js component(protected) - use Mat UI styling
-[ ] Create Instructors.js component(protectedRoute)
-[ ] Conditional Rendering of views /classes (client) & /instructors (instructor)
-[ ] Create InstructorClasses.js (protectedRoute)
+    [ ] Add search feature to classes, integrated into Redux
+    [ ] Create Classes.js component(protectedRoute)
+    [ ] Create Class.js component(protected) - use Mat UI styling
+    [ ] Create Instructors.js component(protectedRoute)
+    [ ] Conditional Rendering of views /classes (client) & /instructors (instructor)
+    [ ] Create InstructorClasses.js (protectedRoute)
 
-[ ] Refactor to redux, create actions and reducers
-[ ] Add Media Queries App.css
+    [ ] Refactor to redux, create actions and reducers
+    [ ] Add Media Queries App.css
 
-[ ] Create Forms:
+    [ ] Create Forms:
 
-[ ] SignUpForm.js - new users sign-up
-[ ] LogInForm.js - checkbox for ------> isTeacher: boolean
-[ ] ClassForm.js (CRUD: add, update, delete a class)
-[ ] Form styling
+    [ ] SignUpForm.js - new users sign-up
+    [ ] LogInForm.js - checkbox for ------> isTeacher: boolean
+    [ ] ClassForm.js (CRUD: add, update, delete a class)
+    [ ] Form styling
 
-[ ] Conditional Rendering of Errors - save as error object
-[ ] Form Validation - Yup
-[ ] Cypress Tests
+    [ ] Conditional Rendering of Errors - save as error object
+    [ ] Form Validation - Yup
+    [ ] Cypress Tests
 
-[ ] Debugging work on Redux async issues / useEffect
-[ ] Testing of components and feedback to group
+    [ ] Debugging work on Redux async issues / useEffect
+    [ ] Testing of components and feedback to group
 
-[ ] Implement Stripe - Stripe components, cart, payment, and redux
+    [ ] Implement Stripe - Stripe components, cart, payment, and redux
 
 ## SAMPLE LOGINS
 
