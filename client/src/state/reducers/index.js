@@ -16,7 +16,8 @@ import {
   UNDO_SIGN_UP,
   PAY_FOR_CLASS,
   ADD_MY_CLASS,
-  REMOVE_MY_CLASS
+  REMOVE_MY_CLASS,
+  CHANGE_ACCOUNT_STATUS
 } from "../actions";
 import {payForClassReducer} from "../interfaces/cartInterface";
 import {
@@ -30,9 +31,14 @@ import {
   allClassesReducer
 } from "../interfaces/getDataInterface";
 //const log = console.log;
+import {
+  LOGGED_OUT
+} from './accountStatus';
+
 
 //1. set initialState
 const initialState = {
+  accountStatus:LOGGED_OUT,
   isLoading: false,
   error: "",
   searchTerm: "",
@@ -174,7 +180,12 @@ export const appReducer = (state = initialState, action) => {
     //   return { ...state, classes: [...state.classes, action.payload] };
     // }
 
-
+    case CHANGE_ACCOUNT_STATUS:
+      const newAccountStatus = action.payload;
+      return {
+        ...state,
+        accountStatus: newAccountStatus
+      };
     case ADD_USER: {
       //console.log("reducer fires: add user");
       return { ...state, user: [...state.users, action.payload] };
