@@ -5,7 +5,7 @@ import { loginFormSchema } from "../validation/schema";
 import { validateForm } from "../validation/validationHelpers";
 import { displayErrors, handleChangeHelper } from "../formHelpers";
 import { connect, useDispatch } from "react-redux";
-import { checkUser } from "../../../state/actions/index";
+import { changeAccountStatus, checkUser } from "../../../state/actions/index";
 import axiosWithAuth from "../../../utils/axiosWithAuth";
 import {
   FETCHING_API_START,
@@ -13,7 +13,7 @@ import {
   FETCHING_API_FAILURE,
   CURRENT_USER,
 } from "../../../state/actions/index";
-
+import { INSTRUCTOR, STUDENT } from "../../../state/reducers/accountStatus";
 const initialValues = {
   email: "",
   password: "",
@@ -76,6 +76,12 @@ const LogInForm = (props) => {
         res.data.is_instructor !== true
           ? history.push("./classes")
           : history.push("/instructors");
+        if(res.data.is_instructor){
+          props.changeAccountStatus(INSTRUCTOR);
+        }
+        else{
+          props.changeAccountStatus(STUDENT);
+        }
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
@@ -159,6 +165,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     myCheckUser: (formValues) => dispatch(checkUser(formValues)),
+    changeAccountStatus: newStatus=> dispatch(changeAccountStatus(newStatus))
   };
 };
 
