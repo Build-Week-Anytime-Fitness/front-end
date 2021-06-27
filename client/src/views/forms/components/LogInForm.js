@@ -13,7 +13,7 @@ import {
   FETCHING_API_FAILURE,
   CURRENT_USER,
 } from "../../../state/actions/index";
-
+import { INSTRUCTOR, STUDENT } from "../../../state/reducers/accountStatus";
 const initialValues = {
   email: "",
   password: "",
@@ -76,6 +76,12 @@ const LogInForm = (props) => {
         res.data.is_instructor !== true
           ? history.push("./classes")
           : history.push("/instructors");
+        if(res.data.is_instructor){
+          props.changeAccountStatus(INSTRUCTOR);
+        }
+        else{
+          props.changeAccountStatus(STUDENT);
+        }
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });

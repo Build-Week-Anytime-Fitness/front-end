@@ -30,13 +30,16 @@ export const ADD_MY_CLASS = "ADD_MY_CLASS";
 export const REMOVE_MY_CLASS = "REMOVE_MY_CLASS";
 
 export const CHANGE_ACCOUNT_STATUS = "CHANGE_ACCOUNT_STATUS";
+export const GET_ACCOUNT_STATUS = "GET_ACCOUNT_STATUS";
 
 export const changeAccountStatus = (newAccountStatus)=>{
   //the account types are student, instructor, logged out
   //they are located in constants.js in the reducer file
   return {type: CHANGE_ACCOUNT_STATUS, payload:newAccountStatus};
 };
-
+export const getAccountStatus = ()=>{
+  return {type:GET_ACCOUNT_STATUS};
+};
 //state related to getClasses API call
 export const getData = getDataAction;
 

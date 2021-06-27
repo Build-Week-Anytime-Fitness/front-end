@@ -1,11 +1,14 @@
 import {Link, useHistory} from 'react-router-dom'
-
+import { useDispatch } from 'react-redux';
+import { changeAccountStatus } from '../state/actions';
+import { LOGGED_OUT } from '../state/reducers/accountStatus';
 export default function Logout() {
     const history = useHistory()
-
+    const dispatch = useDispatch();
     const logout = () => {
         alert("You have been logged out. Thank you for visiting");
         localStorage.clear();
+        dispatch(changeAccountStatus(LOGGED_OUT));
         history.push("/home")
     }
     return (

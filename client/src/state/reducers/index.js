@@ -17,7 +17,8 @@ import {
   PAY_FOR_CLASS,
   ADD_MY_CLASS,
   REMOVE_MY_CLASS,
-  CHANGE_ACCOUNT_STATUS
+  CHANGE_ACCOUNT_STATUS,
+  GET_ACCOUNT_STATUS
 } from "../actions";
 import {payForClassReducer} from "../interfaces/cartInterface";
 import {
@@ -35,6 +36,7 @@ import {
   LOGGED_OUT
 } from './accountStatus';
 
+const LOCAL_ACCOUNT_STATUS = "LOCAL_ACCOUNT_STATUS";
 
 //1. set initialState
 const initialState = {
@@ -182,10 +184,25 @@ export const appReducer = (state = initialState, action) => {
 
     case CHANGE_ACCOUNT_STATUS:
       const newAccountStatus = action.payload;
+      localStorage.setItem(LOCAL_ACCOUNT_STATUS,newAccountStatus);
       return {
         ...state,
         accountStatus: newAccountStatus
       };
+    case GET_ACCOUNT_STATUS:
+      const accountStatus = localStorage.getItem(LOCAL_ACCOUNT_STATUS);
+      if(!accountStatus){
+        return{
+          ...state,
+          accountStatus:LOGGED_OUT
+        }
+      }
+      else{
+        return {
+          ...state,
+          accountStatus
+        }
+      }
     case ADD_USER: {
       //console.log("reducer fires: add user");
       return { ...state, user: [...state.users, action.payload] };

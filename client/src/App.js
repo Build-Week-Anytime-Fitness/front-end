@@ -12,10 +12,16 @@ import Cart from "./views/cart/Cart";
 import Footer from "./views/Footer";
 import ReactPlayer from "react-player";
 import Video from "./assets/ANYWHERE.mp4";
-import React from "react";
-
+import React, { useEffect } from "react";
+import {useDispatch} from "react-redux";
+import {getAccountStatus} from "./state/actions/index";
 function App() {
-
+  // if previously logged in, grab the account status using the actions
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(getAccountStatus());
+  },[dispatch]);
+  //
   return (
     <Router>
       <div className={"d-flex flex-column justify-content-start align-items-center wrapper"}>
