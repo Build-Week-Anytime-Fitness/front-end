@@ -21,25 +21,30 @@ export default function PaymentForm() {
     const [cardComplete, setCardComplete] = useState(false);
     const [processing, setProcessing] = useState(false);
     const [billingDetails, setBillingDetails] = useState({
+        // ****The initial values are not empty for testing*****
       email: "test@gmail.com",
       phone: "000000000",
       name: "John Doe"
     });
     const submitPayment = async (paymentMethod)=>{
+
         try {
+            setProcessing(true);
             const { id } = paymentMethod;
             console.log('https://StripeServer.jayaramnair.repl.co/payment')
             const response = await axios.post("https://StripeServer.jayaramnair.repl.co/payment", {
                 amount: 1000,
                 id
             })
-    
+            
             if (response.data.success) {
                 console.log("Successful Payment");
                 history.push('/checkout/success');
             }
+            setProcessing(false);
         } catch (error) {
-            console.log("Error", error)
+            console.log("Error", error);
+            setProcessing(false);
         }
     };
     const handleSubmit = async (e) => {
@@ -55,20 +60,18 @@ export default function PaymentForm() {
             // form submission until Stripe.js has loaded.
             return;
         }
-        if (error) {
+        if (error || !cardComplete) {
+            // if errors are found, set the card on focus
             elements.getElement("card").focus();
             return;
         }
-        if (cardComplete) {
-            setProcessing(true);
-        }
-        setProcessing(false);
         if (payload.error) {
+            // if there is an error in payload
             setError(payload.error);
+            return;
         } 
-        else {
-            submitPayment(payload.paymentMethod);
-        }
+        submitPayment(payload.paymentMethod);
+        
     };
     return (
         <form className="Form" onSubmit={handleSubmit}>
