@@ -1,9 +1,8 @@
 import CartItem from "./CartItem";
-import { useHistory } from "react-router-dom";
-import StripeCheckout from "react-stripe-checkout";
+import { useHistory, Link } from "react-router-dom";
+// import StripeCheckout from "react-stripe-checkout";
 import { connectToStore } from "../../state/interfaces/cartInterface";
-import axios from "axios";
-require("dotenv").config();
+
 
 const Cart = (props) => {
   // states: classes, user
@@ -43,41 +42,6 @@ const Cart = (props) => {
       ));
     }
   };
-  const makePayment = (token) => {
-    // dummy data for testing
-    const fitnessClass = {
-      id: 5,
-      class_name: "Trip to Nirvana",
-      class_type: "yoga + jazzersize",
-      class_date: "Saturday",
-      start_time: "7:00 am",
-      duration: 1,
-      intensity: "low",
-      location: "park",
-      number_of_students: 1,
-      max_class_size: 40,
-      instructor_id: 2,
-    };
-    const body = {
-      token,
-      product: fitnessClass,
-    };
-    const headers = {
-      Authorization:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJlbWFpbCI6ImJwQG1hcnZlbC5vcmciLCJpc19pbnN0cnVjdG9yIjp0cnVlLCJpYXQiOjE2MjIxMDY3MDAsImV4cCI6MTYyMjE5MzEwMH0.4TFdT6AGFe2rqunM30z7u0e5Kbps0qIwqxtPR5jAaZY",
-    };
-    return axios
-      .create({ headers })
-      .post(`http://localhost:3000/payment`, body)
-      .then((response) => {
-        console.log("RESPONSE ", response);
-        const { status } = response;
-        console.log("STATUS", status);
-      })
-      .catch((err) => {
-        console.log(err.stack);
-      });
-  };
   return (
     <div
       className={"d-flex flex-column justify-content-center"}
@@ -115,28 +79,65 @@ const Cart = (props) => {
       {/*Stripe Publishable Key needs to be stored in the .env file on the frontend - REACT_APP_KEY  environment variable stored on FE */}
       {/*react-stripe-checkout package */}
       {/*stripeKey prop will store the publishable key as process.env.REACT_APP_KEY*/}
-      <StripeCheckout
+      {/* <StripeCheckout
         stripeKey={process.env.REACT_APP_KEY}
         token={makePayment}
         name={"Anywhere Fitness Checkout"}
         amount={10.99 * 100}
-      >
-        <button
-          id="cart-checkout-button"
-          disabled={cartList.length === 0}
-          style={{
-            borderRadius: "50px",
-            color: "white",
-            padding: "1.5vh 50px",
-            backgroundColor: "#444",
-            fontSize: "1.5rem",
-            margin: "2vh 0",
-          }}
-        >
-          Checkout
-        </button>
-      </StripeCheckout>
+      ></StripeCheckout> */}
+        <Link to="/checkout">
+          <button
+            id="cart-checkout-button"
+            disabled={cartList.length === 0}
+            style={{
+              borderRadius: "50px",
+              color: "white",
+              padding: "1.5vh 50px",
+              backgroundColor: "#444",
+              fontSize: "1.5rem",
+              margin: "2vh 0",
+            }}
+          >
+            Checkout
+          </button>
+        </Link>
     </div>
   );
 };
 export default connectToStore(Cart);
+
+// const makePayment = (token) => {
+//   // dummy data for testing
+//   const fitnessClass = {
+//     id: 5,
+//     class_name: "Trip to Nirvana",
+//     class_type: "yoga + jazzersize",
+//     class_date: "Saturday",
+//     start_time: "7:00 am",
+//     duration: 1,
+//     intensity: "low",
+//     location: "park",
+//     number_of_students: 1,
+//     max_class_size: 40,
+//     instructor_id: 2,
+//   };
+//   const body = {
+//     token,
+//     product: fitnessClass,
+//   };
+//   const headers = {
+//     Authorization:
+//       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJlbWFpbCI6ImJwQG1hcnZlbC5vcmciLCJpc19pbnN0cnVjdG9yIjp0cnVlLCJpYXQiOjE2MjIxMDY3MDAsImV4cCI6MTYyMjE5MzEwMH0.4TFdT6AGFe2rqunM30z7u0e5Kbps0qIwqxtPR5jAaZY",
+//   };
+//   return axios
+//     .create({ headers })
+//     .post(`http://localhost:3000/payment`, body)
+//     .then((response) => {
+//       console.log("RESPONSE ", response);
+//       const { status } = response;
+//       console.log("STATUS", status);
+//     })
+//     .catch((err) => {
+//       console.log(err.stack);
+//     });
+// };

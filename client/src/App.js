@@ -15,6 +15,7 @@ import Video from "./assets/ANYWHERE.mp4";
 import React, { useEffect } from "react";
 import {useDispatch} from "react-redux";
 import {getAccountStatus} from "./state/actions/index";
+import Checkout from "./views/cart/Checkout";
 function App() {
   // if previously logged in, grab the account status using the actions
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ function App() {
           <Route path={"/login"} component={Login} />
           <Route path={"/logout"} component={Logout} />
           <Route path={"/cart"} component={Cart} />
+          <PrivateRoute exact path={"/checkout"} component={Checkout} />
           <PrivateRoute exact path={"/classes"} component={Classes}/>
           <PrivateRoute exact path={"/instructors"} component={Instructors} />
 
