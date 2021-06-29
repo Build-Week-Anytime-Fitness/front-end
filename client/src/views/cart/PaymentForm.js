@@ -27,7 +27,6 @@ export default function PaymentForm() {
       name: "John Doe"
     });
     const submitPayment = async (paymentMethod)=>{
-
         try {
             setProcessing(true);
             const { id } = paymentMethod;
@@ -128,45 +127,3 @@ export default function PaymentForm() {
         </form>
     );
 }
-
-
-// return (
-//     <>
-//         {!paymentMethod ?
-//             <form onSubmit={handleSubmit}>
-//                 <fieldset className="FormGroup">
-//                     <div className="FormRow">
-//                         <CardElement options={CARD_OPTIONS} />
-//                     </div>
-//                 </fieldset>
-//                 <button id="pay-button">Pay</button>
-//             </form>
-//             :
-//             <div>
-//                 <h2>You just made the decision to be healthy and fit!</h2>
-//             </div>
-//         }
-//     </>
-// )
-
-// if (!error) {
-//     try {
-//         const { id } = payload;
-//         console.log('https://StripeServer.jayaramnair.repl.co/payment')
-//         const response = await axios.post("https://StripeServer.jayaramnair.repl.co/payment", {
-//             amount: 1000,
-//             id
-//         })
-
-//         if (response.data.success) {
-//             console.log("Successful Payment")
-//             setSuccess(true)
-//         }
-//     } catch (error) {
-//         console.log("Error", error)
-//     }
-// } else {
-//     console.log(error.message);
-//     setError(error);
-// }
-// }
