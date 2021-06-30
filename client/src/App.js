@@ -16,6 +16,7 @@ import React, { useEffect } from "react";
 import {useDispatch} from "react-redux";
 import {getAccountStatus} from "./state/actions/index";
 import Checkout from "./views/cart/Checkout";
+import CheckoutSuccess from "./views/cart/CheckoutSuccess";
 function App() {
   // if previously logged in, grab the account status using the actions
   const dispatch = useDispatch();
@@ -57,6 +58,7 @@ function App() {
           <Route path={"/logout"} component={Logout} />
           <Route path={"/cart"} component={Cart} />
           <PrivateRoute exact path={"/checkout"} component={Checkout} />
+          <PrivateRoute exact path={"/checkout/success"} component={CheckoutSuccess} />
           <PrivateRoute exact path={"/classes"} component={Classes}/>
           <PrivateRoute exact path={"/instructors"} component={Instructors} />
 
