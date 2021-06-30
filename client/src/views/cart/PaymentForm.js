@@ -20,6 +20,7 @@ export default function PaymentForm() {
     const [error, setError] = useState(null);
     const [cardComplete, setCardComplete] = useState(false);
     const [processing, setProcessing] = useState(false);
+    const [paymentMsg, setPaymentMsg] = useState('');
     const [billingDetails, setBillingDetails] = useState({
         // ****The initial values are not empty for testing*****
       email: "test@gmail.com",
@@ -39,6 +40,9 @@ export default function PaymentForm() {
             if (response.data.success) {
                 console.log("Successful Payment");
                 history.push('/checkout/success');
+            }
+            else{
+                setPaymentMsg(response.data.message);
             }
             setProcessing(false);
         } catch (error) {
@@ -116,6 +120,9 @@ export default function PaymentForm() {
                 setCardComplete(e.complete);
             }}
             />
+            <div style={{fontSize:'2rem',color:'red'}}>
+                {paymentMsg}
+            </div>
             {error && <ErrorMessage>{error.message}</ErrorMessage>}
             <SubmitButton processing={processing} error={error} disabled={!stripe}>
                 Pay $25
