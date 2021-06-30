@@ -434,16 +434,30 @@ input {
 
 /* --------------------------PaymentForm----------------------------- */
 .FormGroup {
-  margin: 0 15px 20px;
-  padding: 0;
-  border-style: none;
-  background-color: #7795f8;
-  will-change: opacity, transform;
-  box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 #829fff;
-  border-radius: 4px;
+  display:flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom:10vh ;
+  padding: 8vh 10vw;
+  border: black 1px solid;
+  background-color: #eee;
+  border-radius: 50px;
+  box-shadow: 0 0 1vh white;
+  color:black;
+  min-width: '375px';
 }
-
+// className={"d-flex flex-column justify-content-center"}
+// style={{
+//   textAlign: "center",
+//   border: "1px solid black",
+//   padding: "8vh 10vw",
+//   borderRadius: "50px",
+//   boxShadow: "0 0 1vh white",
+//   marginBottom: "10vh",
+//   backgroundColor: '#eee',
+//   color: 'black',
+//   minWidth: '375px'
+// }}
 .FormRow {
   display: -ms-flexbox;
   display: flex;
@@ -459,26 +473,28 @@ input {
   width: 15%;
   min-width: 70px;
   padding: 11px 0;
-  color: #c4f0ff;
+  color: black;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .StripeElement--webkit-autofill {
+  // not sure what this does
 	background: transparent !important;
 }
 
+// all StripeElements are related to the card info area 
 .StripeElement,
 .StripeElementIdeal {
+  // this is the container for the card info
   display: block;
   margin: 10px 0 20px 0;
   width:100%;
   max-width: 500px;
   padding: 10px 14px;
-  box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px,
-    rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
   border-radius: 4px;
   background: white;
+  border: 1px black solid;
 }
 
 .StripeElement--focus,
@@ -500,21 +516,16 @@ input {
 
 .SubmitButton {
   display: block;
-  font-size: 16px;
   width: calc(100% - 30px);
-  height: 40px;
-  margin: 40px 15px 0;
-  background-color: #f6a4eb;
-  box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 #ffb9f6;
-  border-radius: 4px;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
+  margin: 2vh 0;
+  background-color: #444;
+  border-radius: 50px;
+  color: white;
+  padding:1.5vh 50px;
+  font-size:1.5rem;
   transition: all 100ms ease-in-out;
   will-change: transform, background-color, box-shadow;
 }
-
 .SubmitButton:active {
   background-color: #d782d9;
   box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
@@ -554,35 +565,6 @@ input {
 
 .ErrorMessage svg {
   margin-right: 10px;
-}
-
-.Result {
-  margin-top: 50px;
-  text-align: center;
-  animation: fade 200ms ease-out;
-}
-
-.ResultTitle {
-  color: #fff;
-  font-weight: 500;
-  margin-bottom: 8px;
-  font-size: 17px;
-  text-align: center;
-}
-
-.ResultMessage {
-  color: #9cdbff;
-  font-size: 14px;
-  font-weight: 400;
-  margin-bottom: 25px;
-  line-height: 1.6em;
-  text-align: center;
-}
-
-.ResetButton {
-  border: 0;
-  cursor: pointer;
-  background: transparent;
 }
 /* ---------------------- Media Queries ------------------------- */
 /* <!-- mobile --> */

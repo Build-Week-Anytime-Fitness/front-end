@@ -4,8 +4,8 @@ import {
     CardElement, 
     useElements, 
     useStripe 
-} from '@stripe/react-stripe-js'
-import axios from 'axios'
+} from '@stripe/react-stripe-js';
+import axios from 'axios';
 import {
     CardField,
     Field,
@@ -73,53 +73,49 @@ export default function PaymentForm() {
         
     };
     return (
-        <form className="Form" onSubmit={handleSubmit}>
-            <fieldset className="FormGroup">
-                <Field
-                label="Name"
-                id="name"
-                type="text"
-                placeholder="Jane Doe"
-                required
-                autoComplete="name"
-                value={billingDetails.name}
-                onChange={(e) => {
-                    setBillingDetails({ ...billingDetails, name: e.target.value });
-                }}
-                />
-                <Field
-                label="Email"
-                id="email"
-                type="email"
-                placeholder="janedoe@gmail.com"
-                required
-                autoComplete="email"
-                value={billingDetails.email}
-                onChange={(e) => {
-                    setBillingDetails({ ...billingDetails, email: e.target.value });
-                }}
-                />
-                <Field
-                label="Phone"
-                id="phone"
-                type="tel"
-                placeholder="(941) 555-0123"
-                required
-                autoComplete="tel"
-                value={billingDetails.phone}
-                onChange={(e) => {
-                    setBillingDetails({ ...billingDetails, phone: e.target.value });
-                }}
-                />
-            </fieldset>
-            <fieldset className="FormGroup">
-                <CardField
-                onChange={(e) => {
-                    setError(e.error);
-                    setCardComplete(e.complete);
-                }}
-                />
-            </fieldset>
+        <form className="FormGroup" onSubmit={handleSubmit}>
+            <Field
+            label="Name"
+            id="name"
+            type="text"
+            placeholder="Jane Doe"
+            required
+            autoComplete="name"
+            value={billingDetails.name}
+            onChange={(e) => {
+                setBillingDetails({ ...billingDetails, name: e.target.value });
+            }}
+            />
+            <Field
+            label="Email"
+            id="email"
+            type="email"
+            placeholder="janedoe@gmail.com"
+            required
+            autoComplete="email"
+            value={billingDetails.email}
+            onChange={(e) => {
+                setBillingDetails({ ...billingDetails, email: e.target.value });
+            }}
+            />
+            <Field
+            label="Phone"
+            id="phone"
+            type="tel"
+            placeholder="(941) 555-0123"
+            required
+            autoComplete="tel"
+            value={billingDetails.phone}
+            onChange={(e) => {
+                setBillingDetails({ ...billingDetails, phone: e.target.value });
+            }}
+            />
+            <CardField
+            onChange={(e) => {
+                setError(e.error);
+                setCardComplete(e.complete);
+            }}
+            />
             {error && <ErrorMessage>{error.message}</ErrorMessage>}
             <SubmitButton processing={processing} error={error} disabled={!stripe}>
                 Pay $25

@@ -3,19 +3,20 @@ export const CARD_OPTIONS = {
     iconStyle: 'solid',
     style: {
         base: {
+            // styling for the input area for card info
             iconColor: 'black',
             color: 'black',
             fontWeight: 500,
             fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
-            fontSize: "16px",
+            fontSize: "1rem",
             fontSmoothing: "antialiased",
             ":-webkit-autofill": { color: 'black' },
             "::placeholder": { color: 'black' }
         },
-
         invalid: {
-            iconColor: "black",
-            color: "black",
+            // when card info is invalid
+            iconColor: "red",
+            color: "red",
         }
     }
 }
