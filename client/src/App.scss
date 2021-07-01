@@ -432,6 +432,140 @@ input {
 //}
 
 
+/* --------------------------PaymentForm----------------------------- */
+.FormGroup {
+  display:flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom:10vh ;
+  padding: 8vh 10vw;
+  border: black 1px solid;
+  background-color: #eee;
+  border-radius: 50px;
+  box-shadow: 0 0 1vh white;
+  color:black;
+  min-width: '375px';
+}
+// className={"d-flex flex-column justify-content-center"}
+// style={{
+//   textAlign: "center",
+//   border: "1px solid black",
+//   padding: "8vh 10vw",
+//   borderRadius: "50px",
+//   boxShadow: "0 0 1vh white",
+//   marginBottom: "10vh",
+//   backgroundColor: '#eee',
+//   color: 'black',
+//   minWidth: '375px'
+// }}
+.FormRow {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-left: 15px;
+  border-top: 1px solid #819efc;
+}
+.FormRow:first-child {
+  border-top: none;
+}
+.FormRowLabel {
+  width: 15%;
+  min-width: 70px;
+  padding: 11px 0;
+  color: black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.StripeElement--webkit-autofill {
+  // not sure what this does
+	background: transparent !important;
+}
+
+// all StripeElements are related to the card info area 
+.StripeElement,
+.StripeElementIdeal {
+  // this is the container for the card info
+  display: block;
+  margin: 10px 0 20px 0;
+  width:100%;
+  max-width: 500px;
+  padding: 10px 14px;
+  border-radius: 4px;
+  background: white;
+  border: 1px black solid;
+}
+
+.StripeElement--focus,
+.StripeElementIdeal--focus {
+  box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px,
+    rgba(0, 0, 0, 0.0784314) 0px 1px 3px;
+  -webkit-transition: all 150ms ease;
+  transition: all 150ms ease;
+}
+
+.StripeElement.loading {
+  height: 41.6px;
+  opacity: 0.6;
+}
+
+.StripeElementIdeal {
+  padding: 0;
+}
+
+.SubmitButton {
+  display: block;
+  width: calc(100% - 30px);
+  margin: 2vh 0;
+  background-color: #444;
+  border-radius: 50px;
+  color: white;
+  padding:1.5vh 50px;
+  font-size:1.5rem;
+  transition: all 100ms ease-in-out;
+  will-change: transform, background-color, box-shadow;
+}
+.SubmitButton:active {
+  background-color: #444;
+  box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 #444;
+  transform: scale(0.99);
+}
+.SubmitButton.SubmitButton--error {
+  transform: translateY(15px);
+}
+.SubmitButton.SubmitButton--error:active {
+  transform: scale(0.99) translateY(15px);
+}
+
+.SubmitButton:disabled {
+  opacity: 0.5;
+  cursor: default;
+  background-color: #7795f8;
+  box-shadow: none;
+}
+
+.ErrorMessage {
+  color: #fff;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  padding: 0 15px;
+  font-size: 13px;
+  margin-top: 0px;
+  width: 100%;
+  transform: translateY(-15px);
+  opacity: 0;
+  animation: fade 150ms ease-out;
+  animation-delay: 50ms;
+  animation-fill-mode: forwards;
+  will-change: opacity, transform;
+}
+
+.ErrorMessage svg {
+  margin-right: 10px;
+}
 /* ---------------------- Media Queries ------------------------- */
 /* <!-- mobile --> */
 @media only screen and (min-width: 350px) {
