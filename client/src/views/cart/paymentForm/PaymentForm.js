@@ -11,7 +11,7 @@ import {
     Field,
     SubmitButton,
     ErrorMessage,
-} from './paymentForm/formComponents';
+} from './formComponents';
 
 export default function PaymentForm() {
     const history = useHistory();

@@ -1,5 +1,5 @@
 import React from 'react';
-import StripeContainer from './StripeContainer';
+import StripeContainer from './paymentForm/StripeContainer';
 
 const Checkout=()=>{
     return(
