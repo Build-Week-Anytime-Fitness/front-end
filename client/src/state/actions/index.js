@@ -34,7 +34,7 @@ export const GET_ACCOUNT_STATUS = "GET_ACCOUNT_STATUS";
 
 export const changeAccountStatus = (newAccountStatus)=>{
   //the account types are student, instructor, logged out
-  //they are located in constants.js in the reducer file
+  //they are located in accountStatus.js in the reducer file
   return {type: CHANGE_ACCOUNT_STATUS, payload:newAccountStatus};
 };
 export const getAccountStatus = ()=>{
