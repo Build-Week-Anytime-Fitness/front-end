@@ -8,13 +8,13 @@ import {
 } from "../formHelpers"; //bread crumbs in case we get lost
 import axiosWithAuth from "../../../utils/axiosWithAuth";
 import { connect, useDispatch } from "react-redux";
+import {getData,setEditMode} from "../../../state/actions/index";
+
 import {
-  getData,
   FETCHING_API_START,
   FETCHING_API_SUCCESS,
   FETCHING_API_FAILURE,
-  setEditMode,
-} from "../../../state/actions";
+} from "../../../state/actions/actionTypes";
 
 const initialValues = {
   class_name: "",

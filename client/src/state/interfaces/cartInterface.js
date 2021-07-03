@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 import axiosWithAuth from '../../utils/axiosWithAuth';
+import {getData} from '../actions/index';
+import {payForClass, 
+undoSignUp,} from '../actions/index';
 import { 
-    payForClass, 
-    undoSignUp,
-    getData,
     FETCHING_API_START,
     FETCHING_API_SUCCESS,
     FETCHING_API_FAILURE,
     PAY_FOR_CLASS
-} from '../actions/index';
+} from '../actions/actionTypes';
 
 // props attributes
 export const connectToStore = (component) => {

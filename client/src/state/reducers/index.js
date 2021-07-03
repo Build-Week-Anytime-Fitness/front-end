@@ -18,8 +18,8 @@ import {
   ADD_MY_CLASS,
   REMOVE_MY_CLASS,
   CHANGE_ACCOUNT_STATUS,
-  GET_ACCOUNT_STATUS
-} from "../actions";
+  INIT_ACCOUNT_STATUS
+} from "../actions/actionTypes";
 import {payForClassReducer} from "../interfaces/cartInterface";
 import {
   addMyClassReducer, 
@@ -189,7 +189,7 @@ export const appReducer = (state = initialState, action) => {
         ...state,
         accountStatus: newAccountStatus
       };
-    case GET_ACCOUNT_STATUS:
+    case INIT_ACCOUNT_STATUS:
       const accountStatus = localStorage.getItem(LOCAL_ACCOUNT_STATUS);
       if(!accountStatus){
         return{

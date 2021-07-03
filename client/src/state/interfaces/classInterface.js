@@ -1,11 +1,13 @@
 import {
     ADD_MY_CLASS,
     REMOVE_MY_CLASS,
-    classToEdit,
-    classesToSignUp,
-    undoSignUp,
-    addMyClass,
-    removeMyClass
+} from '../actions/actionTypes';
+import {
+  classToEdit,
+  classesToSignUp,
+  undoSignUp,
+  addMyClass,
+  removeMyClass
 } from '../actions/index';
 import {connect} from 'react-redux';
 export const connectToStore = (component) => {

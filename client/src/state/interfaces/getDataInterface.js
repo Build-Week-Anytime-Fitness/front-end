@@ -4,7 +4,7 @@ import {
     GET_FILTERED_CLASSES,
     FETCHING_API_SUCCESS,
     FETCHING_API_FAILURE
-} from '../actions/index';
+} from '../actions/actionTypes';
 import axiosWithAuth from "../../utils/axiosWithAuth";
 // action
 export const getDataAction = (props) => (dispatch) => {

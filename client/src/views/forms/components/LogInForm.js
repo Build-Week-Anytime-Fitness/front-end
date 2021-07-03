@@ -12,7 +12,7 @@ import {
   FETCHING_API_SUCCESS,
   FETCHING_API_FAILURE,
   CURRENT_USER,
-} from "../../../state/actions/index";
+} from "../../../state/actions/actionTypes";
 import { INSTRUCTOR, STUDENT } from "../../../state/reducers/accountStatus";
 const initialValues = {
   email: "",
