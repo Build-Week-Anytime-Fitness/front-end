@@ -33,7 +33,7 @@ export const INIT_ACCOUNT_STATUS = "INIT_ACCOUNT_STATUS";
 
 // formAction types
 
-
+export const INIT_FORM = "INIT_FORM";
 export const FORM_ERRORS_CHANGE = "HANDLE_FORM_ERRORS_CHANGE";
 export const FORM_VALUES_CHANGE = "FORM_VALUES_CHANGE";
 export const FORM_IS_VALID_CHANGE = "FORM_IS_VALID_CHANGE";

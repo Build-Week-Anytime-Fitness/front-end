@@ -1,18 +1,30 @@
 import {
     FORM_ERRORS_CHANGE,
     FORM_VALUE_CHANGE,
-    FORM_IS_VALID_CHANGE
+    FORM_IS_VALID_CHANGE,
+    INIT_FORM
 } from '../state/actions/actionTypes';
 
 const initialState={
-    schema,
-    formValues,
-    isValid,
-    formErrors
+    schema:{},
+    formValues:{},
+    isValid:true,
+    formErrors:{}
 };
 
 const formReducer=(state=initialState,action)=>{
     switch(action.type){
+        case INIT_FORM:
+            const {schema,formValues} = action.payload;
+            return {
+                ...state,
+                schema,
+                formValues,
+                formErrors:Object.keys(formValues).reduce((acc,name)=>{
+                    acc[name]='';
+                    return acc
+                },{})
+            };
         case FORM_ERRORS_CHANGE:
             const formErrors = action.payload;
             return {

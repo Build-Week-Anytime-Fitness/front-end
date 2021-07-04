@@ -1,8 +1,13 @@
 import {
     FORM_ERRORS_CHANGE,
     FORM_VALUE_CHANGE,
-    FORM_IS_VALID_CHANGE
+    FORM_IS_VALID_CHANGE,
+    INIT_FORM
 } from '../state/actions/actionTypes';
+
+export const initFormSchema=(schema,formValues)=>{
+    return {type:INIT_FORM,payload:{schema,formValues}};
+};
 export const handleFormChange=(event)=>(dispatch,getState)=>{
 
     const {formValues,schema} = getState();
