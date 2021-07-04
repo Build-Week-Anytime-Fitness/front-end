@@ -14,14 +14,14 @@ import ReactPlayer from "react-player";
 import Video from "./assets/ANYWHERE.mp4";
 import React, { useEffect } from "react";
 import {useDispatch} from "react-redux";
-import {getAccountStatus} from "./state/actions/index";
+import {initAccountStatus} from "./state/actions/index";
 import Checkout from "./views/cart/Checkout";
 import CheckoutSuccess from "./views/cart/CheckoutSuccess";
 function App() {
   // if previously logged in, grab the account status using the actions
   const dispatch = useDispatch();
   useEffect(()=>{
-    dispatch(getAccountStatus());
+    dispatch(initAccountStatus());
   },[dispatch]);
   //
   return (

@@ -64,7 +64,7 @@ export const changeAccountStatus = (newAccountStatus)=>{
   //they are located in accountStatus.js in the reducer file
   return {type: CHANGE_ACCOUNT_STATUS, payload:newAccountStatus};
 };
-export const getAccountStatus = ()=>{
+export const initAccountStatus = ()=>{
   return {type:INIT_ACCOUNT_STATUS};
 };
 //state related to getClasses API call

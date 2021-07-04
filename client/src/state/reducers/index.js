@@ -1,3 +1,6 @@
+import { combineReducers } from "redux";
+import formReducer from "../../formState/formReducer";
+import userReducer from "../../userState/userReducer";
 import {
   FETCHING_API_START,
   FETCHING_API_SUCCESS,
@@ -226,3 +229,11 @@ export const appReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const rootReducer = combineReducers({
+  logInForm:formReducer,
+  signUpForm:formReducer,
+  classForm:formReducer,
+  user:userReducer,
+  classes:allClassesReducer,
+});
