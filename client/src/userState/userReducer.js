@@ -7,6 +7,10 @@ import {
     CHANGE_ACCOUNT_STATUS,
     INIT_ACCOUNT_STATUS
 } from '../state/actions/actionTypes';
+import { 
+    LOGGED_OUT
+} from './accountStatus';
+const LOCAL_ACCOUNT_STATUS = "LOCAL_ACCOUNT_STATUS";
 
 const userReducer=(state,action)=>{
     switch(action.type){
