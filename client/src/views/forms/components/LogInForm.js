@@ -1,98 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { loginFormSchema } from "../validation/schema";
-import { validateForm } from "../validation/validationHelpers";
-import { displayErrors, handleChangeHelper } from "../formHelpers";
-import { connect, useDispatch } from "react-redux";
-import { changeAccountStatus, checkUser } from "../../../state/actions/index";
-import axiosWithAuth from "../../../utils/axiosWithAuth";
-import {
-  FETCHING_API_START,
-  FETCHING_API_SUCCESS,
-  FETCHING_API_FAILURE,
-  CURRENT_USER,
-} from "../../../state/actions/actionTypes";
+import { displayErrors } from "../formHelpers";
+import { connect } from "react-redux";
+import { postLogIn } from "../../../userState/userActions";
 import { INSTRUCTOR, STUDENT } from "../../../state/reducers/accountStatus";
+import { handleFormChange, handleFormSubmit, initForm } from "../../../formState/formActions";
 const initialValues = {
   email: "",
   password: "",
 };
 
-const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
-  acc[key] = "";
-  return acc;
-}, {});
-
 const LogInForm = (props) => {
   const history = useHistory();
-  // local state variables
-  const [isValid, setIsValid] = useState(true); //local state not needed by redux. product checker
-  const [formErrors, setFormErrors] = useState(initialErrorValues);
+  
+  useEffect(()=>{
+    // initialize form
+    props.initForm(loginFormSchema,initialValues);
+  },[])
 
-  //redux state
-  const [formValues, setFormValues] = useState(initialValues);
-  // console.log('form values from login form', formValues)
-  const dispatch = useDispatch();
-  // useEffect
-  useEffect(() => {
-    // validateForm whenever the component is mounted
-    validateForm(loginFormSchema, formValues, setIsValid); //check if form is valid using schema.validate
-  }, [formValues]);
+  useEffect(()=>{
+    // redirect after log in
+    if(props.accountStatus===STUDENT){
+      history.push('/classes');
+    }
+    else if(props.acc===INSTRUCTOR){
+      history.push('/instructors')
+    }
+    else{
+      // if log in failed, reinitialize form with the current form values
+      // form does not have errors at this stage
+      props.initForm(loginFormSchema,props.formValues);
+    }
+  },[props.accountStatus]);
 
-  // function declarations
-  const handleChange = (event) => {
-    handleChangeHelper({
-      event,
-      schema: loginFormSchema,
-      formValues,
-      setFormValues,
-      formErrors,
-      setFormErrors,
-      setIsValid,
-    });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    //console.log("FormValues is captured: ", formValues);
-    dispatch({ type: FETCHING_API_START, isLoading: true });
-    axiosWithAuth()
-      .post("/login", formValues)
-      .then((res) => {
-        //console.log("response: ", res); // see sample POST login res below
-        localStorage.setItem("authToken", res.data.token); // 200
-        alert(res.data.message);
-        dispatch({
-          type: FETCHING_API_SUCCESS,
-          isLoading: false,
-          payload: res.data.message,
-        });
-
-        // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
-        let currentUserId = res.data.id;
-        localStorage.setItem("id", res.data.id);
-        dispatch({ type: CURRENT_USER, payload: currentUserId });
-        res.data.is_instructor !== true
-          ? history.push("./classes")
-          : history.push("/instructors");
-        if(res.data.is_instructor){
-          props.changeAccountStatus(INSTRUCTOR);
-        }
-        else{
-          props.changeAccountStatus(STUDENT);
-        }
-      })
-      .catch((error) => {
-        dispatch({ type: FETCHING_API_FAILURE, payload: error });
-        console.log("ERR_1: This error is from Login", error);
-      });
-  };
+  useEffect(()=>{
+    // the handleFormSubmit has run and isSubmitting changed to true
+    if(props.isSubmitting){
+      // post the login
+      props.postLogIn(props.formValues)
+    }
+  },[props.isSubmitting]);
 
   return (
     <div className={"parallax-wrapper5"} style={{marginTop: '60vh'}}>
     <div className={"content1"}>
-  <form className={"d-flex flex-column login-style"} onSubmit={handleSubmit}>
+  <form className={"d-flex flex-column login-style"} onSubmit={props.handleFormSubmit}>
       <div className={"d-flex flex-column justify-content-center input-style"}>
         <h2 style={{ color: "white" }}>Login</h2>
         <div className={"d-flex flex-row flex-wrap justify-content-center"}>
@@ -102,8 +56,8 @@ const LogInForm = (props) => {
               id="login-form-email-input"
               type="text"
               name="email"
-              value={formValues.email}
-              onChange={handleChange}
+              value={props.formValues.email}
+              onChange={props.handleFormChange}
             ></input>
           </label>
           <label>
@@ -113,7 +67,7 @@ const LogInForm = (props) => {
               type="password"
               name="password"
               value={formValues.password}
-              onChange={handleChange}
+              onChange={props.handleFormChange}
             ></input>
           </label>
         </div>
@@ -124,13 +78,12 @@ const LogInForm = (props) => {
           <button
             id="login-form-submit"
             type="submit"
-            onClick={handleSubmit}
-            disabled={!isValid}
+            disabled={!isValid || props.isSubmitting}
             style={{width: '250px', alignSelf: 'center', padding: '1vh 3vw', borderRadius: '50px', marginBottom: '3vh'}}
           >
-            Enter
+            {props.isSubmitting? '...submitting': 'Enter'}
           </button>
-          {displayErrors(formErrors)}
+          {displayErrors(props.formErrors)}
           <h5>
             <em>
               Need to start an account? <br />
@@ -157,15 +110,20 @@ const LogInForm = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.currentUser,
-    user: state.user,
+    accountStatus: state.userState.accountStatus,
+    isSubmitting: state.logInFormState.isSubmitting,
+    formValues: state.logInFormState.formValues,
+    formErrors: state.logInFormState.formErrors,
+    isValid: state.logInFormState.isValid
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    myCheckUser: (formValues) => dispatch(checkUser(formValues)),
-    changeAccountStatus: newStatus=> dispatch(changeAccountStatus(newStatus))
+    postLogIn: (formValues) => dispatch(postLogIn(formValues)),
+    initForm: (schema,formValues) => dispatch(initForm(schema,formValues)),
+    handleFormChange: (event)=> dispatch(handleFormChange(event)),
+    handleFormSubmit: (event)=> dispatch(handleFormSubmit(event))
   };
 };
 

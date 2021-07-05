@@ -2,11 +2,11 @@ import {
     FORM_ERRORS_CHANGE,
     FORM_VALUE_CHANGE,
     FORM_IS_VALID_CHANGE,
-    INIT_FORM
+    INIT_FORM,
+    FORM_IS_SUBMITTING_CHANGE,
 } from '../state/actions/actionTypes';
-
-export const initFormSchema=(schema,formValues)=>{
-    return {type:INIT_FORM,payload:{schema,formValues}};
+export const initForm=(schema,formValues,formName)=>{
+    return {type:INIT_FORM,payload:{schema,formValues},name:formName};
 };
 export const handleFormChange=(event)=>(dispatch,getState)=>{
 
@@ -41,7 +41,6 @@ export const handleFormChange=(event)=>(dispatch,getState)=>{
     });
 
 };
-
 export const handleFormSubmit= async (event)=>{
     event.preventDefault();
     const {formValues} = getState();
@@ -50,6 +49,9 @@ export const handleFormSubmit= async (event)=>{
     schema.isValid(newFormValues)
     .then((isValid)=>{
         dispatch({type:FORM_IS_VALID_CHANGE,payload:isValid});
+        if(isValid){
+            dispatch({type:FORM_IS_SUBMITTING_CHANGE,payload:true});
+        }
     });
 
     // get all field specific errors

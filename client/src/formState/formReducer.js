@@ -2,56 +2,69 @@ import {
     FORM_ERRORS_CHANGE,
     FORM_VALUE_CHANGE,
     FORM_IS_VALID_CHANGE,
-    INIT_FORM
+    INIT_FORM,
+    FORM_IS_SUBMITTING_CHANGE
 } from '../state/actions/actionTypes';
 
-const initialState={
-    schema:{},
-    formValues:{},
-    isValid:true,
-    formErrors:{}
-};
-
-const formReducer=(state=initialState,action)=>{
-    switch(action.type){
-        case INIT_FORM:
-            const {schema,formValues} = action.payload;
-            return {
-                ...state,
-                schema,
-                formValues,
-                formErrors:Object.keys(formValues).reduce((acc,name)=>{
-                    acc[name]='';
-                    return acc
-                },{})
-            };
-        case FORM_ERRORS_CHANGE:
-            const formErrors = action.payload;
-            return {
-                ...state,
-                formErrors
-            };
-        case FORM_VALUE_CHANGE:
-            const {name,value,error} = action.payload;
-            return {
-                ...state,
-                formValues:{
-                    ...state.formValues,
-                    [name]:value,
-                },
-                formErrors:{
-                    ...state.formErrors,
-                    [name]:error
+const formReducerCreator=(formName)=>{
+    const initialState={
+        name:formName,
+        schema:{},
+        formValues:{},
+        isValid:true,
+        formErrors:{},
+        isSubmitting:false
+    };
+    const formReducer=(state=initialState,action)=>{
+        // State refers to this local formReducer state not the global rootReducer state
+        // This is different from mapStateToProps and mapDispatchToProps. They use the rootReducer state instead.
+        switch(action.type){
+            case INIT_FORM:
+                const {schema,formValues} = action.payload;
+                return {
+                    ...initialState,
+                    schema,
+                    formValues,
+                    formErrors:Object.keys(formValues).reduce((acc,name)=>{
+                        acc[name]='';
+                        return acc
+                    },{})
+                };
+            case FORM_ERRORS_CHANGE:
+                const formErrors = action.payload;
+                return {
+                    ...state,
+                    formErrors
+                };
+            case FORM_VALUE_CHANGE:
+                const {name,value,error} = action.payload;
+                return {
+                    ...state,
+                    formValues:{
+                        ...state.formValues,
+                        [name]:value,
+                    },
+                    formErrors:{
+                        ...state.formErrors,
+                        [name]:error
+                    }
+                };
+            case FORM_IS_VALID_CHANGE:
+                const isValid = action.payload;
+                return {
+                    ...state,
+                    isValid
+                };
+            case FORM_IS_SUBMITTING_CHANGE:
+                const isSubmitting = action.payload;
+                return {
+                    ...state,
+                    isSubmitting
                 }
-            };
-        case FORM_IS_VALID_CHANGE:
-            const isValid = action.payload;
-            return {
-                ...state,
-                isValid
-            };
-        default:
-            return state;
-    }
-};  
-export default formReducer;
+            default:
+                return state;
+        }
+    };  
+    return formReducer;
+}
+export default formReducerCreator;

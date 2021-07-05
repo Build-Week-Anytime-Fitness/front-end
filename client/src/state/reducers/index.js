@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import formReducerCreator from "../../formState/formReducer";
 import formReducer from "../../formState/formReducer";
 import userReducer from "../../userState/userReducer";
 import {
@@ -231,9 +232,9 @@ export const appReducer = (state = initialState, action) => {
 };
 
 export const rootReducer = combineReducers({
-  logInForm:formReducer,
-  signUpForm:formReducer,
-  classForm:formReducer,
-  user:userReducer,
-  classes:allClassesReducer,
+  logInFormState:formReducerCreator,
+  signUpFormState:formReducerCreator,
+  classFormState:formReducerCreator,
+  userState:userReducer,
+  classesState:allClassesReducer,
 });

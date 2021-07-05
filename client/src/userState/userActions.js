@@ -70,6 +70,37 @@ export const checkUser = (formValues) => (dispatch) => {
         console.log("ERR_1: This error is from Login", error);
       });
   };
+  export const postLogIn=(formValues)=>(dispatch)=>{
+    dispatch({ type: FETCHING_API_START, isLoading: true });
+    axiosWithAuth()
+      .post("/login", formValues)
+      .then((res) => {
+        //console.log("response: ", res); // see sample POST login res below
+        localStorage.setItem("authToken", res.data.token); // 200
+        alert(res.data.message);
+        dispatch({
+          type: FETCHING_API_SUCCESS,
+          isLoading: false,
+          payload: res.data.message,
+        });
+
+        // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
+        let currentUserId = res.data.id;
+        localStorage.setItem("id", res.data.id);
+        dispatch({ type: CURRENT_USER, payload: currentUserId });
+        if(res.data.is_instructor){
+          props.changeAccountStatus(INSTRUCTOR);
+        }
+        else{
+          props.changeAccountStatus(STUDENT);
+        }
+      })
+      .catch((error) => {
+        dispatch({ type: FETCHING_API_FAILURE, payload: error });
+        console.log("ERR_1: This error is from Login", error);
+      });
+  };
+
   export const changeAccountStatus = (newAccountStatus)=>{
     //the account types are student, instructor, logged out
     //they are located in accountStatus.js in the reducer file

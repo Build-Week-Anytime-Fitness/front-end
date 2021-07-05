@@ -11,8 +11,10 @@ import {
     LOGGED_OUT
 } from './accountStatus';
 const LOCAL_ACCOUNT_STATUS = "LOCAL_ACCOUNT_STATUS";
-
-const userReducer=(state,action)=>{
+const initialState = {
+    accountStatus: LOGGED_OUT
+};
+const userReducer=(state=initialState,action)=>{
     switch(action.type){
         case FETCHING_API_START:
             return { ...state, isLoading: true };
