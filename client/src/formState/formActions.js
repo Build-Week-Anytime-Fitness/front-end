@@ -65,17 +65,33 @@ export const handleFormSubmit=(formValues,formName)=>async (dispatch,getState)=>
     });
 
     // get all field specific errors
-    const formErrors = await Object.keys(formValues).reduce(async (acc,name)=>{
+    // const formErrors = await Object.keys(formValues).reduce(async (acc,name)=>{
+    //     try{
+    //         console.log('before',acc)
+    //         await yup.reach(schema,name).validate(formValues[name]);
+    //         acc[name] = '';
+    //         console.log('after',acc)
+    //     }
+    //     catch(error){
+    //         acc[name] = error.errors[0];
+    //     }
+    //     return acc;
+    // } ,{});
+    // console.log('form errors',formErrors)
+    
+    const formErrors = {};
+    for(let name in formValues){
         try{
-            await yup.reach(schema,name).validate(formValues);
-            acc[name] = '';
+            await yup.reach(schema,name).validate(formValues[name]);
+            formErrors[name] = '';
         }
         catch(error){
-            acc[name] = error.errors[0];
+            formErrors[name] = error.errors[0];
         }
-        return acc;
-    } ,{});
+    }
     dispatch({type:FORM_ERRORS_CHANGE,payload:formErrors,name:formName});
+
+
 };
 export const stopSubmitting=(formName)=>{
     return {type:FORM_IS_SUBMITTING_CHANGE,payload:false,name:formName};

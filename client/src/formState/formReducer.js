@@ -11,7 +11,7 @@ const formReducerCreator=(formName)=>{
         name:formName,
         schema:{},
         formValues:{},
-        isValid:true,
+        isValid:false,
         formErrors:{},
         isSubmitting:false
     };
@@ -22,11 +22,11 @@ const formReducerCreator=(formName)=>{
             // make sure formName matches
             return state;
         }
-        console.log(action.name!==state.formName,action.type!==INIT_FORM,'formName: ',state.name,'action: ',action,'starting state: ',state,'payload: ',action.payload);
+        // console.log(action.name!==state.formName,action.type!==INIT_FORM,'formName: ',state.name,'action: ',action,'starting state: ',state,'payload: ',action.payload);
         switch(action.type){
             case FORM_IS_SUBMITTING_CHANGE:{
                 const isSubmitting = action.payload;
-                console.log('FORM_IS_SUBMITTING_CHANGE',action.payload);
+                // console.log('FORM_IS_SUBMITTING_CHANGE',action.payload);
                 return {
                     ...state,
                     isSubmitting
@@ -34,7 +34,7 @@ const formReducerCreator=(formName)=>{
             }
             case INIT_FORM:{
                 const {schema,formValues} = action.payload;
-                console.log('init form reducer is run',formName,action);
+                // console.log('init form reducer is run',formName,action);
                 return {
                     ...initialState,
                     schema,

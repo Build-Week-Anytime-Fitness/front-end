@@ -8,8 +8,11 @@ import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux'
 import {rootReducer} from './state/reducers/index'
 import thunk from 'redux-thunk';
-// import logger from 'redux-logger';
-const store = createStore(rootReducer, applyMiddleware(thunk))
+import {createLogger} from 'redux-logger';
+const logger = createLogger({
+  diff:true
+});
+const store = createStore(rootReducer, applyMiddleware(thunk,logger));
 
 ReactDOM.render(
   <React.StrictMode>
