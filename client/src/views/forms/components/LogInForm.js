@@ -30,7 +30,9 @@ const LogInForm = (props) => {
   },[initForm])
 
   useEffect(()=>{
-    // redirect after log in
+    // if the api call is successful, the accountStatus will be updated
+    // a change in accountStatus will trigger this useEffect
+    // redirect based on the accountStatus
     if(accountStatus===STUDENT){
       history.push('/classes');
     }
@@ -43,7 +45,13 @@ const LogInForm = (props) => {
   },[accountStatus, history]);
 
   useEffect(()=>{
-    // the handleFormSubmit has run and isSubmitting changed to true
+    // fater handleFormSubmit has run,
+    // if there is no error in form, formReducer will set isSubmitting to true
+    // this change will trigger this useEffect to run and post the login to the backend
+    // this is done by calling the postLogin action in the userActions.js
+    // if successful, it will change the accountStatus to either STUDENT or INSTRUCTOR
+
+    // if isSubmitting is true, the 'Enter' button will be disable to prevent multiple log ins.
     if(isSubmitting){
       // post the login
       console.log('isSubmitting')
