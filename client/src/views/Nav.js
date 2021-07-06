@@ -8,7 +8,7 @@ import {
     INSTRUCTOR
 } from '../state/reducers/accountStatus';
 export default function Nav() {
-    const accountStatus = useSelector(state=>state.accountStatus);
+    const accountStatus = useSelector(state=>state.userState.accountStatus);
     const displayLinks =(accountStatus)=>{
         if(accountStatus===LOGGED_OUT){
             return(
@@ -52,7 +52,9 @@ export default function Nav() {
             );
         }
         else{
-            return;
+            return(
+                <div>Failed to display navbar</div>
+            );
         }
     };  
 

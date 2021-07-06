@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import formReducerCreator from "../../formState/formReducer";
 import userReducer from "../../userState/userReducer";
+import classesReducer from "../../classesState/classesReducer";
 import {
   FETCHING_API_START,
   FETCHING_API_SUCCESS,
@@ -38,6 +39,7 @@ import {
 import {
   LOGGED_OUT
 } from './accountStatus';
+import { LOG_IN_FORM, SIGN_UP_FORM } from "../../formState/formNames";
 
 const LOCAL_ACCOUNT_STATUS = "LOCAL_ACCOUNT_STATUS";
 
@@ -106,6 +108,8 @@ const initialState = {
 // INITIAL STATE:  initialClassesValues (which gets assigned to setAllClasses and setFilteredClasses)
 
 //2. create a features reducer that takes in initialState, sets it equal to state, and takes in an action
+
+
 export const appReducer = (state = initialState, action) => {
   //3. initialize switch statement
   switch (action.type) {
@@ -231,9 +235,9 @@ export const appReducer = (state = initialState, action) => {
 };
 
 export const rootReducer = combineReducers({
-  logInFormState:formReducerCreator,
-  signUpFormState:formReducerCreator,
-  classFormState:formReducerCreator,
+  logInFormState:formReducerCreator(LOG_IN_FORM),
+  signUpFormState:formReducerCreator(SIGN_UP_FORM),
+  classFormState:formReducerCreator(),
   userState:userReducer,
-  classesState:allClassesReducer,
+  classesState:classesReducer,
 });

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { loginFormSchema } from "../validation/schema";
@@ -6,7 +6,8 @@ import { displayErrors } from "../formHelpers";
 import { connect } from "react-redux";
 import { postLogIn } from "../../../userState/userActions";
 import { INSTRUCTOR, STUDENT } from "../../../state/reducers/accountStatus";
-import { handleFormChange, handleFormSubmit, initForm, stopSubmitting } from "../../../formState/formActions";
+import {  handleFormSubmit, initForm, stopSubmitting } from "../../../formState/formActions";
+import { LOG_IN_FORM } from "../../../formState/formNames";
 const initialValues = {
   email: "",
   password: "",
@@ -20,10 +21,9 @@ const LogInForm = (props) => {
     isValid,
     postLogIn, 
     isSubmitting, 
-    formValues,
     handleFormSubmit,
-    handleFormChange
   } = props;
+  const [formValues, setformValues] = useState(initialValues);
   useEffect(()=>{
     // initialize form
     initForm();
@@ -46,14 +46,23 @@ const LogInForm = (props) => {
     // the handleFormSubmit has run and isSubmitting changed to true
     if(isSubmitting){
       // post the login
+      console.log('isSubmitting')
       postLogIn(formValues)
     }
   },[isSubmitting,formValues,postLogIn]);
-
+  const handleChange=(e)=>{
+    const {name, value, checked, type} = e.target;
+    const inputValue = type === 'checkbox' ? checked:value;
+    setformValues({...formValues,[name]:inputValue});
+  };
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    handleFormSubmit(formValues);
+  };
   return (
     <div className={"parallax-wrapper5"} style={{marginTop: '60vh'}}>
     <div className={"content1"}>
-  <form className={"d-flex flex-column login-style"} onSubmit={handleFormSubmit}>
+  <form className={"d-flex flex-column login-style"} onSubmit={handleSubmit}>
       <div className={"d-flex flex-column justify-content-center input-style"}>
         <h2 style={{ color: "white" }}>Login</h2>
         <div className={"d-flex flex-row flex-wrap justify-content-center"}>
@@ -63,8 +72,8 @@ const LogInForm = (props) => {
               id="login-form-email-input"
               type="text"
               name="email"
-              value={formValues.email}
-              onChange={handleFormChange}
+              value={formValues.email} //this input is uncontrolled
+              onChange={handleChange}
             ></input>
           </label>
           <label>
@@ -73,8 +82,8 @@ const LogInForm = (props) => {
               id="login-form-password-input"
               type="password"
               name="password"
-              value={formValues.password}
-              onChange={handleFormChange}
+              defaultValue={formValues.password} //this input is uncontrolled
+              onChange={handleChange}
             ></input>
           </label>
         </div>
@@ -85,7 +94,7 @@ const LogInForm = (props) => {
           <button
             id="login-form-submit"
             type="submit"
-            disabled={!isValid || props.isSubmitting}
+            disabled={isSubmitting}
             style={{width: '250px', alignSelf: 'center', padding: '1vh 3vw', borderRadius: '50px', marginBottom: '3vh'}}
           >
             {props.isSubmitting? '...submitting': 'Enter'}
@@ -124,16 +133,12 @@ const mapStateToProps = (state) => {
     isValid: state.logInFormState.isValid
   };
 };
-const LOG_IN_FORM = "LOG_IN_FORM"; //this is the form name
+
 const mapDispatchToProps = (dispatch) => {
   return {
     postLogIn: (formValues) => dispatch(postLogIn(formValues)),
     initForm: () => dispatch(initForm(loginFormSchema,initialValues,LOG_IN_FORM)),
-    handleFormChange: (event)=> dispatch(handleFormChange(event.target,LOG_IN_FORM)),
-    handleFormSubmit: (event)=> {
-      event.preventDefault();
-      dispatch(handleFormSubmit(LOG_IN_FORM));
-    },
+    handleFormSubmit: (formValues)=>dispatch(handleFormSubmit(formValues,LOG_IN_FORM)),
     stopSubmitting: ()=> dispatch(stopSubmitting(LOG_IN_FORM))
   };
 };

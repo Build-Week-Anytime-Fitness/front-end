@@ -9,53 +9,58 @@ import * as yup from 'yup';
 export const initForm=(schema,formValues,formName)=>{
     return {type:INIT_FORM,payload:{schema,formValues},name:formName};
 };
-export const handleFormChange=(target,formName)=>(dispatch,getState)=>{
+// export const handleFormChange=({name, value, checked, type},formName)=>(dispatch,getState)=>{
 
-    const {formValues,schema} = getState();
-    const {name, value, checked, type} = target;
-    const inputValue = type === 'checkbox' ? checked:value;
-    const newFormValues = {...formValues, [name]: inputValue};
 
-    // validate the entire new form
-    schema.isValid(newFormValues)
-    .then((isValid)=>{
-        dispatch({type:FORM_IS_VALID_CHANGE,payload:isValid,name:formName});
-    });
+//     dispatch({
+//         type:FORM_VALUE_CHANGE,payload:{
+//             name, value, checked, type
+//         },
+//         name:formName
+//     });
 
-    // get field specific error
-    yup.reach(schema,name)
-    .validate(value)
-    .then(()=>{
-            dispatch({
-                type:FORM_VALUE_CHANGE,payload:{
-                    name,
-                    value,
-                    error:''
-                },
-                name:formName
-            });
-    })
-    .catch((error)=>{
-        dispatch({
-            type:FORM_VALUE_CHANGE,payload:{
-                name,
-                value,
-                error:error.errors[0]
-            },
-            name:formName
-        });
-    });
+    // // validate the entire new form
+    // schema.isValid(newFormValues)
+    // .then((isValid)=>{
+    //     dispatch({type:FORM_IS_VALID_CHANGE,payload:isValid,name:formName});
+    // });
 
-};
-export const handleFormSubmit=(formName)=>async (dispatch,getState)=>{
-    const {formValues,schema} = getState();
+    // // get field specific error
+    // yup.reach(schema,name)
+    // .validate(value)
+    // .then(()=>{
+    //         dispatch({
+    //             type:FORM_VALUE_CHANGE,payload:{
+    //                 name,
+    //                 value,
+    //                 error:''
+    //             },
+    //             name:formName
+    //         });
+    // })
+    // .catch((error)=>{
+    //     dispatch({
+    //         type:FORM_VALUE_CHANGE,payload:{
+    //             name,
+    //             value,
+    //             error:error.errors[0]
+    //         },
+    //         name:formName
+    //     });
+    // });
 
+// };
+export const handleFormSubmit=(formValues,formName)=>async (dispatch,getState)=>{
+    const state = getState();
+    const {schema} = state[Object.keys(state).find((key)=>formName===state[key].name)];
     // validate the entire form
     schema.isValid(formValues)
     .then((isValid)=>{
         dispatch({type:FORM_IS_VALID_CHANGE,payload:isValid,name:formName});
         if(isValid){
             dispatch({type:FORM_IS_SUBMITTING_CHANGE,payload:true,name:formName});
+        }
+        else{
         }
     });
 

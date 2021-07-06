@@ -6,10 +6,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux'
-import {appReducer} from './state/reducers/index'
+import {rootReducer} from './state/reducers/index'
 import thunk from 'redux-thunk';
-
-const store = createStore(appReducer, applyMiddleware(thunk))
+// import logger from 'redux-logger';
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
   <React.StrictMode>

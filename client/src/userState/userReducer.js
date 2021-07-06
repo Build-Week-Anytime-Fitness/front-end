@@ -19,28 +19,34 @@ const initialState = {
 };
 const userReducer=(state=initialState,action)=>{
     switch(action.type){
-        case FETCHING_API_START:
+        case FETCHING_API_START:{
             return { ...state, isLoading: true };
-        case FETCHING_API_SUCCESS:
+        }
+        case FETCHING_API_SUCCESS:{
             return { ...state, isLoading: false };
-        case FETCHING_API_FAILURE:
+        }
+        case FETCHING_API_FAILURE:{
             return { ...state, isLoading: false, error: action.payload };
-        case CHECK_USER:
+        }
+        case CHECK_USER:{
             //console.log("reducer fires: check user");
             return {
                 ...state,
                 user: { ...state.user, isInstructor: action.payload },
             };
-        case CURRENT_USER:
+        }
+        case CURRENT_USER:{
             return { ...state, currentUser: { id: action.payload } };
-        case CHANGE_ACCOUNT_STATUS:
+        }
+        case CHANGE_ACCOUNT_STATUS:{
             const newAccountStatus = action.payload;
             localStorage.setItem(LOCAL_ACCOUNT_STATUS,newAccountStatus);
             return {
               ...state,
               accountStatus: newAccountStatus
             };
-        case INIT_ACCOUNT_STATUS:
+        }
+        case INIT_ACCOUNT_STATUS:{
             const accountStatus = localStorage.getItem(LOCAL_ACCOUNT_STATUS);
             if(!accountStatus){
               return{
@@ -54,22 +60,26 @@ const userReducer=(state=initialState,action)=>{
                 accountStatus
               }
             }
-        case USER_LOGGED_IN:
+        }
+        case USER_LOGGED_IN:{
             return{
                 ...state,
                 currentUser:{id:action.payload.currentUserId},
                 isInstructor:action.payload.isInstructor,
                 accountStatus:action.payload.isInstructor?INSTRUCTOR:STUDENT
             }
-        case USER_SIGNED_UP:
+        }
+        case USER_SIGNED_UP:{
             return{
                 ...state,
                 currentUser:{id:action.payload.currentUserId},
                 isInstructor:action.payload.isInstructor,
                 accountStatus:SIGNED_UP
             }
-        default:
+        }
+        default:{
             return state;
+        }
     }
 };
 export default userReducer;

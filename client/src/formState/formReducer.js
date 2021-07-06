@@ -18,13 +18,23 @@ const formReducerCreator=(formName)=>{
     const formReducer=(state=initialState,action)=>{
         // State refers to this local formReducer state not the global rootReducer state
         // This is different from mapStateToProps and mapDispatchToProps. They use the rootReducer state instead.
-        if(action.name!==state.formName){
+        if(action.name!==state.name){
             // make sure formName matches
             return state;
         }
+        console.log(action.name!==state.formName,action.type!==INIT_FORM,'formName: ',state.name,'action: ',action,'starting state: ',state,'payload: ',action.payload);
         switch(action.type){
-            case INIT_FORM:
+            case FORM_IS_SUBMITTING_CHANGE:{
+                const isSubmitting = action.payload;
+                console.log('FORM_IS_SUBMITTING_CHANGE',action.payload);
+                return {
+                    ...state,
+                    isSubmitting
+                }
+            }
+            case INIT_FORM:{
                 const {schema,formValues} = action.payload;
+                console.log('init form reducer is run',formName,action);
                 return {
                     ...initialState,
                     schema,
@@ -34,39 +44,40 @@ const formReducerCreator=(formName)=>{
                         return acc
                     },{})
                 };
-            case FORM_ERRORS_CHANGE:
+            }
+            case FORM_ERRORS_CHANGE:{
                 const formErrors = action.payload;
                 return {
                     ...state,
                     formErrors
                 };
-            case FORM_VALUE_CHANGE:
-                const {name,value,error} = action.payload;
+            }
+            case FORM_VALUE_CHANGE:{
+                const {name, value, checked, type} = action.payload;
+                const inputValue = type === 'checkbox' ? checked:value;
                 return {
                     ...state,
                     formValues:{
                         ...state.formValues,
-                        [name]:value,
+                        [name]:inputValue,
                     },
                     formErrors:{
                         ...state.formErrors,
-                        [name]:error
+                        [name]:''
                     }
                 };
-            case FORM_IS_VALID_CHANGE:
+            }
+            case FORM_IS_VALID_CHANGE:{
                 const isValid = action.payload;
                 return {
                     ...state,
                     isValid
                 };
-            case FORM_IS_SUBMITTING_CHANGE:
-                const isSubmitting = action.payload;
-                return {
-                    ...state,
-                    isSubmitting
-                }
-            default:
+            }
+
+            default:{
                 return state;
+            }
         }
     };  
     return formReducer;

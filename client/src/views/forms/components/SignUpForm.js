@@ -185,7 +185,7 @@ const mapDispatchToProps = (dispatch) => {
         postLogIn: (formValues) => dispatch(postLogIn(formValues)),
         postSignUp: (formValues) => dispatch(postSignUp(formValues)),
         initForm: () => dispatch(initForm(signUpFormSchema,initialValues,SIGN_UP_FORM)),
-        handleFormChange: (event)=> dispatch(handleFormChange(event.target,SIGN_UP_FORM)),
+        handleFormChange: null,
         handleFormSubmit: (event)=> {
           event.preventDefault();
           dispatch(handleFormSubmit(SIGN_UP_FORM));
