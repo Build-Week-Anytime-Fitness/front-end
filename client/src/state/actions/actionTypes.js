@@ -28,8 +28,12 @@ export const ADD_USER = "ADD_USER";
 export const CHECK_USER = "CHECK_USER";
 export const CURRENT_USER = "CURRENT_USER";
 
+export const USER_LOGGED_IN = "USER_LOGGED_IN";
+export const USER_SIGNED_UP = "USER_SIGNED_UP";
 export const CHANGE_ACCOUNT_STATUS = "CHANGE_ACCOUNT_STATUS";
 export const INIT_ACCOUNT_STATUS = "INIT_ACCOUNT_STATUS";
+
+
 
 // formAction types
 

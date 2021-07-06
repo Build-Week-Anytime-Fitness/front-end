@@ -18,6 +18,10 @@ const formReducerCreator=(formName)=>{
     const formReducer=(state=initialState,action)=>{
         // State refers to this local formReducer state not the global rootReducer state
         // This is different from mapStateToProps and mapDispatchToProps. They use the rootReducer state instead.
+        if(action.name!==state.formName){
+            // make sure formName matches
+            return state;
+        }
         switch(action.type){
             case INIT_FORM:
                 const {schema,formValues} = action.payload;

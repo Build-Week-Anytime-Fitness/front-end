@@ -1,14 +1,14 @@
-import React, {useState, useEffect} from "react";
+import React, { useEffect} from "react";
 import {Link, useHistory} from "react-router-dom";
 import {signUpFormSchema} from "../validation/schema";
-import {validateForm} from "../validation/validationHelpers";
 import {connect} from "react-redux";
-import {addUser} from "../../../state/actions/index";
 import {
     displayErrors,
-    handleChangeHelper,
-    handleSubmitHelper,
 } from "../formHelpers";
+import { SIGNED_UP } from "../../../userState/accountStatus";
+import { postLogIn, postSignUp, } from "../../../userState/userActions";
+import { STUDENT,INSTRUCTOR } from "../../../state/reducers/accountStatus";
+import { handleFormChange, handleFormSubmit, initForm, stopSubmitting } from "../../../formState/formActions";
 //import FitnessThree from "../../../assets/fitnessThree.jpg"; //bread crumbs if we get lost
 
 const initialValues = {
@@ -19,43 +19,58 @@ const initialValues = {
     is_instructor: false,
 };
 
-const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
-    acc[key] = "";
-    return acc;
-}, {});
-
 function SignUpForm(props) {
+    const {
+        accountStatus,
+        initForm,
+        isValid,
+        postLogIn,
+        postSignUp,
+        formValues,
+        formErrors,
+        isSubmitting,
+        stopSubmitting,
+        handleFormChange,
+        handleFormSubmit
+    } = props;
     const history = useHistory();
-    // state variables
-    const [isValid, setIsValid] = useState(true);
-    const [formValues, setFormValues] = useState(initialValues);
-    const [formErrors, setFormErrors] = useState(initialErrorValues);
-    // useEffect
-    useEffect(() => {
-        // validateForm whenever the component is mounted
-        validateForm(signUpFormSchema, formValues, setIsValid); //check if form is valid using schema.validate
-    }, [formValues]);
-    // function declarations
-    const handleChange = (event) => {
-        handleChangeHelper({
-            event,
-            schema: signUpFormSchema,
-            formValues,
-            setFormValues,
-            formErrors,
-            setFormErrors,
-            setIsValid,
-        });
-    };
-    const handleSubmit = (event) => {
-        handleSubmitHelper(event);
-        // console.log(
-        //   "received form values in handle submit signup form",
-        //   formValues
-        // );
-        props.addNewUser(formValues);
-        history.push("/login");
-    };
+    useEffect(()=>{
+        initForm();
+    },[initForm])
+    useEffect(()=>{
+        // redirect after log in
+        if(accountStatus===STUDENT){
+          history.push('/classes');
+        }
+        else if(accountStatus===INSTRUCTOR){
+          history.push('/instructors')
+        }
+        else if(accountStatus===SIGNED_UP){
+            // when postSignUp is successful, accountStatus will be changed to SIGNED_UP
+            postLogIn({
+                email:formValues.email,
+                password:formValues.password
+            });
+        }
+        else{
+            stopSubmitting();
+        }
+      },[
+          accountStatus,
+          initForm,
+          postLogIn,
+          formValues,
+          stopSubmitting,
+          history
+        ]);
+    useEffect(()=>{
+        // the handleFormSubmit has run and isSubmitting changed to true
+        if(isSubmitting){
+          // post the login
+          postSignUp(formValues);
+        }
+      },[isSubmitting,postSignUp,formValues]);
+
     return (
         <div className={"parallax-wrapper3"} style={{marginTop: '40vh'}}>
             <div className={"content1"}>
@@ -64,7 +79,7 @@ function SignUpForm(props) {
                         "d-flex flex-column flex-wrap justify-content-center align-content-center form-style"
                     }
                     style={{padding: '0 10vw'}}
-                    onSubmit={handleSubmit}
+                    onSubmit={handleFormSubmit}
                 >
                     <div className={"d-flex flex-column justify-content-center align-items-center input-style"}>
                         <h2 style={{color: "white"}}>Sign Up</h2>
@@ -75,7 +90,7 @@ function SignUpForm(props) {
                                 type="text"
                                 name="name"
                                 value={formValues.name}
-                                onChange={handleChange}
+                                onChange={handleFormChange}
                             />
                         </label>
                         <label style={{padding: '.5rem'}}>
@@ -85,7 +100,7 @@ function SignUpForm(props) {
                                 type="text"
                                 name="email"
                                 value={formValues.email}
-                                onChange={handleChange}
+                                onChange={handleFormChange}
                             />
                         </label>
                         <label style={{fontSize: '1rem', padding: '.5rem'}}>
@@ -95,7 +110,7 @@ function SignUpForm(props) {
                                 type="password"
                                 name="password"
                                 value={formValues.password}
-                                onChange={handleChange}
+                                onChange={handleFormChange}
 
                             />
                         </label>
@@ -107,7 +122,7 @@ function SignUpForm(props) {
                             type="checkbox"
                             name="isOverEighteen"
                             checked={formValues.isOverEighteen}
-                            onChange={handleChange}
+                            onChange={handleFormChange}
                             style={{margin: '2vh auto', alignSelf: 'center'}}
                         />
 
@@ -117,7 +132,7 @@ function SignUpForm(props) {
                             type="checkbox"
                             name="is_instructor"
                             checked={formValues.is_instructor}
-                            onChange={handleChange}
+                            onChange={handleFormChange}
                             style={{margin: '2vh auto', alignSelf: 'center'}}
                         />
 
@@ -157,14 +172,25 @@ function SignUpForm(props) {
 
 const mapStateToProps = (state) => {
     return {
-        currentUser: state.currentUser,
-        user: state.user,
+        accountStatus: state.userState.accountStatus,
+        isSubmitting: state.logInFormState.isSubmitting,
+        formValues: state.logInFormState.formValues,
+        formErrors: state.logInFormState.formErrors,
+        isValid: state.logInFormState.isValid
     };
 };
-
+const SIGN_UP_FORM = "SIGN_UP_FORM"; //name of the form for the reducer
 const mapDispatchToProps = (dispatch) => {
     return {
-        addNewUser: (formValues) => dispatch(addUser(formValues)),
+        postLogIn: (formValues) => dispatch(postLogIn(formValues)),
+        postSignUp: (formValues) => dispatch(postSignUp(formValues)),
+        initForm: () => dispatch(initForm(signUpFormSchema,initialValues,SIGN_UP_FORM)),
+        handleFormChange: (event)=> dispatch(handleFormChange(event.target,SIGN_UP_FORM)),
+        handleFormSubmit: (event)=> {
+          event.preventDefault();
+          dispatch(handleFormSubmit(SIGN_UP_FORM));
+        },
+        stopSubmitting: ()=>dispatch(stopSubmitting(SIGN_UP_FORM))
     };
 };
 

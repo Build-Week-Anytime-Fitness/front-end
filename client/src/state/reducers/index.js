@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
 import formReducerCreator from "../../formState/formReducer";
-import formReducer from "../../formState/formReducer";
 import userReducer from "../../userState/userReducer";
 import {
   FETCHING_API_START,

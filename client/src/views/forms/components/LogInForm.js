@@ -6,7 +6,7 @@ import { displayErrors } from "../formHelpers";
 import { connect } from "react-redux";
 import { postLogIn } from "../../../userState/userActions";
 import { INSTRUCTOR, STUDENT } from "../../../state/reducers/accountStatus";
-import { handleFormChange, handleFormSubmit, initForm } from "../../../formState/formActions";
+import { handleFormChange, handleFormSubmit, initForm, stopSubmitting } from "../../../formState/formActions";
 const initialValues = {
   email: "",
   password: "",
@@ -14,39 +14,46 @@ const initialValues = {
 
 const LogInForm = (props) => {
   const history = useHistory();
-  
+  const {
+    initForm, 
+    accountStatus, 
+    isValid,
+    postLogIn, 
+    isSubmitting, 
+    formValues,
+    handleFormSubmit,
+    handleFormChange
+  } = props;
   useEffect(()=>{
     // initialize form
-    props.initForm(loginFormSchema,initialValues);
-  },[])
+    initForm();
+  },[initForm])
 
   useEffect(()=>{
     // redirect after log in
-    if(props.accountStatus===STUDENT){
+    if(accountStatus===STUDENT){
       history.push('/classes');
     }
-    else if(props.acc===INSTRUCTOR){
+    else if(accountStatus===INSTRUCTOR){
       history.push('/instructors')
     }
     else{
-      // if log in failed, reinitialize form with the current form values
-      // form does not have errors at this stage
-      props.initForm(loginFormSchema,props.formValues);
+      stopSubmitting()
     }
-  },[props.accountStatus]);
+  },[accountStatus, history]);
 
   useEffect(()=>{
     // the handleFormSubmit has run and isSubmitting changed to true
-    if(props.isSubmitting){
+    if(isSubmitting){
       // post the login
-      props.postLogIn(props.formValues)
+      postLogIn(formValues)
     }
-  },[props.isSubmitting]);
+  },[isSubmitting,formValues,postLogIn]);
 
   return (
     <div className={"parallax-wrapper5"} style={{marginTop: '60vh'}}>
     <div className={"content1"}>
-  <form className={"d-flex flex-column login-style"} onSubmit={props.handleFormSubmit}>
+  <form className={"d-flex flex-column login-style"} onSubmit={handleFormSubmit}>
       <div className={"d-flex flex-column justify-content-center input-style"}>
         <h2 style={{ color: "white" }}>Login</h2>
         <div className={"d-flex flex-row flex-wrap justify-content-center"}>
@@ -56,8 +63,8 @@ const LogInForm = (props) => {
               id="login-form-email-input"
               type="text"
               name="email"
-              value={props.formValues.email}
-              onChange={props.handleFormChange}
+              value={formValues.email}
+              onChange={handleFormChange}
             ></input>
           </label>
           <label>
@@ -67,7 +74,7 @@ const LogInForm = (props) => {
               type="password"
               name="password"
               value={formValues.password}
-              onChange={props.handleFormChange}
+              onChange={handleFormChange}
             ></input>
           </label>
         </div>
@@ -117,13 +124,17 @@ const mapStateToProps = (state) => {
     isValid: state.logInFormState.isValid
   };
 };
-
+const LOG_IN_FORM = "LOG_IN_FORM"; //this is the form name
 const mapDispatchToProps = (dispatch) => {
   return {
     postLogIn: (formValues) => dispatch(postLogIn(formValues)),
-    initForm: (schema,formValues) => dispatch(initForm(schema,formValues)),
-    handleFormChange: (event)=> dispatch(handleFormChange(event)),
-    handleFormSubmit: (event)=> dispatch(handleFormSubmit(event))
+    initForm: () => dispatch(initForm(loginFormSchema,initialValues,LOG_IN_FORM)),
+    handleFormChange: (event)=> dispatch(handleFormChange(event.target,LOG_IN_FORM)),
+    handleFormSubmit: (event)=> {
+      event.preventDefault();
+      dispatch(handleFormSubmit(LOG_IN_FORM));
+    },
+    stopSubmitting: ()=> dispatch(stopSubmitting(LOG_IN_FORM))
   };
 };
 
