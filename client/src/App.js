@@ -46,7 +46,7 @@ function App() {
           <Link
             to="home"
             className="button"
-            style={{ color: "white", padding: "3vh 5vw", border: '1px solid white', borderRadius: '50px', margin: '10vh 0', width: '300px', backgroundColor: '#222', opacity: '0.8' }}
+            style={{ color: "white", padding: "3vh 300px", border: '1px solid white', borderRadius: '50px', margin: '10vh 0', backgroundColor: '#222', opacity: '0.8' }}
           >
             <h4 style={{ color: "white"}}>Step Inside</h4>
           </Link>
