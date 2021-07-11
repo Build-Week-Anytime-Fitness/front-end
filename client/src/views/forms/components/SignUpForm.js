@@ -37,8 +37,28 @@ function SignUpForm(props) {
     useEffect(()=>{
         initForm();
     },[initForm])
+
+
     useEffect(()=>{
-        // redirect after log in
+        // if the api call is successful, the accountStatus will be updated
+        // a change in accountStatus will trigger this useEffect
+        // redirect based on the accountStatus
+        if(accountStatus===STUDENT){
+          history.push('/classes');
+        }
+        else if(accountStatus===INSTRUCTOR){
+          history.push('/instructors')
+        }
+        else{
+          stopSubmitting()
+        }
+      },[accountStatus, history]);
+
+
+    useEffect(()=>{
+        // if the api call is successful, the accountStatus will be updated
+        // a change in accountStatus will trigger this useEffect
+        // redirect based on the accountStatus
         if(accountStatus===STUDENT){
           history.push('/classes');
         }
@@ -70,7 +90,19 @@ function SignUpForm(props) {
           postSignUp(formValues);
         }
       },[isSubmitting,postSignUp,formValues]);
-
+      useEffect(()=>{
+        // after handleFormSubmit has run,
+        // if there is no error in form, formReducer will set isSubmitting to true
+        // this change will trigger this useEffect to run and post the sign up to the backend
+        // this is done by calling the postSignUp action in the userActions.js
+        // if successful, it will change the accountStatus to SIGNED_UP
+    
+        // if isSubmitting is true, the 'Enter' button will be disable to prevent multiple log ins.
+        if(isSubmitting){
+          // post the sign up
+          postSignUp(formValues);
+        }
+      },[isSubmitting,postSignUp,formValues]);
     return (
         <div className={"parallax-wrapper3"} style={{marginTop: '40vh'}}>
             <div className={"content1"}>

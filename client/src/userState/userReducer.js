@@ -40,14 +40,13 @@ const userReducer=(state=initialState,action)=>{
         }
         case CHANGE_ACCOUNT_STATUS:{
             const newAccountStatus = action.payload;
-            localStorage.setItem(LOCAL_ACCOUNT_STATUS,newAccountStatus);
             return {
               ...state,
               accountStatus: newAccountStatus
             };
         }
         case INIT_ACCOUNT_STATUS:{
-            const accountStatus = localStorage.getItem(LOCAL_ACCOUNT_STATUS);
+            const accountStatus = action.payload;
             if(!accountStatus){
               return{
                 ...state,
@@ -62,18 +61,20 @@ const userReducer=(state=initialState,action)=>{
             }
         }
         case USER_LOGGED_IN:{
+            const {isInstructor,currentUserId} = action.payload;
             return{
                 ...state,
-                currentUser:{id:action.payload.currentUserId},
-                isInstructor:action.payload.isInstructor,
-                accountStatus:action.payload.isInstructor?INSTRUCTOR:STUDENT
+                currentUser:{id:currentUserId},
+                isInstructor:isInstructor,
+                accountStatus:isInstructor?INSTRUCTOR:STUDENT
             }
         }
         case USER_SIGNED_UP:{
+            const {isInstructor,currentUserId} = action.payload;
             return{
                 ...state,
-                currentUser:{id:action.payload.currentUserId},
-                isInstructor:action.payload.isInstructor,
+                currentUser:{id:currentUserId},
+                isInstructor:isInstructor,
                 accountStatus:SIGNED_UP
             }
         }

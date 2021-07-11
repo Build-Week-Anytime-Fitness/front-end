@@ -10,6 +10,8 @@ import {
     USER_SIGNED_UP
 } from '../state/actions/actionTypes';
 import axiosWithAuth from '../utils/axiosWithAuth';
+import { INSTRUCTOR, SIGNED_UP, STUDENT } from './accountStatus';
+const LOCAL_ACCOUNT_STATUS = "LOCAL_ACCOUNT_STATUS";
 export const addUser = (addUser) => (dispatch) => {
     // console.log("9. new allUser from classes.js", addUser);
     dispatch({ type: FETCHING_API_START });
@@ -54,6 +56,7 @@ export const addUser = (addUser) => (dispatch) => {
 
         // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
         localStorage.setItem("id", res.data.id);
+        localStorage.setItem(LOCAL_ACCOUNT_STATUS,res.data.isInstructor?INSTRUCTOR:STUDENT);
         dispatch({type:USER_LOGGED_IN,payload:{
           currentUserId:res.data.id,
           isInstructor:res.data.is_instructor
@@ -72,12 +75,12 @@ export const addUser = (addUser) => (dispatch) => {
         .post("/register", {name,email,password,isOverEighteen,is_instructor})
         // or here
         .then((res) => {
-          console.log("message: ", res.data.message);
+          localStorage.setItem(LOCAL_ACCOUNT_STATUS,SIGNED_UP);
           alert(res.data.message)
           dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
           dispatch({type:USER_SIGNED_UP,payload:{
             currentUserId:res.data.id,
-            isInstructor:res.data.is_instructor
+            isInstructor:res.data.is_instructor,
           }});
         })
         .catch((error) => {
@@ -85,11 +88,7 @@ export const addUser = (addUser) => (dispatch) => {
           console.log("ERR_1: This error is from Login", error);
         });
   };
-  export const changeAccountStatus = (newAccountStatus)=>{
-    //the account types are student, instructor, logged out
-    //they are located in accountStatus.js in the reducer file
-    return {type: CHANGE_ACCOUNT_STATUS, payload:newAccountStatus};
-  };
   export const initAccountStatus = ()=>{
-    return {type:INIT_ACCOUNT_STATUS};
+    const status = localStorage.getItem(LOCAL_ACCOUNT_STATUS);
+    return {type:INIT_ACCOUNT_STATUS, payload:status};
   };

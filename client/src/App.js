@@ -13,16 +13,16 @@ import Footer from "./views/Footer";
 import ReactPlayer from "react-player";
 import Video from "./assets/ANYWHERE.mp4";
 import React, { useEffect } from "react";
-import {useDispatch} from "react-redux";
 import {initAccountStatus} from "./userState/userActions";
 import Checkout from "./views/cart/Checkout";
 import CheckoutSuccess from "./views/cart/CheckoutSuccess";
-function App() {
+import {connect} from "react-redux";
+function App(props) {
   // if previously logged in, grab the account status using the actions
-  const dispatch = useDispatch();
+  const {initAccountStatus} = props;
   useEffect(()=>{
-    dispatch(initAccountStatus());
-  },[dispatch]);
+    initAccountStatus();
+  },[initAccountStatus]);
   //
   return (
     <Router>
@@ -71,5 +71,9 @@ function App() {
     </Router>
   );
 }
-
-export default App;
+const mapDispatchToProps=(dispatch)=>{
+  return{
+    initAccountStatus:()=>dispatch(initAccountStatus())
+  }
+}
+export default connect(null,mapDispatchToProps)(App);
