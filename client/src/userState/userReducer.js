@@ -13,7 +13,6 @@ import {
     INSTRUCTOR,
     LOGGED_OUT, SIGNED_UP, STUDENT
 } from './accountStatus';
-const LOCAL_ACCOUNT_STATUS = "LOCAL_ACCOUNT_STATUS";
 const initialState = {
     accountStatus: LOGGED_OUT
 };

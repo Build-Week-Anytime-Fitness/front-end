@@ -7,12 +7,15 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import EditIcon from "@material-ui/icons/Edit";
-import { useDispatch } from "react-redux";
-import { connectToStore } from "../../state/interfaces/classInterface";
+import { connect, useDispatch } from "react-redux";
 import {
   classToEdit,
+  classesToSignUp,
+  undoSignUp,
+  addMyClass,
+  removeMyClass,
   setEditMode,
-} from "../../state/actions";
+} from "../../classesState/classesActions";
 
 const useStyles = makeStyles({
   root: {
@@ -252,5 +255,22 @@ const displayTime = (duration) => {
     }
   }
 };
+const mapStateToProps = (state) => {
+  return {
+    classToEdit: state.classState.classToEdit,
+    currentUser: state.classState.currentUser,
+    classesToSignUp: state.classState.classesToSignUp,
+    isEditMode: state.classState.isEditMode,
+  };
+};
 
-export default connectToStore(Class);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    classToEdit: (indivClass) => dispatch(classToEdit(indivClass)),
+    classesToSignUp: (indivClass) => dispatch(classesToSignUp(indivClass)),
+    undoSignUp: (indivClass) => dispatch(undoSignUp(indivClass)),
+    addMyClass: (indivClass) => dispatch(addMyClass(indivClass)),
+    removeMyClass: (indivClass) => dispatch(removeMyClass(indivClass)),
+  };
+};
+export default connect(mapStateToProps,mapDispatchToProps)(Class);

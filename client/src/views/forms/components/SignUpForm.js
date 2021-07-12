@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useState, useEffect} from "react";
 import {Link, useHistory} from "react-router-dom";
 import {signUpFormSchema} from "../validation/schema";
 import {connect} from "react-redux";
@@ -8,7 +8,7 @@ import {
 import { SIGNED_UP } from "../../../userState/accountStatus";
 import { postLogIn, postSignUp, } from "../../../userState/userActions";
 import { STUDENT,INSTRUCTOR } from "../../../state/reducers/accountStatus";
-import { handleFormChange, handleFormSubmit, initForm, stopSubmitting } from "../../../formState/formActions";
+import {  handleFormSubmit, initForm, stopSubmitting } from "../../../formState/formActions";
 //import FitnessThree from "../../../assets/fitnessThree.jpg"; //bread crumbs if we get lost
 
 const initialValues = {
@@ -26,14 +26,14 @@ function SignUpForm(props) {
         isValid,
         postLogIn,
         postSignUp,
-        formValues,
         formErrors,
         isSubmitting,
         stopSubmitting,
-        handleFormChange,
         handleFormSubmit
     } = props;
+    const [formValues,setFormValues] = useState(initialValues);
     const history = useHistory();
+
     useEffect(()=>{
         initForm();
     },[initForm])
@@ -52,7 +52,7 @@ function SignUpForm(props) {
         else{
           stopSubmitting()
         }
-      },[accountStatus, history]);
+      },[accountStatus, history, stopSubmitting]);
 
 
     useEffect(()=>{
@@ -103,6 +103,11 @@ function SignUpForm(props) {
           postSignUp(formValues);
         }
       },[isSubmitting,postSignUp,formValues]);
+    const handleChange=(e)=>{
+        const {name, value, checked, type} = e.target;
+        const inputValue = type === 'checkbox' ? checked:value;
+        setFormValues({...formValues,[name]:inputValue});
+    };
     return (
         <div className={"parallax-wrapper3"} style={{marginTop: '40vh'}}>
             <div className={"content1"}>
@@ -122,7 +127,7 @@ function SignUpForm(props) {
                                 type="text"
                                 name="name"
                                 value={formValues.name}
-                                onChange={handleFormChange}
+                                onChange={handleChange}
                             />
                         </label>
                         <label style={{padding: '.5rem'}}>
@@ -132,7 +137,7 @@ function SignUpForm(props) {
                                 type="text"
                                 name="email"
                                 value={formValues.email}
-                                onChange={handleFormChange}
+                                onChange={handleChange}
                             />
                         </label>
                         <label style={{fontSize: '1rem', padding: '.5rem'}}>
@@ -142,7 +147,7 @@ function SignUpForm(props) {
                                 type="password"
                                 name="password"
                                 value={formValues.password}
-                                onChange={handleFormChange}
+                                onChange={handleChange}
 
                             />
                         </label>
@@ -154,7 +159,7 @@ function SignUpForm(props) {
                             type="checkbox"
                             name="isOverEighteen"
                             checked={formValues.isOverEighteen}
-                            onChange={handleFormChange}
+                            onChange={handleChange}
                             style={{margin: '2vh auto', alignSelf: 'center'}}
                         />
 
@@ -164,7 +169,7 @@ function SignUpForm(props) {
                             type="checkbox"
                             name="is_instructor"
                             checked={formValues.is_instructor}
-                            onChange={handleFormChange}
+                            onChange={handleChange}
                             style={{margin: '2vh auto', alignSelf: 'center'}}
                         />
 
@@ -217,7 +222,6 @@ const mapDispatchToProps = (dispatch) => {
         postLogIn: (formValues) => dispatch(postLogIn(formValues)),
         postSignUp: (formValues) => dispatch(postSignUp(formValues)),
         initForm: () => dispatch(initForm(signUpFormSchema,initialValues,SIGN_UP_FORM)),
-        handleFormChange: null,
         handleFormSubmit: (event)=> {
           event.preventDefault();
           dispatch(handleFormSubmit(SIGN_UP_FORM));

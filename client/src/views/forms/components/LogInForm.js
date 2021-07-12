@@ -18,12 +18,11 @@ const LogInForm = (props) => {
   const {
     initForm, 
     accountStatus, 
-    isValid,
     postLogIn, 
     isSubmitting, 
     handleFormSubmit,
   } = props;
-  const [formValues, setformValues] = useState(initialValues);
+  const [formValues, setFormValues] = useState(initialValues);
   useEffect(()=>{
     // initialize form
     initForm();
@@ -61,7 +60,7 @@ const LogInForm = (props) => {
   const handleChange=(e)=>{
     const {name, value, checked, type} = e.target;
     const inputValue = type === 'checkbox' ? checked:value;
-    setformValues({...formValues,[name]:inputValue});
+    setFormValues({...formValues,[name]:inputValue});
   };
   const handleSubmit=(e)=>{
     e.preventDefault();
@@ -138,7 +137,6 @@ const mapStateToProps = (state) => {
     isSubmitting: state.logInFormState.isSubmitting,
     formValues: state.logInFormState.formValues,
     formErrors: state.logInFormState.formErrors,
-    isValid: state.logInFormState.isValid
   };
 };
 

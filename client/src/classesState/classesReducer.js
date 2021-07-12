@@ -135,7 +135,6 @@ const classesReducer=(state=initialState,action)=>{
             };
         }
         case REMOVE_MY_CLASS:{
-
             const newClassId = action.payload.id;
             const newMyClasses = Object.keys(state.myClasses).filter((key)=>key!==newClassId).map((key)=>state.myClasses[key]);
             return {

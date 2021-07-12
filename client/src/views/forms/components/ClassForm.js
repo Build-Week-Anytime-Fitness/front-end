@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { classFormSchema } from "../validation/schema";
-import { validateForm } from "../validation/validationHelpers";
 import {
   displayErrors,
-  handleChangeHelper,
-  handleSubmitHelper,
 } from "../formHelpers"; //bread crumbs in case we get lost
-import axiosWithAuth from "../../../utils/axiosWithAuth";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import {getData,setEditMode} from "../../../state/actions/index";
 
-import {
-  FETCHING_API_START,
-  FETCHING_API_SUCCESS,
-  FETCHING_API_FAILURE,
-} from "../../../state/actions/actionTypes";
+import { deleteClass, postClass, updateClass } from "../../../classesState/classesActions";
+import { stopSubmitting } from "../../../formState/formActions";
 
 const initialValues = {
   class_name: "",
@@ -28,26 +20,65 @@ const initialValues = {
   instructor_id: 0,
 };
 
-const initialErrorValues = Object.keys(initialValues).reduce((acc, key) => {
-  acc[key] = "";
-  return acc;
-}, {});
+const API_POST = "API_POST";
+const API_PUT = "API_PUT";
+const API_DELETE = "API_DELETE";
 
 const ClassForm = (props) => {
-  // state variables
-  const [isValid, setIsValid] = useState(true);
+  const [apiMode, setApiMode] = useState(API_POST);
   const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState(initialErrorValues);
-  const dispatch = useDispatch();
+  const {
+    initForm, 
+    isSubmitting, 
+    handleFormSubmit,
+    formErrors,
+    classToEdit
+  } = props;
+  useEffect(()=>{
+    // initialize form
+    initForm();
+  },[initForm]);
 
-  let localId = localStorage.getItem("id");
-  formValues.instructor_id = Number(localId);
+  useEffect(()=>{
+    // fater handleFormSubmit has run,
+    // if there is no error in form, formReducer will set isSubmitting to true
+    // this change will trigger this useEffect to run and post the login to the backend
+    // this is done by calling the postLogin action in the userActions.js
+    // if successful, it will change the accountStatus to either STUDENT or INSTRUCTOR
 
-  // useEffect
-  useEffect(() => {
-    // validateForm whenever the component is mounted
-    validateForm(classFormSchema, formValues, setIsValid); //check if form is valid using schema.validate
-  }, [formValues]);
+    // if isSubmitting is true, the 'Enter' button will be disable to prevent multiple log ins.
+    if(isSubmitting){
+        if(apiMode === API_POST){
+            postClass(formValues);
+        }
+        else if(apiMode === API_PUT){
+            updateClass(formValues,classToEdit.id);
+        }
+    }
+    if(apiMode === API_DELETE){
+        deleteClass(classToEdit.id);
+    }
+  },[isSubmitting,formValues,classToEdit,apiMode]);
+
+  const handleChange=(e)=>{
+    const {name, value, checked, type} = e.target;
+    const inputValue = type === 'checkbox' ? checked:value;
+    setFormValues({...formValues,[name]:inputValue});
+  };
+  const handleAdd = (e)=>{
+    e.preventDefault();
+    handleFormSubmit(formValues);
+    setApiMode(API_POST);
+  };
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    handleFormSubmit(formValues);
+    setApiMode(API_PUT);
+  };
+  const handleDelete = (e) => {
+    e.preventDefault();
+    setApiMode(API_DELETE);
+  };
 
   useEffect(() => {
     //console.log("props.classToEdit from useEffect", props.classToEdit);
@@ -57,111 +88,6 @@ const ClassForm = (props) => {
       setFormValues(initialValues);
     }
   }, [props.isEditMode, props.classToEdit]);
-
-  useEffect(() => {});
-
-  // function declarations
-  const handleChange = (event) => {
-    setFormValues({
-      ...formValues,
-      [event.target.name]: event.target.value,
-    });
-
-    handleChangeHelper({
-      event,
-      schema: classFormSchema,
-      formValues,
-      setFormValues,
-      formErrors,
-      setFormErrors,
-      setIsValid,
-    });
-  };
-
-  const handleSubmit = (event) => {
-    handleSubmitHelper(event);
-
-    const currUser = localStorage.getItem("id");
-    formValues.instructor_id = Number(currUser);
-    //console.log("Add class submit fired from ClassForm", formValues);
-    dispatch({ type: FETCHING_API_START, isLoading: true });
-    axiosWithAuth()
-      .post("/classes", formValues)
-      // or here
-      .then((res) => {
-        //console.log("response: ", res); // see sample POST login res below
-        //console.log("message: ", res.data.message);
-        setFormValues(initialValues);
-        dispatch({
-          type: FETCHING_API_SUCCESS,
-          isLoading: false,
-          payload: res.data.message,
-        });
-        setFormValues(initialValues);
-        window.location.reload();
-      })
-      .catch((error) => {
-        dispatch({ type: FETCHING_API_FAILURE, payload: error });
-        console.log("ERR_1: This error is from Login", { error });
-      });
-  };
-
-  const handleUpdate = (e) => {
-    e.preventDefault();
-    const currUser = localStorage.getItem("id");
-    formValues.instructor_id = Number(currUser);
-    dispatch({ type: FETCHING_API_START, isLoading: true });
-    axiosWithAuth()
-      .put(`/classes/${props.classToEdit.id}`, formValues)
-      // or here
-      .then((res) => {
-        //console.log("response: ", res); // see sample POST login res below
-        //console.log("message: ", res.data.message);
-        dispatch({
-          type: FETCHING_API_SUCCESS,
-          isLoading: false,
-          payload: res.data.message,
-        });
-        alert(res.data.message);
-        props.mySetEditMode(false);
-        setFormValues(initialValues);
-        window.location.reload();
-      })
-      .catch((error) => {
-        dispatch({ type: FETCHING_API_FAILURE, payload: error });
-        //const message = error.response.data.message
-        // alert(message)
-        console.log("ERR_1: This error is from Login", { error });
-      });
-  };
-
-  const handleDelete = () => {
-    //e.preventDefault();
-    console.log(
-      "Delete a class fired from classForm DATA: ",
-      props.classToEdit.id
-    );
-    dispatch({ type: FETCHING_API_START, isLoading: true });
-    axiosWithAuth()
-      .delete(`/classes/${props.classToEdit.id}`)
-      // or here
-      .then((res) => {
-        //console.log("response: ", res); // see sample POST login res below
-        //console.log("message: ", res.data.message);
-        dispatch({
-          type: FETCHING_API_SUCCESS,
-          isLoading: false,
-          payload: res.data.message,
-        });
-        alert(res.data.message);
-        setFormValues(initialValues);
-        props.mySetEditMode(false);
-      })
-      .catch((error) => {
-        dispatch({ type: FETCHING_API_FAILURE, payload: error });
-        console.log("ERR_1: This error is from Login", { error });
-      });
-  };
 
   return (
     <form
@@ -173,7 +99,7 @@ const ClassForm = (props) => {
         opacity: "0.8",
         padding: '8vh 0'
       }}
-      onSubmit={handleSubmit}
+      onSubmit={(e)=>e.preventDefault()}
     >
       <h2>{!props.isEditMode ? "Add a Class" : "Update or Delete"}</h2>
       <label>
@@ -267,8 +193,8 @@ const ClassForm = (props) => {
         <button
           id="class-form-submit"
           type="submit"
-          disabled={!isValid}
-          onClick={handleSubmit}
+          disabled={!isSubmitting}
+          onClick={handleAdd}
           style={{
             width: "250px",
             alignSelf: "center",
@@ -285,7 +211,7 @@ const ClassForm = (props) => {
           <button
             id="class-form-update"
             type="submit"
-            disabled={!isValid}
+            disabled={!isSubmitting}
             onClick={handleUpdate}
             style={{
               width: "250px",
@@ -301,7 +227,7 @@ const ClassForm = (props) => {
           <button
             id="class-form-delete"
             type="submit"
-            disabled={!isValid}
+            disabled={!apiMode===API_DELETE}
             onClick={handleDelete}
             style={{
               width: "250px",
@@ -323,8 +249,19 @@ const ClassForm = (props) => {
   );
 };
 
+// const {
+//   id,
+//   initForm, 
+//   accountStatus, 
+//   isSubmitting, 
+//   handleFormSubmit,
+// } = props;
+
 const mapStateToProps = (state) => {
   return {
+    accountStatus: state.formState.accountStatus,
+    isSubmitting: state.isSubmitting.isSubmitting,
+    formErrors: state.formState.formErrors,
     classToEdit: state.classToEdit, // when user clicks edit button on class, Redux state saves indivClass object
     isEditMode: state.isEditMode,
     indivClass: state.indivClass,
@@ -335,9 +272,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // myCheckUser: (formValues) => dispatch(checkUser(formValues)), // SAMPLE CODE
-    mySetEditMode: (isEditMode) => dispatch(setEditMode(isEditMode)),
-    myGetData: () => dispatch(getData()),
+    setEditMode: (isEditMode) => dispatch(setEditMode(isEditMode)),
+    getData: () => dispatch(getData()),
+    stopSubmitting: ()=> dispatch(stopSubmitting())
   };
 };
 
