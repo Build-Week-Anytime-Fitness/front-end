@@ -5,8 +5,8 @@ const axiosWithAuth = () => {
   // console.log("token from axiosWithAuth: ", token)
   return axios.create({
     baseURL: "https://amazing-fitness-app.herokuapp.com/api",
-    headers: { Authorization: token }
+    headers: { Authorization: token },
   });
-}
+};
 
-export default axiosWithAuth
+export default axiosWithAuth;

@@ -5,7 +5,7 @@ import {
   displayErrors,
   handleChangeHelper,
   handleSubmitHelper,
-} from "../formHelpers"; //bread crumbs in case we get lost
+} from "../formHelpers"; 
 import axiosWithAuth from "../../../utils/axiosWithAuth";
 import { connect, useDispatch } from "react-redux";
 import {
@@ -113,7 +113,6 @@ const ClassForm = (props) => {
     dispatch({ type: FETCHING_API_START, isLoading: true });
     axiosWithAuth()
       .put(`/classes/${props.classToEdit.id}`, formValues)
-      // or here
       .then((res) => {
         //console.log("response: ", res); // see sample POST login res below
         //console.log("message: ", res.data.message);
@@ -129,8 +128,6 @@ const ClassForm = (props) => {
       })
       .catch((error) => {
         dispatch({ type: FETCHING_API_FAILURE, payload: error });
-        //const message = error.response.data.message
-        // alert(message)
         console.log("ERR_1: This error is from Login", { error });
       });
   };
@@ -146,8 +143,6 @@ const ClassForm = (props) => {
       .delete(`/classes/${props.classToEdit.id}`)
       // or here
       .then((res) => {
-        //console.log("response: ", res); // see sample POST login res below
-        //console.log("message: ", res.data.message);
         dispatch({
           type: FETCHING_API_SUCCESS,
           isLoading: false,
@@ -171,7 +166,7 @@ const ClassForm = (props) => {
         backgroundColor: "#444",
         width: "100vw",
         opacity: "0.8",
-        padding: '8vh 0'
+        padding: "8vh 0",
       }}
       onSubmit={handleSubmit}
     >

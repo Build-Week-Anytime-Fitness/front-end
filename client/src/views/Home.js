@@ -32,7 +32,7 @@ export default function Home() {
                     <img
                         className={"marketing-resizer"}
                         src={FitnessThree}
-                        alt={"fitness Three"}
+                        alt={"fitness weight and shoes"}
                         style={{marginTop: '5vh'}}
                     />
                 </div>
@@ -57,7 +57,7 @@ export default function Home() {
                         <img
                             className={"marketing-resizer"}
                             src={FitnessFive}
-                            alt={"fitness Five"}
+                            alt={"man working out with ropes"}
                         />
                         <div style={{maxWidth: "50vw", margin: '10vh'}}>
                             <h3>
@@ -75,7 +75,7 @@ export default function Home() {
                  style={{marginTop: '-20vh'}}>
                 <img
                     src={FitnessNine}
-                    alt={"fitness Five"}
+                    alt={"women doing yoga pose in sunrise"}
                     style={{
                         width: '450px',
                         height: '650px',
@@ -132,7 +132,7 @@ export default function Home() {
                     <img
                         className={"marketing-resizer"}
                         src={FitnessSix}
-                        alt={"fitness six"}
+                        alt={"fitness instructor working with student using ropes"}
                         style={{width: "400px"}}
                     />
                 </div>
@@ -145,7 +145,7 @@ export default function Home() {
                     <img
                     className={"marketing-resizer"}
                     src={FitnessEight}
-                    alt={"fitness eight"}
+                    alt={"woman holding dumbbells"}
                     style={{ width: "400px" }}
                 />
                     <h2

@@ -1,11 +1,11 @@
 //import axios from 'axios';
 import axiosWithAuth from "../../utils/axiosWithAuth";
-import {payForClassAction} from "../interfaces/cartInterface";
+import { payForClassAction } from "../interfaces/cartInterface";
 import {
   addMyClassAction,
-  removeMyClassAction
+  removeMyClassAction,
 } from "../interfaces/classInterface";
-import {getDataAction} from "../interfaces/getDataInterface";
+import { getDataAction } from "../interfaces/getDataInterface";
 export const FETCHING_API_START = "FETCHING_API_LOADING";
 export const FETCHING_API_SUCCESS = "FETCHING_API_SUCCESS";
 export const FETCHING_API_FAILURE = "FETCHING_API_FAIL";
@@ -19,10 +19,6 @@ export const CURRENT_USER = "CURRENT_USER";
 export const CLASS_TO_EDIT = "CLASS_TO_EDIT";
 export const EDIT_MODE = "EDIT_MODE";
 export const CLASS_TO_DELETE = "CLASS_TO_DELETE";
-// export const UPDATE_CLASSES_START = "UPDATE_CLASSES_START";
-// export const UPDATE_CLASSES_SUCCESS = "UPDATE_CLASSES_SUCCESS";
-// export const DELETE_CLASSES_START = "DELETE_CLASSES_START";
-// export const DELETE_CLASSES_SUCCESS = "DELETE_CLASSES_SUCCESS";
 export const CLASSES_TO_SIGN_UP = "CLASS_TO_SIGN_UP";
 export const UNDO_SIGN_UP = "UNDO_SIGN_UP";
 export const PAY_FOR_CLASS = "PAY_FOR_CLASS";
@@ -66,7 +62,6 @@ export const classesToSignUp = (indivClass) => {
   return { type: CLASSES_TO_SIGN_UP, payload: indivClass };
 };
 
-
 export const undoSignUp = (indivClass) => {
   //console.log("UNDO_SIGN_UP action fires: log props: ", indivClass);
   return { type: UNDO_SIGN_UP, payload: indivClass };
@@ -86,16 +81,16 @@ export const addClass = (addClass) => {
 export const addUser = (addUser) => (dispatch) => {
   // console.log("9. new allUser from classes.js", addUser);
   dispatch({ type: FETCHING_API_START });
-  
+
   axiosWithAuth()
     .post("/register", addUser)
     // or here
     .then((res) => {
       //console.log("ADD_USER response: ", res); // see sample POST login res below
       console.log("message: ", res.data.message);
-      alert(res.data.message)
+      alert(res.data.message);
       dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
-      
+
       // res gives is_instructor, assign to user obj in reducer. Payload = isInstructor
       let isInstructor = res.data.is_instructor;
       dispatch({ type: CHECK_USER, payload: isInstructor });
@@ -125,11 +120,11 @@ export const checkUser = (formValues) => (dispatch) => {
       localStorage.setItem("authToken", res.data.token); // 200
       localStorage.setItem("id", res.data.id);
       alert(res.data.message);
-     //console.log("message: ", res.data.message);
-     dispatch({
-       type: FETCHING_API_SUCCESS,
-       isLoading: false,
-       payload: res.data.message,
+      //console.log("message: ", res.data.message);
+      dispatch({
+        type: FETCHING_API_SUCCESS,
+        isLoading: false,
+        payload: res.data.message,
       });
 
       // res gives is_instructor, assign to user obj in reducer. Payload = isInstructor
@@ -139,7 +134,7 @@ export const checkUser = (formValues) => (dispatch) => {
       // res gives currentUserId, assign to currentUser obj in reducer. Payload = currentUserId
       let currentUserId = res.data.id;
       //console.log("user ID: ", res.data.id);
-      localStorage.setItem("id", res.data.id)
+      localStorage.setItem("id", res.data.id);
       dispatch({ type: CURRENT_USER, payload: currentUserId });
     })
     .catch((error) => {

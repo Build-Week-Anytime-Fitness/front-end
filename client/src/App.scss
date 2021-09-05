@@ -30,7 +30,7 @@ h3 {
 }
 
 .button {
-  color: #AAA;
+  color: #aaa;
   margin: 1vh 1.5vw;
   font-size: 1.5rem;
   align-self: center;
@@ -48,7 +48,6 @@ h3 {
   box-shadow: 0.5rem 0.5rem 3vh black;
 }
 
-
 .parallax-wrapper {
   width: 100vw;
   height: 100vh;
@@ -56,12 +55,11 @@ h3 {
   padding-top: 20vh;
   box-sizing: border-box;
   transform-style: preserve-3d;
-
 }
 
 .parallax-wrapper::before {
   background-color: black;
-  content: '';
+  content: "";
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -74,7 +72,7 @@ h3 {
   background-repeat: no-repeat;
   position: absolute;
   z-index: -1;
-  transform:translateZ(-1px) scale(2)
+  transform: translateZ(-1px) scale(2);
 }
 
 .regular-wrapper {
@@ -98,7 +96,7 @@ h3 {
 }
 
 .parallax-wrapper2::before {
-  content: '';
+  content: "";
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -108,13 +106,13 @@ h3 {
   background-position: center center;
   position: absolute;
   z-index: -1;
-  transform:translateZ(-1px) scale(2)
+  transform: translateZ(-1px) scale(2);
 }
 
 .regular-wrapper2 {
   width: 100vw;
   height: 170vh;
- //background-image: url("/assets/fitnessEight.jpg");
+  //background-image: url("/assets/fitnessEight.jpg");
   background-color: black;
   background-size: cover;
   background-position: center center;
@@ -140,7 +138,7 @@ input {
 }
 
 .parallax-wrapper3::before {
-  content: '';
+  content: "";
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -150,7 +148,7 @@ input {
   background-position: center center;
   position: absolute;
   z-index: -1;
-  transform:translateZ(-1px) scale(2)
+  transform: translateZ(-1px) scale(2);
 }
 
 .parallax-wrapper4 {
@@ -162,7 +160,7 @@ input {
 }
 
 .parallax-wrapper4::before {
-  content: '';
+  content: "";
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -172,9 +170,8 @@ input {
   background-position: center center;
   position: absolute;
   z-index: -1;
-  transform:translateZ(-1px) scale(2)
+  transform: translateZ(-1px) scale(2);
 }
-
 
 .parallax-wrapper5 {
   width: 100vw;
@@ -185,7 +182,7 @@ input {
 }
 
 .parallax-wrapper5::before {
-  content: '';
+  content: "";
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -195,7 +192,7 @@ input {
   background-position: center center;
   position: absolute;
   z-index: -1;
-  transform:translateZ(-1px) scale(2)
+  transform: translateZ(-1px) scale(2);
 }
 .regular-wrapper5 {
   width: 100vw;
@@ -210,7 +207,7 @@ input {
 }
 
 .parallax-wrapper6::before {
-  content: '';
+  content: "";
   width: 100vw;
   height: 200vh;
   top: 0;
@@ -221,7 +218,7 @@ input {
   background-repeat: repeat;
   position: absolute;
   z-index: -1;
-  transform:translateZ(-1px) scale(2)
+  transform: translateZ(-1px) scale(2);
 }
 .regular-wrapper6 {
   width: 100vw;
@@ -242,7 +239,7 @@ input {
   background: #222;
   opacity: 0.8;
   text-align: center;
-  color: white
+  color: white;
 }
 .content1 {
   margin: 0 auto;
@@ -251,9 +248,8 @@ input {
   background: #222;
   opacity: 0.8;
   text-align: center;
-  color: white
+  color: white;
 }
-
 
 .regular-wrapper3 {
   width: 100vw;
@@ -272,178 +268,20 @@ input {
   width: 100vw;
   padding: 8vh 5vw;
   margin-top: 5vh;
- }
-
-
-//html {
-//  overflow: hidden;
-//}
-//body {
-//  margin: 0;
-//  height: 100vh;
-//  font-family: "Tungsten Narrow A", "Tungsten Narrow B";
-//  font-style: normal;
-//  font-weight: 400;
-//  perspective: 1px;
-//  transform-style: preserve-3d;
-//  overflow-x: hidden;
-//  overflow-y: auto;
-//}
-//
-
-//
-//.wrapper {
-//  width: 100vw;
-//  height: auto;
-//  background-color: white;
-//  position: absolute;
-//  display: flex;
-//  align-items: center;
-//  justify-content: center;
-//  margin-top: 65vh;
-//}
-//
-
-//
-
-
-
-//
-//.footer {
-//  left: 0;
-//  bottom: 0;
-//  width: 100%;
-//  height: auto
-//}
-//
-
-//
-//.content-wrapperOne {
-//  background-image: url("assets/fitnessFour.jpg");
-//  background-position: center center;
-//  background-repeat: no-repeat;
-//  background-size: 100vw;
-//  background-attachment: fixed;
-//  width: 100vw;
-//  padding: 8vh 5vw;
-//  margin-top: 25vh;
-//  margin-bottom: 15vh;
-//}
-//
-//.content-wrapperTwo {
-//  background-image: url("assets/fitnessTwo.jpeg");
-//  background-position: center center;
-//  background-repeat: no-repeat;
-//  background-size: 100vw;
-//  background-attachment: fixed;
-//  width: 100vw;
-//  padding: 8vh 5vw;
-//  margin-top: 25vh;
-//  margin-bottom: 15vh;
-//}
-//
-//.content-wrapperThree {
-//  background-image: url("assets/fitnessSeven.jpg");
-//  background-position: center center;
-//  background-repeat: no-repeat;
-//  background-size: 100vw;
-//  background-attachment: fixed;
-//  width: 100vw;
-//  padding: 8vh 5vw;
-//  margin-top: 25vh;
-//  margin-bottom: 15vh;
-//}
-//
-//.content {
-//  padding: 8vh 5vw;
-//  background-color: #444;
-//  color: white;
-//  opacity: 0.8;
-//  border: 1px solid white;
-//  box-shadow: 0 0 2vh #444;
-//  text-align: center;
-//  margin: 30vh auto;
-//}
-//
-//.fitness-wrapper {
-//  margin-top: 15vh;
-//}
-//
-//.form-style {
-//  padding: 3vh 5vw;
-//  text-align: center;
-//  font-size: 1.25rem;
-//  background: url("assets/fitnessNine.jpg");
-//  background-size: 90%;
-//  background-repeat: no-repeat;
-//  background-attachment: fixed;
-//  background-position: center center;
-//  height: 100vh;
-//}
-//
-//.form-style-two {
-//  padding: 8vh 10vw;
-//  text-align: center;
-//  font-size: 1.25rem;
-//  border: 1px solid black;
-//  border-radius: 50px;
-//  box-shadow: 0 0 2vh black;
-//  height: auto;
-//  margin-top: 3vh;
-//  color: black;
-//  opacity: 0.8;
-//}
-//
-//.form-style-two input {
-//  margin: 3vh 3vw;
-//  font-size: 1.5rem;
-//}
-//
-//.input-style {
-//  padding: 3vh 5vh;
-//  background-color: #444;
-//  box-shadow: 0 0 2vh black;
-//  opacity: 0.8;
-//  color: white;
-//  border-radius: 50px;
-//}
-//
-//div input {
-//  margin: 1.5vh 1vw;
-//  width: 275px;
-//  font-size: 1.5rem;
-//}
-//
-//div button {
-//  width: 275px;
-//  margin: 3vh auto;
-//  font-size: 1.5rem;
-//}
-//
-//.login-style {
-//  padding: 30vh 10vw;
-//  font-size: 1.25rem;
-//  background: url("assets/fitnessTen.jpg");
-//  background-size: contain;
-//  background-repeat: no-repeat;
-//  background-position: center center;
-//  background-attachment: fixed;
-//  text-align: center;
-//}
+}
 
 
 /* ---------------------- Media Queries ------------------------- */
 /* <!-- mobile --> */
 @media only screen and (min-width: 350px) {
   #video-player {
-      position: relative;
-      margin-top: -50vh;
+    position: relative;
+    margin-top: -50vh;
   }
   .regular-wrapper {
     margin-top: -40vh;
     background-color: black;
   }
-
 }
 
 /* <!-- tablet --> */

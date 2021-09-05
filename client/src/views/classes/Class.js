@@ -9,16 +9,13 @@ import Typography from "@material-ui/core/Typography";
 import EditIcon from "@material-ui/icons/Edit";
 import { useDispatch } from "react-redux";
 import { connectToStore } from "../../state/interfaces/classInterface";
-import {
-  classToEdit,
-  setEditMode,
-} from "../../state/actions";
+import { classToEdit, setEditMode } from "../../state/actions";
 
 const useStyles = makeStyles({
   root: {
     width: 350,
     height: 450,
-    backgroundColor: '#DDD',
+    backgroundColor: "#DDD",
     fontSize: 22,
     margin: "20px",
     display: "flex",
@@ -94,10 +91,9 @@ const Class = (props) => {
   const toggleSignUp = () => {
     //console.log("toggleSignUp has been fired");
     if (isSignedUpFor(props.indivClass)) {
-      
       handleUndoSignUp();
     } else {
-      alert(`Your class has been added to your cart`)
+      alert(`Your class has been added to your cart`);
       handleSignUp();
     }
   };
@@ -114,15 +110,15 @@ const Class = (props) => {
     //   "handleUndoSignUp has been fired: indiv class",
     //   props.indivClass
     // );
-    alert("The selected class has been removed from your cart")
+    alert("The selected class has been removed from your cart");
     props.myUndoSignUp(props.indivClass); // assign class to false in dictionary of signed up classes
     props.removeMyClass(props.indivClass);
     // dispatch({ type: FETCHING_API_START });
 
     // axiosWithAuth()
-    //   .delete(`/clientclasses/${indivClass.id}`) 
+    //   .delete(`/clientclasses/${indivClass.id}`)
     //   .then((res) => {
-    //     console.log("UNDO_SIGN_UP_FOR_CLASS response: ", res); 
+    //     console.log("UNDO_SIGN_UP_FOR_CLASS response: ", res);
     //     alert(res.data.message);
     //     dispatch({ type: FETCHING_API_SUCCESS, payload: res.data.message });
     //   })
@@ -130,7 +126,6 @@ const Class = (props) => {
     //     dispatch({ type: FETCHING_API_FAILURE, payload: error });
     //     console.log("ERR_1: This error is from UNDO_SIGN_UP_FOR_CLASS", error);
     //   });
-
   };
 
   const isSignedUpFor = (indivClass) => {
@@ -201,38 +196,35 @@ const Class = (props) => {
             </Typography>
           </CardContent>
           <CardActions>
-            {
-              isInstructor ? (
-                <Button
-                  variant="outlined"
-                  color="inherit"
-                  onClick={handleEditButtonClick}
-                  disabled={props.disabled}
-                  style={{
-                    backgroundColor: props.disabled === true ? "red" : "#aaa",
-                    borderRadius: "25px",
-                    opacity: props.disabled === true ? "0.5" : "0.9",
-                    width: '250px'
-                  }}
-                >
-                  <EditIcon style={{ margin: "10", color: "555555" }} />
-                </Button>
-              ) : (
-                <Button
-                  onClick={toggleSignUp}
-                  disabled={number_of_students >= max_class_size}
-                  size="small"
-                  style={{ color: "#555555" }}
-
-                >
-                  {number_of_students >= max_class_size
-                    ? "full"
-                    : isSignedUpFor(props.indivClass)
-                    ? "unregister"
-                    : "sign up"}
-                </Button>
-              )
-            }
+            {isInstructor ? (
+              <Button
+                variant="outlined"
+                color="inherit"
+                onClick={handleEditButtonClick}
+                disabled={props.disabled}
+                style={{
+                  backgroundColor: props.disabled === true ? "red" : "#aaa",
+                  borderRadius: "25px",
+                  opacity: props.disabled === true ? "0.5" : "0.9",
+                  width: "250px",
+                }}
+              >
+                <EditIcon style={{ margin: "10", color: "555555" }} />
+              </Button>
+            ) : (
+              <Button
+                onClick={toggleSignUp}
+                disabled={number_of_students >= max_class_size}
+                size="small"
+                style={{ color: "#555555" }}
+              >
+                {number_of_students >= max_class_size
+                  ? "full"
+                  : isSignedUpFor(props.indivClass)
+                  ? "unregister"
+                  : "sign up"}
+              </Button>
+            )}
           </CardActions>
         </Card>
       </React.Fragment>
